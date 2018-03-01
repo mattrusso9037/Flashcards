@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">FlashCards</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_home">Home</string>
+
+    <string name="home_single_player">Single Player</string>
+    <string name="home_multi_player">Study With\nFriends</string>
+
+    <string name="nav_my_flashcards">My Flashcards</string>
+    <string name="nav_new_category">New Category</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_about">About</string>
 </resources>
