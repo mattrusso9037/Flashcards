@@ -137,6 +137,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/btn_mp_game_submit_margin_top"
+            android:background="@android:color/white"
             android:text="@string/btn_submit"
             android:textAllCaps="false"
             android:textSize="@dimen/btn_mp_game_submit_text_size"

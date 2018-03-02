@@ -32,4 +32,11 @@
 
     <string name="txt_answer_label">Your Answer</string>
     <string name="btn_submit">Submit</string>
+
+    <string name="btn_enter">Enter</string>
+
+    <string name="edit_mp_code_hint">Enter a Code</string>
+
+    <string name="txt_about_label">About</string>
+    <string name="txt_about">Product Owner | Matt Russo\nProject Manager | Kyle Waldron\nUX | Franklin Torres\nFront End | Brandon Selzer\nMiddleware | David Pirraglia\nMiddleware | David Siopa\nDatabase | Gregory Barney\nQuality Assurance | Enrique Gambra</string>
 </resources>

@@ -63,4 +63,15 @@
     <dimen name="txt_mp_game_flashcard_text_size">32sp</dimen>
     <dimen name="edit_mp_game_answer_text_size">18sp</dimen>
     <dimen name="btn_mp_game_submit_text_size">18sp</dimen>
+
+    <dimen name="edit_mp_code_margin_horizontal">90dp</dimen>
+    <dimen name="btn_mp_code_margin_top">32dp</dimen>
+    <dimen name="edit_mp_code_height">32dp</dimen>
+    <dimen name="edit_mp_code_text_size">32sp</dimen>
+    <dimen name="btn_mp_code_text_size">18sp</dimen>
+
+    <dimen name="txt_about_label_margin_top">16dp</dimen>
+    <dimen name="txt_about_margin_top">16dp</dimen>
+    <dimen name="txt_about_label_text_size">32sp</dimen>
+    <dimen name="txt_about_text_size">20sp</dimen>
 </resources>
