@@ -1,11 +1,21 @@
 <resources>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>
-    <dimen name="fab_margin_vertical">60dp</dimen>
+
+    <dimen name="fab_home_margin_vertical">60dp</dimen>
+    <dimen name="fab_margin_vertical">16dp</dimen>
     <dimen name="fab_margin_horizontal">16dp</dimen>
 
-    <dimen name="home_txt_margin_horizontal">32dp</dimen>
-    <dimen name="home_txt_text_size">32sp</dimen>
+    <dimen name="home_btn_margin_horizontal">32dp</dimen>
+    <dimen name="home_btn_text_size">32sp</dimen>
+
+    <dimen name="clt_flashcard_creator_top_margin_top">32dp</dimen>
+    <dimen name="clt_flashcard_creator_top_margin_bottom">16dp</dimen>
+    <dimen name="clt_flashcard_creator_bottom_margin_top">0dp</dimen>
+    <dimen name="edit_margin_right">16dp</dimen>
+    <dimen name="txt_margin_right">8dp</dimen>
+    <dimen name="txt_text_size">32sp</dimen>
 </resources>
