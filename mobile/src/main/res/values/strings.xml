@@ -22,4 +22,11 @@
 
     <string name="btn_prev">Prev</string>
     <string name="btn_next">Next</string>
+
+    <string name="txt_player_1">Player 1</string>
+    <string name="txt_player_2">Player 2</string>
+    <string name="txt_invite">Invite Friends</string>
+    <string name="txt_nearby">Nearby</string>
+    <string name="btn_code">Enter a Code</string>
+    <string name="btn_start_game">Start Game</string>
 </resources>
