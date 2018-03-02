@@ -6,7 +6,7 @@
     android:background="@android:color/darker_gray">
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/clt_flashcard_creator_top"
+        android:id="@+id/clt_sp_flashcard_viewer_top"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/clt_flashcard_creator_top_margin_bottom"
@@ -20,63 +20,63 @@
         app:layout_constraintVertical_weight=".5">
 
         <TextView
-            android:id="@+id/txt_side_a"
+            android:id="@+id/txt__flashcard_creator_side_a"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/txt_margin_right"
+            android:layout_marginEnd="@dimen/txt_flashcard_creator_margin_right"
             android:gravity="end"
-            android:text="@string/txt__side_a"
+            android:text="@string/txt_side_a_with_colon"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/txt_text_size"
+            android:textSize="@dimen/txt_flashcard_creator_text_size"
             android:textStyle="italic"
-            app:layout_constraintBottom_toTopOf="@id/edit_side_b"
+            app:layout_constraintBottom_toTopOf="@id/edit_flashcard_creator_side_b"
             app:layout_constraintHorizontal_weight=".31"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/edit_side_a"
+            app:layout_constraintRight_toLeftOf="@id/edit_flashcard_creator_side_a"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <EditText
-            android:id="@+id/edit_side_a"
+            android:id="@+id/edit_flashcard_creator_side_a"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/edit_margin_right"
+            android:layout_marginEnd="@dimen/edit_flashcard_creator_margin_right"
             android:inputType="text"
-            app:layout_constraintBottom_toTopOf="@id/edit_side_b"
+            app:layout_constraintBottom_toTopOf="@id/edit_flashcard_creator_side_b"
             app:layout_constraintHorizontal_weight=".69"
-            app:layout_constraintLeft_toRightOf="@id/txt_side_a"
+            app:layout_constraintLeft_toRightOf="@id/txt__flashcard_creator_side_a"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
-            android:id="@+id/txt_side_b"
+            android:id="@+id/txt_flashcard_creator_side_b"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/txt_margin_right"
+            android:layout_marginEnd="@dimen/txt_flashcard_creator_margin_right"
             android:gravity="end"
-            android:text="@string/txt__side_b"
+            android:text="@string/txt_side_b_with_colon"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/txt_text_size"
+            android:textSize="@dimen/txt_flashcard_creator_text_size"
             android:textStyle="italic"
-            app:layout_constraintBottom_toTopOf="@id/fab_sp_flashcard_creator"
+            app:layout_constraintBottom_toTopOf="@id/fab_flashcard_creator"
             app:layout_constraintHorizontal_weight=".31"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/edit_side_b"
-            app:layout_constraintTop_toBottomOf="@id/edit_side_a"/>
+            app:layout_constraintRight_toLeftOf="@id/edit_flashcard_creator_side_b"
+            app:layout_constraintTop_toBottomOf="@id/edit_flashcard_creator_side_a"/>
 
         <EditText
-            android:id="@+id/edit_side_b"
+            android:id="@+id/edit_flashcard_creator_side_b"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/edit_margin_right"
+            android:layout_marginEnd="@dimen/edit_flashcard_creator_margin_right"
             android:inputType="text"
-            app:layout_constraintBottom_toTopOf="@id/fab_sp_flashcard_creator"
+            app:layout_constraintBottom_toTopOf="@id/fab_flashcard_creator"
             app:layout_constraintHorizontal_weight=".69"
-            app:layout_constraintLeft_toRightOf="@id/txt_side_b"
+            app:layout_constraintLeft_toRightOf="@id/txt_flashcard_creator_side_b"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_side_a"/>
+            app:layout_constraintTop_toBottomOf="@id/edit_flashcard_creator_side_a"/>
         
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_sp_flashcard_creator"
+            android:id="@+id/fab_flashcard_creator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/fab_margin_vertical"
@@ -98,7 +98,7 @@
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/clt_flashcard_creator_top"
+        app:layout_constraintTop_toBottomOf="@id/clt_sp_flashcard_viewer_top"
         app:layout_constraintVertical_weight=".5">
 
         <android.support.v7.widget.RecyclerView

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/darker_gray">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clt_sp_flashcard_viewer_top"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/clt_sp_flashcard_viewer_top_margin_bottom"
+        android:layout_marginLeft="@dimen/clt_sp_flashcard_viewer_margin_horizontal"
+        android:layout_marginRight="@dimen/clt_sp_flashcard_viewer_margin_horizontal"
+        android:layout_marginTop="@dimen/clt_sp_flashcard_viewer_top_margin_top"
+        android:background="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@id/clt_sp_flashcard_viewer_bottom"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight=".7">
+
+        <TextView
+            android:id="@+id/txt_sp_flashcard_viewer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/txt_sp_flashcard_viewer_text_size"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clt_sp_flashcard_viewer_bottom"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/clt_flashcard_creator_bottom_margin_top"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clt_sp_flashcard_viewer_top"
+        app:layout_constraintVertical_weight=".3">
+
+        <Button
+            android:id="@+id/btn_sp_flashcard_viewer_prev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_sp_flashcard_viewer_with_border"
+            android:text="@string/btn_prev"
+            android:textAllCaps="false"
+            android:textSize="@dimen/btn_sp_flashcard_viewer_text_size"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/btn_sp_flashcard_viewer_next"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <Button
+            android:id="@+id/btn_sp_flashcard_viewer_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_sp_flashcard_viewer_with_border"
+            android:text="@string/btn_next"
+            android:textAllCaps="false"
+            android:textSize="@dimen/btn_sp_flashcard_viewer_text_size"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/btn_sp_flashcard_viewer_prev"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+    </android.support.constraint.ConstraintLayout>
+
+
+
+</android.support.constraint.ConstraintLayout>
