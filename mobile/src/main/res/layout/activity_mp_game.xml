@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/darker_gray">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clt_mp_game_top"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/clt_mp_game_top_margin_top"
+        app:layout_constraintBottom_toTopOf="@id/clt_mp_game_middle"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight=".1">
+
+        <TextView
+            android:id="@+id/txt_mp_game_player_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/txt_mp_game_player_1_margin_left"
+            android:background="@android:color/white"
+            android:paddingLeft="@dimen/mp_game_padding_horizontal"
+            android:paddingRight="@dimen/mp_game_padding_horizontal"
+            android:text="@string/txt_player_1"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/txt_mp_game_player_text_size"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight=".5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_mp_game_player_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/txt_mp_game_player_2_margin_left"
+            android:background="@android:color/white"
+            android:paddingLeft="@dimen/mp_game_padding_horizontal"
+            android:paddingRight="@dimen/mp_game_padding_horizontal"
+            android:text="@string/txt_player_2"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/txt_mp_game_player_text_size"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight=".5"
+            app:layout_constraintLeft_toRightOf="@id/txt_mp_game_player_1"
+            app:layout_constraintTop_toTopOf="parent"/>
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clt_mp_game_middle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/clt_mp_game_middle_margin_bottom"
+        android:layout_marginTop="@dimen/clt_mp_game_middle_margin_top"
+        android:background="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@id/clt_mp_game_bottom"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clt_mp_game_top"
+        app:layout_constraintVertical_weight=".65">
+
+        <ScrollView
+            android:id="@+id/sv_mp_game"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            android:scrollbars="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/txt_mp_game_flashcard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="@dimen/mp_game_padding_vertical"
+                android:paddingLeft="@dimen/mp_game_padding_horizontal"
+                android:paddingRight="@dimen/mp_game_padding_horizontal"
+                android:paddingTop="@dimen/mp_game_padding_vertical"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/txt_mp_game_flashcard_text_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+        </ScrollView>
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clt_mp_game_bottom"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clt_mp_game_middle"
+        app:layout_constraintVertical_weight=".25">
+
+        <TextView
+            android:id="@+id/txt_mp_game_answer_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_answer_label"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/txt_mp_game_answer_label_text_size"
+            android:textStyle="italic"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <EditText
+            android:id="@+id/edit_mp_game_answer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/edit_mp_game_margin_horizontal"
+            android:layout_marginRight="@dimen/edit_mp_game_margin_horizontal"
+            android:background="@android:color/white"
+            android:hint=""
+            android:inputType="text"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_mp_game_answer_label"/>
+
+        <Button
+            android:id="@+id/btn_mp_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/btn_mp_game_submit_margin_top"
+            android:text="@string/btn_submit"
+            android:textAllCaps="false"
+            android:textSize="@dimen/btn_mp_game_submit_text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_mp_game_answer"/>
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>

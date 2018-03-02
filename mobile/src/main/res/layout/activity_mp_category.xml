@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,7 +10,7 @@
         android:id="@+id/grd_mp_category"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/grd_sp_category_margin_bottom"
+        android:layout_marginBottom="@dimen/grd_mp_category_margin_bottom"
         android:numColumns="2"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -19,14 +20,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_weight="1"/>
 
-    <android.support.design.widget.FloatingActionButton
+    <Button
         android:id="@+id/btn_mp_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/fab_margin_vertical"
-        android:layout_marginEnd="@dimen/fab_margin_horizontal"
-        android:src="@android:drawable/ic_menu_add"
+        android:layout_marginBottom="@dimen/btn_mp_category_margin_bottom"
+        android:layout_marginEnd="@dimen/btn_mp_category_margin_right"
+        android:background="@android:color/white"
+        android:text="@string/btn_next"
+        android:textAllCaps="false"
+        android:textSize="@dimen/btn_mp_category_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
-
 </android.support.constraint.ConstraintLayout>

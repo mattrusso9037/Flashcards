@@ -22,17 +22,33 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_weight=".7">
 
-        <TextView
-            android:id="@+id/txt_sp_flashcard_viewer"
-            android:layout_width="wrap_content"
+        <ScrollView
+            android:id="@+id/sv_sp_flashcard_viewer"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/txt_sp_flashcard_viewer_text_size"
-            android:textStyle="italic"
+            android:fillViewport="true"
+            android:scrollbars="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/txt_sp_flashcard_viewer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="@dimen/sp_flashcard_viewer_padding_vertical"
+                android:paddingLeft="@dimen/sp_flashcard_viewer_padding_horizontal"
+                android:paddingRight="@dimen/sp_flashcard_viewer_padding_horizontal"
+                android:paddingTop="@dimen/sp_flashcard_viewer_padding_vertical"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/txt_sp_flashcard_viewer_text_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+        </ScrollView>
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout

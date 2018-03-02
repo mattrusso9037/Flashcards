@@ -73,7 +73,6 @@
         android:layout_marginTop="@dimen/clt_mp_lobby_middle_margin_top"
         android:background="@android:color/white"
         app:layout_constraintBottom_toTopOf="@id/clt_mp_lobby_bottom"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
