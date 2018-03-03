@@ -26,9 +26,9 @@
         android:id="@+id/fab_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="top|end"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="@dimen/fab_home_margin_bottom"
         android:layout_marginEnd="@dimen/fab_margin_horizontal"
-        android:layout_marginTop="@dimen/fab_home_margin_vertical"
         app:srcCompat="@android:drawable/ic_menu_add"/>
 
 </android.support.design.widget.CoordinatorLayout>
