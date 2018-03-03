@@ -74,4 +74,18 @@
     <dimen name="txt_about_margin_top">16dp</dimen>
     <dimen name="txt_about_label_text_size">32sp</dimen>
     <dimen name="txt_about_text_size">20sp</dimen>
+
+    <dimen name="btn_settings_margin_left">16dp</dimen>
+    <dimen name="btn_settings_margin_top">16dp</dimen>
+    <dimen name="btn_settings_color_theme_margin_top">32dp</dimen>
+    <dimen name="swt_settings_margin_left">32dp</dimen>
+    <dimen name="btn_settings_text_size">32sp</dimen>
+    
+    <dimen name="txt_theme_margin_left">16dp</dimen>
+    <dimen name="txt_theme_margin_top">16dp</dimen>
+    <dimen name="txt_theme_color_1_margin_top">32dp</dimen>
+    <dimen name="edit_theme_margin_left">16dp</dimen>
+    <dimen name="btn_theme_margin_top">32dp</dimen>
+    <dimen name="theme_text_size">32sp</dimen>
+    <dimen name="btn_theme_text_size">18sp</dimen>
 </resources>
