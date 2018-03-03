@@ -28,6 +28,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".MpCategoryActivity"
+            />
+
+        <activity android:name=".SpCategoryActivity"
+            />
+
+        <activity android:name=".SpFlashcardCreatorActivity"
+            />
+
+        <activity android:name=".SpFlashcardViewerActivity"
+            />
+        
     </application>
 
 </manifest>
