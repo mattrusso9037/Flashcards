@@ -23,6 +23,13 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".SP_CategoryActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".SP_FlashcardCreatorActivity"
+            android:parentActivityName=".SP_CategoryActivity" />
+        <activity android:name=".SP_FlashcardViewerActivity" />
+        <activity
             android:name=".AboutActivity"
             android:label="@string/title_activity_about"
             android:parentActivityName=".HomeActivity" />

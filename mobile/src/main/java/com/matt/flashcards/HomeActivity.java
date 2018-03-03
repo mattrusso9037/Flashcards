@@ -22,11 +22,20 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // Event for the single player button
+        findViewById(R.id.btn_home_single_player).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeActivity.this, SP_CategoryActivity.class));
+            }
+        });
+
         FloatingActionButton fab = findViewById(R.id.fab_home);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                startActivity(new Intent(HomeActivity.this, SP_CategoryActivity.class));
             }
         });
 
@@ -81,8 +90,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         switch (item.getItemId()) {
             case R.id.nav_my_flashcards:
+                startActivity(new Intent(HomeActivity.this, SP_CategoryActivity.class));
                 break;
             case R.id.nav_new_category:
+                startActivity(new Intent(HomeActivity.this, SP_FlashcardCreatorActivity.class));
                 break;
             case R.id.nav_settings:
                 startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
