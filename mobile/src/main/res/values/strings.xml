@@ -41,4 +41,13 @@
     <string name="title_activity_about">About</string>
     <string name="txt_about_label">About</string>
     <string name="txt_about">Product Owner | Matt Russo\nProject Manager | Kyle Waldron\nUX | Franklin Torres\nFront End | Brandon Selzer\nMiddleware | David Pirraglia\nMiddleware | David Siopa\nDatabase | Gregory Barney\nQuality Assurance | Enrique Gambra</string>
+    
+    <string name="txt_color_theme">Color Theme</string>
+    <string name="txt_timer">Timer</string>
+    <string name="txt_incognito">Incognito Mode</string>
+    <string name="txt_difficulty">Difficulty</string>
+
+    <string name="txt_color_1">Color 1</string>
+    <string name="txt_color_2">Color 2</string>
+    <string name="txt_color_3">Color 3</string>
 </resources>
