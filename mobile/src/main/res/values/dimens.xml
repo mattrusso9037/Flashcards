@@ -5,56 +5,66 @@
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>
 
-    <dimen name="fab_home_margin_bottom">16dp</dimen>
-    <dimen name="fab_margin_vertical">16dp</dimen>
-    <dimen name="fab_margin_horizontal">16dp</dimen>
+    <dimen name="fab_margin_vertical">8dp</dimen>
+    <dimen name="fab_margin_horizontal">8dp</dimen>
 
+    <dimen name="btn_home_single_player_margin_top">12dp</dimen>
+    <dimen name="btn_home_single_player_margin_bottom">8dp</dimen>
+    <dimen name="btn_home_multi_player_margin_top">8dp</dimen>
+    <dimen name="btn_home_multi_player_margin_bottom">12dp</dimen>
+    <dimen name="guideline_home_vertical_bound_top_begin">55dp</dimen>
+    <dimen name="guideline_home_vertical_bound_bottom_end">60dp</dimen>
     <dimen name="btn_home_margin_horizontal">32dp</dimen>
     <dimen name="btn_home_text_size">32sp</dimen>
 
     <dimen name="grd_sp_category_margin_bottom">72dp</dimen>
 
-    <dimen name="clt_flashcard_creator_top_margin_top">32dp</dimen>
-    <dimen name="clt_flashcard_creator_top_margin_bottom">16dp</dimen>
-    <dimen name="clt_flashcard_creator_bottom_margin_top">0dp</dimen>
-    <dimen name="edit_flashcard_creator_margin_right">16dp</dimen>
-    <dimen name="txt_flashcard_creator_margin_right">8dp</dimen>
-    <dimen name="txt_flashcard_creator_text_size">32sp</dimen>
+    <dimen name="clt_sp_flashcard_creator_top_margin_top">8dp</dimen>
+    <dimen name="clt_sp_flashcard_creator_top_margin_bottom">16dp</dimen>
+    <dimen name="clt_sp_flashcard_creator_bottom_margin_top">0dp</dimen>
+    <dimen name="clt_sp_flashcard_creator_items_padding_top">10dp</dimen>
+    <dimen name="clt_sp_flashcard_creator_items_padding_bottom">10dp</dimen>
+    <dimen name="edit_sp_flashcard_creator_margin_right">16dp</dimen>
+    <dimen name="edit_sp_flashcard_creator_margin_left">8dp</dimen>
+    <dimen name="txt_sp_flashcard_creator_margin_left">8dp</dimen>
+    <dimen name="txt_sp_flashcard_creator_text_size">32sp</dimen>
 
     <dimen name="clt_sp_flashcard_viewer_margin_horizontal">32dp</dimen>
-    <dimen name="clt_sp_flashcard_viewer_top_margin_top">100dp</dimen>
-    <dimen name="clt_sp_flashcard_viewer_top_margin_bottom">16dp</dimen>
+    <dimen name="clt_sp_flashcard_viewer_top_margin_top">32dp</dimen>
+    <dimen name="clt_sp_flashcard_viewer_top_margin_bottom">24dp</dimen>
     <dimen name="clt_sp_flashcard_viewer_bottom_margin_top">0dp</dimen>
+    <dimen name="btn_sp_flashcard_viewer_margin_bottom">24dp</dimen>
     <dimen name="sp_flashcard_viewer_padding_horizontal">6dp</dimen>
     <dimen name="sp_flashcard_viewer_padding_vertical">6dp</dimen>
     <dimen name="txt_sp_flashcard_viewer_text_size">32sp</dimen>
     <dimen name="btn_sp_flashcard_viewer_text_size">32sp</dimen>
 
-    <dimen name="clt_mp_lobby_top_margin_top">16dp</dimen>
+    <dimen name="clt_mp_lobby_top_margin_top">8dp</dimen>
+    <dimen name="clt_mp_lobby_top_margin_bottom">8dp</dimen>
     <dimen name="clt_mp_lobby_middle_margin_top">16dp</dimen>
-    <dimen name="clt_mp_lobby_middle_margin_bottom">32dp</dimen>
+    <dimen name="clt_mp_lobby_middle_margin_bottom">8dp</dimen>
     <dimen name="btn_mp_lobby_code_height">32dp</dimen>
     <dimen name="txt_mp_lobby_middle_margin_top">10dp</dimen>
-    <dimen name="txt_mp_lobby_invite_margin_left">32dp</dimen>
-    <dimen name="txt_mp_lobby_nearby_margin_right">80dp</dimen>
+    <dimen name="btn_mp_lobby_start_margin_bottom">8dp</dimen>
     <dimen name="mp_lobby_padding_horizontal">6dp</dimen>
     <dimen name="divider_mp_lobby_margin_vertical">3dp</dimen>
     <dimen name="divider_mp_lobby_height">3dp</dimen>
     <dimen name="txt_mp_lobby_text_size">18sp</dimen>
     <dimen name="btn_mp_lobby_code_text_size">18sp</dimen>
-    <dimen name="btn_mp_lobby_start_text_size">32sp</dimen>
+    <dimen name="btn_mp_lobby_start_text_size">24sp</dimen>
 
     <dimen name="btn_mp_category_margin_right">32dp</dimen>
     <dimen name="btn_mp_category_margin_bottom">12dp</dimen>
     <dimen name="grd_mp_category_margin_bottom">72dp</dimen>
     <dimen name="btn_mp_category_text_size">18sp</dimen>
 
-    <dimen name="clt_mp_game_top_margin_top">16dp</dimen>
-    <dimen name="clt_mp_game_middle_margin_top">16dp</dimen>
-    <dimen name="clt_mp_game_middle_margin_bottom">16dp</dimen>
+    <dimen name="clt_mp_game_top_margin_top">8dp</dimen>
+    <dimen name="clt_mp_game_middle_margin_top">8dp</dimen>
+    <dimen name="clt_mp_game_middle_margin_bottom">8dp</dimen>
     <dimen name="txt_mp_game_player_1_margin_left">32dp</dimen>
     <dimen name="txt_mp_game_player_2_margin_left">16dp</dimen>
     <dimen name="btn_mp_game_submit_margin_top">8dp</dimen>
+    <dimen name="btn_mp_game_submit_margin_bottom">8dp</dimen>
     <dimen name="edit_mp_game_margin_horizontal">64dp</dimen>
     <dimen name="mp_game_padding_horizontal">6dp</dimen>
     <dimen name="mp_game_padding_vertical">6dp</dimen>
@@ -73,19 +83,20 @@
     <dimen name="txt_about_label_margin_top">16dp</dimen>
     <dimen name="txt_about_margin_top">16dp</dimen>
     <dimen name="txt_about_label_text_size">32sp</dimen>
-    <dimen name="txt_about_text_size">20sp</dimen>
+    <dimen name="txt_about_text_size">16sp</dimen>
 
     <dimen name="btn_settings_margin_left">16dp</dimen>
-    <dimen name="btn_settings_margin_top">16dp</dimen>
-    <dimen name="btn_settings_color_theme_margin_top">32dp</dimen>
+    <dimen name="btn_settings_margin_top">8dp</dimen>
+    <dimen name="btn_settings_color_theme_margin_top">16dp</dimen>
     <dimen name="swt_settings_margin_left">32dp</dimen>
     <dimen name="btn_settings_text_size">32sp</dimen>
     
     <dimen name="txt_theme_margin_left">16dp</dimen>
     <dimen name="txt_theme_margin_top">16dp</dimen>
-    <dimen name="txt_theme_color_1_margin_top">32dp</dimen>
+    <dimen name="txt_theme_color_1_margin_top">16dp</dimen>
     <dimen name="edit_theme_margin_left">16dp</dimen>
-    <dimen name="btn_theme_margin_top">32dp</dimen>
+    <dimen name="edit_theme_margin_right">32sp</dimen>
+    <dimen name="btn_theme_margin_top">16dp</dimen>
     <dimen name="theme_text_size">32sp</dimen>
     <dimen name="btn_theme_text_size">18sp</dimen>
 </resources>
