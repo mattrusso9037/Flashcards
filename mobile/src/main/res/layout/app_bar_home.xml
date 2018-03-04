@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -29,6 +30,5 @@
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="@dimen/fab_home_margin_bottom"
         android:layout_marginEnd="@dimen/fab_margin_horizontal"
-        app:srcCompat="@android:drawable/ic_menu_add"/>
-
+        app:srcCompat="@android:drawable/ic_menu_add" />
 </android.support.design.widget.CoordinatorLayout>

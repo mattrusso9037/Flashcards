@@ -2,9 +2,11 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/darker_gray">
+    android:background="@android:color/darker_gray"
+    tools:context="com.matt.flashcards.ThemeActivity">
 
     <TextView
         android:id="@+id/txt_theme_color_1_label"
@@ -16,7 +18,7 @@
         android:textColor="@android:color/black"
         android:textSize="@dimen/theme_text_size"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edit_theme_color_1"
@@ -30,14 +32,14 @@
         android:textSize="@dimen/theme_text_size"
         app:layout_constraintLeft_toRightOf="@id/txt_theme_color_1_label"
         app:layout_constraintRight_toRightOf="@id/guideline_theme"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline_theme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".7"/>
+        app:layout_constraintGuide_percent=".7" />
 
     <TextView
         android:id="@+id/txt_theme_color_2_label"
@@ -49,7 +51,7 @@
         android:textColor="@android:color/black"
         android:textSize="@dimen/theme_text_size"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_theme_color_1_label"/>
+        app:layout_constraintTop_toBottomOf="@id/txt_theme_color_1_label" />
 
     <EditText
         android:id="@+id/edit_theme_color_2"
@@ -64,7 +66,7 @@
         app:layout_constraintHorizontal_weight=".69"
         app:layout_constraintLeft_toRightOf="@id/txt_theme_color_2_label"
         app:layout_constraintRight_toRightOf="@id/guideline_theme"
-        app:layout_constraintTop_toBottomOf="@id/edit_theme_color_1"/>
+        app:layout_constraintTop_toBottomOf="@id/edit_theme_color_1" />
 
     <TextView
         android:id="@+id/txt_theme_color_3_label"
@@ -76,7 +78,7 @@
         android:textColor="@android:color/black"
         android:textSize="@dimen/theme_text_size"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_theme_color_2_label"/>
+        app:layout_constraintTop_toBottomOf="@id/txt_theme_color_2_label" />
 
     <EditText
         android:id="@+id/edit_theme_color_3"
@@ -90,7 +92,7 @@
         android:textSize="@dimen/theme_text_size"
         app:layout_constraintLeft_toRightOf="@id/txt_theme_color_3_label"
         app:layout_constraintRight_toRightOf="@id/guideline_theme"
-        app:layout_constraintTop_toBottomOf="@id/edit_theme_color_2"/>
+        app:layout_constraintTop_toBottomOf="@id/edit_theme_color_2" />
 
     <Button
         android:id="@+id/btn_theme_enter"
@@ -103,6 +105,6 @@
         android:textSize="@dimen/btn_theme_text_size"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_theme_color_3_label"/>
+        app:layout_constraintTop_toBottomOf="@id/txt_theme_color_3_label" />
 
 </android.support.constraint.ConstraintLayout>
