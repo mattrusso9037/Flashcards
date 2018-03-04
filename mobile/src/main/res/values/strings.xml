@@ -47,6 +47,7 @@
     <string name="txt_incognito">Incognito Mode</string>
     <string name="txt_difficulty">Difficulty</string>
 
+    <string name="title_activity_theme">Theme</string>
     <string name="txt_color_1">Color 1</string>
     <string name="txt_color_2">Color 2</string>
     <string name="txt_color_3">Color 3</string>

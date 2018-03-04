@@ -37,5 +37,9 @@
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
             android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".ThemeActivity"
+            android:label="@string/title_activity_theme"
+            android:parentActivityName=".SettingsActivity" />
     </application>
 </manifest>
