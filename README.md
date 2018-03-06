@@ -1,11 +1,10 @@
 # Flashcards
+## *Emphasize*_Things To Do_
+- Create delete and edit functions for decks
+- Pass decks to the database
+- Create adapters to take decks and output them
+- Will Edit As Time Goes On
 
-- Readme files like this are written using a language called Markdown.
-- [Click here](1) to see a quick reference for the syntax of the language.
-- Also, here are some websites that allow you to play with the language online:
-	- [Markdown Live Preview](2)
-	- [# Markdown Editor](3)
+Linked logo: [![alt text](/wp-smaller.png)]
 
-[1]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
-[2]: http://markdownlivepreview.com/
-[3]: https://jbt.github.io/markdown-editor/
+(https://vignette.wikia.nocookie.net/arrow/images/4/41/Flash_series_logo.png/revision/latest?cb=20140512122705)
