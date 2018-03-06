@@ -5,5 +5,6 @@
 - Create adapters to take decks and output them
 - Will Edit As Time Goes On
 
-[![alt text](/Flash_series_logo.png)]
-(https://vignette.wikia.nocookie.net/arrow/images/4/41/Flash_series_logo.png)
+![Alt][1]
+
+[1]: /Flash_series_logo.png "Title"
