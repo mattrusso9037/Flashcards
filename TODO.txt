@@ -1,0 +1,23 @@
+### UX TODO:
+
+- Update the app icon
+
+### Frontend TODO:
+
+- Remove that fab button from the home screen
+
+### Middleware TODO:
+
+- Create a Deck object to hold an ArrayList of Flashcards
+	- Add an attribute for the title of the deck
+	- Maybe add an attribute to hold the index of the last viewed flash card
+- Maybe modify the Flashcard object so that each flashcard has a unique id
+- Create a custom adapter to display each of the decks in the category activity
+	- The 3rd Udacity course in the android basics course covers making custom adapters in the Miwok app
+- Make an event for the fab button in the flashcard creator activity to create a new flashcard object and add it to the current deck
+- Maybe make a settings object to hold things like the selected theme colors
+	- Maybe it can hold an ArrayList of Decks
+- Once the custom adapter for the categoty activity is done, make it so clicking on a deck will open the flashcard viewer activity with the corresponding flashcards from that deck
+	- Add events for the previous and next buttons
+- Create an adapter for the flashcard creator activity as well
+- Get all this stuff to save to the database somehow
