@@ -16,6 +16,18 @@ public class SP_FlashcardCreatorActivity extends AppCompatActivity {
         dummyFlashcards.add(new Flashcard("MVP", "Minimum Viable Product"));
         dummyFlashcards.add(new Flashcard("Lorem Ipsum", "dolor sit amet"));
         dummyFlashcards.add(new Flashcard("Herp", "Derp"));
+        dummyFlashcards.add(new Flashcard("MVP", "Minimum Viable Product"));
+        dummyFlashcards.add(new Flashcard("Lorem Ipsum", "dolor sit amet"));
+        dummyFlashcards.add(new Flashcard("Herp", "Derp"));
+        dummyFlashcards.add(new Flashcard("MVP", "Minimum Viable Product"));
+        dummyFlashcards.add(new Flashcard("Lorem Ipsum", "dolor sit amet"));
+        dummyFlashcards.add(new Flashcard("Herp", "Derp"));
+        dummyFlashcards.add(new Flashcard("MVP", "Minimum Viable Product"));
+        dummyFlashcards.add(new Flashcard("Lorem Ipsum", "dolor sit amet"));
+        dummyFlashcards.add(new Flashcard("Herp", "Derp"));
+        dummyFlashcards.add(new Flashcard("MVP", "Minimum Viable Product"));
+        dummyFlashcards.add(new Flashcard("Lorem Ipsum", "dolor sit amet"));
+        dummyFlashcards.add(new Flashcard("Herp", "Derp"));
 
         ((ListView) findViewById(R.id.flashcards_listview)).setAdapter(new FlashcardAdapter(this, dummyFlashcards));
     }

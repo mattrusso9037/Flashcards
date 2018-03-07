@@ -46,10 +46,11 @@ public class FlashcardAdapter extends ArrayAdapter {
             }
         });
 
-        listItemView.findViewById(R.id.flashcard_item_actions).setTag(Integer.toString(position));
+        View flashCardItem = listItemView.findViewById(R.id.flashcard_item_actions);
+        flashCardItem.setVisibility(position == lastPosition ? View.VISIBLE : View.GONE);
+        flashCardItem.setTag(Integer.toString(position));
 
         // Event for clicking on a flashcard item
-        final View finalListItemView = listItemView;
         listItemView.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -57,14 +58,20 @@ public class FlashcardAdapter extends ArrayAdapter {
                 // Logic to make sure only one item will show buttons at a time
                 if (lastPosition > -1) {
                     if (lastPosition == position) {
-                        finalListItemView.findViewById(R.id.flashcard_item_actions).setVisibility(View.GONE);
+                        View v = parent.findViewWithTag(Integer.toString(position));
+                        if (v != null) {
+                            v.setVisibility(View.GONE);
+                        }
                         lastPosition = -1;
                         return;
                     } else {
-                        parent.findViewWithTag(Integer.toString(lastPosition)).setVisibility(View.GONE);
+                        View v = parent.findViewWithTag(Integer.toString(lastPosition));
+                        if (v != null) {
+                            v.setVisibility(View.GONE);
+                        }
                     }
                 }
-                finalListItemView.findViewById(R.id.flashcard_item_actions).setVisibility(View.VISIBLE);
+                parent.findViewWithTag(Integer.toString(position)).setVisibility(View.VISIBLE);
                 lastPosition = position;
             }
         });
