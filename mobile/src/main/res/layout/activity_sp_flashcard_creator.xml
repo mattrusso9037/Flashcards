@@ -107,8 +107,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/clt_sp_flashcard_viewer_top">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/ryc_flashcards"
+        <ListView
+            android:id="@+id/flashcards_listview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
