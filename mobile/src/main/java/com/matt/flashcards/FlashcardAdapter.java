@@ -46,6 +46,8 @@ public class FlashcardAdapter extends ArrayAdapter {
             }
         });
 
+        listItemView.findViewById(R.id.flashcard_item_actions).setTag(Integer.toString(position));
+
         // Event for clicking on a flashcard item
         final View finalListItemView = listItemView;
         listItemView.setOnClickListener(new View.OnClickListener() {
@@ -57,44 +59,16 @@ public class FlashcardAdapter extends ArrayAdapter {
                     if (lastPosition == position) {
                         finalListItemView.findViewById(R.id.flashcard_item_actions).setVisibility(View.GONE);
                         lastPosition = -1;
+                        return;
                     } else {
-                        // Hide all visible views
-                        for (View item : getViewsByTag(parent, "flashcard_item_actions")) {
-                            if (item.getVisibility() == View.VISIBLE) {
-                                item.setVisibility(View.GONE);
-                                break;
-                            }
-                        }
-                        finalListItemView.findViewById(R.id.flashcard_item_actions).setVisibility(View.VISIBLE);
-                        lastPosition = position;
+                        parent.findViewWithTag(Integer.toString(lastPosition)).setVisibility(View.GONE);
                     }
-                } else {
-                    finalListItemView.findViewById(R.id.flashcard_item_actions).setVisibility(View.VISIBLE);
-                    lastPosition = position;
                 }
+                finalListItemView.findViewById(R.id.flashcard_item_actions).setVisibility(View.VISIBLE);
+                lastPosition = position;
             }
         });
 
         return listItemView;
-    }
-
-    /**
-     * https://stackoverflow.com/questions/8817377/android-how-to-find-multiple-views-with-common-attribute#8831593
-     */
-    private static ArrayList<View> getViewsByTag(ViewGroup root, String tag) {
-        ArrayList<View> views = new ArrayList<>();
-        final int childCount = root.getChildCount();
-        for (int i = 0; i < childCount; i++) {
-            final View child = root.getChildAt(i);
-            if (child instanceof ViewGroup) {
-                views.addAll(getViewsByTag((ViewGroup) child, tag));
-            }
-
-            final Object tagObj = child.getTag();
-            if (tagObj != null && tagObj.equals(tag)) {
-                views.add(child);
-            }
-        }
-        return views;
     }
 }

@@ -22,7 +22,6 @@
         android:id="@+id/flashcard_item_actions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:tag="flashcard_item_actions"
         android:visibility="gone">
 
         <Button
