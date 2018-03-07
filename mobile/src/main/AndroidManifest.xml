@@ -11,16 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-            <!--<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
-        </activity>
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".HomeActivity"
-            android:label="@string/title_activity_home"
+            android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter android:label="@string/app_name">
                 <action android:name="android.intent.action.MAIN" />
@@ -29,18 +23,5 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MpCategoryActivity"
-            />
-
-        <activity android:name=".SpCategoryActivity"
-            />
-
-        <activity android:name=".SpFlashcardCreatorActivity"
-            />
-
-        <activity android:name=".SpFlashcardViewerActivity"
-            />
-        
     </application>
-
 </manifest>

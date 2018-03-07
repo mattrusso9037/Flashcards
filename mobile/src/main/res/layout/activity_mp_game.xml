@@ -9,14 +9,13 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/clt_mp_game_top"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/clt_mp_game_top_margin_top"
         app:layout_constraintBottom_toTopOf="@id/clt_mp_game_middle"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight=".1">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/txt_mp_game_player_1"
@@ -50,7 +49,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_weight=".5"
             app:layout_constraintLeft_toRightOf="@id/txt_mp_game_player_1"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
@@ -64,8 +63,7 @@
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/clt_mp_game_top"
-        app:layout_constraintVertical_weight=".65">
+        app:layout_constraintTop_toBottomOf="@id/clt_mp_game_top">
 
         <ScrollView
             android:id="@+id/sv_mp_game"
@@ -92,20 +90,19 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
         </ScrollView>
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/clt_mp_game_bottom"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/clt_mp_game_middle"
-        app:layout_constraintVertical_weight=".25">
+        app:layout_constraintTop_toBottomOf="@id/clt_mp_game_middle">
 
         <TextView
             android:id="@+id/txt_mp_game_answer_label"
@@ -117,7 +114,7 @@
             android:textStyle="italic"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/edit_mp_game_answer"
@@ -130,20 +127,22 @@
             android:inputType="text"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt_mp_game_answer_label"/>
+            app:layout_constraintTop_toBottomOf="@id/txt_mp_game_answer_label" />
 
         <Button
             android:id="@+id/btn_mp_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/btn_mp_game_submit_margin_bottom"
             android:layout_marginTop="@dimen/btn_mp_game_submit_margin_top"
             android:background="@android:color/white"
             android:text="@string/btn_submit"
             android:textAllCaps="false"
             android:textSize="@dimen/btn_mp_game_submit_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_mp_game_answer"/>
+            app:layout_constraintTop_toBottomOf="@id/edit_mp_game_answer" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>
