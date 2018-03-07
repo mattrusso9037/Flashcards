@@ -9,14 +9,14 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/clt_mp_lobby_top"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/clt_mp_lobby_top_margin_bottom"
         android:layout_marginTop="@dimen/clt_mp_lobby_top_margin_top"
         app:layout_constraintBottom_toTopOf="@id/clt_mp_lobby_middle"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight=".1">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/txt_mp_lobby_player_1"
@@ -32,7 +32,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/txt_mp_lobby_player_2"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/txt_mp_lobby_player_2"
@@ -48,7 +48,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/txt_mp_lobby_player_1"
             app:layout_constraintRight_toLeftOf="@id/btn_mp_lobby_code"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btn_mp_lobby_code"
@@ -62,7 +62,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/txt_mp_lobby_player_2"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
@@ -76,32 +76,38 @@
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/clt_mp_lobby_top"
-        app:layout_constraintVertical_weight=".65">
+        app:layout_constraintTop_toBottomOf="@id/clt_mp_lobby_top">
 
         <TextView
             android:id="@+id/txt_mp_lobby_invite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/txt_mp_lobby_invite_margin_left"
             android:layout_marginTop="@dimen/txt_mp_lobby_middle_margin_top"
             android:text="@string/txt_invite"
             android:textColor="@android:color/black"
             android:textSize="@dimen/txt_mp_lobby_text_size"
             android:textStyle="italic"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/guideline_mp_lobby"
             app:layout_constraintTop_toTopOf="parent"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline_mp_lobby"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".5"/>
 
         <TextView
             android:id="@+id/txt_mp_lobby_nearby"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/txt_mp_lobby_nearby_margin_right"
             android:layout_marginTop="@dimen/txt_mp_lobby_middle_margin_top"
             android:text="@string/txt_nearby"
             android:textColor="@android:color/black"
             android:textSize="@dimen/txt_mp_lobby_text_size"
             android:textStyle="italic"
+            app:layout_constraintLeft_toRightOf="@id/guideline_mp_lobby"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
@@ -113,7 +119,7 @@
             android:layout_marginTop="@dimen/divider_mp_lobby_margin_vertical"
             android:background="@android:color/darker_gray"
             app:layout_constraintBottom_toTopOf="@id/grd_mp_lobby"
-            app:layout_constraintTop_toBottomOf="@id/txt_mp_lobby_invite"/>
+            app:layout_constraintTop_toBottomOf="@id/txt_mp_lobby_invite" />
 
         <GridView
             android:id="@+id/grd_mp_lobby"
@@ -125,25 +131,25 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/divider_mp_lobby"/>
+            app:layout_constraintTop_toBottomOf="@id/divider_mp_lobby" />
 
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/clt_mp_lobby_bottom"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/clt_mp_lobby_middle"
-        app:layout_constraintVertical_weight=".25">
+        app:layout_constraintTop_toBottomOf="@id/clt_mp_lobby_middle">
 
         <Button
             android:id="@+id/btn_mp_lobby_start_game"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/btn_mp_lobby_start_margin_bottom"
             android:background="@android:color/white"
             android:paddingLeft="@dimen/mp_lobby_padding_horizontal"
             android:paddingRight="@dimen/mp_lobby_padding_horizontal"
@@ -151,11 +157,10 @@
             android:textAllCaps="false"
             android:textSize="@dimen/btn_mp_lobby_start_text_size"
             android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
     </android.support.constraint.ConstraintLayout>
-
-
 </android.support.constraint.ConstraintLayout>

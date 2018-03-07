@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/darker_gray"
+    tools:context="com.matt.flashcards.SettingsActivity">
+
+    <Button
+        android:id="@+id/btn_settings_color_theme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/btn_settings_margin_left"
+        android:layout_marginTop="@dimen/btn_settings_color_theme_margin_top"
+        android:background="@android:color/transparent"
+        android:text="@string/txt_color_theme"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/btn_settings_text_size"
+        android:textStyle="italic"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_settings_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/btn_settings_margin_left"
+        android:layout_marginTop="@dimen/btn_settings_margin_top"
+        android:background="@android:color/transparent"
+        android:text="@string/txt_timer"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/btn_settings_text_size"
+        android:textStyle="italic"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_settings_color_theme" />
+
+    <Switch
+        android:id="@+id/swt_settings_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/swt_settings_margin_left"
+        app:layout_constraintBottom_toTopOf="@id/btn_settings_incognito"
+        app:layout_constraintLeft_toRightOf="@id/btn_settings_incognito"
+        app:layout_constraintTop_toBottomOf="@id/btn_settings_color_theme" />
+
+    <Button
+        android:id="@+id/btn_settings_incognito"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/btn_settings_margin_left"
+        android:layout_marginTop="@dimen/btn_settings_margin_top"
+        android:background="@android:color/transparent"
+        android:text="@string/txt_incognito"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/btn_settings_text_size"
+        android:textStyle="italic"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_settings_timer"/>
+
+    <Switch
+        android:id="@+id/swt_settings_incognito"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/swt_settings_margin_left"
+        app:layout_constraintBottom_toTopOf="@id/txt_settings_difficulty"
+        app:layout_constraintLeft_toRightOf="@id/btn_settings_incognito"
+        app:layout_constraintTop_toBottomOf="@id/btn_settings_timer"/>
+
+    <Button
+        android:id="@+id/txt_settings_difficulty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/btn_settings_margin_left"
+        android:layout_marginTop="@dimen/btn_settings_margin_top"
+        android:background="@android:color/transparent"
+        android:text="@string/txt_difficulty"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/btn_settings_text_size"
+        android:textStyle="italic"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_settings_incognito" />
+
+</android.support.constraint.ConstraintLayout>
