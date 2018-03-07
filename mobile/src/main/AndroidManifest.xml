@@ -22,25 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SP_CategoryActivity"
-            android:parentActivityName=".HomeActivity" />
-        <activity
-            android:name=".SP_FlashcardCreatorActivity"
-            android:parentActivityName=".SP_CategoryActivity"
-            android:windowSoftInputMode="adjustNothing"/>
-        <activity android:name=".SP_FlashcardViewerActivity" />
-        <activity
-            android:name=".AboutActivity"
-            android:label="@string/title_activity_about"
-            android:parentActivityName=".HomeActivity" />
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:parentActivityName=".HomeActivity" />
-        <activity
-            android:name=".ThemeActivity"
-            android:label="@string/title_activity_theme"
-            android:parentActivityName=".SettingsActivity" />
+
     </application>
 </manifest>
