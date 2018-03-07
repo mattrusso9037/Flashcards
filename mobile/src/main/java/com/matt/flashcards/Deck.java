@@ -3,6 +3,7 @@ package com.matt.flashcards;
 import java.util.ArrayList;
 
 public class Deck extends ArrayList {
+    //extends Arraylist makes the actual deck class ana array list
 
     private String title;
 
