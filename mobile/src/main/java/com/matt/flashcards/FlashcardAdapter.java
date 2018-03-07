@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -28,6 +29,22 @@ public class FlashcardAdapter extends ArrayAdapter {
         final Flashcard currentFlashcard = (Flashcard) getItem(position);
 
         ((TextView) listItemView.findViewById(R.id.flashcard_item_text)).setText(currentFlashcard.getSideA());
+
+        // Event for the edit button
+        listItemView.findViewById(R.id.flashcard_item_edit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Edit item " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Event for the delete button
+        listItemView.findViewById(R.id.flashcard_item_delete).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Delete item " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         // Event for clicking on a flashcard item
         final View finalListItemView = listItemView;
