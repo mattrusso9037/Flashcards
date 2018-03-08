@@ -28,7 +28,7 @@
         <activity
             android:name=".SP_FlashcardCreatorActivity"
             android:parentActivityName=".SP_CategoryActivity"
-            android:windowSoftInputMode="adjustNothing"/>
+            android:windowSoftInputMode="adjustNothing" />
         <activity android:name=".SP_FlashcardViewerActivity" />
         <activity
             android:name=".AboutActivity"

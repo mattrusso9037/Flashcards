@@ -18,12 +18,11 @@ public class SP_FlashcardCreatorActivity extends AppCompatActivity {
 
         // Dummy data
         final Deck dummyFlashcards = new Deck("Dummy Data");
-        //ListView Variable
         final ListView lv = ((ListView) findViewById(R.id.flashcards_listview));
-        //Adapter variable
+        // ListView Variable
+        // Adapter variable
         final FlashcardAdapter adapter = new FlashcardAdapter(this, dummyFlashcards);
 
-
         dummyFlashcards.add(new Flashcard("MVP", "Minimum Viable Product"));
         dummyFlashcards.add(new Flashcard("Lorem Ipsum", "dolor sit amet"));
         dummyFlashcards.add(new Flashcard("Herp", "Derp"));
@@ -40,10 +39,10 @@ public class SP_FlashcardCreatorActivity extends AppCompatActivity {
         dummyFlashcards.add(new Flashcard("Lorem Ipsum", "dolor sit amet"));
         dummyFlashcards.add(new Flashcard("Herp", "Derp"));
 
-        //set the dummy data to the adapter
+        // Set the dummy data to the adapter
         lv.setAdapter(adapter);
 
-        //Event to add another flashcard to the adapter
+        // Event to create a new flashcard
         findViewById(R.id.fab_flashcard_creator).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,13 +52,12 @@ public class SP_FlashcardCreatorActivity extends AppCompatActivity {
                 EditText B = findViewById(R.id.edit_flashcard_creator_side_b);
                 sideA = A.getText().toString();
                 sideB = B.getText().toString();
-                dummyFlashcards.add(new Flashcard(sideA,sideB));
+                dummyFlashcards.add(new Flashcard(sideA, sideB));
                 adapter.notifyDataSetChanged();
                 A.getText().clear();
                 B.getText().clear();
             }
         });
-
     }
 
     // This adds menu items to the app bar

@@ -10,7 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class FlashcardAdapter extends ArrayAdapter{
+public class FlashcardAdapter extends ArrayAdapter {
 
     private int lastPosition = -1;
     private Deck deck;
@@ -47,7 +47,7 @@ public class FlashcardAdapter extends ArrayAdapter{
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(), "Delete item " + position, Toast.LENGTH_SHORT).show();
-                Log.d("Postion", position+"");
+                Log.d("Postion", position + "");
                 deck.remove(position);
                 notifyDataSetChanged();
             }
