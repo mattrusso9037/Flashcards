@@ -6,8 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.GridView;
 
-import java.util.ArrayList;
-
 public class SP_CategoryActivity extends AppCompatActivity {
 
     @Override
@@ -22,23 +20,6 @@ public class SP_CategoryActivity extends AppCompatActivity {
             }
         });
 
-        // Dummy Data
-        ArrayList<Deck> dummyDecks = new ArrayList<>();
-        dummyDecks.add(new Deck("Android Development"));
-        dummyDecks.add(new Deck("aslddlfnsljgnfgjdnfkgjndfgkjdngkfjdngkjn"));
-        dummyDecks.add(new Deck("asdlkmdf asmdlkmasldk faslkdaslmd asdasd asdassdf dfsdf "));
-        dummyDecks.add(new Deck("Derp"));
-        dummyDecks.add(new Deck("Herp"));
-        dummyDecks.add(new Deck("Derp"));
-        dummyDecks.add(new Deck("Herp"));
-        dummyDecks.add(new Deck("Derp"));
-        dummyDecks.add(new Deck("Herp"));
-        dummyDecks.add(new Deck("Derp"));
-        dummyDecks.add(new Deck("Herp"));
-        dummyDecks.add(new Deck("Derp"));
-        dummyDecks.add(new Deck("Herp"));
-        dummyDecks.add(new Deck("Derp"));
-
-        ((GridView) findViewById(R.id.grd_mp_category)).setAdapter(new DeckAdapter(this, dummyDecks));
+        ((GridView) findViewById(R.id.grd_mp_category)).setAdapter(new DeckAdapter(this, Settings.theDeckOfDecks));
     }
 }
