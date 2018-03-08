@@ -17,27 +17,11 @@ public class SP_FlashcardCreatorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sp_flashcard_creator);
 
         // Dummy data
-        final Deck dummyFlashcards = new Deck("Dummy Data");
+        final Deck currentDeck = Settings.theDeckOfDecks.get(0);
         // ListView Variable
         final ListView lv = findViewById(R.id.flashcards_listview);
         // Adapter variable
-        final FlashcardAdapter adapter = new FlashcardAdapter(this, dummyFlashcards);
-
-        dummyFlashcards.add(new Flashcard("MVP", "Minimum Viable Product"));
-        dummyFlashcards.add(new Flashcard("Lorem Ipsum", "dolor sit amet"));
-        dummyFlashcards.add(new Flashcard("Herp", "Derp"));
-        dummyFlashcards.add(new Flashcard("MVP", "Minimum Viable Product"));
-        dummyFlashcards.add(new Flashcard("Lorem Ipsum", "dolor sit amet"));
-        dummyFlashcards.add(new Flashcard("Herp", "Derp"));
-        dummyFlashcards.add(new Flashcard("MVP", "Minimum Viable Product"));
-        dummyFlashcards.add(new Flashcard("Lorem Ipsum", "dolor sit amet"));
-        dummyFlashcards.add(new Flashcard("Herp", "Derp"));
-        dummyFlashcards.add(new Flashcard("MVP", "Minimum Viable Product"));
-        dummyFlashcards.add(new Flashcard("Lorem Ipsum", "dolor sit amet"));
-        dummyFlashcards.add(new Flashcard("Herp", "Derp"));
-        dummyFlashcards.add(new Flashcard("MVP", "Minimum Viable Product"));
-        dummyFlashcards.add(new Flashcard("Lorem Ipsum", "dolor sit amet"));
-        dummyFlashcards.add(new Flashcard("Herp", "Derp"));
+        final FlashcardAdapter adapter = new FlashcardAdapter(this, currentDeck);
 
         // Set the dummy data to the adapter
         lv.setAdapter(adapter);
@@ -48,7 +32,7 @@ public class SP_FlashcardCreatorActivity extends AppCompatActivity {
             public void onClick(View view) {
                 EditText A = findViewById(R.id.edit_flashcard_creator_side_a),
                          B = findViewById(R.id.edit_flashcard_creator_side_b);
-                dummyFlashcards.add(new Flashcard(A.getText().toString(), B.getText().toString()));
+                currentDeck.add(new Flashcard(A.getText().toString(), B.getText().toString()));
                 adapter.notifyDataSetChanged();
                 A.getText().clear();
                 B.getText().clear();
