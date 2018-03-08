@@ -1,6 +1,7 @@
 package com.matt.flashcards;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,10 +28,13 @@ public class DeckAdapter extends ArrayAdapter {
 
         ((TextView) listItemView.findViewById(R.id.deck_title)).setText(currentDeck.getTitle());
 
+        // Event for when a deck is clicked
         listItemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Deck " + position + " clicked", Toast.LENGTH_SHORT).show();
+                Intent flashCardView = new Intent(getContext(), SP_FlashcardViewerActivity.class);
+                flashCardView.putExtra("Index", position);
+                getContext().startActivity(flashCardView);
             }
         });
 
