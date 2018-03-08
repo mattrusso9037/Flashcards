@@ -1,6 +1,7 @@
 package com.matt.flashcards;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,14 +9,17 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 
-public class FlashcardAdapter extends ArrayAdapter {
+public class FlashcardAdapter extends ArrayAdapter{
 
     private int lastPosition = -1;
+    private Deck deck;
+    private SP_FlashcardCreatorActivity clas = new SP_FlashcardCreatorActivity();
 
-    public FlashcardAdapter(Context context, ArrayList<Flashcard> flashcards) {
+
+    public FlashcardAdapter(Context context, Deck flashcards) {
         super(context, 0, flashcards);
+        this.deck = flashcards;
     }
 
     @Override
@@ -43,8 +47,12 @@ public class FlashcardAdapter extends ArrayAdapter {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(), "Delete item " + position, Toast.LENGTH_SHORT).show();
+                Log.d("Postion", position+"");
+                deck.remove(position);
+                notifyDataSetChanged();
             }
         });
+
 
         View flashCardItem = listItemView.findViewById(R.id.flashcard_item_actions);
         flashCardItem.setVisibility(position == lastPosition ? View.VISIBLE : View.GONE);
