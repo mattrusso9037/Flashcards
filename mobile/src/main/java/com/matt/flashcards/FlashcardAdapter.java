@@ -1,7 +1,6 @@
 package com.matt.flashcards;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +13,6 @@ public class FlashcardAdapter extends ArrayAdapter {
 
     private int lastPosition = -1;
     private Deck deck;
-    private SP_FlashcardCreatorActivity clas = new SP_FlashcardCreatorActivity();
-
 
     public FlashcardAdapter(Context context, Deck flashcards) {
         super(context, 0, flashcards);
@@ -47,7 +44,6 @@ public class FlashcardAdapter extends ArrayAdapter {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(), "Delete item " + position, Toast.LENGTH_SHORT).show();
-                Log.d("Postion", position + "");
                 deck.remove(position);
                 notifyDataSetChanged();
             }

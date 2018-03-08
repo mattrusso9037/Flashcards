@@ -18,8 +18,8 @@ public class SP_FlashcardCreatorActivity extends AppCompatActivity {
 
         // Dummy data
         final Deck dummyFlashcards = new Deck("Dummy Data");
-        final ListView lv = ((ListView) findViewById(R.id.flashcards_listview));
         // ListView Variable
+        final ListView lv = findViewById(R.id.flashcards_listview);
         // Adapter variable
         final FlashcardAdapter adapter = new FlashcardAdapter(this, dummyFlashcards);
 
@@ -46,13 +46,9 @@ public class SP_FlashcardCreatorActivity extends AppCompatActivity {
         findViewById(R.id.fab_flashcard_creator).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String sideA = null;
-                String sideB = null;
-                EditText A = findViewById(R.id.edit_flashcard_creator_side_a);
-                EditText B = findViewById(R.id.edit_flashcard_creator_side_b);
-                sideA = A.getText().toString();
-                sideB = B.getText().toString();
-                dummyFlashcards.add(new Flashcard(sideA, sideB));
+                EditText A = findViewById(R.id.edit_flashcard_creator_side_a),
+                         B = findViewById(R.id.edit_flashcard_creator_side_b);
+                dummyFlashcards.add(new Flashcard(A.getText().toString(), B.getText().toString()));
                 adapter.notifyDataSetChanged();
                 A.getText().clear();
                 B.getText().clear();
