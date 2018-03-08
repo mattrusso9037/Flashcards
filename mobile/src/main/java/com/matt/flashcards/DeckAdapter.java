@@ -1,7 +1,9 @@
 package com.matt.flashcards;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +57,16 @@ public class DeckAdapter extends ArrayAdapter {
                                     Toast.makeText(getContext(), "Rename", Toast.LENGTH_SHORT).show();
                                     break;
                                 case 1:
-                                    Toast.makeText(getContext(), "Delete", Toast.LENGTH_SHORT).show();
+                                    new AlertDialog.Builder(getContext())
+                                        .setTitle("Are you sure you want to delete this deck?")
+                                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                decks.remove(position);
+                                                notifyDataSetChanged();
+                                            }
+                                        }).setNegativeButton("No", null)
+                                        .create().show();
                             }
                         }
                     }).create().show();
