@@ -3,7 +3,9 @@ package com.matt.flashcards;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class SP_FlashcardCreatorActivity extends AppCompatActivity {
 
@@ -38,5 +40,17 @@ public class SP_FlashcardCreatorActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_flashcard_creator, menu);
         return true;
+    }
+
+    // Event for the save button
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_save:
+                Toast.makeText(getBaseContext(), "Nothing actually saved", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
