@@ -20,7 +20,6 @@
         android:id="@+id/text_view_DbMsg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/hello"/>
-
+        android:layout_alignBottom="@id/hello" />
 
 </android.support.constraint.ConstraintLayout>

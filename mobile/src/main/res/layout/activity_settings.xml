@@ -60,7 +60,7 @@
         android:textSize="@dimen/btn_settings_text_size"
         android:textStyle="italic"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_settings_timer"/>
+        app:layout_constraintTop_toBottomOf="@id/btn_settings_timer" />
 
     <Switch
         android:id="@+id/swt_settings_incognito"
@@ -69,7 +69,7 @@
         android:layout_marginStart="@dimen/swt_settings_margin_left"
         app:layout_constraintBottom_toTopOf="@id/txt_settings_difficulty"
         app:layout_constraintLeft_toRightOf="@id/btn_settings_incognito"
-        app:layout_constraintTop_toBottomOf="@id/btn_settings_timer"/>
+        app:layout_constraintTop_toBottomOf="@id/btn_settings_timer" />
 
     <Button
         android:id="@+id/txt_settings_difficulty"

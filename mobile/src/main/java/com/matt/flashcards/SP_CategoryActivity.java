@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.GridView;
 
 public class SP_CategoryActivity extends AppCompatActivity {
 
@@ -18,5 +19,7 @@ public class SP_CategoryActivity extends AppCompatActivity {
                 startActivity(new Intent(SP_CategoryActivity.this, SP_FlashcardCreatorActivity.class));
             }
         });
+
+        ((GridView) findViewById(R.id.grd_mp_category)).setAdapter(new DeckAdapter(this, Settings.theDeckOfDecks));
     }
 }

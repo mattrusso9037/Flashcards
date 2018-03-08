@@ -2,9 +2,8 @@ package com.matt.flashcards;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.matt.flashcards.database.FlashCardContract;
@@ -19,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
         displayDatabaseInfo();
     }
 
-
     private void displayDatabaseInfo() {
         FlashCardDbHelper mDbHelper = new FlashCardDbHelper(this);  //acces db
         SQLiteDatabase db = mDbHelper.getReadableDatabase(); //create/open db and READ
@@ -31,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
             displayView.setText("Number of rows in Decks db table: " + cursor.getCount());
         } finally {
             cursor.close();
-
         }
     }
 

@@ -23,6 +23,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         toolbar.setTitle(R.string.title_activity_home);
         setSupportActionBar(toolbar);
 
+        Settings.loadData();
+
         // Event for the single player button
         findViewById(R.id.btn_home_single_player).setOnClickListener(new View.OnClickListener() {
             @Override
