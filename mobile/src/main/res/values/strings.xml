@@ -42,7 +42,7 @@
 
     <string name="title_activity_about">About</string>
     <string name="txt_about_label">About</string>
-    <string name="txt_about">Product Owner | Matt Russo\nProject Manager | Kyle Waldron\nUX | Franklin Torres\nFront End | Brandon Selzer\nMiddleware | David Pirraglia\nMiddleware | David Siopa\nDatabase | Gregory Barney\nQuality Assurance | Enrique Gambra</string>
+    <string name="txt_about">Product Owner | Matt Russo\nProject Manager | Kyle Waldron\nUX | Franklin Torres\nFront End | Brandon Selzer\nMiddleware | David Pirraglia\nMiddleware | David Siopa\nMiddleware | Anthony Destefano\nDatabase | Gregory Barney\nQuality Assurance | Enrique Gambra</string>
     
     <string name="txt_color_theme">Color Theme</string>
     <string name="txt_timer">Timer</string>

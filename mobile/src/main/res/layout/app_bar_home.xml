@@ -23,12 +23,12 @@
 
     <include layout="@layout/content_home" />
 
-    <android.support.design.widget.FloatingActionButton
+    <!--<android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="@dimen/fab_margin_vertical"
         android:layout_marginEnd="@dimen/fab_margin_horizontal"
-        app:srcCompat="@android:drawable/ic_menu_add" />
+        app:srcCompat="@android:drawable/ic_menu_add" />-->
 </android.support.design.widget.CoordinatorLayout>
