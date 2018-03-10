@@ -8,7 +8,12 @@ public final class Settings {
 
     public final static ArrayList<Deck> theDeckOfDecks = new ArrayList<>();
 
+    private static boolean dataLoaded = false;
+
     public static void loadData() {
+        if (dataLoaded) return;
+        dataLoaded = true;
+
         // Load in dummy data
 
         Deck android = new Deck("Android Development");
