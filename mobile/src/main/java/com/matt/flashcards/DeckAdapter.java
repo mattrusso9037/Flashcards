@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -54,7 +53,7 @@ public class DeckAdapter extends ArrayAdapter {
                         public void onClick(DialogInterface dialog, int which) {
                             switch (which) {
                                 case 0:
-                                    Toast.makeText(getContext(), "Rename", Toast.LENGTH_SHORT).show();
+                                    new DebugToast(getContext(), "Rename clicked");
                                     break;
                                 case 1:
                                     new AlertDialog.Builder(getContext())

@@ -7,7 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class SP_FlashcardCreatorActivity extends AppCompatActivity {
 
@@ -52,7 +51,7 @@ public class SP_FlashcardCreatorActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_save:
-                Toast.makeText(getBaseContext(), "Nothing actually saved", Toast.LENGTH_SHORT).show();
+                new DebugToast(getBaseContext(), "Nothing actually saved");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
