@@ -6,8 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 public class FlashcardAdapter extends ArrayAdapter {
 
@@ -35,7 +33,7 @@ public class FlashcardAdapter extends ArrayAdapter {
         listItemView.findViewById(R.id.flashcard_item_edit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Edit item " + position, Toast.LENGTH_SHORT).show();
+                new DebugToast(getContext(), "Edit item " + position);
             }
         });
 
@@ -43,7 +41,6 @@ public class FlashcardAdapter extends ArrayAdapter {
         listItemView.findViewById(R.id.flashcard_item_delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Delete item " + position, Toast.LENGTH_SHORT).show();
                 deck.remove(position);
                 notifyDataSetChanged();
             }

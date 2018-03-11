@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -37,9 +36,9 @@ public class DeckAdapter extends ArrayAdapter {
         listItemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent flashCardView = new Intent(getContext(), SP_FlashcardViewerActivity.class);
-                flashCardView.putExtra("Index", position);
-                getContext().startActivity(flashCardView);
+                getContext().startActivity(
+                        new Intent(getContext(), SP_FlashcardViewerActivity.class)
+                                .putExtra("Index", position));
             }
         });
 
@@ -54,18 +53,34 @@ public class DeckAdapter extends ArrayAdapter {
                         public void onClick(DialogInterface dialog, int which) {
                             switch (which) {
                                 case 0:
-                                    Toast.makeText(getContext(), "Rename", Toast.LENGTH_SHORT).show();
+                                    final View inflater = LayoutInflater.from(getContext())
+                                            .inflate(R.layout.deck_dialog, null);
+                                    final TextView dialogName = inflater.findViewById(R.id.deck_dialog_name);
+                                    dialogName.setText(decks.get(position).getTitle());
+                                    new AlertDialog.Builder(getContext())
+                                            .setTitle("Rename deck:")
+                                            .setView(inflater)
+                                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    decks.get(position).setTitle(dialogName.getText().toString());
+                                                    notifyDataSetChanged();
+                                                    Settings.saveData(getContext());
+                                                }
+                                            }).setNegativeButton("Cancel", null)
+                                            .create().show();
                                     break;
                                 case 1:
                                     new AlertDialog.Builder(getContext())
                                         .setTitle("Are you sure you want to delete this deck?")
-                                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 decks.remove(position);
                                                 notifyDataSetChanged();
+                                                Settings.saveData(getContext());
                                             }
-                                        }).setNegativeButton("No", null)
+                                        }).setNegativeButton("Cancel", null)
                                         .create().show();
                             }
                         }
