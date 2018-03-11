@@ -65,6 +65,7 @@ public class DeckAdapter extends ArrayAdapter {
                                                 public void onClick(DialogInterface dialog, int which) {
                                                     decks.get(position).setTitle(dialogName.getText().toString());
                                                     notifyDataSetChanged();
+                                                    Settings.saveData(getContext());
                                                 }
                                             }).setNegativeButton("Cancel", null)
                                             .create().show();
@@ -77,6 +78,7 @@ public class DeckAdapter extends ArrayAdapter {
                                             public void onClick(DialogInterface dialog, int which) {
                                                 decks.remove(position);
                                                 notifyDataSetChanged();
+                                                Settings.saveData(getContext());
                                             }
                                         }).setNegativeButton("Cancel", null)
                                         .create().show();

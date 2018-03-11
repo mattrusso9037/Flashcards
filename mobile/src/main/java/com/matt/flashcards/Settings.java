@@ -108,6 +108,10 @@ public final class Settings {
     }
 
     public static void saveData() {
-        //
+        // Code to save data goes here
+    }
+
+    public static void saveData(android.content.Context context) {
+        new DebugToast(context, "Saved to Derpbase");
     }
 }

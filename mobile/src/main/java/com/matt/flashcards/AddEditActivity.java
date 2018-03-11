@@ -62,6 +62,7 @@ public class AddEditActivity extends AppCompatActivity {
                             sideB.getText().toString()
                     ));
                 }
+                Settings.saveData(this);
                 super.onBackPressed();
                 return true;
             // Event for the Up button

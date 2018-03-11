@@ -32,6 +32,7 @@ public class SP_CategoryActivity extends AppCompatActivity {
                                 Settings.theDeckOfDecks.add(
                                         new Deck(dialogName.getText().toString()));
                                 adapter.notifyDataSetChanged();
+                                Settings.saveData(getBaseContext());
                             }
                         }).setNegativeButton("Cancel", null)
                         .create().show();
