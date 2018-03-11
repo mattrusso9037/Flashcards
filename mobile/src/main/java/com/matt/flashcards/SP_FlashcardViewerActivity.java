@@ -1,6 +1,7 @@
 package com.matt.flashcards;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,13 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
     private boolean isFront = true;
     private Deck currentDeck;
     private TextView mainTextView;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // After editing a flashcard, make sure it has the updated information
+        mainTextView.setText(currentDeck.get(cardIndex).getSideA());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,10 +108,14 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
                 new DebugToast(getBaseContext(), "Fullscreen Mode");
                 break;
             case R.id.action_new_card:
-                new DebugToast(getBaseContext(), "New Flashcard");
+                newFlashCard();
                 break;
             case R.id.action_edit_card:
-                new DebugToast(getBaseContext(), "Edit Flashcard");
+                if (currentDeck.isEmpty()) {
+                    newFlashCard();
+                } else {
+                    editFlashCard();
+                }
                 break;
             case R.id.action_delete_card:
                 if (!currentDeck.isEmpty()) {
@@ -114,6 +126,19 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    private void newFlashCard() {
+        startActivity(new Intent(this, AddEditActivity.class)
+                .putExtra("EditMode", false)
+                .putExtra("DeckIndex", deckIndex));
+    }
+
+    private void editFlashCard() {
+        startActivity(new Intent(this, AddEditActivity.class)
+                .putExtra("EditMode", true)
+                .putExtra("DeckIndex", deckIndex)
+                .putExtra("CardIndex", cardIndex));
     }
 
     private void deleteFlashCard() {
