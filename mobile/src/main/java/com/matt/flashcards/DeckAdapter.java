@@ -36,9 +36,9 @@ public class DeckAdapter extends ArrayAdapter {
         listItemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent flashCardView = new Intent(getContext(), SP_FlashcardViewerActivity.class);
-                flashCardView.putExtra("Index", position);
-                getContext().startActivity(flashCardView);
+                getContext().startActivity(
+                        new Intent(getContext(), SP_FlashcardViewerActivity.class)
+                                .putExtra("Index", position));
             }
         });
 
@@ -58,13 +58,13 @@ public class DeckAdapter extends ArrayAdapter {
                                 case 1:
                                     new AlertDialog.Builder(getContext())
                                         .setTitle("Are you sure you want to delete this deck?")
-                                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 decks.remove(position);
                                                 notifyDataSetChanged();
                                             }
-                                        }).setNegativeButton("No", null)
+                                        }).setNegativeButton("Cancel", null)
                                         .create().show();
                             }
                         }

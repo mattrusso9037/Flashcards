@@ -23,7 +23,12 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         // After editing a flashcard, make sure it has the updated information
-        mainTextView.setText(currentDeck.get(cardIndex).getSideA());
+        if (currentDeck != null && !currentDeck.isEmpty()) {
+            if (cardIndex == currentDeck.size()) {
+                cardIndex--;
+            }
+            mainTextView.setText(currentDeck.get(cardIndex).getSideA());
+        }
     }
 
     @Override
@@ -71,6 +76,8 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
                     } else {
                         Toast.makeText(getBaseContext(), "This is the last card", Toast.LENGTH_SHORT).show();
                     }
+                } else {
+                    Toast.makeText(getBaseContext(), "There are no flashcards in this deck", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -88,6 +95,8 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
                     } else {
                         Toast.makeText(getBaseContext(), "This is the first card", Toast.LENGTH_SHORT).show();
                     }
+                } else {
+                    Toast.makeText(getBaseContext(), "There are no flashcards in this deck", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -132,6 +141,7 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
         startActivity(new Intent(this, AddEditActivity.class)
                 .putExtra("EditMode", false)
                 .putExtra("DeckIndex", deckIndex));
+        cardIndex = currentDeck.size();
     }
 
     private void editFlashCard() {

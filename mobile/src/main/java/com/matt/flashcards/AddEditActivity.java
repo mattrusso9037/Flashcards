@@ -62,6 +62,8 @@ public class AddEditActivity extends AppCompatActivity {
                             sideB.getText().toString()
                     ));
                 }
+                super.onBackPressed();
+                return true;
             // Event for the Up button
             case android.R.id.home: // https://stackoverflow.com/a/8887556
                 onBackPressed();
@@ -74,8 +76,10 @@ public class AddEditActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         String a = sideA.getText().toString(), b = sideB.getText().toString();
-        if ((editMode && (!currentCard.getSideA().equals(a) || !currentCard.getSideB().equals(b))) ||
-                (!editMode && (!a.isEmpty() || !b.isEmpty()))) {
+        if (editMode && currentCard.getSideA().equals(a) && currentCard.getSideB().equals(b) ||
+                !editMode && a.isEmpty() && b.isEmpty()) {
+            super.onBackPressed();
+        } else {
             new AlertDialog.Builder(this)
                     .setTitle("Are you sure you want to lose the changes you've made?")
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -85,8 +89,6 @@ public class AddEditActivity extends AppCompatActivity {
                         }
                     }).setNegativeButton("Cancel", null)
                     .create().show();
-        } else {
-            super.onBackPressed();
         }
     }
 }
