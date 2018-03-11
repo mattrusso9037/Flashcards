@@ -53,7 +53,21 @@ public class DeckAdapter extends ArrayAdapter {
                         public void onClick(DialogInterface dialog, int which) {
                             switch (which) {
                                 case 0:
-                                    new DebugToast(getContext(), "Rename clicked");
+                                    final View inflater = LayoutInflater.from(getContext())
+                                            .inflate(R.layout.deck_dialog, null);
+                                    final TextView dialogName = inflater.findViewById(R.id.deck_dialog_name);
+                                    dialogName.setText(decks.get(position).getTitle());
+                                    new AlertDialog.Builder(getContext())
+                                            .setTitle("Rename deck:")
+                                            .setView(inflater)
+                                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    decks.get(position).setTitle(dialogName.getText().toString());
+                                                    notifyDataSetChanged();
+                                                }
+                                            }).setNegativeButton("Cancel", null)
+                                            .create().show();
                                     break;
                                 case 1:
                                     new AlertDialog.Builder(getContext())
