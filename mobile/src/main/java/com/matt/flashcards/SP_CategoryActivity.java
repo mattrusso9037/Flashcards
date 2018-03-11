@@ -92,9 +92,21 @@ public class SP_CategoryActivity extends AppCompatActivity {
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Settings.theDeckOfDecks.add(new Deck(dialogName.getText().toString()));
-                            adapter.notifyDataSetChanged();
-                            Settings.saveData(getBaseContext());
+                            String deckTitle = dialogName.getText().toString();
+                            if (deckTitle.isEmpty()) {
+                                new AlertDialog.Builder(SP_CategoryActivity.this)
+                                        .setTitle("Error")
+                                        .setMessage("You can't create a deck without a title")
+                                        .setPositiveButton("Ok", null)
+                                        .create().show();
+                            } else {
+                                Settings.theDeckOfDecks.add(new Deck(deckTitle));
+                                adapter.notifyDataSetChanged();
+                                Settings.saveData(getBaseContext());
+                                if (drawer.isDrawerOpen(GravityCompat.START)) {
+                                    drawer.closeDrawer(GravityCompat.START, false);
+                                }
+                            }
                         }
                     }).setNegativeButton("Cancel", null)
                     .create().show();
