@@ -2,6 +2,8 @@ package com.matt.flashcards;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,5 +62,34 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    // This adds menu items to the app bar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_flashcard_viewer, menu);
+        return true;
+    }
+
+    // Events for the menu
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_fullscreen:
+                new DebugToast(getBaseContext(), "Fullscreen Mode");
+                break;
+            case R.id.action_new_card:
+                new DebugToast(getBaseContext(), "New Flashcard");
+                break;
+            case R.id.action_edit_card:
+                new DebugToast(getBaseContext(), "Edit Flashcard");
+                break;
+            case R.id.action_delete_card:
+                new DebugToast(getBaseContext(), "Delete Flashcard");
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return true;
     }
 }

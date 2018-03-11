@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".SP_FlashcardViewerActivity">
+
+    <item
+        android:id="@+id/action_fullscreen"
+        android:title="Fullscreen"
+        android:icon="@drawable/ic_zoom_out_map_white_48dp"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_new_card"
+        android:title="New"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_edit_card"
+        android:title="Edit"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_delete_card"
+        android:title="Delete"
+        app:showAsAction="never" />
+
+</menu>
