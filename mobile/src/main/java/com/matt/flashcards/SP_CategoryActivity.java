@@ -14,10 +14,12 @@ public class SP_CategoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sp_category);
+        Settings.loadData();
 
         final DeckAdapter adapter = new DeckAdapter(this, Settings.theDeckOfDecks);
         ((GridView) findViewById(R.id.grd_mp_category)).setAdapter(adapter);
 
+        // Event for the Fab
         findViewById(R.id.btn_mp_category).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
