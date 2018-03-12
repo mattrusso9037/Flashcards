@@ -45,5 +45,7 @@
             android:label="@string/title_activity_theme"
             android:parentActivityName=".SettingsActivity" />
         <activity android:name=".AddEditActivity" />
+        <activity android:name=".SP_FlashcardViewerActivity$FlashcardListActivity"
+            android:parentActivityName=".SP_FlashcardViewerActivity" />
     </application>
 </manifest>
