@@ -131,6 +131,9 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
                     deleteFlashCard();
                 }
                 break;
+            case R.id.action_list_view:
+                new DebugToast(this, "List");
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }
