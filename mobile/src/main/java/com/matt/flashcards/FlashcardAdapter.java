@@ -37,6 +37,7 @@ public class FlashcardAdapter extends ArrayAdapter {
             @Override
             public void onClick(View v) {
                 SP_FlashcardViewerActivity.cardIndex = position;
+                SP_FlashcardViewerActivity.keepCard = true;
                 ((SP_FlashcardViewerActivity.FlashcardListActivity) getContext()).onNavigateUp();
             }
         });

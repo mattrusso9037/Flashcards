@@ -19,7 +19,7 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
     private boolean isFront = true;
     private static Deck currentDeck;
     private TextView mainTextView;
-    private boolean isNewInstance = true;
+    protected static boolean keepCard;
 
     @Override
     protected void onResume() {
@@ -38,9 +38,10 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sp_flashcard_viewer);
 
-        if (isNewInstance) {
+        if (!keepCard) {
             cardIndex = 0;
-            isNewInstance = false;
+        } else {
+            keepCard = !keepCard;
         }
 
         final Deck finalCurrentDeck = Settings.theDeckOfDecks.get(deckIndex = getIntent().getIntExtra("Index", deckIndex));
@@ -139,6 +140,7 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.action_list_view:
+                keepCard = true;
                 startActivity(new Intent(this, FlashcardListActivity.class));
                 break;
             default:
@@ -151,7 +153,6 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
         startActivity(new Intent(this, AddEditActivity.class)
                 .putExtra("EditMode", false)
                 .putExtra("DeckIndex", deckIndex));
-        cardIndex = currentDeck.size();
     }
 
     private void editFlashCard() {
