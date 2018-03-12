@@ -32,6 +32,15 @@ public class FlashcardAdapter extends ArrayAdapter {
 
         ((TextView) listItemView.findViewById(R.id.flashcard_item_text)).setText(currentFlashcard.getSideA());
 
+        // Event for the view button
+        listItemView.findViewById(R.id.flashcard_item_view).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SP_FlashcardViewerActivity.cardIndex = position;
+                ((SP_FlashcardViewerActivity.FlashcardListActivity) getContext()).onNavigateUp();
+            }
+        });
+
         // Event for the edit button
         listItemView.findViewById(R.id.flashcard_item_edit).setOnClickListener(new View.OnClickListener() {
             @Override

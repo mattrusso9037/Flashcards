@@ -20,6 +20,7 @@
     <string name="txt_side_b_with_colon">Side B:</string>
     <string name="txt_side_a">Side A</string>
     <string name="txt_side_b">Side B</string>
+    <string name="btn_view">View</string>
     <string name="btn_edit">Edit</string>
     <string name="btn_delete">Delete</string>
 
