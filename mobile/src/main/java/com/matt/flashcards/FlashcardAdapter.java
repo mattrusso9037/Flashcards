@@ -36,7 +36,10 @@ public class FlashcardAdapter extends ArrayAdapter {
         listItemView.findViewById(R.id.flashcard_item_edit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DebugToast(getContext(), "Edit item " + position);
+                getContext().startActivity(new Intent(getContext(), AddEditActivity.class)
+                        .putExtra("EditMode", true)
+                        .putExtra("DeckIndex", SP_FlashcardViewerActivity.deckIndex)
+                        .putExtra("CardIndex", position));
             }
         });
 
