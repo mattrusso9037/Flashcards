@@ -193,5 +193,27 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
             setTitle(currentDeck.getTitle());
             ((ListView) findViewById(R.id.flashcards_listview)).setAdapter(new FlashcardAdapter(this, currentDeck));
         }
+
+        // Adds menu to the app bar
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+            getMenuInflater().inflate(R.menu.menu_flashcard_listview, menu);
+            return true;
+        }
+
+        // Events for the menu
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.action_new_card_list_view:
+                    startActivity(new Intent(this, AddEditActivity.class)
+                            .putExtra("EditMode", false)
+                            .putExtra("DeckIndex", deckIndex));
+                    break;
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
+            return true;
+        }
     }
 }
