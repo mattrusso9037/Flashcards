@@ -8,16 +8,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class SP_FlashcardViewerActivity extends AppCompatActivity {
 
-    private int cardIndex;
-    private int deckIndex;
+    protected static int cardIndex;
+    protected static int deckIndex;
     private boolean isFront = true;
-    private Deck currentDeck;
+    private static Deck currentDeck;
     private TextView mainTextView;
+    protected static boolean keepCard;
 
     @Override
     protected void onResume() {
@@ -36,25 +38,31 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sp_flashcard_viewer);
 
-        final Deck currentDeck = Settings.theDeckOfDecks.get(deckIndex = getIntent().getExtras().getInt("Index"));
-        this.currentDeck = currentDeck;
+        if (!keepCard) {
+            cardIndex = 0;
+        } else {
+            keepCard = !keepCard;
+        }
+
+        final Deck finalCurrentDeck = Settings.theDeckOfDecks.get(deckIndex = getIntent().getIntExtra("Index", deckIndex));
+        currentDeck = finalCurrentDeck;
         final TextView mainTextView = findViewById(R.id.txt_sp_flashcard_viewer);
         this.mainTextView = mainTextView;
 
-        setTitle(currentDeck.getTitle());
+        setTitle(finalCurrentDeck.getTitle());
 
-        if (currentDeck.isEmpty()) {
+        if (finalCurrentDeck.isEmpty()) {
             mainTextView.setText("There are no flashcards in this deck");
         } else {
-            mainTextView.setText(currentDeck.get(cardIndex).getSideA());
+            mainTextView.setText(finalCurrentDeck.get(cardIndex).getSideA());
         }
 
         // Event for tapping on the card to flip it over
         View.OnClickListener flipCard = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!currentDeck.isEmpty()) {
-                    Flashcard currentCard = currentDeck.get(cardIndex);
+                if (!finalCurrentDeck.isEmpty()) {
+                    Flashcard currentCard = finalCurrentDeck.get(cardIndex);
                     mainTextView.setText(isFront ? currentCard.getSideB() : currentCard.getSideA());
                     isFront = !isFront;
                 }
@@ -67,11 +75,11 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
         findViewById(R.id.btn_sp_flashcard_viewer_next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!currentDeck.isEmpty()) {
-                    if (cardIndex < currentDeck.size() - 1) {
-                        mainTextView.setText(currentDeck.get(++cardIndex).getSideA());
+                if (!finalCurrentDeck.isEmpty()) {
+                    if (cardIndex < finalCurrentDeck.size() - 1) {
+                        mainTextView.setText(finalCurrentDeck.get(++cardIndex).getSideA());
                         isFront = true;
-                    } else if (currentDeck.size() == 1) {
+                    } else if (finalCurrentDeck.size() == 1) {
                         Toast.makeText(getBaseContext(), "This is the only card", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getBaseContext(), "This is the last card", Toast.LENGTH_SHORT).show();
@@ -86,11 +94,11 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
         findViewById(R.id.btn_sp_flashcard_viewer_prev).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!currentDeck.isEmpty()) {
+                if (!finalCurrentDeck.isEmpty()) {
                     if (cardIndex > 0) {
-                        mainTextView.setText(currentDeck.get(--cardIndex).getSideA());
+                        mainTextView.setText(finalCurrentDeck.get(--cardIndex).getSideA());
                         isFront = true;
-                    } else if (currentDeck.size() == 1) {
+                    } else if (finalCurrentDeck.size() == 1) {
                         Toast.makeText(getBaseContext(), "This is the only card", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getBaseContext(), "This is the first card", Toast.LENGTH_SHORT).show();
@@ -131,6 +139,10 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
                     deleteFlashCard();
                 }
                 break;
+            case R.id.action_list_view:
+                keepCard = true;
+                startActivity(new Intent(this, FlashcardListActivity.class));
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -141,7 +153,6 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
         startActivity(new Intent(this, AddEditActivity.class)
                 .putExtra("EditMode", false)
                 .putExtra("DeckIndex", deckIndex));
-        cardIndex = currentDeck.size();
     }
 
     private void editFlashCard() {
@@ -171,5 +182,38 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
                     }
                 }).setNegativeButton("Cancel", null)
                 .create().show();
+    }
+
+    public static class FlashcardListActivity extends AppCompatActivity {
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_flashcard_list);
+            setTitle(currentDeck.getTitle());
+            ((ListView) findViewById(R.id.flashcards_listview)).setAdapter(new FlashcardAdapter(this, currentDeck));
+        }
+
+        // Adds menu to the app bar
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+            getMenuInflater().inflate(R.menu.menu_flashcard_listview, menu);
+            return true;
+        }
+
+        // Events for the menu
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.action_new_card_list_view:
+                    startActivity(new Intent(this, AddEditActivity.class)
+                            .putExtra("EditMode", false)
+                            .putExtra("DeckIndex", deckIndex));
+                    break;
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
+            return true;
+        }
     }
 }

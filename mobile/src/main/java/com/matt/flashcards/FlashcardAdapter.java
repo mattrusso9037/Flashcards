@@ -1,6 +1,9 @@
 package com.matt.flashcards;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,11 +32,24 @@ public class FlashcardAdapter extends ArrayAdapter {
 
         ((TextView) listItemView.findViewById(R.id.flashcard_item_text)).setText(currentFlashcard.getSideA());
 
+        // Event for the view button
+        listItemView.findViewById(R.id.flashcard_item_view).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SP_FlashcardViewerActivity.cardIndex = position;
+                SP_FlashcardViewerActivity.keepCard = true;
+                ((SP_FlashcardViewerActivity.FlashcardListActivity) getContext()).onNavigateUp();
+            }
+        });
+
         // Event for the edit button
         listItemView.findViewById(R.id.flashcard_item_edit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DebugToast(getContext(), "Edit item " + position);
+                getContext().startActivity(new Intent(getContext(), AddEditActivity.class)
+                        .putExtra("EditMode", true)
+                        .putExtra("DeckIndex", SP_FlashcardViewerActivity.deckIndex)
+                        .putExtra("CardIndex", position));
             }
         });
 
@@ -41,8 +57,17 @@ public class FlashcardAdapter extends ArrayAdapter {
         listItemView.findViewById(R.id.flashcard_item_delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deck.remove(position);
-                notifyDataSetChanged();
+                new AlertDialog.Builder(getContext())
+                        .setTitle("Are you sure you want to delete this?")
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                deck.remove(position);
+                                notifyDataSetChanged();
+                                Settings.saveData(getContext());
+                            }
+                        }).setNegativeButton("Cancel", null)
+                        .create().show();
             }
         });
 

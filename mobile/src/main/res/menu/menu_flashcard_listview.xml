@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".SP_FlashcardViewerActivity$FlashcardListActivity">
+
+    <item
+        android:id="@+id/action_new_card_list_view"
+        android:title="New"
+        android:icon="@drawable/ic_add_white_48dp"
+        app:showAsAction="always" />
+
+</menu>
