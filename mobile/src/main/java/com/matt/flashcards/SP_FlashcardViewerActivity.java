@@ -14,22 +14,22 @@ import android.widget.Toast;
 
 public class SP_FlashcardViewerActivity extends AppCompatActivity {
 
-    protected static int cardIndex;
-    protected static int deckIndex;
+    private boolean fullscreenMode = false;
     private boolean isFront = true;
-    private static Deck currentDeck;
+    protected static Deck currentDeck;
     private TextView mainTextView;
-    protected static boolean keepCard;
+    private TextView fullscreenTextView;
+    private View fullscreenView;
 
     @Override
     protected void onResume() {
         super.onResume();
         // After editing a flashcard, make sure it has the updated information
         if (currentDeck != null && !currentDeck.isEmpty()) {
-            if (cardIndex == currentDeck.size()) {
-                cardIndex--;
+            if (currentDeck.currentCardIndex == currentDeck.size()) {
+                currentDeck.getPrevCard();
             }
-            mainTextView.setText(currentDeck.get(cardIndex).getSideA());
+            mainTextView.setText(currentDeck.getCurrentCard().getSideA());
         }
     }
 
@@ -38,76 +38,102 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sp_flashcard_viewer);
 
-        if (!keepCard) {
-            cardIndex = 0;
+        currentDeck = Settings.theDeckOfDecks.get(Deck.currentDeckIndex);
+        setTitle(currentDeck.getTitle());
+
+        fullscreenView = findViewById(R.id.fullscreen_frame);
+        mainTextView = findViewById(R.id.txt_sp_flashcard_viewer);
+        fullscreenTextView = fullscreenView.findViewById(R.id.fullscreen_textview);
+
+        // Check if the deck is empty
+        if (currentDeck.isEmpty()) {
+            setTextViews("There are no flashcards in this deck");
         } else {
-            keepCard = !keepCard;
+            setTextViews(currentDeck.getCurrentCard().getSideA());
         }
 
-        final Deck finalCurrentDeck = Settings.theDeckOfDecks.get(deckIndex = getIntent().getIntExtra("Index", deckIndex));
-        currentDeck = finalCurrentDeck;
-        final TextView mainTextView = findViewById(R.id.txt_sp_flashcard_viewer);
-        this.mainTextView = mainTextView;
-
-        setTitle(finalCurrentDeck.getTitle());
-
-        if (finalCurrentDeck.isEmpty()) {
-            mainTextView.setText("There are no flashcards in this deck");
-        } else {
-            mainTextView.setText(finalCurrentDeck.get(cardIndex).getSideA());
-        }
-
-        // Event for tapping on the card to flip it over
-        View.OnClickListener flipCard = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!finalCurrentDeck.isEmpty()) {
-                    Flashcard currentCard = finalCurrentDeck.get(cardIndex);
-                    mainTextView.setText(isFront ? currentCard.getSideB() : currentCard.getSideA());
-                    isFront = !isFront;
-                }
-            }
-        };
+        // Add listeners to flip a card
         findViewById(R.id.clt_sp_flashcard_viewer_top).setOnClickListener(flipCard);
         mainTextView.setOnClickListener(flipCard);
+        fullscreenTextView.setOnClickListener(flipCard);
+        fullscreenView.findViewById(R.id.fullscreen_flip).setOnClickListener(flipCard);
 
-        // Event for the next button
-        findViewById(R.id.btn_sp_flashcard_viewer_next).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!finalCurrentDeck.isEmpty()) {
-                    if (cardIndex < finalCurrentDeck.size() - 1) {
-                        mainTextView.setText(finalCurrentDeck.get(++cardIndex).getSideA());
-                        isFront = true;
-                    } else if (finalCurrentDeck.size() == 1) {
-                        Toast.makeText(getBaseContext(), "This is the only card", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getBaseContext(), "This is the last card", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(getBaseContext(), "There are no flashcards in this deck", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        // Add listeners to go to the next card
+        findViewById(R.id.btn_sp_flashcard_viewer_next).setOnClickListener(nextCard);
+        fullscreenView.findViewById(R.id.fullscreen_next).setOnClickListener(nextCard);
 
-        // Event for the previous button
-        findViewById(R.id.btn_sp_flashcard_viewer_prev).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!finalCurrentDeck.isEmpty()) {
-                    if (cardIndex > 0) {
-                        mainTextView.setText(finalCurrentDeck.get(--cardIndex).getSideA());
-                        isFront = true;
-                    } else if (finalCurrentDeck.size() == 1) {
-                        Toast.makeText(getBaseContext(), "This is the only card", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getBaseContext(), "This is the first card", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(getBaseContext(), "There are no flashcards in this deck", Toast.LENGTH_SHORT).show();
-                }
+        // Add listeners to go to the previous card
+        findViewById(R.id.btn_sp_flashcard_viewer_prev).setOnClickListener(prevCard);
+        fullscreenView.findViewById(R.id.fullscreen_prev).setOnClickListener(prevCard);
+    }
+
+    // Function to set the text for both text views
+    public void setTextViews(String text) {
+        mainTextView.setText(text);
+        fullscreenTextView.setText(text);
+    }
+
+    // Event for tapping on the card to flip it over
+    private View.OnClickListener flipCard = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (!currentDeck.isEmpty()) {
+                Flashcard currentCard = currentDeck.getCurrentCard();
+                mainTextView.setText(isFront ? currentCard.getSideB() : currentCard.getSideA());
+                fullscreenTextView.setText(isFront ? currentCard.getSideB() : currentCard.getSideA());
+                isFront = !isFront;
             }
-        });
+        }
+    };
+
+    // Event for the next button
+    private View.OnClickListener nextCard = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (!currentDeck.isEmpty()) {
+                if (currentDeck.currentCardIndex < currentDeck.size() - 1) {
+                    setTextViews(currentDeck.getNextCard().getSideA());
+                    isFront = true;
+                } else if (currentDeck.size() == 1) {
+                    Toast.makeText(getBaseContext(), "This is the only card", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getBaseContext(), "This is the last card", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(getBaseContext(), "There are no flashcards in this deck", Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+
+    // Event for the previous button
+    private View.OnClickListener prevCard = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (!currentDeck.isEmpty()) {
+                if (currentDeck.currentCardIndex > 0) {
+                    setTextViews(currentDeck.getPrevCard().getSideA());
+                    isFront = true;
+                } else if (currentDeck.size() == 1) {
+                    Toast.makeText(getBaseContext(), "This is the only card", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getBaseContext(), "This is the first card", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(getBaseContext(), "There are no flashcards in this deck", Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+
+    @Override
+    public void onBackPressed() {
+        if (fullscreenMode) {
+            fullscreenView.setVisibility(View.GONE);
+            getSupportActionBar().show();
+            toggleFullscreen();
+            fullscreenMode = false;
+        } else {
+            onNavigateUp();
+        }
     }
 
     // This adds menu items to the app bar
@@ -122,7 +148,10 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_fullscreen:
-                new DebugToast(getBaseContext(), "Fullscreen Mode");
+                fullscreenMode = true;
+                toggleFullscreen();
+                getSupportActionBar().hide();
+                fullscreenView.setVisibility(View.VISIBLE);
                 break;
             case R.id.action_new_card:
                 newFlashCard();
@@ -140,7 +169,6 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.action_list_view:
-                keepCard = true;
                 startActivity(new Intent(this, FlashcardListActivity.class));
                 break;
             default:
@@ -152,14 +180,14 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
     private void newFlashCard() {
         startActivity(new Intent(this, AddEditActivity.class)
                 .putExtra("EditMode", false)
-                .putExtra("DeckIndex", deckIndex));
+                .putExtra("DeckIndex", Deck.currentDeckIndex));
     }
 
     private void editFlashCard() {
         startActivity(new Intent(this, AddEditActivity.class)
                 .putExtra("EditMode", true)
-                .putExtra("DeckIndex", deckIndex)
-                .putExtra("CardIndex", cardIndex));
+                .putExtra("DeckIndex", Deck.currentDeckIndex)
+                .putExtra("CardIndex", currentDeck.currentCardIndex));
     }
 
     private void deleteFlashCard() {
@@ -169,14 +197,14 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (currentDeck.size() == 1) {
-                            currentDeck.remove(cardIndex);
+                            currentDeck.remove(currentDeck.currentCardIndex);
                             mainTextView.setText("There are no flashcards in this deck");
-                        } else if (currentDeck.size() - 1 == cardIndex) {
-                            currentDeck.remove(cardIndex--);
-                            mainTextView.setText(currentDeck.get(cardIndex).getSideA());
+                        } else if (currentDeck.size() - 1 == currentDeck.currentCardIndex) {
+                            currentDeck.remove(currentDeck.currentCardIndex--);
+                            mainTextView.setText(currentDeck.getCurrentCard().getSideA());
                         } else {
-                            currentDeck.remove(cardIndex);
-                            mainTextView.setText(currentDeck.get(cardIndex).getSideA());
+                            currentDeck.remove(currentDeck.currentCardIndex);
+                            mainTextView.setText(currentDeck.getCurrentCard().getSideA());
                         }
                         Settings.saveData(getBaseContext());
                     }
@@ -208,12 +236,22 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
                 case R.id.action_new_card_list_view:
                     startActivity(new Intent(this, AddEditActivity.class)
                             .putExtra("EditMode", false)
-                            .putExtra("DeckIndex", deckIndex));
-                    break;
+                            .putExtra("DeckIndex", Deck.currentDeckIndex));
+                    return true;
                 default:
                     return super.onOptionsItemSelected(item);
             }
-            return true;
         }
+    }
+
+    /**
+     * https://developer.android.com/samples/ImmersiveMode/project.html
+     */
+    private void toggleFullscreen() {
+        int newUiOptions = getWindow().getDecorView().getSystemUiVisibility();
+        newUiOptions ^= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        newUiOptions ^= View.SYSTEM_UI_FLAG_FULLSCREEN;
+        newUiOptions ^= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        getWindow().getDecorView().setSystemUiVisibility(newUiOptions);
     }
 }
