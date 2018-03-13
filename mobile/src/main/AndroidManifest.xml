@@ -10,8 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        >
+        android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
         <activity
             android:name=".HomeActivity"
@@ -32,6 +31,7 @@
             android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".SP_FlashcardViewerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:parentActivityName=".SP_CategoryActivity" />
         <activity
             android:name=".AboutActivity"

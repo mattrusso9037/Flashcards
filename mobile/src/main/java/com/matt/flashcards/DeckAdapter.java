@@ -36,9 +36,8 @@ public class DeckAdapter extends ArrayAdapter {
         listItemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getContext().startActivity(
-                        new Intent(getContext(), SP_FlashcardViewerActivity.class)
-                                .putExtra("Index", position));
+                Deck.currentDeckIndex = position;
+                getContext().startActivity(new Intent(getContext(), SP_FlashcardViewerActivity.class));
             }
         });
 

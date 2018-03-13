@@ -36,8 +36,7 @@ public class FlashcardAdapter extends ArrayAdapter {
         listItemView.findViewById(R.id.flashcard_item_view).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SP_FlashcardViewerActivity.cardIndex = position;
-                SP_FlashcardViewerActivity.keepCard = true;
+                SP_FlashcardViewerActivity.currentDeck.currentCardIndex = position;
                 ((SP_FlashcardViewerActivity.FlashcardListActivity) getContext()).onNavigateUp();
             }
         });
@@ -48,7 +47,7 @@ public class FlashcardAdapter extends ArrayAdapter {
             public void onClick(View view) {
                 getContext().startActivity(new Intent(getContext(), AddEditActivity.class)
                         .putExtra("EditMode", true)
-                        .putExtra("DeckIndex", SP_FlashcardViewerActivity.deckIndex)
+                        .putExtra("DeckIndex", Deck.currentDeckIndex)
                         .putExtra("CardIndex", position));
             }
         });
