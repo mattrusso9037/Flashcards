@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 public class SP_FlashcardViewerActivity extends AppCompatActivity {
 
-    private boolean fullscreenMode = false;
+    private boolean isFullscreen = false;
     private boolean isFront = true;
     protected static Deck currentDeck;
     private TextView mainTextView;
@@ -126,11 +126,10 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (fullscreenMode) {
+        if (isFullscreen) {
             fullscreenView.setVisibility(View.GONE);
             getSupportActionBar().show();
             toggleFullscreen();
-            fullscreenMode = false;
         } else {
             onNavigateUp();
         }
@@ -148,33 +147,31 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_fullscreen:
-                fullscreenMode = true;
                 toggleFullscreen();
                 getSupportActionBar().hide();
                 fullscreenView.setVisibility(View.VISIBLE);
-                break;
+                return true;
             case R.id.action_new_card:
                 newFlashCard();
-                break;
+                return true;
             case R.id.action_edit_card:
                 if (currentDeck.isEmpty()) {
                     newFlashCard();
                 } else {
                     editFlashCard();
                 }
-                break;
+                return true;
             case R.id.action_delete_card:
                 if (!currentDeck.isEmpty()) {
                     deleteFlashCard();
                 }
-                break;
+                return true;
             case R.id.action_list_view:
                 startActivity(new Intent(this, FlashcardListActivity.class));
-                break;
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
-        return true;
     }
 
     private void newFlashCard() {
@@ -248,6 +245,7 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
      * https://developer.android.com/samples/ImmersiveMode/project.html
      */
     private void toggleFullscreen() {
+        isFullscreen = !isFullscreen;
         int newUiOptions = getWindow().getDecorView().getSystemUiVisibility();
         newUiOptions ^= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         newUiOptions ^= View.SYSTEM_UI_FLAG_FULLSCREEN;
