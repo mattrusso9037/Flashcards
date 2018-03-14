@@ -62,9 +62,18 @@ public class DeckAdapter extends ArrayAdapter {
                                             .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
-                                                    decks.get(position).setTitle(dialogName.getText().toString());
-                                                    notifyDataSetChanged();
-                                                    Settings.saveData(getContext());
+                                                    String deckTitle = dialogName.getText().toString();
+                                                    if (deckTitle.isEmpty()) {
+                                                        new AlertDialog.Builder(getContext())
+                                                                .setTitle("Error")
+                                                                .setMessage("You can't create a deck without a title")
+                                                                .setPositiveButton("Ok", null)
+                                                                .create().show();
+                                                    } else {
+                                                        decks.get(position).setTitle(dialogName.getText().toString());
+                                                        notifyDataSetChanged();
+                                                        Settings.saveData(getContext());
+                                                    }
                                                 }
                                             }).setNegativeButton("Cancel", null)
                                             .create().show();
