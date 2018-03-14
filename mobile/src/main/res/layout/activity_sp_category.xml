@@ -21,6 +21,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="?attr/actionBarSize"
             android:layout_marginBottom="@dimen/grd_sp_category_margin_bottom"
+            android:drawSelectorOnTop="true"
             android:numColumns="2"
             android:scrollbars="vertical"
             app:layout_constraintBottom_toBottomOf="parent"

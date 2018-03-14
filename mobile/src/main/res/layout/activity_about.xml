@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/darker_gray"
+    android:background="@drawable/gradient_background"
     tools:context=".AboutActivity">
 
     <!--<TextView
@@ -27,7 +27,7 @@
         android:layout_marginTop="@dimen/txt_about_label_margin_top"
         android:gravity="center"
         android:text="@string/txt_about"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:textSize="@dimen/txt_about_text_size"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
