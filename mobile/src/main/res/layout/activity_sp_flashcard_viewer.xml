@@ -109,40 +109,44 @@
             android:fillViewport="true"
             android:scrollbars="vertical">
 
-            <TextView
-                android:id="@+id/fullscreen_textview"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal|center_vertical"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/txt_sp_flashcard_viewer_text_size"
-                tools:text="Testing" />
+                android:layout_height="match_parent">
 
+                <TextView
+                    android:id="@+id/fullscreen_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/txt_sp_flashcard_viewer_text_size"
+                    tools:text="Testing" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent">
+
+                    <View
+                        android:id="@+id/fullscreen_prev"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.25" />
+
+                    <View
+                        android:id="@+id/fullscreen_flip"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.50" />
+
+                    <View
+                        android:id="@+id/fullscreen_next"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.25" />
+
+                </LinearLayout>
+            </RelativeLayout>
         </ScrollView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent">
-
-            <View
-                android:id="@+id/fullscreen_prev"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.25" />
-
-            <View
-                android:id="@+id/fullscreen_flip"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.50" />
-
-            <View
-                android:id="@+id/fullscreen_next"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.25" />
-
-        </LinearLayout>
     </FrameLayout>
 </android.support.constraint.ConstraintLayout>
