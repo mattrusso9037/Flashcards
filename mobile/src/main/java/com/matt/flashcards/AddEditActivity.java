@@ -69,7 +69,7 @@ public class AddEditActivity extends AppCompatActivity {
                                 sideA.getText().toString(),
                                 sideB.getText().toString()
                         ));
-                        SP_FlashcardViewerActivity.currentDeck.currentCardIndex = currentDeck.size();
+                        SP_FlashcardViewerActivity.currentDeck.currentCardIndex = currentDeck.size() - 1;
                     }
                     Settings.saveData(this);
                     super.onBackPressed();
