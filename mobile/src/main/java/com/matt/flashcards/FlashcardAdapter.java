@@ -57,11 +57,15 @@ public class FlashcardAdapter extends ArrayAdapter {
             @Override
             public void onClick(View view) {
                 new AlertDialog.Builder(getContext())
-                        .setTitle("Are you sure you want to delete this?")
+                        .setTitle("Are you sure you want to delete this flashcard?")
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 deck.remove(position);
+                                if (SP_FlashcardViewerActivity.currentDeck.currentCardIndex
+                                        == SP_FlashcardViewerActivity.currentDeck.size()) {
+                                    SP_FlashcardViewerActivity.currentDeck.currentCardIndex--;
+                                }
                                 notifyDataSetChanged();
                                 Settings.saveData(getContext());
                             }
