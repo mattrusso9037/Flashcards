@@ -63,7 +63,8 @@ public class SP_CategoryActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_load_dummy_data:
                         new AlertDialog.Builder(SP_CategoryActivity.this)
-                                .setTitle("Are you sure you want to overwrite all your data with dummy data?")
+                                .setTitle("Warning")
+                                .setMessage("Are you sure you want to overwrite all your data with dummy data?")
                                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
