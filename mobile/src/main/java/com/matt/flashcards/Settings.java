@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -147,6 +148,7 @@ public final class Settings {
                 }
                 theDeckOfDecks.add(deck);
             }
+        } catch (FileNotFoundException e) {
         } catch (JSONException | IOException e) {
             new AlertDialog.Builder(context)
                     .setTitle("Error")
