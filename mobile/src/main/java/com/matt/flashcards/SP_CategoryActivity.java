@@ -37,7 +37,7 @@ public class SP_CategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sp_category);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Settings.loadData();
+        Settings.loadData(this);
 
         adapter = new DeckAdapter(this, Settings.theDeckOfDecks);
         ((GridView) findViewById(R.id.grd_mp_category)).setAdapter(adapter);
@@ -60,6 +60,20 @@ public class SP_CategoryActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.nav_new_category:
                         FabListener.onClick(getCurrentFocus());
+                        break;
+                    case R.id.nav_load_dummy_data:
+                        new AlertDialog.Builder(SP_CategoryActivity.this)
+                                .setTitle("Warning")
+                                .setMessage("Are you sure you want to overwrite all your data with dummy data?")
+                                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Settings.loadDummyData();
+                                        Settings.saveData(SP_CategoryActivity.this);
+                                        adapter.notifyDataSetChanged();
+                                    }
+                                }).setNegativeButton("Cancel", null)
+                                .create().show();
                         break;
                     case R.id.nav_settings:
                         startActivity(new Intent(SP_CategoryActivity.this, SettingsActivity.class));
@@ -102,7 +116,7 @@ public class SP_CategoryActivity extends AppCompatActivity {
                             } else {
                                 Settings.theDeckOfDecks.add(new Deck(deckTitle));
                                 adapter.notifyDataSetChanged();
-                                Settings.saveData(getBaseContext());
+                                Settings.saveData(SP_CategoryActivity.this);
                                 if (drawer.isDrawerOpen(GravityCompat.START)) {
                                     drawer.closeDrawer(GravityCompat.START, false);
                                 }
