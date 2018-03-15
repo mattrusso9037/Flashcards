@@ -202,7 +202,7 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
                             currentDeck.remove(currentDeck.currentCardIndex);
                             setTextViews(currentDeck.getCurrentCard().getSideA());
                         }
-                        Settings.saveData(getBaseContext());
+                        Settings.saveData(SP_FlashcardViewerActivity.this);
                     }
                 }).setNegativeButton("Cancel", null)
                 .create().show();

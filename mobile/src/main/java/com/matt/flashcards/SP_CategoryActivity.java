@@ -115,7 +115,7 @@ public class SP_CategoryActivity extends AppCompatActivity {
                             } else {
                                 Settings.theDeckOfDecks.add(new Deck(deckTitle));
                                 adapter.notifyDataSetChanged();
-                                Settings.saveData(getBaseContext());
+                                Settings.saveData(SP_CategoryActivity.this);
                                 if (drawer.isDrawerOpen(GravityCompat.START)) {
                                     drawer.closeDrawer(GravityCompat.START, false);
                                 }
