@@ -37,7 +37,7 @@ public class SP_CategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sp_category);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Settings.loadData();
+        Settings.loadData(this);
 
         adapter = new DeckAdapter(this, Settings.theDeckOfDecks);
         ((GridView) findViewById(R.id.grd_mp_category)).setAdapter(adapter);
