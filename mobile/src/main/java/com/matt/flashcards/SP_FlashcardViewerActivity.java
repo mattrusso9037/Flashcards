@@ -29,7 +29,7 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
             if (currentDeck.currentCardIndex == currentDeck.size()) {
                 currentDeck.getPrevCard();
             }
-            mainTextView.setText(currentDeck.getCurrentCard().getSideA());
+            setTextViews(currentDeck.getCurrentCard().getSideA());
         }
     }
 
@@ -79,9 +79,8 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
         public void onClick(View v) {
             if (!currentDeck.isEmpty()) {
                 Flashcard currentCard = currentDeck.getCurrentCard();
-                mainTextView.setText(isFront ? currentCard.getSideB() : currentCard.getSideA());
-                fullscreenTextView.setText(isFront ? currentCard.getSideB() : currentCard.getSideA());
                 isFront = !isFront;
+                setTextViews(isFront ? currentCard.getSideA() : currentCard.getSideB());
             }
         }
     };
@@ -195,13 +194,13 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         if (currentDeck.size() == 1) {
                             currentDeck.remove(currentDeck.currentCardIndex);
-                            mainTextView.setText("There are no flashcards in this deck");
+                            setTextViews("There are no flashcards in this deck");
                         } else if (currentDeck.size() - 1 == currentDeck.currentCardIndex) {
                             currentDeck.remove(currentDeck.currentCardIndex--);
-                            mainTextView.setText(currentDeck.getCurrentCard().getSideA());
+                            setTextViews(currentDeck.getCurrentCard().getSideA());
                         } else {
                             currentDeck.remove(currentDeck.currentCardIndex);
-                            mainTextView.setText(currentDeck.getCurrentCard().getSideA());
+                            setTextViews(currentDeck.getCurrentCard().getSideA());
                         }
                         Settings.saveData(getBaseContext());
                     }
