@@ -61,6 +61,19 @@ public class SP_CategoryActivity extends AppCompatActivity {
                     case R.id.nav_new_category:
                         FabListener.onClick(getCurrentFocus());
                         break;
+                    case R.id.nav_load_dummy_data:
+                        new AlertDialog.Builder(SP_CategoryActivity.this)
+                                .setTitle("Are you sure you want to overwrite all your data with dummy data?")
+                                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Settings.loadDummyData();
+                                        Settings.saveData(SP_CategoryActivity.this);
+                                        adapter.notifyDataSetChanged();
+                                    }
+                                }).setNegativeButton("Cancel", null)
+                                .create().show();
+                        break;
                     case R.id.nav_settings:
                         startActivity(new Intent(SP_CategoryActivity.this, SettingsActivity.class));
                         break;
