@@ -1,6 +1,7 @@
 package com.matt.flashcards;
 
 import android.content.Context;
+import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -147,7 +148,11 @@ public final class Settings {
                 theDeckOfDecks.add(deck);
             }
         } catch (JSONException | IOException e) {
-            e.printStackTrace();
+            new AlertDialog.Builder(context)
+                    .setTitle("Error")
+                    .setMessage("Unable to load data")
+                    .setPositiveButton("Ok", null)
+                    .create().show();
         }
     }
 
@@ -175,7 +180,11 @@ public final class Settings {
             outputStream.close();
 
         } catch (JSONException | IOException e) {
-            e.printStackTrace();
+            new AlertDialog.Builder(context)
+                    .setTitle("Error")
+                    .setMessage("Unable to save data")
+                    .setPositiveButton("Ok", null)
+                    .create().show();
             return;
         }
         Toast.makeText(context, "Saved Successfully", Toast.LENGTH_SHORT).show();
