@@ -1,6 +1,15 @@
 package com.matt.flashcards;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+
+import static android.content.Context.CLIPBOARD_SERVICE;
 
 public final class Settings {
 
@@ -9,6 +18,10 @@ public final class Settings {
     public final static ArrayList<Deck> theDeckOfDecks = new ArrayList<>();
 
     private static boolean dataLoaded = false;
+
+    private final static String SIDE_A_KEY = "SideA";
+    private final static String SIDE_B_KEY = "SideB";
+    private final static String DECK_KEY = "Decks";
 
     public static void loadData() {
         if (dataLoaded) return;
@@ -107,11 +120,30 @@ public final class Settings {
         theDeckOfDecks.add(java);
     }
 
-    public static void saveData() {
-        // Code to save data goes here
-    }
-
     public static void saveData(android.content.Context context) {
-        new DebugToast(context, "Saved to Derpbase");
+        JSONObject main = new JSONObject();
+        JSONArray JSONAllDecks = new JSONArray();
+        ClipboardManager clipboard = (ClipboardManager) context.getSystemService(CLIPBOARD_SERVICE);
+
+        try {
+            for (Deck deck : theDeckOfDecks) {
+                JSONArray JSONDeck = new JSONArray();
+                for (Flashcard flashcard : deck) {
+                    JSONObject JSONFlashcard = new JSONObject();
+
+                    JSONFlashcard.put(SIDE_A_KEY, flashcard.getSideA());
+                    JSONFlashcard.put(SIDE_B_KEY, flashcard.getSideB());
+
+                    JSONDeck.put(JSONFlashcard);
+                }
+                JSONAllDecks.put(new JSONObject().put(deck.getTitle(), JSONDeck));
+            }
+            main.put(DECK_KEY, JSONAllDecks);
+            clipboard.setPrimaryClip(ClipData.newPlainText("FlashCards", main.toString()));
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return;
+        }
+        new DebugToast(context, "Saved Successfully");
     }
 }
