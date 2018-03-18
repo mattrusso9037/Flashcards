@@ -38,7 +38,7 @@ public class MyAdapter extends WearableRecyclerView.Adapter<MyAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 //        Deck deck = deckList.get(position);
-//        holder.deckTitle.setText(deck.getTitle());
+        holder.deckTitle.setText(String.valueOf(deckList.get(position)));
     }
 
 

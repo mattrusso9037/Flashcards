@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -11,15 +12,28 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.TextView;
 
-public class SP_CategoryActivity extends AppCompatActivity {
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.wearable.MessageApi;
+import com.google.android.gms.wearable.Node;
+import com.google.android.gms.wearable.NodeApi;
+import com.google.android.gms.wearable.Wearable;
+
+
+public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks {
 
     private DeckAdapter adapter;
     private DrawerLayout drawer;
+
+    //for wear*
+    GoogleApiClient googleClient;
+
+    //*
 
     @Override
     protected void onResume() {
@@ -29,12 +43,26 @@ public class SP_CategoryActivity extends AppCompatActivity {
         if (drawer != null && drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START, false);
         }
+
+
+        // *wear
+
+        // *
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sp_category);
+
+        //wear *
+        initGoogleApiClient();
+        sendMessage("/testPath","testing");
+        Log.i("wear", "sent");
+
+        // *
+
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Settings.loadData(this);
@@ -126,4 +154,55 @@ public class SP_CategoryActivity extends AppCompatActivity {
                     .create().show();
         }
     };
+
+
+    //* wear
+
+    @Override
+    public void onConnected(Bundle bundle) {
+    sendMessage("/testPath","test");
+        Log.i("wear", "sent");
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        googleClient.disconnect();
+    }
+    private void initGoogleApiClient() {
+        googleClient = new GoogleApiClient.Builder(this).addApi(Wearable.API).build();
+        googleClient.connect();
+        Log.i("wear", "connected");
+    }
+    private void sendMessage(final String path, final String text) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                NodeApi.GetConnectedNodesResult nodes = Wearable.NodeApi.getConnectedNodes(googleClient).await();
+
+                for (Node node : nodes.getNodes()) {
+                    MessageApi.SendMessageResult result = Wearable.MessageApi.sendMessage(googleClient, node.getId(), path, text.getBytes()).await();
+                    Log.i("wear", "msg sent");
+
+                }
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                    }
+                });
+            }
+        }).start();
+    }
+
+    // *
+
+
 }
+
