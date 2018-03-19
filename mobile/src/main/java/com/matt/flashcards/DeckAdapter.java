@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.example.mylibrary.Deck;
+
 import java.util.ArrayList;
 
 public class DeckAdapter extends ArrayAdapter {

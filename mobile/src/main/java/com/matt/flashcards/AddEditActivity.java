@@ -8,6 +8,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.mylibrary.Deck;
+import com.example.mylibrary.Flashcard;
+
 public class AddEditActivity extends AppCompatActivity {
 
     private Bundle extras;

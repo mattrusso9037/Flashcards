@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.example.mylibrary.Deck;
+import com.example.mylibrary.Flashcard;
+
 public class FlashcardAdapter extends ArrayAdapter {
 
     private int lastPosition = -1;
