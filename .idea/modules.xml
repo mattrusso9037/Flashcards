@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Flashcards.iml" filepath="$PROJECT_DIR$/Flashcards.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Flashcards.iml" filepath="$PROJECT_DIR$/.idea/Flashcards.iml" />
+      <module fileurl="file://C:\Users\mattr\Desktop\Flashcards\Flashcards.iml" filepath="C:\Users\mattr\Desktop\Flashcards\Flashcards.iml" />
       <module fileurl="file://$PROJECT_DIR$/mobile/mobile.iml" filepath="$PROJECT_DIR$/mobile/mobile.iml" />
       <module fileurl="file://$PROJECT_DIR$/mylibrary/mylibrary.iml" filepath="$PROJECT_DIR$/mylibrary/mylibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/wear/wear.iml" filepath="$PROJECT_DIR$/wear/wear.iml" />
