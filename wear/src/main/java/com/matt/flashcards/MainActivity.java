@@ -1,24 +1,25 @@
 package com.matt.flashcards;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.wear.widget.WearableLinearLayoutManager;
 import android.support.wear.widget.WearableRecyclerView;
 import android.support.wearable.activity.WearableActivity;
 import android.util.Log;
 import android.widget.Toast;
-
+import com.example.mylibrary.Deck;
+import com.example.mylibrary.Flashcard;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
+import com.google.android.gms.wearable.DataMap;
 import com.google.android.gms.wearable.MessageApi;
 import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.Wearable;
-import com.google.android.gms.wearable.WearableListenerService;
 
 import java.util.ArrayList;
+
 
 public class MainActivity extends WearableActivity implements ListItemClickListener, MessageApi.MessageListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
 
@@ -26,7 +27,10 @@ public class MainActivity extends WearableActivity implements ListItemClickListe
     private MyAdapter adapter;
     private WearableLinearLayoutManager layoutManager;
     private GoogleApiClient googleClient;
-    static ArrayList list = new ArrayList();
+    private ArrayList titleList = new ArrayList();
+    private ArrayList<Deck> deckList = new ArrayList<>();
+    protected static Deck currentDeck;
+    final String TRANSFER_PATH = "/dataTransferToWear";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,43 +38,43 @@ public class MainActivity extends WearableActivity implements ListItemClickListe
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
-        list.add("test2");
-        list.add("test3");
 
         layoutManager = new WearableLinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-
-        adapter = new MyAdapter(list,this);
+        adapter = new MyAdapter(titleList,this);
         recyclerView.setAdapter(adapter);
 
         // Enables Always-on
         setAmbientEnabled();
-
         initGoogleApiClient();
     }
 
     private void initGoogleApiClient() {
         googleClient = new GoogleApiClient.Builder(this).addApi(Wearable.API).addConnectionCallbacks(this).build();
         googleClient.connect();
-        Log.i("wear", "connected");
         Wearable.MessageApi.addListener(googleClient, this);
-        Log.i("wear", "listener added");
-
     }
 
     @Override
     public void onListItemClick(int clickedItemIndex) {
-        Toast.makeText(this,String.valueOf(clickedItemIndex), Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(this, SP_WearViewerActivity.class);
+        currentDeck = deckList.get(clickedItemIndex);
+        Toast toast = Toast.makeText(this, String.valueOf("empty"), Toast.LENGTH_SHORT);
+
+        if (!currentDeck.isEmpty()) {
+            startActivity(intent);
+            toast.cancel();
+        }
+        toast.show();
+
     }
-
-
-
 
     @Override
     public void onConnected(Bundle bundle) {
         Wearable.MessageApi.addListener(googleClient, this);
-        Log.i("wear", "on connected");
+        Log.i("wear", "connected");
 
     }
     @Override
@@ -86,18 +90,11 @@ public class MainActivity extends WearableActivity implements ListItemClickListe
     @Override
     public void onConnectionSuspended(int i) {
         Log.i("wear", "suspended");
-
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Log.i("wear", "failed");
-
-    }
-
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
     }
 
     @Override
@@ -105,15 +102,57 @@ public class MainActivity extends WearableActivity implements ListItemClickListe
         runOnUiThread( new Runnable() {
             @Override
             public void run() {
-                if( messageEvent.getPath().equals( "/testPath" ) ) {
-                   list.add(new String(messageEvent.getData()));
+                if( messageEvent.getPath().equals(TRANSFER_PATH)) {
+
+                    adapter.clear();
+
+                   DataMap dataMap = DataMap.fromByteArray(messageEvent.getData());
+                   ArrayList<DataMap> dataMapList = new ArrayList<>();
+
+                   getTitles(dataMapList, dataMap);
+                    makeDecks(dataMapList);
+                    makeFlashCards(dataMapList);
                    adapter.notifyDataSetChanged();
                     Log.i("wear", "received");
-                    Log.i("wear", new String(messageEvent.getData()));
-
 
                 }
             }
         });
+    }
+    private void getTitles(ArrayList<DataMap> dataMapList, DataMap dataMap) {
+        int size = dataMap.getDataMapArrayList("deck title key").size();
+        //get titles and cards
+        for (int i = 0; i < size; i++) {
+            DataMap incomingTitle;
+            incomingTitle = dataMap.getDataMapArrayList("deck title key").get(i);
+            dataMapList.add(incomingTitle);
+        }
+    }
+    private void makeDecks(ArrayList<DataMap> dataMapList) {
+        for (int i = 0; i < dataMapList.size(); i++) {
+
+            String title = dataMapList.get(i).getString("deck title");
+            if (title != null ) {
+                Deck deck = new Deck(title);
+                deckList.add(deck);
+                titleList.add(title);
+            }
+
+        }
+    }
+    private void makeFlashCards(ArrayList<DataMap> dataMapList) {
+
+        for (int deckKey = 0; deckKey < deckList.size(); deckKey++) {
+            for (int i = 0; i < dataMapList.size(); i++) {
+                String sideA = dataMapList.get(i).getString(deckKey + "side a");
+                String sideB = dataMapList.get(i).getString(deckKey + "side b");
+                if (sideA != null) {
+                    Flashcard card = new Flashcard(sideA, sideB);
+                    deckList.get(deckKey).add(card);
+                }
+            }
+
+        }
+
     }
 }

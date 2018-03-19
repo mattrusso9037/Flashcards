@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.example.mylibrary.Deck;
+import com.example.mylibrary.Flashcard;
+
 public class SP_FlashcardCreatorActivity extends AppCompatActivity {
 
     @Override

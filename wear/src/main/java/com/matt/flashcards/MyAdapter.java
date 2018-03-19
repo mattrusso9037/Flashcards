@@ -47,6 +47,11 @@ public class MyAdapter extends WearableRecyclerView.Adapter<MyAdapter.ViewHolder
         return deckList.size();
     }
 
+    public void clear() {
+        final int size = deckList.size();
+        deckList.clear();
+        notifyItemRangeRemoved(0, size);
+    }
 
     public class ViewHolder extends WearableRecyclerView.ViewHolder implements View.OnClickListener {
 

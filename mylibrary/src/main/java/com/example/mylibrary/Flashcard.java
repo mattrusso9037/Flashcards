@@ -1,4 +1,4 @@
-package com.matt.flashcards;
+package com.example.mylibrary;
 
 public class Flashcard {
     private String sideA;

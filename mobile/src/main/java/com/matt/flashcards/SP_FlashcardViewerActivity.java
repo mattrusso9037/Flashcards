@@ -12,6 +12,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mylibrary.Deck;
+import com.example.mylibrary.Flashcard;
+
 public class SP_FlashcardViewerActivity extends AppCompatActivity {
 
     private boolean isFullscreen = false;
