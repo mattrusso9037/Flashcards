@@ -33,8 +33,12 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/black"
-                android:text="Prev"
                 android:textColor="@color/white" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/darker_gray" />
 
             <Button
                 android:id="@+id/rightBtn"
@@ -42,7 +46,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/black"
-                android:text="Next"
                 android:textColor="@color/white" />
         </LinearLayout>
 
@@ -61,13 +64,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/cardText"
+            <ScrollView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:textColor="@color/black" />
+                android:layout_centerVertical="true">
+
+                <TextView
+                    android:id="@+id/cardText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black" />
+            </ScrollView>
 
         </RelativeLayout>
 

@@ -5,7 +5,6 @@ import android.support.wearable.activity.WearableActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -35,22 +34,21 @@ public class SP_WearViewerActivity extends WearableActivity {
 
         Log.i("wear", "size viewer --- " + currentDeck.size());
 
-        cardLayout.setOnClickListener(new View.OnClickListener() {
+        View.OnClickListener onFlip = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i("wear", "index --- " + currentDeck.currentCardIndex);
-                    cardText.setText(currentDeck.getCurrentCard().getSideB());
-                    isFront = !isFront;
+                cardText.setText(currentDeck.getCurrentCard().getSideB());
+                isFront = !isFront;
 
                 if (!isFront) {
                     cardText.setText(currentDeck.getCurrentCard().getSideA());
 
                 }
-
-                }
-
-
-        });
+            }
+        };
+        cardLayout.setOnClickListener(onFlip);
+        cardText.setOnClickListener(onFlip);
 
 
         leftBtn.setOnClickListener(new View.OnClickListener() {
