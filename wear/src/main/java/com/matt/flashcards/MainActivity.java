@@ -33,7 +33,7 @@ public class MainActivity extends WearableActivity implements ListItemClickListe
     private GoogleApiClient googleClient;
     private TextView defaultText;
     private ArrayList titleList = new ArrayList();
-    private ArrayList<Deck> deckList = new ArrayList<>();
+    private ArrayList<Deck> deckList;
     protected static Deck currentDeck;
 
     final String TRANSFER_PATH = "/dataTransferToWear";
@@ -52,6 +52,7 @@ public class MainActivity extends WearableActivity implements ListItemClickListe
         recyclerView.setLayoutManager(layoutManager);
         adapter = new MyAdapter(titleList, this);
         recyclerView.setAdapter(adapter);
+        deckList = new ArrayList<>();
 
         // Enables Always-on
         setAmbientEnabled();
@@ -76,7 +77,6 @@ public class MainActivity extends WearableActivity implements ListItemClickListe
             toast.cancel();
         }
         toast.show();
-
     }
 
     @Override
@@ -123,9 +123,10 @@ public class MainActivity extends WearableActivity implements ListItemClickListe
             @Override
             public void run() {
                 if (messageEvent.getPath().equals(TRANSFER_PATH)) {
+                    Log.i("wear", String.valueOf(adapter.getItemCount()));
 
                     adapter.clear();
-
+                    Log.i("wear", String.valueOf(adapter.getItemCount()));
                     DataMap dataMap = DataMap.fromByteArray(messageEvent.getData());
                     ArrayList<DataMap> dataMapList = new ArrayList<>();
 
@@ -133,7 +134,7 @@ public class MainActivity extends WearableActivity implements ListItemClickListe
                     makeDecks(dataMapList);
                     makeFlashCards(dataMapList);
                     adapter.notifyDataSetChanged();
-
+                    dataMapList.clear();
                     if (!deckList.isEmpty()) {
                         defaultText.setVisibility(View.INVISIBLE);
                     }
@@ -145,6 +146,7 @@ public class MainActivity extends WearableActivity implements ListItemClickListe
     }
 
     private void getTitles(ArrayList<DataMap> dataMapList, DataMap dataMap) {
+        titleList.clear();
         int size = dataMap.getDataMapArrayList("deck title key").size();
         //get titles and cards
         for (int i = 0; i < size; i++) {
@@ -155,6 +157,7 @@ public class MainActivity extends WearableActivity implements ListItemClickListe
     }
 
     private void makeDecks(ArrayList<DataMap> dataMapList) {
+        deckList.clear();
         for (int i = 0; i < dataMapList.size(); i++) {
             String title = dataMapList.get(i).getString("deck title");
             if (title != null) {
@@ -167,7 +170,6 @@ public class MainActivity extends WearableActivity implements ListItemClickListe
     }
 
     private void makeFlashCards(ArrayList<DataMap> dataMapList) {
-
         for (int deckKey = 0; deckKey < deckList.size(); deckKey++) {
             for (int i = 0; i < dataMapList.size(); i++) {
                 String sideA = dataMapList.get(i).getString(deckKey + "side a");
