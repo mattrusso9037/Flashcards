@@ -9,6 +9,8 @@ import android.support.wear.widget.WearableLinearLayoutManager;
 import android.support.wear.widget.WearableRecyclerView;
 import android.support.wearable.activity.WearableActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mylibrary.Deck;
@@ -29,6 +31,7 @@ public class MainActivity extends WearableActivity implements ListItemClickListe
     private MyAdapter adapter;
     private WearableLinearLayoutManager layoutManager;
     private GoogleApiClient googleClient;
+    private TextView defaultText;
     private ArrayList titleList = new ArrayList();
     private ArrayList<Deck> deckList = new ArrayList<>();
     protected static Deck currentDeck;
@@ -40,6 +43,8 @@ public class MainActivity extends WearableActivity implements ListItemClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recycler_view);
+        defaultText = findViewById(R.id.defaultText);
+
         recyclerView.setHasFixedSize(true);
 
         layoutManager = new WearableLinearLayoutManager(this);
@@ -128,6 +133,10 @@ public class MainActivity extends WearableActivity implements ListItemClickListe
                     makeDecks(dataMapList);
                     makeFlashCards(dataMapList);
                     adapter.notifyDataSetChanged();
+
+                    if (!deckList.isEmpty()) {
+                        defaultText.setVisibility(View.INVISIBLE);
+                    }
                     Log.i("wear", "received");
 
                 }

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -17,10 +18,12 @@ import java.util.ArrayList;
 public class DeckAdapter extends ArrayAdapter {
 
     private ArrayList<Deck> decks;
+    private MenuItem item;
 
-    public DeckAdapter(Context context, ArrayList<Deck> decks) {
+    public DeckAdapter(Context context, ArrayList<Deck> decks, MenuItem item) {
         super(context, 0, decks);
         this.decks = decks;
+        this.item = item;
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -89,6 +92,8 @@ public class DeckAdapter extends ArrayAdapter {
                                                 decks.remove(position);
                                                 notifyDataSetChanged();
                                                 Settings.saveData(getContext());
+                                                WearTask wearTask = new WearTask(getContext(), item);
+                                                wearTask.execute();
                                             }
                                         }).setNegativeButton("Cancel", null)
                                         .create().show();
