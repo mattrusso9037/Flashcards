@@ -29,4 +29,5 @@ dependencies {
     compileOnly 'com.google.android.wearable:wearable:2.2.0'
     implementation project(':mylibrary')
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+
 }

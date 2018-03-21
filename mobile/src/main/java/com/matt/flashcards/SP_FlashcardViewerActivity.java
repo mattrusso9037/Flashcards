@@ -68,6 +68,7 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
         // Add listeners to go to the previous card
         findViewById(R.id.btn_sp_flashcard_viewer_prev).setOnClickListener(prevCard);
         fullscreenView.findViewById(R.id.fullscreen_prev).setOnClickListener(prevCard);
+
     }
 
     // Function to set the text for both text views

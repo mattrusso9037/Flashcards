@@ -21,6 +21,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+        <TextView
+            android:id="@+id/defaultText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:text="Open the Flashcards app on your phone to sync with your watch" />
+
     </FrameLayout>
 </android.support.wear.widget.BoxInsetLayout>
 
