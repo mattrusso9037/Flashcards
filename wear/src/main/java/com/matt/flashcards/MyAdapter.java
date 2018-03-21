@@ -2,12 +2,15 @@ package com.matt.flashcards;
 
 import android.content.Context;
 import android.support.wear.widget.WearableRecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.List;
+
+import static com.matt.flashcards.MainActivity.currentDeck;
 
 /**
  * Created by Matt on 3/17/2018.
@@ -21,8 +24,6 @@ public class MyAdapter extends WearableRecyclerView.Adapter<MyAdapter.ViewHolder
         this.deckList = deckList;
         onClickListener = listener;
     }
-
-
 
     @Override
     public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int numberOfItems) {
@@ -50,6 +51,11 @@ public class MyAdapter extends WearableRecyclerView.Adapter<MyAdapter.ViewHolder
     public void clear() {
         final int size = deckList.size();
         deckList.clear();
+        if (currentDeck != null) {
+            currentDeck.clear();
+            Log.i("wear", "current deck size " + currentDeck.size());
+
+        }
         notifyItemRangeRemoved(0, size);
     }
 

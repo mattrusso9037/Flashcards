@@ -1,11 +1,7 @@
 package com.matt.flashcards;
 
-import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -15,26 +11,18 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mylibrary.Deck;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.wearable.DataMap;
-import com.google.android.gms.wearable.MessageApi;
-import com.google.android.gms.wearable.Node;
-import com.google.android.gms.wearable.NodeApi;
-import com.google.android.gms.wearable.Wearable;
 
-import java.util.ArrayList;
 
 import static com.matt.flashcards.R.id.sync_wear;
 
@@ -46,6 +34,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     private MenuItem syncItem;
     private NavigationView navView;
     private Menu menu;
+    private Toast syncToast;
 
     @Override
     protected void onResume() {
@@ -65,6 +54,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         navView = findViewById(R.id.nav_view);
         menu = navView.getMenu();
         syncItem = menu.findItem(R.id.sync_wear);
+        syncToast = syncToast.makeText(this, "Synced With Wear", Toast.LENGTH_SHORT);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -108,6 +98,9 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                                 Settings.loadDummyData();
                                                 Settings.saveData(SP_CategoryActivity.this);
                                                 adapter.notifyDataSetChanged();
+                                                syncWear();
+                                                syncToast.cancel();
+
                                             }
                                         }).setNegativeButton("Cancel", null)
                                         .create().show();
@@ -198,7 +191,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         WearTask secondaryWearTask = new WearTask(this, syncItem);
         secondaryWearTask.execute();
         drawer.closeDrawer(GravityCompat.START);
-        Toast.makeText(this, "Synced With Wear", Toast.LENGTH_SHORT).show();
+        syncToast.show();
 
     }
 

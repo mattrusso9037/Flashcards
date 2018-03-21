@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Toast;
 import com.example.mylibrary.Deck;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.DataMap;
@@ -47,6 +46,7 @@ public class WearTask extends AsyncTask<Void, Void, Void> {
         syncItem.setEnabled(true);
         googleClient.disconnect();
         Log.i("wear", "synced");
+
     }
 
     @Override
