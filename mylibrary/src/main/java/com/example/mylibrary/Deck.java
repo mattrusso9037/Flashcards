@@ -1,4 +1,4 @@
-package com.matt.flashcards;
+package com.example.mylibrary;
 
 import java.util.ArrayList;
 

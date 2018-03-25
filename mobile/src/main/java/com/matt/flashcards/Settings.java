@@ -1,8 +1,12 @@
 package com.matt.flashcards;
+import com.example.mylibrary.Deck;
+import com.example.mylibrary.Flashcard;
 
 import android.content.Context;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
+
+import com.example.mylibrary.Flashcard;
 
 import org.json.JSONArray;
 import org.json.JSONException;

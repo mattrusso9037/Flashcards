@@ -13,13 +13,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Side A"
-        android:inputType="textMultiLine" />
+        android:inputType="textMultiLine|textCapWords" />
 
     <EditText
         android:id="@+id/add_edit_side_b"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Side B"
-        android:inputType="textMultiLine" />
+        android:inputType="textMultiLine|textCapSentences" />
 
 </LinearLayout>

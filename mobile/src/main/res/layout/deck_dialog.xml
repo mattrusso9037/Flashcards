@@ -6,7 +6,7 @@
 
     <EditText
         android:id="@+id/deck_dialog_name"
-        android:inputType="text"
+        android:inputType="textCapWords"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"

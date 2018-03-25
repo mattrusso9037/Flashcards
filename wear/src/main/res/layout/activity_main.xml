@@ -5,22 +5,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_grey"
+    android:background="@drawable/gradient_background"
     android:padding="@dimen/box_inset_layout_padding"
     tools:context="com.matt.flashcards.MainActivity"
-    tools:deviceIds="wear">
+    tools:deviceIds="wear"
+    >
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/inner_frame_layout_padding"
-        app:boxedEdges="all">
+        app:boxedEdges="left|right">
+
+        <android.support.wear.widget.WearableRecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
         <TextView
-            android:id="@+id/text"
+            android:id="@+id/defaultText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/hello_world" />
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:text="Open the Flashcards app on your phone to sync with your watch" />
 
     </FrameLayout>
 </android.support.wear.widget.BoxInsetLayout>
