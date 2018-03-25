@@ -31,7 +31,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import static com.matt.flashcards.R.id.sync_wear;
 
-
 public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private DeckAdapter adapter;
@@ -101,7 +100,6 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         sharedPreferences = getSharedPreferences("com.matt.flashcards", MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
-
         // Events for the drawer items
         ((NavigationView) findViewById(R.id.nav_view)).setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -125,7 +123,6 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                                 adapter.notifyDataSetChanged();
                                                 syncWear();
                                                 syncToast.cancel();
-
                                             }
                                         }).setNegativeButton("Cancel", null)
                                         .create().show();
@@ -212,7 +209,6 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         Log.i("wear", "disconnected from GoogleApiClient");
     }
 
-
     private void syncWear() {
         WearTask secondaryWearTask = new WearTask(this, syncItem);
         secondaryWearTask.execute();
@@ -234,8 +230,8 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
 
         show = builder.show();
         show.show();
-        show.getWindow().setLayout(getResources().getDisplayMetrics().widthPixels - 100
-                , getResources().getDisplayMetrics().heightPixels - 500);
+        show.getWindow().setLayout(getResources().getDisplayMetrics().widthPixels - 100,
+                getResources().getDisplayMetrics().heightPixels - 500);
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
