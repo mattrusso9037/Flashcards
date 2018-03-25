@@ -2,8 +2,18 @@ package com.matt.flashcards;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
+import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,10 +22,15 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,10 +50,24 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     private NavigationView navView;
     private Menu menu;
     private Toast syncToast;
+    private LayoutInflater inflater;
+    private FrameLayout layout;
+    private Button button;
+    private int tutorialCount;
+    private AlertDialog show;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        //check for first run
+        if (sharedPreferences.getBoolean("first run", true)) {
+            createTutorialView();
+            editor.putBoolean("first run", false);
+            editor.commit();
+        }
 
         // Make sure the drawer is closed when returning from another activity
         if (drawer != null && drawer.isDrawerOpen(GravityCompat.START)) {
@@ -51,6 +80,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sp_category);
+
         navView = findViewById(R.id.nav_view);
         menu = navView.getMenu();
         syncItem = menu.findItem(R.id.sync_wear);
@@ -76,6 +106,10 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         WearTask primaryWearTask = new WearTask(this, syncItem);
         primaryWearTask.execute();
         // *
+
+        sharedPreferences = getSharedPreferences("com.matt.flashcards", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
 
         // Events for the drawer items
         ((NavigationView) findViewById(R.id.nav_view)).setNavigationItemSelectedListener(
@@ -171,12 +205,12 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
 
     @Override
     public void onConnectionSuspended(int i) {
-        Toast.makeText(this, "Connection Lost", Toast.LENGTH_SHORT);
+        Toast.makeText(this, "Connection Lost", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-        Toast.makeText(this, "Connection Failed", Toast.LENGTH_SHORT);
+        Toast.makeText(this, "Connection Failed", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -185,14 +219,62 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         Log.i("wear", "disconnected from GoogleApiClient");
     }
 
-    // *
 
     private void syncWear() {
         WearTask secondaryWearTask = new WearTask(this, syncItem);
         secondaryWearTask.execute();
         drawer.closeDrawer(GravityCompat.START);
         syncToast.show();
+    }
 
+    private void createTutorialView() {
+        tutorialCount = 0;
+        inflater = getLayoutInflater();
+
+        final View dialogLayout = inflater.inflate(R.layout.tutorial_layout, null);
+        button = dialogLayout.findViewById(R.id.tutorial_next_button);
+        layout = dialogLayout.findViewById(R.id.alert_body);
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(dialogLayout);
+
+        show = builder.show();
+        show.show();
+        show.getWindow().setLayout(getResources().getDisplayMetrics().widthPixels - 100, getResources().getDisplayMetrics().heightPixels - 500);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                runTutorial();
+            }
+        });
+    }
+
+    private void runTutorial() {
+
+        switch (tutorialCount) {
+
+            case 0:
+                layout.setBackgroundResource(R.drawable.screen_two);
+                tutorialCount++;
+                break;
+            case 1:
+                layout.setBackgroundResource(R.drawable.screen_three);
+                tutorialCount++;
+                break;
+            case 2:
+                layout.setBackgroundResource(R.drawable.screen_four);
+                tutorialCount++;
+                break;
+            case 3:
+                layout.setBackgroundResource(R.drawable.screen_five);
+                tutorialCount++;
+                button.setText("Lets Go");
+                break;
+            case 4:
+                show.dismiss();
+
+        }
     }
 
 

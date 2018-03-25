@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="8dp"
+    android:background="@drawable/gradient_background"
     android:orientation="vertical"
     tools:context="com.matt.flashcards.AddEditActivity">
 
@@ -12,14 +11,18 @@
         android:id="@+id/add_edit_side_a"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:hint="Side A"
-        android:inputType="textMultiLine|textCapWords" />
+        android:inputType="textMultiLine|textCapWords"
+        android:textColor="@android:color/white" />
 
     <EditText
         android:id="@+id/add_edit_side_b"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:hint="Side B"
-        android:inputType="textMultiLine|textCapSentences" />
+        android:inputType="textMultiLine|textCapSentences"
+        android:textColor="@android:color/white" />
 
 </LinearLayout>
