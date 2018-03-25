@@ -67,7 +67,6 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     @Override
     protected void onResume() {
         super.onResume();
-        createTutorialView();
 
         //check for first run
         if (sharedPreferences.getBoolean("first run", true)) {
