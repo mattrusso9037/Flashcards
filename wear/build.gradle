@@ -4,9 +4,9 @@ android {
     signingConfigs {
         config {
             keyAlias 'flashcardkey'
-            keyPassword 'SickSanCono6'
+            keyPassword ''
             storeFile file('C:/Users/Matt/Flashcards/keystore/key.jks')
-            storePassword 'SickSanCono6'
+            storePassword ''
         }
     }
     compileSdkVersion 26
