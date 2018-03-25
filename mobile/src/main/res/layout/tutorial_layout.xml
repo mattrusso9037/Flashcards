@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -18,7 +19,7 @@
         android:layout_alignParentStart="true"
         android:background="@drawable/custom_rect_dropshadow"
         android:elevation="5dp"
-        >
+        android:id="@+id/frameLayout">
 
         <FrameLayout
             android:id="@+id/alert_body"
@@ -33,10 +34,10 @@
         android:id="@+id/tutorial_next_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/frameLayout"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="0dp"
-        android:layout_weight="1"
+        android:background="@android:color/white"
+        style="?android:attr/borderlessButtonStyle"
         android:text="Next" />
 
     <TextView
@@ -53,5 +54,50 @@
         android:shadowDx="4"
         android:shadowRadius="10"
         android:text="Tutorial" />
+
+    <Button
+        android:id="@+id/tutorial_prev_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:layout_alignBottom="@+id/tutorial_next_button"
+        android:layout_alignStart="@+id/frameLayout"
+        style="?android:attr/borderlessButtonStyle"
+        android:text="Prev" />
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabDots"
+        app:tabIndicatorHeight="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textView"
+        app:tabBackground="@drawable/tab_selector"
+        android:layout_toStartOf="@+id/tutorial_next_button">
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </android.support.design.widget.TabLayout>
 
 </RelativeLayout>

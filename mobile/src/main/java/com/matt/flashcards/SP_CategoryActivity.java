@@ -3,6 +3,7 @@ package com.matt.flashcards;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,7 +16,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
@@ -52,7 +56,9 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     private Toast syncToast;
     private LayoutInflater inflater;
     private FrameLayout layout;
-    private Button button;
+    private Button nextButton;
+    private Button prevButton;
+    private TabLayout tabLayout;
     private int tutorialCount;
     private AlertDialog show;
     private SharedPreferences sharedPreferences;
@@ -145,6 +151,9 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                             case sync_wear:
                                 syncWear();
                                 break;
+                            case R.id.nav_run_tutorial:
+                                createTutorialView();
+                                break;
                             case R.id.nav_about:
                                 startActivity(new Intent(SP_CategoryActivity.this, AboutActivity.class));
                         }
@@ -230,22 +239,48 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     private void createTutorialView() {
         tutorialCount = 0;
         inflater = getLayoutInflater();
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         final View dialogLayout = inflater.inflate(R.layout.tutorial_layout, null);
-        button = dialogLayout.findViewById(R.id.tutorial_next_button);
-        layout = dialogLayout.findViewById(R.id.alert_body);
+
+        setTutorialItems(dialogLayout);
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(dialogLayout);
 
         show = builder.show();
         show.show();
-        show.getWindow().setLayout(getResources().getDisplayMetrics().widthPixels - 100, getResources().getDisplayMetrics().heightPixels - 500);
+        show.getWindow().setLayout(getResources().getDisplayMetrics().widthPixels - 100
+                , getResources().getDisplayMetrics().heightPixels - 500);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                tutorialCount++;
+                if (tutorialCount < 6) {
+                    TabLayout.Tab tab = tabLayout.getTabAt(tutorialCount);
+                    tab.select();
+                }
                 runTutorial();
+            }
+        });
+
+        prevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (tutorialCount != 0) {
+                    if (tutorialCount > 4) {
+                        nextButton.setText("Next");
+                    }
+                    tutorialCount--;
+                    TabLayout.Tab tab = tabLayout.getTabAt(tutorialCount);
+                    tab.select();
+Log.i("tut", String.valueOf(tutorialCount));
+
+                    runTutorial();
+
+                }
             }
         });
     }
@@ -253,28 +288,38 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     private void runTutorial() {
 
         switch (tutorialCount) {
-
             case 0:
-                layout.setBackgroundResource(R.drawable.screen_two);
-                tutorialCount++;
+                layout.setBackgroundResource(R.drawable.screen_one);
                 break;
             case 1:
-                layout.setBackgroundResource(R.drawable.screen_three);
-                tutorialCount++;
+                layout.setBackgroundResource(R.drawable.screen_two);
                 break;
             case 2:
-                layout.setBackgroundResource(R.drawable.screen_four);
-                tutorialCount++;
+                layout.setBackgroundResource(R.drawable.screen_three);
                 break;
             case 3:
-                layout.setBackgroundResource(R.drawable.screen_five);
-                tutorialCount++;
-                button.setText("Lets Go");
+                layout.setBackgroundResource(R.drawable.screen_four);
                 break;
             case 4:
+                layout.setBackgroundResource(R.drawable.screen_six);
+                break;
+            case 5:
+                layout.setBackgroundResource(R.drawable.screen_five);
+                nextButton.setText("Lets Go");
+                break;
+            case 6:
                 show.dismiss();
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
+
 
         }
+    }
+
+    private void setTutorialItems(View dialogLayout) {
+        nextButton = dialogLayout.findViewById(R.id.tutorial_next_button);
+        prevButton = dialogLayout.findViewById(R.id.tutorial_prev_button);
+        layout = dialogLayout.findViewById(R.id.alert_body);
+        tabLayout = dialogLayout.findViewById(R.id.tabDots);
     }
 
 
