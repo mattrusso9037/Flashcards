@@ -3,17 +3,8 @@ package com.matt.flashcards;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -29,15 +20,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mylibrary.Deck;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-
 
 import static com.matt.flashcards.R.id.sync_wear;
 
@@ -73,7 +61,6 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         if (drawer != null && drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START, false);
         }
-
     }
 
     @Override
@@ -200,7 +187,6 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     @Override
     public void onConnected(Bundle bundle) {
         Log.i("wear", "connected to GoogleApiClient");
-
     }
 
     @Override
@@ -251,9 +237,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     }
 
     private void runTutorial() {
-
         switch (tutorialCount) {
-
             case 0:
                 layout.setBackgroundResource(R.drawable.screen_two);
                 tutorialCount++;
@@ -273,9 +257,6 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                 break;
             case 4:
                 show.dismiss();
-
         }
     }
-
-
 }

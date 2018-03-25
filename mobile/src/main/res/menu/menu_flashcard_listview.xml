@@ -6,8 +6,8 @@
 
     <item
         android:id="@+id/action_new_card_list_view"
-        android:title="New"
         android:icon="@drawable/ic_add_white_48dp"
+        android:title="New"
         app:showAsAction="always" />
 
 </menu>

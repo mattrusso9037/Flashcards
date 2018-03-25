@@ -19,8 +19,8 @@
             android:id="@+id/grd_mp_category"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="?attr/actionBarSize"
             android:layout_marginBottom="@dimen/grd_sp_category_margin_bottom"
+            android:layout_marginTop="?attr/actionBarSize"
             android:drawSelectorOnTop="true"
             android:numColumns="2"
             android:scrollbars="vertical"
@@ -49,14 +49,14 @@
         android:layout_height="match_parent" />
 
     <android.support.design.widget.NavigationView
-        android:layout_marginTop="80dp"
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/gradient_background"
         android:fitsSystemWindows="true"
         app:itemTextColor="#fff"
-        android:background="@drawable/gradient_background"
         app:menu="@menu/activity_home_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

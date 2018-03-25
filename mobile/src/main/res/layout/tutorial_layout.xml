@@ -7,26 +7,23 @@
     android:background="#fff"
     android:orientation="vertical">
 
-
     <FrameLayout
-        android:layout_marginTop="40dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/tutorial_next_button"
         android:layout_alignParentStart="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/custom_rect_dropshadow"
-        android:elevation="5dp"
-        >
+        android:elevation="5dp">
 
         <FrameLayout
             android:id="@+id/alert_body"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="2dp"
-            android:background="@drawable/screen_one">
-        </FrameLayout>
+            android:background="@drawable/screen_one" />
     </FrameLayout>
 
     <Button
@@ -45,13 +42,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textSize="28sp"
-        android:textColor="#000"
-        android:shadowColor="#696969"
         android:elevation="2dp"
-        android:shadowDy="6"
+        android:shadowColor="#696969"
         android:shadowDx="4"
+        android:shadowDy="6"
         android:shadowRadius="10"
-        android:text="Tutorial" />
-
+        android:text="Tutorial"
+        android:textColor="#000"
+        android:textSize="28sp" />
 </RelativeLayout>

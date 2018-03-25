@@ -12,7 +12,7 @@ public class Deck extends ArrayList<Flashcard> {
         this.title = title;
     }
 
-    public void setTitle(String title){
+    public void setTitle(String title) {
         this.title = title;
     }
 
