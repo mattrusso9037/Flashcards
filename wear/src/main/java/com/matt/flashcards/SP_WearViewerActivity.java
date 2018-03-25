@@ -23,7 +23,7 @@ public class SP_WearViewerActivity extends WearableActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sp__wear_viewer);
 
-        cardText = (TextView) findViewById(R.id.cardText);
+        cardText = findViewById(R.id.cardText);
         cardLayout = findViewById(R.id.cardLayout);
         leftBtn = findViewById(R.id.leftBtn);
         rightBtn = findViewById(R.id.rightBtn);
@@ -57,7 +57,6 @@ public class SP_WearViewerActivity extends WearableActivity {
 
                 if (currentDeck.getPrevCard() != null) {
                     currentDeck.currentCardIndex++;
-
                     cardText.setText(currentDeck.getPrevCard().getSideA());
                     Log.i("wear", "index --- " + currentDeck.currentCardIndex);
 

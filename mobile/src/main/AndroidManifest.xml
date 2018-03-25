@@ -52,5 +52,4 @@
             android:name=".SP_FlashcardViewerActivity$FlashcardListActivity"
             android:parentActivityName=".SP_FlashcardViewerActivity" />
     </application>
-
 </manifest>

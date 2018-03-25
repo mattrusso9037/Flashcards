@@ -5,6 +5,5 @@ package com.matt.flashcards;
  */
 
 public interface ListItemClickListener {
-        void onListItemClick(int clickedItemIndex);
-
+    void onListItemClick(int clickedItemIndex);
 }

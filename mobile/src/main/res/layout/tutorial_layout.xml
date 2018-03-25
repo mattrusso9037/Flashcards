@@ -8,36 +8,34 @@
     android:background="#fff"
     android:orientation="vertical">
 
-
     <FrameLayout
-        android:layout_marginTop="40dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/tutorial_next_button"
         android:layout_alignParentStart="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/custom_rect_dropshadow"
-        android:elevation="5dp"
-        android:id="@+id/frameLayout">
+        android:elevation="5dp">
 
         <FrameLayout
             android:id="@+id/alert_body"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="2dp"
-            android:background="@drawable/screen_one">
-        </FrameLayout>
+            android:background="@drawable/screen_one" />
     </FrameLayout>
 
     <Button
         android:id="@+id/tutorial_next_button"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/frameLayout"
         android:layout_alignParentBottom="true"
         android:background="@android:color/white"
-        style="?android:attr/borderlessButtonStyle"
         android:text="Next" />
 
     <TextView
@@ -46,58 +44,57 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textSize="28sp"
-        android:textColor="#000"
-        android:shadowColor="#696969"
         android:elevation="2dp"
-        android:shadowDy="6"
+        android:shadowColor="#696969"
         android:shadowDx="4"
+        android:shadowDy="6"
         android:shadowRadius="10"
         android:text="Tutorial" />
 
     <Button
         android:id="@+id/tutorial_prev_button"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
         android:layout_alignBottom="@+id/tutorial_next_button"
         android:layout_alignStart="@+id/frameLayout"
-        style="?android:attr/borderlessButtonStyle"
+        android:background="@android:color/white"
         android:text="Prev" />
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabDots"
-        app:tabIndicatorHeight="0dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/textView"
+        android:layout_marginStart="2dp"
+        android:layout_toStartOf="@+id/tutorial_next_button"
         app:tabBackground="@drawable/tab_selector"
-        android:layout_toStartOf="@+id/tutorial_next_button">
+        app:tabIndicatorHeight="0dp">
 
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </android.support.design.widget.TabLayout>
 
 </RelativeLayout>

@@ -14,11 +14,15 @@
     <!--<item-->
         <!--android:id="@+id/nav_settings"-->
         <!--android:title="@string/nav_settings" />-->
-    <item android:id="@+id/nav_run_tutorial"
-    android:title="Tutorial"/>
+
+    <item
+        android:id="@+id/nav_run_tutorial"
+        android:title="Tutorial" />
+
     <item
         android:id="@+id/nav_about"
         android:title="@string/nav_about" />
+
     <item
         android:id="@+id/sync_wear"
         android:title="Sync With Wear" />
