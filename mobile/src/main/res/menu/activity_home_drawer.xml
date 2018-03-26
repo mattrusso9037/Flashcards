@@ -4,19 +4,27 @@
     tools:showIn="navigation_view">
 
     <item
-        android:id="@+id/nav_my_flashcards"
-        android:title="@string/nav_my_flashcards" />
-
-    <item
         android:id="@+id/nav_new_category"
-        android:title="@string/nav_new_category" />
+        android:title="New Deck" />
 
     <item
-        android:id="@+id/nav_settings"
-        android:title="@string/nav_settings" />
+        android:id="@+id/nav_load_dummy_data"
+        android:title="Load Sample Data" />
+
+    <!--<item-->
+        <!--android:id="@+id/nav_settings"-->
+        <!--android:title="@string/nav_settings" />-->
+
+    <item
+        android:id="@+id/nav_run_tutorial"
+        android:title="Tutorial" />
 
     <item
         android:id="@+id/nav_about"
         android:title="@string/nav_about" />
+
+    <item
+        android:id="@+id/sync_wear"
+        android:title="Sync With Wear" />
 
 </menu>

@@ -8,6 +8,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.mylibrary.Deck;
+import com.example.mylibrary.Flashcard;
+
 public class AddEditActivity extends AppCompatActivity {
 
     private Bundle extras;
@@ -51,19 +54,29 @@ public class AddEditActivity extends AppCompatActivity {
     // Event for the save button
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        String a = sideA.getText().toString(), b = sideB.getText().toString();
         switch (item.getItemId()) {
             case R.id.action_save:
-                if (editMode) {
-                    currentCard.setSideA(sideA.getText().toString());
-                    currentCard.setSideB(sideB.getText().toString());
+                if (a.isEmpty() && b.isEmpty()){
+                    new AlertDialog.Builder(this)
+                            .setTitle("Error")
+                            .setMessage("You can't save a blank flashcard")
+                            .setPositiveButton("Ok", null)
+                            .create().show();
                 } else {
-                    currentDeck.add(new Flashcard(
-                            sideA.getText().toString(),
-                            sideB.getText().toString()
-                    ));
+                    if (editMode) {
+                        currentCard.setSideA(a);
+                        currentCard.setSideB(b);
+                    } else {
+                        currentDeck.add(new Flashcard(
+                                sideA.getText().toString(),
+                                sideB.getText().toString()
+                        ));
+                        SP_FlashcardViewerActivity.currentDeck.currentCardIndex = currentDeck.size() - 1;
+                    }
+                    Settings.saveData(this);
+                    super.onBackPressed();
                 }
-                Settings.saveData(this);
-                super.onBackPressed();
                 return true;
             // Event for the Up button
             case android.R.id.home: // https://stackoverflow.com/a/8887556

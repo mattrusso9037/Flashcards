@@ -2,28 +2,20 @@ package com.matt.flashcards;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 
-public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends AppCompatActivity /*implements NavigationView.OnNavigationItemSelectedListener*/ {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        /*Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.title_activity_home);
         setSupportActionBar(toolbar);
 
-        Settings.loadData();
+        Settings.loadData();*/
 
         // Event for the single player button
         findViewById(R.id.btn_home_single_player).setOnClickListener(new View.OnClickListener() {
@@ -42,16 +34,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
         });*/
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        /*DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setNavigationItemSelectedListener(this);*/
     }
 
-    @Override
+    /*@Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
@@ -60,7 +52,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         } else {
             super.onBackPressed();
         }
-    }
+    }*/
 
     /*@Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -87,7 +79,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }*/
 
-    @SuppressWarnings("StatementWithEmptyBody")
+    /*@SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
@@ -112,5 +104,5 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         //DrawerLayout drawer = findViewById(R.id.drawer_layout);
         //drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
+    }*/
 }

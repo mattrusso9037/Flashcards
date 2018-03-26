@@ -5,20 +5,25 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.example.mylibrary.Deck;
 
 import java.util.ArrayList;
 
 public class DeckAdapter extends ArrayAdapter {
 
     private ArrayList<Deck> decks;
+    private MenuItem item;
 
-    public DeckAdapter(Context context, ArrayList<Deck> decks) {
+    public DeckAdapter(Context context, ArrayList<Deck> decks, MenuItem item) {
         super(context, 0, decks);
         this.decks = decks;
+        this.item = item;
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -36,9 +41,8 @@ public class DeckAdapter extends ArrayAdapter {
         listItemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getContext().startActivity(
-                        new Intent(getContext(), SP_FlashcardViewerActivity.class)
-                                .putExtra("Index", position));
+                Deck.currentDeckIndex = position;
+                getContext().startActivity(new Intent(getContext(), SP_FlashcardViewerActivity.class));
             }
         });
 
@@ -63,9 +67,18 @@ public class DeckAdapter extends ArrayAdapter {
                                             .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
-                                                    decks.get(position).setTitle(dialogName.getText().toString());
-                                                    notifyDataSetChanged();
-                                                    Settings.saveData(getContext());
+                                                    String deckTitle = dialogName.getText().toString();
+                                                    if (deckTitle.isEmpty()) {
+                                                        new AlertDialog.Builder(getContext())
+                                                                .setTitle("Error")
+                                                                .setMessage("You can't create a deck without a title")
+                                                                .setPositiveButton("Ok", null)
+                                                                .create().show();
+                                                    } else {
+                                                        decks.get(position).setTitle(dialogName.getText().toString());
+                                                        notifyDataSetChanged();
+                                                        Settings.saveData(getContext());
+                                                    }
                                                 }
                                             }).setNegativeButton("Cancel", null)
                                             .create().show();
@@ -79,6 +92,8 @@ public class DeckAdapter extends ArrayAdapter {
                                                 decks.remove(position);
                                                 notifyDataSetChanged();
                                                 Settings.saveData(getContext());
+                                                WearTask wearTask = new WearTask(getContext(), item);
+                                                wearTask.execute();
                                             }
                                         }).setNegativeButton("Cancel", null)
                                         .create().show();

@@ -1,5 +1,21 @@
 package com.matt.flashcards;
 
+import android.content.Context;
+import android.support.v7.app.AlertDialog;
+import android.widget.Toast;
+
+import com.example.mylibrary.Deck;
+import com.example.mylibrary.Flashcard;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public final class Settings {
@@ -10,12 +26,14 @@ public final class Settings {
 
     private static boolean dataLoaded = false;
 
-    public static void loadData() {
-        if (dataLoaded) return;
-        dataLoaded = true;
+    private final static String SIDE_A_KEY = "SideA";
+    private final static String SIDE_B_KEY = "SideB";
+    private final static String DECK_KEY = "Decks";
+    private final static String DECK_TITLE_KEY = "Title";
+    private final static String DECK_FLASHCARDS_KEY = "Flashcards";
+    private final static String FILE_NAME = "Settings.json";
 
-        // Load in dummy data
-
+    public static void loadDummyData() {
         Deck android = new Deck("Android Development");
         android.add(new Flashcard("DP", "Density-independent Pixels"));
         android.add(new Flashcard("SP", "Scale-independent Pixels"));
@@ -101,17 +119,103 @@ public final class Settings {
         java.add(new Flashcard("Polymorphism", "Polymorphism is the capability of a method to do different things based on the object that it is acting upon."));
         java.add(new Flashcard("static", "In Java, a static member is a member of a class that isn’t associated with an instance of a class. Instead, the member belongs to the class itself."));
 
+        theDeckOfDecks.clear();
         theDeckOfDecks.add(android);
         theDeckOfDecks.add(git);
         theDeckOfDecks.add(famousPeople);
         theDeckOfDecks.add(java);
     }
 
-    public static void saveData() {
-        // Code to save data goes here
+    public static void loadData(Context context) {
+        // Make sure the data is only read in once from the file
+        if (dataLoaded) return;
+        dataLoaded = true;
+
+        try {
+            // Get ready to read in the JSON data
+            BufferedReader inputStream = new BufferedReader(
+                    new InputStreamReader(context.openFileInput(FILE_NAME), "UTF-8"));
+
+            // Since all the JSON data is on 1 line, we only need to read in 1 line from the file
+            JSONObject JSONSettings = new JSONObject(inputStream.readLine());
+            inputStream.close();
+
+            // Get the array of decks from the settings
+            JSONArray JSONAllDecks = JSONSettings.getJSONArray(DECK_KEY);
+
+            for (int i = 0; i < JSONAllDecks.length(); i++) {
+                // Get a deck from the array of decks
+                JSONObject JSONDeck = (JSONObject) JSONAllDecks.get(i);
+
+                // Create a new deck object using the title read in
+                Deck deck = new Deck(JSONDeck.getString(DECK_TITLE_KEY));
+
+                // Get an array of flashcards from the deck
+                JSONArray JSONFlashcards = JSONDeck.getJSONArray(DECK_FLASHCARDS_KEY);
+
+                for (int j = 0; j < JSONFlashcards.length(); j++) {
+                    // Get a flashcard from the array of flashcards
+                    JSONObject JSONFlashcard = JSONFlashcards.getJSONObject(j);
+
+                    // Create a new Flashcard object and add it to the deck object
+                    deck.add(new Flashcard(
+                            JSONFlashcard.getString(SIDE_A_KEY),
+                            JSONFlashcard.getString(SIDE_B_KEY))
+                    );
+                }
+                // Add the new deck to the theDeckOfDecks
+                theDeckOfDecks.add(deck);
+            }
+        } catch (FileNotFoundException e) {
+            // It's likely the file was not found because the program ran for the first time
+        } catch (JSONException | IOException e) {
+            new AlertDialog.Builder(context)
+                    .setTitle("Error")
+                    .setMessage("Unable to load data")
+                    .setPositiveButton("Ok", null)
+                    .create().show();
+        }
     }
 
-    public static void saveData(android.content.Context context) {
-        new DebugToast(context, "Saved to Derpbase");
+    public static void saveData(Context context) {
+        JSONObject JSONSettings = new JSONObject();
+        JSONArray JSONAllDecks = new JSONArray();
+
+        try {
+            for (Deck deck : theDeckOfDecks) {
+                // Create a new JSON deck to hold all the flashcards
+                JSONArray JSONDeck = new JSONArray();
+
+                for (Flashcard flashcard : deck) {
+                    // Adds a new JSON flashcard to the deck
+                    JSONDeck.put(new JSONObject()
+                            .put(SIDE_A_KEY, flashcard.getSideA())
+                            .put(SIDE_B_KEY, flashcard.getSideB())
+                    );
+                }
+                // Adds the JSON deck to the array of decks
+                JSONAllDecks.put(new JSONObject()
+                        .put(DECK_TITLE_KEY, deck.getTitle())
+                        .put(DECK_FLASHCARDS_KEY, JSONDeck)
+                );
+            }
+
+            // Adds the array of decks to the settings
+            JSONSettings.put(DECK_KEY, JSONAllDecks);
+
+            // Save the JSON data to the file
+            FileOutputStream outputStream = context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
+            outputStream.write(JSONSettings.toString().getBytes()); // Convert to binary and write
+            outputStream.close();
+
+        } catch (JSONException | IOException e) {
+            new AlertDialog.Builder(context)
+                    .setTitle("Error")
+                    .setMessage("Unable to save data")
+                    .setPositiveButton("Ok", null)
+                    .create().show();
+            return;
+        }
+        Toast.makeText(context, "Saved Successfully", Toast.LENGTH_SHORT).show();
     }
 }
