@@ -51,5 +51,9 @@
         <activity
             android:name=".SP_FlashcardViewerActivity$FlashcardListActivity"
             android:parentActivityName=".SP_FlashcardViewerActivity" />
+        <activity
+            android:name=".FlashcardActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:parentActivityName=".SP_CategoryActivity" />
     </application>
 </manifest>

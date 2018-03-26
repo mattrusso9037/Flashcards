@@ -42,7 +42,8 @@ public class DeckAdapter extends ArrayAdapter {
             @Override
             public void onClick(View v) {
                 Deck.currentDeckIndex = position;
-                getContext().startActivity(new Intent(getContext(), SP_FlashcardViewerActivity.class));
+//                getContext().startActivity(new Intent(getContext(), SP_FlashcardViewerActivity.class));
+                getContext().startActivity(new Intent(getContext(), FlashcardActivity.class));
             }
         });
 
