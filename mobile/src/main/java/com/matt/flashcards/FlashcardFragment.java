@@ -45,7 +45,7 @@ public class FlashcardFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (!isFront && !isVisibleToUser && flashcardTextView != null) {
+        if (!(isFront || isVisibleToUser || flashcardTextView == null)) {
             flashcardTextView.setText(flashcard.getSideA());
             isFront = true;
         }
