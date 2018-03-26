@@ -16,6 +16,7 @@ public class FlashcardFragment extends Fragment {
 
     private Flashcard flashcard;
     private boolean isFront = true;
+    private TextView flashcardTextView;
 
     @SuppressLint("ValidFragment")
     public FlashcardFragment(Flashcard flashcard) {
@@ -27,7 +28,7 @@ public class FlashcardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_flashcard, container, false);
 
-        final TextView flashcardTextView = rootView.findViewById(R.id.flashcard_textview);
+        this.flashcardTextView = rootView.findViewById(R.id.flashcard_textview);
         flashcardTextView.setText(flashcard.getSideA());
         flashcardTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,5 +39,15 @@ public class FlashcardFragment extends Fragment {
         });
 
         return rootView;
+    }
+
+    // Flips flashcard back to Side A when focus is lost
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (!isFront && !isVisibleToUser && flashcardTextView != null) {
+            flashcardTextView.setText(flashcard.getSideA());
+            isFront = true;
+        }
     }
 }
