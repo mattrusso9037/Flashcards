@@ -10,13 +10,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.mylibrary.Flashcard;
+import com.wajahatkarim3.easyflipview.EasyFlipView;
 
 @SuppressLint("ValidFragment")
 public class FlashcardFragment extends Fragment {
 
     private Flashcard flashcard;
-    private boolean isFront = true;
-    private TextView flashcardTextView;
+    private View rootView;
 
     @SuppressLint("ValidFragment")
     public FlashcardFragment(Flashcard flashcard) {
@@ -26,28 +26,35 @@ public class FlashcardFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_flashcard, container, false);
+        this.rootView = inflater.inflate(R.layout.fragment_flashcard, container, false);
 
-        this.flashcardTextView = rootView.findViewById(R.id.flashcard_textview);
-        flashcardTextView.setText(flashcard.getSideA());
-        flashcardTextView.setOnClickListener(new View.OnClickListener() {
+        TextView frontTextView = rootView.findViewById(R.id.flashcard_front_textview);
+        frontTextView.setText(flashcard.getSideA());
+
+        TextView backTextView = rootView.findViewById(R.id.flashcard_back_textview);
+        backTextView.setText(flashcard.getSideB());
+
+        View.OnClickListener flip = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isFront = !isFront;
-                flashcardTextView.setText(isFront ? flashcard.getSideA() : flashcard.getSideB());
+                ((EasyFlipView) rootView).flipTheView();
             }
-        });
+        };
+        frontTextView.setOnClickListener(flip);
+        backTextView.setOnClickListener(flip);
 
         return rootView;
     }
 
-    // Flips flashcard back to Side A when focus is lost
+    // Flips flashcard back to the front when focus is lost
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (!(isFront || isVisibleToUser || flashcardTextView == null)) {
-            flashcardTextView.setText(flashcard.getSideA());
-            isFront = true;
+
+        if (!isVisibleToUser && flashcard != null && rootView != null && ((EasyFlipView) rootView).isBackSide()) {
+            ((EasyFlipView) rootView).setFlipDuration(0);
+            ((EasyFlipView) rootView).flipTheView();
+            ((EasyFlipView) rootView).setFlipDuration(EasyFlipView.DEFAULT_FLIP_DURATION);
         }
     }
 }
