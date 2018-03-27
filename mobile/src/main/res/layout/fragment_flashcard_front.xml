@@ -1,27 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/flashcard_front"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:background="@drawable/gradient_background">
+    android:layout_margin="8dp"
+    android:background="@android:color/white"
+    android:fillViewport="true"
+    android:scrollbars="vertical">
 
-    <ScrollView
+    <TextView
+        android:id="@+id/flashcard_front_textview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="8dp"
-        android:background="@android:color/white"
-        android:fillViewport="true"
-        android:scrollbars="vertical">
-
-        <TextView
-            android:id="@+id/flashcard_front_textview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal|center_vertical"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/txt_sp_flashcard_viewer_text_size"
-            tools:text="Front" />
-    </ScrollView>
-</FrameLayout>
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/txt_sp_flashcard_viewer_text_size"
+        tools:text="Front" />
+</ScrollView>
