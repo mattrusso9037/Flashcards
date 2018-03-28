@@ -1,5 +1,6 @@
 package com.matt.flashcards;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -19,7 +20,9 @@ public class FlashcardFragmentPageAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         FlashcardFragment flashcardFragment = new FlashcardFragment(currentDeck.get(position));
 
-        //
+        Bundle args = new Bundle();
+        args.putInt("CardIndex", position);
+        flashcardFragment.setArguments(args);
 
         return flashcardFragment;
     }

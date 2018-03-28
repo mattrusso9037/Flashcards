@@ -46,15 +46,20 @@ public class FlashcardFragment extends Fragment {
         return rootView;
     }
 
-    // Flips flashcard back to the front when focus is lost
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
 
+        // Flips flashcard back to the front when focus is lost
         if (!isVisibleToUser && flashcard != null && rootView != null && ((EasyFlipView) rootView).isBackSide()) {
             ((EasyFlipView) rootView).setFlipDuration(0);
             ((EasyFlipView) rootView).flipTheView();
             ((EasyFlipView) rootView).setFlipDuration(EasyFlipView.DEFAULT_FLIP_DURATION);
+        }
+
+        // Sets the current card index
+        if (isVisibleToUser && getArguments() != null) {
+            FlashcardActivity.cardIndex = getArguments().getInt("CardIndex");
         }
     }
 }
