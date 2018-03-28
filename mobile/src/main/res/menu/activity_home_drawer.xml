@@ -5,7 +5,7 @@
 
     <item
         android:id="@+id/nav_new_category"
-        android:title="New Deck" />
+        android:title="@string/nav_new_deck" />
 
     <item
         android:id="@+id/nav_load_dummy_data"
@@ -17,7 +17,7 @@
 
     <item
         android:id="@+id/nav_run_tutorial"
-        android:title="Tutorial" />
+        android:title="@string/tutorial" />
 
     <item
         android:id="@+id/nav_about"
@@ -25,6 +25,6 @@
 
     <item
         android:id="@+id/sync_wear"
-        android:title="Sync With Wear" />
+        android:title="@string/nav_sync_with_wear" />
 
 </menu>

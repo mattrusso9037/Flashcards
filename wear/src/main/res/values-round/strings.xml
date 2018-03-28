@@ -1,3 +1,4 @@
 <resources>
     <string name="hello_world">Hello Round World!</string>
+    <string name="default_text">Open the Flashcards app on your phone to sync with your watch</string>
 </resources>
