@@ -5,11 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.mylibrary.Deck;
 
 public class FlashcardActivity extends AppCompatActivity {
 
+    private boolean isFullscreen = false;
     private ViewPager viewPager;
     private FlashcardFragmentPageAdapter pageAdapter;
     protected static Deck currentDeck;
@@ -43,6 +45,9 @@ public class FlashcardActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_fullscreen:
+                toggleFullscreen();
+                getSupportActionBar().hide();
+                return true;
             case R.id.action_new_card:
             case R.id.action_edit_card:
             case R.id.action_delete_card:
@@ -51,6 +56,29 @@ public class FlashcardActivity extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /**
+     * https://developer.android.com/samples/ImmersiveMode/project.html
+     */
+    private void toggleFullscreen() {
+        isFullscreen = !isFullscreen;
+        int newUiOptions = getWindow().getDecorView().getSystemUiVisibility();
+        newUiOptions ^= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        newUiOptions ^= View.SYSTEM_UI_FLAG_FULLSCREEN;
+        newUiOptions ^= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        getWindow().getDecorView().setSystemUiVisibility(newUiOptions);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (isFullscreen) {
+            getSupportActionBar().show();
+            toggleFullscreen();
+            isFullscreen = false;
+        } else {
+            super.onBackPressed();
         }
     }
 }
