@@ -18,17 +18,17 @@
 
     <item
         android:id="@+id/action_new_card"
-        android:title="New"
+        android:title="@string/menu_new"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_edit_card"
-        android:title="Edit"
+        android:title="@string/edit"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_delete_card"
-        android:title="Delete"
+        android:title="@string/delete"
         app:showAsAction="never" />
 
 </menu>

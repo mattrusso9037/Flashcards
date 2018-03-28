@@ -74,7 +74,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         navView = findViewById(R.id.nav_view);
         menu = navView.getMenu();
         syncItem = menu.findItem(R.id.sync_wear);
-        syncToast = syncToast.makeText(this, "Synced With Wear", Toast.LENGTH_SHORT);
+        syncToast = syncToast.makeText(this, getResources().getString(R.string.synced), Toast.LENGTH_SHORT);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -159,17 +159,17 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
             final View inflater = getLayoutInflater().inflate(R.layout.deck_dialog, null);
             final TextView dialogName = inflater.findViewById(R.id.deck_dialog_name);
             new AlertDialog.Builder(SP_CategoryActivity.this)
-                    .setTitle("Create deck:")
+                    .setTitle(getResources().getString(R.string.create_deck))
                     .setView(inflater)
-                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             String deckTitle = dialogName.getText().toString();
                             if (deckTitle.isEmpty()) {
                                 new AlertDialog.Builder(SP_CategoryActivity.this)
-                                        .setTitle("Error")
-                                        .setMessage("You can't create a deck without a title")
-                                        .setPositiveButton("Ok", null)
+                                        .setTitle(getResources().getString(R.string.error))
+                                        .setMessage(getResources().getString(R.string.error_msg_1))
+                                        .setPositiveButton(getResources().getString(R.string.ok), null)
                                         .create().show();
                             } else {
                                 Settings.theDeckOfDecks.add(new Deck(deckTitle));
@@ -182,7 +182,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                 }
                             }
                         }
-                    }).setNegativeButton("Cancel", null)
+                    }).setNegativeButton(getResources().getString(R.string.cancel), null)
                     .create().show();
         }
     };
@@ -250,13 +250,11 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
             public void onClick(View v) {
                 if (tutorialCount != 0) {
                     if (tutorialCount > 4) {
-                        nextButton.setText("Next");
+                        nextButton.setText(getResources().getString(R.string.btn_next));
                     }
                     tutorialCount--;
                     TabLayout.Tab tab = tabLayout.getTabAt(tutorialCount);
                     tab.select();
-                    Log.i("tut", String.valueOf(tutorialCount));
-
                     runTutorial();
                 }
             }
@@ -282,7 +280,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                 break;
             case 5:
                 layout.setBackgroundResource(R.drawable.screen_five);
-                nextButton.setText("Lets Go");
+                nextButton.setText(getResources().getString(R.string.lets_go));
                 break;
             case 6:
                 show.dismiss();
