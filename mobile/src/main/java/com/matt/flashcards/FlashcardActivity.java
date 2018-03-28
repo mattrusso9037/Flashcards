@@ -15,7 +15,6 @@ public class FlashcardActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private FlashcardFragmentPageAdapter pageAdapter;
     protected static Deck currentDeck;
-    protected static int cardIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +51,7 @@ public class FlashcardActivity extends AppCompatActivity {
             case R.id.action_edit_card:
             case R.id.action_delete_card:
             case R.id.action_list_view:
-                new DebugToast(this, Integer.toString(cardIndex));
+                new DebugToast(this, Integer.toString(viewPager.getCurrentItem()));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

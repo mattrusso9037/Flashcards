@@ -1,6 +1,5 @@
 package com.matt.flashcards;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,19 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.mylibrary.Flashcard;
 import com.wajahatkarim3.easyflipview.EasyFlipView;
 
-@SuppressLint("ValidFragment")
 public class FlashcardFragment extends Fragment {
 
-    private Flashcard flashcard;
     private View rootView;
-
-    @SuppressLint("ValidFragment")
-    public FlashcardFragment(Flashcard flashcard) {
-        this.flashcard = flashcard;
-    }
 
     @Nullable
     @Override
@@ -29,10 +20,10 @@ public class FlashcardFragment extends Fragment {
         this.rootView = inflater.inflate(R.layout.fragment_flashcard, container, false);
 
         TextView frontTextView = rootView.findViewById(R.id.flashcard_front_textview);
-        frontTextView.setText(flashcard.getSideA());
+        frontTextView.setText(getArguments().getString("Front"));
 
         TextView backTextView = rootView.findViewById(R.id.flashcard_back_textview);
-        backTextView.setText(flashcard.getSideB());
+        backTextView.setText(getArguments().getString("Back"));
 
         View.OnClickListener flip = new View.OnClickListener() {
             @Override
@@ -51,15 +42,10 @@ public class FlashcardFragment extends Fragment {
         super.setUserVisibleHint(isVisibleToUser);
 
         // Flips flashcard back to the front when focus is lost
-        if (!isVisibleToUser && flashcard != null && rootView != null && ((EasyFlipView) rootView).isBackSide()) {
+        if (!isVisibleToUser && rootView != null && ((EasyFlipView) rootView).isBackSide()) {
             ((EasyFlipView) rootView).setFlipDuration(0);
             ((EasyFlipView) rootView).flipTheView();
             ((EasyFlipView) rootView).setFlipDuration(EasyFlipView.DEFAULT_FLIP_DURATION);
-        }
-
-        // Sets the current card index
-        if (isVisibleToUser && getArguments() != null) {
-            FlashcardActivity.cardIndex = getArguments().getInt("CardIndex");
         }
     }
 }
