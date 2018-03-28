@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <android.support.wear.widget.BoxInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,8 +7,7 @@
     android:background="@drawable/gradient_background"
     android:padding="@dimen/box_inset_layout_padding"
     tools:context="com.matt.flashcards.MainActivity"
-    tools:deviceIds="wear"
-    >
+    tools:deviceIds="wear">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -26,9 +24,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textAlignment="center"
-            android:text="Open the Flashcards app on your phone to sync with your watch" />
+            android:text="@string/default_text"
+            android:textAlignment="center" />
 
     </FrameLayout>
 </android.support.wear.widget.BoxInsetLayout>
-

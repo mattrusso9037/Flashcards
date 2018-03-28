@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
+
 import com.example.mylibrary.Deck;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.DataMap;
@@ -15,7 +16,7 @@ import com.google.android.gms.wearable.Wearable;
 
 import java.util.ArrayList;
 
-import static com.matt.flashcards.Settings.*;
+import static com.matt.flashcards.Settings.theDeckOfDecks;
 
 /**
  * Created by Matt on 3/21/2018.

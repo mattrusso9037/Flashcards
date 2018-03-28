@@ -6,4 +6,5 @@
     -->
     <string name="hello_world">Hello Square World!</string>
     <string name="title_activity_sp__wear_viewer">SP_WearViewerActivity</string>
+    <string name="default_text">Open the Flashcards app on your phone to sync with your watch</string>
 </resources>

@@ -6,29 +6,29 @@
 
     <item
         android:id="@+id/action_list_view"
-        android:title="View as list"
         android:icon="@drawable/ic_list_white_48dp"
+        android:title="View as list"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/action_fullscreen"
-        android:title="Fullscreen"
         android:icon="@drawable/ic_zoom_out_map_white_48dp"
+        android:title="Fullscreen"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/action_new_card"
-        android:title="New"
+        android:title="@string/menu_new"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_edit_card"
-        android:title="Edit"
+        android:title="@string/edit"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_delete_card"
-        android:title="Delete"
+        android:title="@string/delete"
         app:showAsAction="never" />
 
 </menu>

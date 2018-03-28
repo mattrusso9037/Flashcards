@@ -1,7 +1,6 @@
 package com.matt.flashcards;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
@@ -83,9 +82,7 @@ public class MainActivity extends WearableActivity implements ListItemClickListe
     protected void onResume() {
         super.onResume();
         initGoogleApiClient();
-
     }
-
 
     @Override
     public void onConnected(Bundle bundle) {
@@ -139,7 +136,6 @@ public class MainActivity extends WearableActivity implements ListItemClickListe
                         defaultText.setVisibility(View.INVISIBLE);
                     }
                     Log.i("wear", "received");
-
                 }
             }
         });
@@ -165,7 +161,6 @@ public class MainActivity extends WearableActivity implements ListItemClickListe
                 deckList.add(deck);
                 titleList.add(title);
             }
-
         }
     }
 
@@ -179,8 +174,6 @@ public class MainActivity extends WearableActivity implements ListItemClickListe
                     deckList.get(deckKey).add(card);
                 }
             }
-
         }
-
     }
 }
