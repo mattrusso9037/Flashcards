@@ -200,7 +200,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-        Toast.makeText(this, "Connection Failed", Toast.LENGTH_SHORT).show();
+        Log.i("wear", "connection failed");
     }
 
     @Override
