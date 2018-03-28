@@ -1,6 +1,8 @@
 package com.matt.flashcards;
 
+import android.content.DialogInterface;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -50,11 +52,29 @@ public class FlashcardActivity extends AppCompatActivity {
             case R.id.action_new_card:
             case R.id.action_edit_card:
             case R.id.action_delete_card:
+                deleteFlashCard();
+                return true;
             case R.id.action_list_view:
                 new DebugToast(this, Integer.toString(viewPager.getCurrentItem()));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void deleteFlashCard() {
+        if (currentDeck.size() > 0) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Are you sure you want to delete this?")
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            currentDeck.remove(viewPager.getCurrentItem());
+                            pageAdapter.notifyDataSetChanged();
+                            Settings.saveData(FlashcardActivity.this);
+                        }
+                    }).setNegativeButton("Cancel", null)
+                    .create().show();
         }
     }
 

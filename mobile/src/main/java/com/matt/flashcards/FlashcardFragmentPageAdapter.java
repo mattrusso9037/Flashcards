@@ -3,12 +3,12 @@ package com.matt.flashcards;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.example.mylibrary.Deck;
 import com.example.mylibrary.Flashcard;
 
-public class FlashcardFragmentPageAdapter extends FragmentPagerAdapter {
+public class FlashcardFragmentPageAdapter extends FragmentStatePagerAdapter {
 
     private Deck currentDeck;
 
@@ -28,6 +28,17 @@ public class FlashcardFragmentPageAdapter extends FragmentPagerAdapter {
         flashcardFragment.setArguments(args);
 
         return flashcardFragment;
+    }
+
+    /**
+     * https://stackoverflow.com/a/27422029
+     *
+     * Needed to override this method and change this class to extend FragmentStatePagerAdapter
+     * in order to update the viewpager properly when calling notifyDataSetChanged()
+     */
+    @Override
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
     }
 
     @Override
