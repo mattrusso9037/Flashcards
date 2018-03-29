@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mylibrary.Deck;
 import com.example.mylibrary.Flashcard;
@@ -128,7 +129,11 @@ public class FlashcardActivity extends AppCompatActivity {
                 deleteFlashCard();
                 return true;
             case R.id.action_list_view:
-                startActivity(new Intent(this, FlashcardListActivity.class));
+                if (currentDeck.isEmpty()) {
+                    Toast.makeText(this, "There are no flashcards in this deck", Toast.LENGTH_SHORT).show();
+                } else {
+                    startActivity(new Intent(this, FlashcardListActivity.class));
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
