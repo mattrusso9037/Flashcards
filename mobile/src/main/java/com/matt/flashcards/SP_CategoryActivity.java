@@ -212,6 +212,22 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         }
     };
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_deck, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_shuffle:
+                new DebugToast(this, "Shuffle menu item clicked");
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     //* GoogleApiClient
     @Override
     public void onConnected(Bundle bundle) {
