@@ -15,7 +15,8 @@
         android:singleLine="true"
         android:textColor="@android:color/white"
         android:textSize="16sp"
-        tools:text="Testing this is a really long string just to show the ..." />
+        tools:text="Testing this is a really long string just to show the ..."
+        tools:textColor="@android:color/black" />
 
     <LinearLayout
         android:id="@+id/flashcard_item_actions"
