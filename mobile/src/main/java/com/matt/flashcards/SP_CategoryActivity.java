@@ -2,7 +2,6 @@ package com.matt.flashcards;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,8 +19,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +30,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import static com.matt.flashcards.R.id.sync_wear;
+import static com.matt.flashcards.Settings.isFirstRun;
 
 public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
@@ -40,25 +41,18 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     private Menu menu;
     private Toast syncToast;
     private LayoutInflater inflater;
-    private FrameLayout layout;
+    private ImageView layout;
     private Button nextButton;
     private Button prevButton;
     private TabLayout tabLayout;
     private int tutorialCount;
-    private AlertDialog show;
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
+    private AlertDialog tutorialDialog;
+    private boolean letsGo;
+    protected static LinearLayout deckTip;
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        //check for first run
-        if (sharedPreferences.getBoolean("first run", true)) {
-            createTutorialView();
-            editor.putBoolean("first run", false);
-            editor.commit();
-        }
 
         // Make sure the drawer is closed when returning from another activity
         if (drawer != null && drawer.isDrawerOpen(GravityCompat.START)) {
@@ -80,6 +74,19 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         setSupportActionBar(toolbar);
         Settings.loadData(this);
 
+        deckTip = findViewById(R.id.deck_tip);
+
+        // Show the deck tip when there are no decks
+        if (Settings.theDeckOfDecks.isEmpty()) {
+            deckTip.setVisibility(View.VISIBLE);
+        }
+
+        // Show tutorial if it's the first run
+        if (isFirstRun) {
+            createTutorialView();
+            isFirstRun = false;
+        }
+
         adapter = new DeckAdapter(this, Settings.theDeckOfDecks, syncItem);
         ((GridView) findViewById(R.id.grd_mp_category)).setAdapter(adapter);
 
@@ -96,9 +103,6 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         WearTask primaryWearTask = new WearTask(this, syncItem);
         primaryWearTask.execute();
         // *
-
-        sharedPreferences = getSharedPreferences("com.matt.flashcards", MODE_PRIVATE);
-        editor = sharedPreferences.edit();
 
         // Events for the drawer items
         ((NavigationView) findViewById(R.id.nav_view)).setNavigationItemSelectedListener(
@@ -175,6 +179,10 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                 Settings.theDeckOfDecks.add(new Deck(deckTitle));
                                 adapter.notifyDataSetChanged();
                                 Settings.saveData(SP_CategoryActivity.this);
+
+                                // Hide the deck tip when decks are created
+                                deckTip.setVisibility(View.INVISIBLE);
+
                                 WearTask newDeckWearTask = new WearTask(SP_CategoryActivity.this, syncItem);
                                 newDeckWearTask.execute();
                                 if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -228,18 +236,15 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(dialogLayout);
 
-        show = builder.show();
-        show.show();
-        show.getWindow().setLayout(getResources().getDisplayMetrics().widthPixels - 100,
+        tutorialDialog = builder.show();
+        tutorialDialog.getWindow().setLayout(getResources().getDisplayMetrics().widthPixels - 100,
                 getResources().getDisplayMetrics().heightPixels - 500);
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tutorialCount++;
-                if (tutorialCount < 6) {
-                    TabLayout.Tab tab = tabLayout.getTabAt(tutorialCount);
-                    tab.select();
+                if (++tutorialCount < 6) {
+                    tabLayout.getTabAt(tutorialCount).select();
                 }
                 runTutorial();
             }
@@ -248,42 +253,56 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         prevButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tutorialCount != 0) {
-                    if (tutorialCount > 4) {
-                        nextButton.setText(getResources().getString(R.string.btn_next));
-                    }
-                    tutorialCount--;
-                    TabLayout.Tab tab = tabLayout.getTabAt(tutorialCount);
-                    tab.select();
+                if (tutorialCount > 0) {
+                    tabLayout.getTabAt(--tutorialCount).select();
                     runTutorial();
                 }
             }
         });
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                tutorialCount = tab.getPosition();
+                runTutorial();
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {}
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {}
+        });
     }
 
     private void runTutorial() {
+        if (letsGo && tutorialCount < 5) {
+            nextButton.setText(getResources().getString(R.string.btn_next));
+            letsGo = false;
+        }
         switch (tutorialCount) {
             case 0:
-                layout.setBackgroundResource(R.drawable.screen_one);
+                layout.setImageResource(R.drawable.screen_one);
                 break;
             case 1:
-                layout.setBackgroundResource(R.drawable.screen_two);
+                layout.setImageResource(R.drawable.screen_two);
                 break;
             case 2:
-                layout.setBackgroundResource(R.drawable.screen_three);
+                layout.setImageResource(R.drawable.screen_three);
                 break;
             case 3:
-                layout.setBackgroundResource(R.drawable.screen_four);
+                layout.setImageResource(R.drawable.screen_four);
                 break;
             case 4:
-                layout.setBackgroundResource(R.drawable.screen_six);
+                layout.setImageResource(R.drawable.screen_six);
                 break;
             case 5:
-                layout.setBackgroundResource(R.drawable.screen_five);
+                layout.setImageResource(R.drawable.screen_five);
                 nextButton.setText(getResources().getString(R.string.lets_go));
+                letsGo = true;
                 break;
-            case 6:
-                show.dismiss();
+            default:
+                tutorialDialog.dismiss();
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
         }
     }
@@ -291,7 +310,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     private void setTutorialItems(View dialogLayout) {
         nextButton = dialogLayout.findViewById(R.id.tutorial_next_button);
         prevButton = dialogLayout.findViewById(R.id.tutorial_prev_button);
-        layout = dialogLayout.findViewById(R.id.alert_body);
+        layout = dialogLayout.findViewById(R.id.tutorial_body);
         tabLayout = dialogLayout.findViewById(R.id.tabDots);
     }
 }

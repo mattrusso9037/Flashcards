@@ -7,8 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".SP_CategoryActivity"
-    tools:openDrawer="start">
+    tools:context=".SP_CategoryActivity">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -40,6 +39,29 @@
             android:src="@android:drawable/ic_menu_add"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/deck_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_sp_category"
+            app:layout_constraintEnd_toStartOf="@+id/btn_sp_category"
+            app:layout_constraintTop_toTopOf="@+id/btn_sp_category">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Click here to add a new deck →"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+            <!-- TODO Maybe add icon here instead of having a → -->
+        </LinearLayout>
 
     </android.support.constraint.ConstraintLayout>
 
