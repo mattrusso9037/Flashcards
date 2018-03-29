@@ -23,6 +23,7 @@ public class AddEditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit);
+        Settings.loadData(this);
 
         Bundle extras = getIntent().getExtras();
         currentDeck = Settings.theDeckOfDecks.get(extras.getInt("DeckIndex"));
@@ -61,7 +62,7 @@ public class AddEditActivity extends AppCompatActivity {
                             .setTitle("Error")
                             .setMessage("You can't save a blank flashcard")
                             .setPositiveButton("Ok", null)
-                            .create().show();
+                            .show();
                     return true;
                 }
 
@@ -106,7 +107,7 @@ public class AddEditActivity extends AppCompatActivity {
                             AddEditActivity.super.onBackPressed();
                         }
                     }).setNegativeButton("Cancel", null)
-                    .create().show();
+                    .show();
         }
     }
 }

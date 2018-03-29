@@ -175,7 +175,7 @@ public final class Settings {
                     .setTitle("Error")
                     .setMessage("Unable to load data")
                     .setPositiveButton("Ok", null)
-                    .create().show();
+                    .show();
         }
     }
 
@@ -215,7 +215,7 @@ public final class Settings {
                     .setTitle("Error")
                     .setMessage("Unable to save data")
                     .setPositiveButton("Ok", null)
-                    .create().show();
+                    .show();
             return;
         }
         Toast.makeText(context, "Saved Successfully", Toast.LENGTH_SHORT).show();

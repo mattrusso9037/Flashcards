@@ -129,7 +129,24 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                                 syncToast.cancel();
                                             }
                                         }).setNegativeButton("Cancel", null)
-                                        .create().show();
+                                        .show();
+                                break;
+                            case R.id.nav_clear_data:
+                                new AlertDialog.Builder(SP_CategoryActivity.this)
+                                        .setTitle("Warning")
+                                        .setMessage("Are you sure you want to delete all of your decks?")
+                                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                Settings.theDeckOfDecks.clear();
+                                                Settings.saveData(SP_CategoryActivity.this);
+                                                adapter.notifyDataSetChanged();
+                                                deckTip.setVisibility(View.VISIBLE);
+                                                syncWear();
+                                                syncToast.cancel();
+                                            }
+                                        }).setNegativeButton("Cancel", null)
+                                        .show();
                                 break;
 //                    case R.id.nav_settings:
 //                        startActivity(new Intent(SP_CategoryActivity.this, SettingsActivity.class));
@@ -174,7 +191,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                         .setTitle(getResources().getString(R.string.error))
                                         .setMessage(getResources().getString(R.string.error_msg_1))
                                         .setPositiveButton(getResources().getString(R.string.ok), null)
-                                        .create().show();
+                                        .show();
                             } else {
                                 Settings.theDeckOfDecks.add(new Deck(deckTitle));
                                 adapter.notifyDataSetChanged();
@@ -191,7 +208,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                             }
                         }
                     }).setNegativeButton(getResources().getString(R.string.cancel), null)
-                    .create().show();
+                    .show();
         }
     };
 

@@ -209,7 +209,7 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
                         Settings.saveData(SP_FlashcardViewerActivity.this);
                     }
                 }).setNegativeButton("Cancel", null)
-                .create().show();
+                .show();
     }
 
     public static class FlashcardListActivity extends AppCompatActivity {

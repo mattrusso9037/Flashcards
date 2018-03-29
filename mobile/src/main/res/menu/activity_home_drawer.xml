@@ -11,6 +11,10 @@
         android:id="@+id/nav_load_dummy_data"
         android:title="Load Sample Data" />
 
+    <item
+        android:id="@+id/nav_clear_data"
+        android:title="Delete all decks" />
+
     <!--<item-->
         <!--android:id="@+id/nav_settings"-->
         <!--android:title="@string/nav_settings" />-->
