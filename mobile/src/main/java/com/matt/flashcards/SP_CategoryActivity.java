@@ -131,6 +131,23 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                         }).setNegativeButton("Cancel", null)
                                         .show();
                                 break;
+                            case R.id.nav_clear_data:
+                                new AlertDialog.Builder(SP_CategoryActivity.this)
+                                        .setTitle("Warning")
+                                        .setMessage("Are you sure you want to delete all of your decks?")
+                                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                Settings.theDeckOfDecks.clear();
+                                                Settings.saveData(SP_CategoryActivity.this);
+                                                adapter.notifyDataSetChanged();
+                                                deckTip.setVisibility(View.VISIBLE);
+                                                syncWear();
+                                                syncToast.cancel();
+                                            }
+                                        }).setNegativeButton("Cancel", null)
+                                        .show();
+                                break;
 //                    case R.id.nav_settings:
 //                        startActivity(new Intent(SP_CategoryActivity.this, SettingsActivity.class));
 //                        break;
