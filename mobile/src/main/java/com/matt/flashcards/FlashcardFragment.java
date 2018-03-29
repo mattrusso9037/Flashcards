@@ -43,9 +43,12 @@ public class FlashcardFragment extends Fragment {
 
         // Flips flashcard back to the front when focus is lost
         if (!isVisibleToUser && rootView != null && ((EasyFlipView) rootView).isBackSide()) {
-            ((EasyFlipView) rootView).setFlipDuration(0);
-            ((EasyFlipView) rootView).flipTheView();
-            ((EasyFlipView) rootView).setFlipDuration(EasyFlipView.DEFAULT_FLIP_DURATION);
+            // Refreshing the fragment works best: https://stackoverflow.com/a/46447226
+            getFragmentManager()
+                    .beginTransaction()
+                    .detach(FlashcardFragment.this)
+                    .attach(FlashcardFragment.this)
+                    .commit();
         }
     }
 }
