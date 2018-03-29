@@ -65,7 +65,6 @@ public class FlashcardActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 currentDeck.currentCardIndex = position;
-                new DebugToast(FlashcardActivity.this, position + "");
             }
 
             @Override
@@ -119,7 +118,6 @@ public class FlashcardActivity extends AppCompatActivity {
                 deleteFlashCard();
                 return true;
             case R.id.action_list_view:
-                new DebugToast(this, Integer.toString(currentDeck.currentCardIndex));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
