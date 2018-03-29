@@ -19,8 +19,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,7 +40,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     private Menu menu;
     private Toast syncToast;
     private LayoutInflater inflater;
-    private FrameLayout layout;
+    private ImageView layout;
     private Button nextButton;
     private Button prevButton;
     private TabLayout tabLayout;
@@ -269,22 +269,22 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         }
         switch (tutorialCount) {
             case 0:
-                layout.setBackgroundResource(R.drawable.screen_one);
+                layout.setImageResource(R.drawable.screen_one);
                 break;
             case 1:
-                layout.setBackgroundResource(R.drawable.screen_two);
+                layout.setImageResource(R.drawable.screen_two);
                 break;
             case 2:
-                layout.setBackgroundResource(R.drawable.screen_three);
+                layout.setImageResource(R.drawable.screen_three);
                 break;
             case 3:
-                layout.setBackgroundResource(R.drawable.screen_four);
+                layout.setImageResource(R.drawable.screen_four);
                 break;
             case 4:
-                layout.setBackgroundResource(R.drawable.screen_six);
+                layout.setImageResource(R.drawable.screen_six);
                 break;
             case 5:
-                layout.setBackgroundResource(R.drawable.screen_five);
+                layout.setImageResource(R.drawable.screen_five);
                 nextButton.setText(getResources().getString(R.string.lets_go));
                 letsGo = true;
                 break;
@@ -297,7 +297,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     private void setTutorialItems(View dialogLayout) {
         nextButton = dialogLayout.findViewById(R.id.tutorial_next_button);
         prevButton = dialogLayout.findViewById(R.id.tutorial_prev_button);
-        layout = dialogLayout.findViewById(R.id.alert_body);
+        layout = dialogLayout.findViewById(R.id.tutorial_body);
         tabLayout = dialogLayout.findViewById(R.id.tabDots);
     }
 }
