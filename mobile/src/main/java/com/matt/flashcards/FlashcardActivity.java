@@ -165,7 +165,7 @@ public class FlashcardActivity extends AppCompatActivity {
                         Settings.saveData(FlashcardActivity.this);
                     }
                 }).setNegativeButton("Cancel", null)
-                .create().show();
+                .show();
     }
 
     /**

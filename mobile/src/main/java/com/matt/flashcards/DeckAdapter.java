@@ -74,7 +74,7 @@ public class DeckAdapter extends ArrayAdapter {
                                                                 .setTitle("Error")
                                                                 .setMessage("You can't create a deck without a title")
                                                                 .setPositiveButton("Ok", null)
-                                                                .create().show();
+                                                                .show();
                                                     } else {
                                                         decks.get(position).setTitle(dialogName.getText().toString());
                                                         notifyDataSetChanged();
@@ -82,7 +82,7 @@ public class DeckAdapter extends ArrayAdapter {
                                                     }
                                                 }
                                             }).setNegativeButton("Cancel", null)
-                                            .create().show();
+                                            .show();
                                     break;
                                 case 1:
                                     new AlertDialog.Builder(getContext())
@@ -103,10 +103,10 @@ public class DeckAdapter extends ArrayAdapter {
                                                 wearTask.execute();
                                             }
                                         }).setNegativeButton("Cancel", null)
-                                        .create().show();
+                                        .show();
                             }
                         }
-                    }).create().show();
+                    }).show();
                 return true;
             }
         });

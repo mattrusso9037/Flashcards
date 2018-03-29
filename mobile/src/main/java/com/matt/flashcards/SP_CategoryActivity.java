@@ -129,7 +129,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                                 syncToast.cancel();
                                             }
                                         }).setNegativeButton("Cancel", null)
-                                        .create().show();
+                                        .show();
                                 break;
 //                    case R.id.nav_settings:
 //                        startActivity(new Intent(SP_CategoryActivity.this, SettingsActivity.class));
@@ -174,7 +174,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                         .setTitle(getResources().getString(R.string.error))
                                         .setMessage(getResources().getString(R.string.error_msg_1))
                                         .setPositiveButton(getResources().getString(R.string.ok), null)
-                                        .create().show();
+                                        .show();
                             } else {
                                 Settings.theDeckOfDecks.add(new Deck(deckTitle));
                                 adapter.notifyDataSetChanged();
@@ -191,7 +191,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                             }
                         }
                     }).setNegativeButton(getResources().getString(R.string.cancel), null)
-                    .create().show();
+                    .show();
         }
     };
 

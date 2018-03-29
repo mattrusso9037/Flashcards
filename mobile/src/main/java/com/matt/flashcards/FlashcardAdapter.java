@@ -73,7 +73,7 @@ public class FlashcardAdapter extends ArrayAdapter {
                                 Settings.saveData(getContext());
                             }
                         }).setNegativeButton("Cancel", null)
-                        .create().show();
+                        .show();
             }
         });
 
