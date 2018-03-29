@@ -1,10 +1,10 @@
 package com.matt.flashcards;
 
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,7 +27,7 @@ public class FlashcardActivity extends AppCompatActivity {
         setTitle(currentDeck.getTitle());
 
         // Get the viewpager
-        this.viewPager = findViewById(R.id.viewpager);
+        viewPager = findViewById(R.id.viewpager);
 
         // Updates the Decks current card index whenever the page is changed
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -45,7 +45,7 @@ public class FlashcardActivity extends AppCompatActivity {
         });
 
         // Set the adapter for the viewpager
-        this.pageAdapter = new FlashcardFragmentPageAdapter(getSupportFragmentManager(), currentDeck);
+        pageAdapter = new FlashcardFragmentPageAdapter(getSupportFragmentManager(), currentDeck);
         viewPager.setAdapter(pageAdapter);
     }
 
@@ -53,7 +53,7 @@ public class FlashcardActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_flashcard_viewer, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     // Events for the menu

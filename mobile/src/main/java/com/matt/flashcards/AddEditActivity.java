@@ -13,7 +13,6 @@ import com.example.mylibrary.Flashcard;
 
 public class AddEditActivity extends AppCompatActivity {
 
-    private Bundle extras;
     private Deck currentDeck;
     private Flashcard currentCard;
     private boolean editMode;
@@ -28,7 +27,7 @@ public class AddEditActivity extends AppCompatActivity {
         // Add an Up button to the ActionBar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        extras = getIntent().getExtras();
+        Bundle extras = getIntent().getExtras();
         currentDeck = Settings.theDeckOfDecks.get(extras.getInt("DeckIndex"));
         editMode = extras.getBoolean("EditMode");
         sideA = findViewById(R.id.add_edit_side_a);
