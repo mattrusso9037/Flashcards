@@ -13,7 +13,6 @@ import com.example.mylibrary.Flashcard;
 
 public class AddEditActivity extends AppCompatActivity {
 
-    private Bundle extras;
     private Deck currentDeck;
     private Flashcard currentCard;
     private boolean editMode;
@@ -25,12 +24,11 @@ public class AddEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit);
 
-        // Add an Up button to the ActionBar
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        extras = getIntent().getExtras();
+        Bundle extras = getIntent().getExtras();
         currentDeck = Settings.theDeckOfDecks.get(extras.getInt("DeckIndex"));
         editMode = extras.getBoolean("EditMode");
+
+        // Get the textviews for both sides
         sideA = findViewById(R.id.add_edit_side_a);
         sideB = findViewById(R.id.add_edit_side_b);
 
@@ -57,26 +55,32 @@ public class AddEditActivity extends AppCompatActivity {
         String a = sideA.getText().toString(), b = sideB.getText().toString();
         switch (item.getItemId()) {
             case R.id.action_save:
+                // Prevent blank flashcards from being created
                 if (a.isEmpty() && b.isEmpty()){
                     new AlertDialog.Builder(this)
                             .setTitle("Error")
                             .setMessage("You can't save a blank flashcard")
                             .setPositiveButton("Ok", null)
                             .create().show();
-                } else {
-                    if (editMode) {
-                        currentCard.setSideA(a);
-                        currentCard.setSideB(b);
-                    } else {
-                        currentDeck.add(new Flashcard(
-                                sideA.getText().toString(),
-                                sideB.getText().toString()
-                        ));
-                        SP_FlashcardViewerActivity.currentDeck.currentCardIndex = currentDeck.size() - 1;
-                    }
-                    Settings.saveData(this);
-                    super.onBackPressed();
+                    return true;
                 }
+
+                if (editMode) { // Edit the current flashcard
+                    currentCard.setSideA(a);
+                    currentCard.setSideB(b);
+                } else { // Add a new flashcard
+                    currentDeck.add(new Flashcard(
+                            sideA.getText().toString(),
+                            sideB.getText().toString()
+                    ));
+
+                    // Set the current flashcard to the new flashcard
+                    FlashcardActivity.currentDeck.currentCardIndex = currentDeck.size() - 1;
+                }
+
+                FlashcardActivity.updateOnResume();
+                Settings.saveData(this);
+                super.onBackPressed();
                 return true;
             // Event for the Up button
             case android.R.id.home: // https://stackoverflow.com/a/8887556
