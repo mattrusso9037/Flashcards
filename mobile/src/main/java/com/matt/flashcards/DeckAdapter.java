@@ -93,6 +93,12 @@ public class DeckAdapter extends ArrayAdapter {
                                                 decks.remove(position);
                                                 notifyDataSetChanged();
                                                 Settings.saveData(getContext());
+
+                                                // Show the deck tip when there are no decks
+                                                if (Settings.theDeckOfDecks.isEmpty()) {
+                                                    SP_CategoryActivity.deckTip.setVisibility(View.VISIBLE);
+                                                }
+
                                                 WearTask wearTask = new WearTask(getContext(), item);
                                                 wearTask.execute();
                                             }

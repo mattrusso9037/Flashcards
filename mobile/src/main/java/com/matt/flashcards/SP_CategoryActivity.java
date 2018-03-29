@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     private int tutorialCount;
     private AlertDialog tutorialDialog;
     private boolean letsGo;
+    protected static LinearLayout deckTip;
 
     @Override
     protected void onResume() {
@@ -71,6 +73,13 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Settings.loadData(this);
+
+        deckTip = findViewById(R.id.deck_tip);
+
+        // Show the deck tip when there are no decks
+        if (Settings.theDeckOfDecks.isEmpty()) {
+            deckTip.setVisibility(View.VISIBLE);
+        }
 
         // Show tutorial if it's the first run
         if (isFirstRun) {
@@ -170,6 +179,10 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                 Settings.theDeckOfDecks.add(new Deck(deckTitle));
                                 adapter.notifyDataSetChanged();
                                 Settings.saveData(SP_CategoryActivity.this);
+
+                                // Hide the deck tip when decks are created
+                                deckTip.setVisibility(View.INVISIBLE);
+
                                 WearTask newDeckWearTask = new WearTask(SP_CategoryActivity.this, syncItem);
                                 newDeckWearTask.execute();
                                 if (drawer.isDrawerOpen(GravityCompat.START)) {
