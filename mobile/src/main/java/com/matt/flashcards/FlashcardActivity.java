@@ -28,6 +28,11 @@ public class FlashcardActivity extends AppCompatActivity {
         if (updateOnResume && pageAdapter != null) {
             pageAdapter.notifyDataSetChanged();
             updateOnResume = false;
+
+            // Add the edit and delete menu items
+            if (currentDeck.size() == 1) {
+                invalidateOptionsMenu();
+            }
         }
 
         // Changes the viewpager to the current flashcard
@@ -70,6 +75,23 @@ public class FlashcardActivity extends AppCompatActivity {
         // Set the adapter for the viewpager
         pageAdapter = new FlashcardFragmentPageAdapter(getSupportFragmentManager(), currentDeck);
         viewPager.setAdapter(pageAdapter);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem newItem = menu.findItem(R.id.action_new_card);
+        MenuItem editItem = menu.findItem(R.id.action_edit_card);
+        MenuItem deleteItem = menu.findItem(R.id.action_delete_card);
+        if (currentDeck.isEmpty()) {
+            newItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+            editItem.setVisible(false);
+            deleteItem.setVisible(false);
+        } else {
+            newItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+            editItem.setVisible(true);
+            deleteItem.setVisible(true);
+        }
+        return super.onPrepareOptionsMenu(menu);
     }
 
     // This adds menu items to the app bar
@@ -118,19 +140,23 @@ public class FlashcardActivity extends AppCompatActivity {
     }
 
     private void deleteFlashCard() {
-        if (currentDeck.size() > 0) {
-            new AlertDialog.Builder(this)
-                    .setTitle("Are you sure you want to delete this?")
-                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            currentDeck.remove(viewPager.getCurrentItem());
-                            pageAdapter.notifyDataSetChanged();
-                            Settings.saveData(FlashcardActivity.this);
+        new AlertDialog.Builder(this)
+                .setTitle("Are you sure you want to delete this?")
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        currentDeck.remove(currentDeck.currentCardIndex);
+                        pageAdapter.notifyDataSetChanged();
+
+                        // Remove edit and delete menu items when deck is empty
+                        if (currentDeck.isEmpty()) {
+                            invalidateOptionsMenu();
                         }
-                    }).setNegativeButton("Cancel", null)
-                    .create().show();
-        }
+
+                        Settings.saveData(FlashcardActivity.this);
+                    }
+                }).setNegativeButton("Cancel", null)
+                .create().show();
     }
 
     /**
