@@ -2,7 +2,6 @@ package com.matt.flashcards;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -30,6 +29,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import static com.matt.flashcards.R.id.sync_wear;
+import static com.matt.flashcards.Settings.isFirstRun;
 
 public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
@@ -46,19 +46,10 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     private TabLayout tabLayout;
     private int tutorialCount;
     private AlertDialog show;
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        //check for first run
-        if (sharedPreferences.getBoolean("first run", true)) {
-            createTutorialView();
-            editor.putBoolean("first run", false);
-            editor.commit();
-        }
 
         // Make sure the drawer is closed when returning from another activity
         if (drawer != null && drawer.isDrawerOpen(GravityCompat.START)) {
@@ -80,6 +71,12 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         setSupportActionBar(toolbar);
         Settings.loadData(this);
 
+        // Show tutorial if it's the first run
+        if (isFirstRun) {
+            createTutorialView();
+            isFirstRun = false;
+        }
+
         adapter = new DeckAdapter(this, Settings.theDeckOfDecks, syncItem);
         ((GridView) findViewById(R.id.grd_mp_category)).setAdapter(adapter);
 
@@ -96,9 +93,6 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         WearTask primaryWearTask = new WearTask(this, syncItem);
         primaryWearTask.execute();
         // *
-
-        sharedPreferences = getSharedPreferences("com.matt.flashcards", MODE_PRIVATE);
-        editor = sharedPreferences.edit();
 
         // Events for the drawer items
         ((NavigationView) findViewById(R.id.nav_view)).setNavigationItemSelectedListener(

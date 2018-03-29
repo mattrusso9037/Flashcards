@@ -24,6 +24,7 @@ public final class Settings {
 
     public final static ArrayList<Deck> theDeckOfDecks = new ArrayList<>();
 
+    public static boolean isFirstRun = false;
     private static boolean dataLoaded = false;
 
     private final static String SIDE_A_KEY = "SideA";
@@ -168,6 +169,7 @@ public final class Settings {
             }
         } catch (FileNotFoundException e) {
             // It's likely the file was not found because the program ran for the first time
+            isFirstRun = true;
         } catch (JSONException | IOException e) {
             new AlertDialog.Builder(context)
                     .setTitle("Error")
