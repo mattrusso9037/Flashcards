@@ -57,5 +57,8 @@
             android:name=".FlashcardActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:parentActivityName=".SP_CategoryActivity" />
+        <activity
+            android:name=".FlashcardActivity$FlashcardListActivity"
+            android:parentActivityName=".FlashcardActivity" />
     </application>
 </manifest>

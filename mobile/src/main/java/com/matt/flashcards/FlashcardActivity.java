@@ -1,16 +1,26 @@
 package com.matt.flashcards;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.mylibrary.Deck;
+import com.example.mylibrary.Flashcard;
 
 public class FlashcardActivity extends AppCompatActivity {
 
@@ -118,6 +128,7 @@ public class FlashcardActivity extends AppCompatActivity {
                 deleteFlashCard();
                 return true;
             case R.id.action_list_view:
+                startActivity(new Intent(this, FlashcardListActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -177,6 +188,49 @@ public class FlashcardActivity extends AppCompatActivity {
             isFullscreen = false;
         } else {
             super.onBackPressed();
+        }
+    }
+
+    public static class FlashcardListActivity extends AppCompatActivity {
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_flashcard_list);
+            setTitle(currentDeck.getTitle());
+            ((ListView) findViewById(R.id.flashcards_listview)).setAdapter(new FlashcardAdapter(this));
+        }
+
+        public class FlashcardAdapter extends ArrayAdapter {
+            public FlashcardAdapter(Context context) {
+                super(context, 0, currentDeck);
+            }
+
+            @NonNull
+            @Override
+            public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                // Create the layout
+                View listItem = convertView;
+                if (listItem == null) {
+                    listItem = LayoutInflater.from(getContext()).inflate(
+                            R.layout.flashcard_item, parent, false);
+                }
+
+                // Add the text to the textview
+                ((TextView) listItem.findViewById(R.id.flashcard_item_text))
+                        .setText(currentDeck.get(position).getSideA());
+
+                // Event for when an item is clicked
+                listItem.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        currentDeck.currentCardIndex = position;
+                        onNavigateUp();
+                    }
+                });
+
+                return listItem;
+            }
         }
     }
 }
