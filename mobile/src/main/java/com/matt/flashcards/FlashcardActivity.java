@@ -61,6 +61,7 @@ public class FlashcardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flashcard);
+        Settings.loadData(this);
 
         currentDeck = Settings.theDeckOfDecks.get(Deck.currentDeckIndex);
         setTitle(currentDeck.getTitle());
@@ -202,6 +203,7 @@ public class FlashcardActivity extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_flashcard_list);
+            Settings.loadData(this);
             setTitle(currentDeck.getTitle());
             ((ListView) findViewById(R.id.flashcards_listview)).setAdapter(new FlashcardAdapter(this));
         }

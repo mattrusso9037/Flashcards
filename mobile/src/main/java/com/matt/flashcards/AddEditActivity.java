@@ -23,6 +23,7 @@ public class AddEditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit);
+        Settings.loadData(this);
 
         Bundle extras = getIntent().getExtras();
         currentDeck = Settings.theDeckOfDecks.get(extras.getInt("DeckIndex"));
