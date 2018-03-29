@@ -1,6 +1,7 @@
 package com.matt.flashcards;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
@@ -17,6 +18,28 @@ public class FlashcardActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private FlashcardFragmentPageAdapter pageAdapter;
     protected static Deck currentDeck;
+    protected static boolean updateOnResume;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Update the viewpager on resume
+        if (updateOnResume && pageAdapter != null) {
+            pageAdapter.notifyDataSetChanged();
+            updateOnResume = false;
+        }
+
+        // Changes the viewpager to the current flashcard
+        if (viewPager != null) {
+            viewPager.setCurrentItem(currentDeck.currentCardIndex, false);
+        }
+    }
+
+    // This method is used whenever a flashcard is added or edited
+    protected static void updateOnResume() {
+        updateOnResume = true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +88,11 @@ public class FlashcardActivity extends AppCompatActivity {
                 getSupportActionBar().hide();
                 return true;
             case R.id.action_new_card:
+                newFlashCard();
+                return true;
             case R.id.action_edit_card:
+                editFlashCard();
+                return true;
             case R.id.action_delete_card:
                 deleteFlashCard();
                 return true;
@@ -75,6 +102,19 @@ public class FlashcardActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void newFlashCard() {
+        startActivity(new Intent(this, AddEditActivity.class)
+                .putExtra("EditMode", false)
+                .putExtra("DeckIndex", Deck.currentDeckIndex));
+    }
+
+    private void editFlashCard() {
+        startActivity(new Intent(this, AddEditActivity.class)
+                .putExtra("EditMode", true)
+                .putExtra("DeckIndex", Deck.currentDeckIndex)
+                .putExtra("CardIndex", viewPager.getCurrentItem()));
     }
 
     private void deleteFlashCard() {
