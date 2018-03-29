@@ -45,7 +45,8 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     private Button prevButton;
     private TabLayout tabLayout;
     private int tutorialCount;
-    private AlertDialog show;
+    private AlertDialog tutorialDialog;
+    private boolean letsGo;
 
     @Override
     protected void onResume() {
@@ -222,18 +223,15 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(dialogLayout);
 
-        show = builder.show();
-        show.show();
-        show.getWindow().setLayout(getResources().getDisplayMetrics().widthPixels - 100,
+        tutorialDialog = builder.show();
+        tutorialDialog.getWindow().setLayout(getResources().getDisplayMetrics().widthPixels - 100,
                 getResources().getDisplayMetrics().heightPixels - 500);
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tutorialCount++;
-                if (tutorialCount < 6) {
-                    TabLayout.Tab tab = tabLayout.getTabAt(tutorialCount);
-                    tab.select();
+                if (++tutorialCount < 6) {
+                    tabLayout.getTabAt(tutorialCount).select();
                 }
                 runTutorial();
             }
@@ -242,13 +240,8 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         prevButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tutorialCount != 0) {
-                    if (tutorialCount > 4) {
-                        nextButton.setText(getResources().getString(R.string.btn_next));
-                    }
-                    tutorialCount--;
-                    TabLayout.Tab tab = tabLayout.getTabAt(tutorialCount);
-                    tab.select();
+                if (tutorialCount > 0) {
+                    tabLayout.getTabAt(--tutorialCount).select();
                     runTutorial();
                 }
             }
@@ -270,6 +263,10 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     }
 
     private void runTutorial() {
+        if (letsGo && tutorialCount < 5) {
+            nextButton.setText(getResources().getString(R.string.btn_next));
+            letsGo = false;
+        }
         switch (tutorialCount) {
             case 0:
                 layout.setBackgroundResource(R.drawable.screen_one);
@@ -289,9 +286,10 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
             case 5:
                 layout.setBackgroundResource(R.drawable.screen_five);
                 nextButton.setText(getResources().getString(R.string.lets_go));
+                letsGo = true;
                 break;
-            case 6:
-                show.dismiss();
+            default:
+                tutorialDialog.dismiss();
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
         }
     }
