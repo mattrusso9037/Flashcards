@@ -29,6 +29,21 @@ public class FlashcardActivity extends AppCompatActivity {
         // Get the viewpager
         this.viewPager = findViewById(R.id.viewpager);
 
+        // Updates the Decks current card index whenever the page is changed
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+
+            @Override
+            public void onPageSelected(int position) {
+                currentDeck.currentCardIndex = position;
+                new DebugToast(FlashcardActivity.this, position + "");
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {}
+        });
+
         // Set the adapter for the viewpager
         this.pageAdapter = new FlashcardFragmentPageAdapter(getSupportFragmentManager(), currentDeck);
         viewPager.setAdapter(pageAdapter);
@@ -55,7 +70,7 @@ public class FlashcardActivity extends AppCompatActivity {
                 deleteFlashCard();
                 return true;
             case R.id.action_list_view:
-                new DebugToast(this, Integer.toString(viewPager.getCurrentItem()));
+                new DebugToast(this, Integer.toString(currentDeck.currentCardIndex));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
