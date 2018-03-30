@@ -26,6 +26,7 @@ import com.example.mylibrary.Flashcard;
 public class FlashcardActivity extends AppCompatActivity {
 
     private boolean isFullscreen = false;
+    private boolean shuffleMode = false;
     private ViewPager viewPager;
     private FlashcardFragmentPageAdapter pageAdapter;
     protected static Deck currentDeck;
@@ -63,7 +64,17 @@ public class FlashcardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_flashcard);
         Settings.loadData(this);
 
-        currentDeck = Settings.theDeckOfDecks.get(Deck.currentDeckIndex);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            shuffleMode = extras.getBoolean("shuffleMode", false);
+        }
+
+        if (shuffleMode) {
+            currentDeck = Settings.shuffledDeck;
+        } else {
+            currentDeck = Settings.theDeckOfDecks.get(Deck.currentDeckIndex);
+        }
+
         setTitle(currentDeck.getTitle());
 
         // Get the viewpager
@@ -90,10 +101,16 @@ public class FlashcardActivity extends AppCompatActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem listViewItem = menu.findItem(R.id.action_list_view);
         MenuItem newItem = menu.findItem(R.id.action_new_card);
         MenuItem editItem = menu.findItem(R.id.action_edit_card);
         MenuItem deleteItem = menu.findItem(R.id.action_delete_card);
-        if (currentDeck.isEmpty()) {
+        if (shuffleMode) {
+            listViewItem.setVisible(false);
+            newItem.setVisible(false);
+            editItem.setVisible(false);
+            deleteItem.setVisible(false);
+        } else if (currentDeck.isEmpty()) {
             newItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
             editItem.setVisible(false);
             deleteItem.setVisible(false);

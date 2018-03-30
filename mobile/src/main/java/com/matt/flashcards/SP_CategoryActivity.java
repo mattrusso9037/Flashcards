@@ -225,17 +225,14 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                 final boolean[] checkedItems = new boolean[Settings.theDeckOfDecks.size()];
                 new AlertDialog.Builder(SP_CategoryActivity.this)
                         .setTitle("Shuffle Mode")
-                        .setMultiChoiceItems(Settings.getAllDeckTitles(), checkedItems,
-                                new DialogInterface.OnMultiChoiceClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                                new DebugToast(SP_CategoryActivity.this, which + " " + isChecked);
-                            }
-                        })
+                        .setMultiChoiceItems(Settings.getAllDeckTitles(), checkedItems, null)
                         .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                new DebugToast(SP_CategoryActivity.this, checkedItems[0] + "");
+                                Settings.generateShuffledDeck(checkedItems);
+                                startActivity(
+                                        new Intent(SP_CategoryActivity.this, FlashcardActivity.class)
+                                                .putExtra("shuffleMode", true));
                             }
                         }).setNegativeButton(getResources().getString(R.string.cancel), null)
                         .show();
