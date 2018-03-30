@@ -14,7 +14,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,10 +36,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     private DeckAdapter adapter;
     private DrawerLayout drawer;
     private MenuItem syncItem;
-    private NavigationView navView;
-    private Menu menu;
     private Toast syncToast;
-    private LayoutInflater inflater;
     private ImageView tutorialImage;
     private Button nextButton;
     private Button prevButton;
@@ -48,7 +44,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     private int tutorialCount;
     private AlertDialog tutorialDialog;
     private boolean letsGo;
-    protected static LinearLayout deckTip;
+    private LinearLayout deckTip;
 
     @Override
     protected void onResume() {
@@ -65,9 +61,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sp_category);
 
-        navView = findViewById(R.id.nav_view);
-        menu = navView.getMenu();
-        syncItem = menu.findItem(R.id.sync_wear);
+        syncItem = ((NavigationView) findViewById(R.id.nav_view)).getMenu().findItem(R.id.sync_wear);
         syncToast = syncToast.makeText(this, getResources().getString(R.string.synced), Toast.LENGTH_SHORT);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -87,7 +81,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
             isFirstRun = false;
         }
 
-        adapter = new DeckAdapter(this, Settings.theDeckOfDecks, syncItem);
+        adapter = new DeckAdapter(this, Settings.theDeckOfDecks, syncItem, deckTip);
         ((GridView) findViewById(R.id.grd_mp_category)).setAdapter(adapter);
 
         // Event for the Fab
@@ -239,7 +233,20 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                         new Intent(SP_CategoryActivity.this, FlashcardActivity.class)
                                                 .putExtra("shuffleMode", true));
                             }
-                        }).setNegativeButton(R.string.cancel, null)
+                        })
+                        .setNeutralButton(R.string.select_all, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                for (int i = 0; i < checkedItems.length; i++) {
+                                    checkedItems[i] = true;
+                                }
+                                Settings.generateShuffledDeck(checkedItems);
+                                startActivity(
+                                        new Intent(SP_CategoryActivity.this, FlashcardActivity.class)
+                                                .putExtra("shuffleMode", true));
+                            }
+                        })
+                        .setNegativeButton(R.string.cancel, null)
                         .show();
             default:
                 return super.onOptionsItemSelected(item);
@@ -277,18 +284,20 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
 
     private void createTutorialView() {
         tutorialCount = 0;
-        inflater = getLayoutInflater();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        final View dialogLayout = inflater.inflate(R.layout.tutorial_layout, null);
+        View dialogLayout = getLayoutInflater().inflate(R.layout.tutorial_layout, null);
+        nextButton = dialogLayout.findViewById(R.id.tutorial_next_button);
+        prevButton = dialogLayout.findViewById(R.id.tutorial_prev_button);
+        tutorialImage = dialogLayout.findViewById(R.id.tutorial_body);
+        tabLayout = dialogLayout.findViewById(R.id.tabDots);
 
-        setTutorialItems(dialogLayout);
-
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(dialogLayout);
 
         tutorialDialog = builder.show();
-        tutorialDialog.getWindow().setLayout(getResources().getDisplayMetrics().widthPixels - 100,
+        tutorialDialog.getWindow().setLayout(
+                getResources().getDisplayMetrics().widthPixels - 100,
                 getResources().getDisplayMetrics().heightPixels - 500);
 
         nextButton.setOnClickListener(new View.OnClickListener() {
@@ -359,12 +368,5 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                 tutorialDialog.dismiss();
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
         }
-    }
-
-    private void setTutorialItems(View dialogLayout) {
-        nextButton = dialogLayout.findViewById(R.id.tutorial_next_button);
-        prevButton = dialogLayout.findViewById(R.id.tutorial_prev_button);
-        tutorialImage = dialogLayout.findViewById(R.id.tutorial_body);
-        tabLayout = dialogLayout.findViewById(R.id.tabDots);
     }
 }
