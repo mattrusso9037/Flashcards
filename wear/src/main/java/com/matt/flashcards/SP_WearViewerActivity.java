@@ -13,9 +13,6 @@ import static com.matt.flashcards.MainActivity.currentDeck;
 public class SP_WearViewerActivity extends WearableActivity {
 
     private TextView cardText;
-    private RelativeLayout cardLayout;
-    private Button leftBtn;
-    private Button rightBtn;
     private boolean isFront = true;
 
     @Override
@@ -24,9 +21,9 @@ public class SP_WearViewerActivity extends WearableActivity {
         setContentView(R.layout.activity_sp__wear_viewer);
 
         cardText = findViewById(R.id.cardText);
-        cardLayout = findViewById(R.id.cardLayout);
-        leftBtn = findViewById(R.id.leftBtn);
-        rightBtn = findViewById(R.id.rightBtn);
+        RelativeLayout cardLayout = findViewById(R.id.cardLayout);
+        Button leftBtn = findViewById(R.id.leftBtn);
+        Button rightBtn = findViewById(R.id.rightBtn);
 
         currentDeck.currentCardIndex = 0;
 
@@ -43,23 +40,19 @@ public class SP_WearViewerActivity extends WearableActivity {
 
                 if (!isFront) {
                     cardText.setText(currentDeck.getCurrentCard().getSideA());
-
                 }
             }
         };
         cardLayout.setOnClickListener(onFlip);
         cardText.setOnClickListener(onFlip);
 
-
         leftBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (currentDeck.getPrevCard() != null) {
                     currentDeck.currentCardIndex++;
                     cardText.setText(currentDeck.getPrevCard().getSideA());
                     Log.i("wear", "index --- " + currentDeck.currentCardIndex);
-
                 }
             }
         });
@@ -67,12 +60,10 @@ public class SP_WearViewerActivity extends WearableActivity {
         rightBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (currentDeck.getNextCard() != null) {
                     currentDeck.currentCardIndex--;
                     cardText.setText(currentDeck.getNextCard().getSideA());
                     Log.i("wear", "index --- " + currentDeck.currentCardIndex);
-
                 }
             }
         });
