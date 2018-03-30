@@ -232,13 +232,17 @@ public final class Settings {
     }
 
     public static void generateShuffledDeck(boolean[] decksChecked) {
+        new DebugLog("generateShuffledDeck");
+
         // Make sure the shuffled deck is reset
         shuffledDeck = new Deck("Shuffle Mode");
 
         // Add all flashcards from checked off decks to the shuffled deck
         for (int i = 0; i < theDeckOfDecks.size(); i++) {
+            new DebugLog(i + " " + decksChecked[i]);
             if (decksChecked[i]) {
                 shuffledDeck.addAll(theDeckOfDecks.get(i));
+                new DebugLog("Deck added: " + theDeckOfDecks.get(i).getTitle());
             }
         }
 
