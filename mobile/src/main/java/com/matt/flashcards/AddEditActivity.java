@@ -82,7 +82,6 @@ public class AddEditActivity extends AppCompatActivity {
                     FlashcardActivity.currentDeck.currentCardIndex = currentDeck.size() - 1;
                 }
 
-                FlashcardActivity.updateOnResume();
                 Settings.saveData(this);
                 super.onBackPressed();
                 return true;

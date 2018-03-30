@@ -25,10 +25,10 @@ public class FlashcardActivity extends AppCompatActivity {
 
     private boolean isFullscreen = false;
     private boolean shuffleMode = false;
+    private boolean updateOnResume = false;
     private ViewPager viewPager;
     private FlashcardFragmentPageAdapter pageAdapter;
     protected static Deck currentDeck;
-    protected static boolean updateOnResume;
 
     @Override
     protected void onResume() {
@@ -49,11 +49,6 @@ public class FlashcardActivity extends AppCompatActivity {
         if (viewPager != null) {
             viewPager.setCurrentItem(currentDeck.currentCardIndex, false);
         }
-    }
-
-    // This method is used whenever a flashcard is added or edited
-    protected static void updateOnResume() {
-        updateOnResume = true;
     }
 
     @Override
@@ -157,12 +152,14 @@ public class FlashcardActivity extends AppCompatActivity {
     }
 
     private void newFlashCard() {
+        updateOnResume = true;
         startActivity(new Intent(this, AddEditActivity.class)
                 .putExtra("EditMode", false)
                 .putExtra("DeckIndex", Deck.currentDeckIndex));
     }
 
     private void editFlashCard() {
+        updateOnResume = true;
         startActivity(new Intent(this, AddEditActivity.class)
                 .putExtra("EditMode", true)
                 .putExtra("DeckIndex", Deck.currentDeckIndex)
