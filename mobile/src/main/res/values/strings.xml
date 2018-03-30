@@ -44,6 +44,11 @@
     <string name="btn_next">Next</string>
     <string name="lets_go">Let\'s Go!</string>
 
+    <!-- Shuffle Dialog -->
+    <string name="shuffle_mode">Shuffle Mode</string>
+    <string name="shuffle">Shuffle</string>
+    <string name="select_all">Select All</string>
+
     <!-- Flashcard Activity-->
     <string name="empty_deck">There are no flashcards in this deck</string>
 
@@ -87,8 +92,6 @@
     <string name="error_cant_save_blank_flashcard">You can\'t save a blank flashcard</string>
     <string name="confirm_lose_changes">Are you sure you want to lose the changes you\'ve made?</string>
     <string name="click_here_to_add_a_new_deck">Click here to add a new deck →</string>
-    <string name="shuffle_mode">Shuffle Mode</string>
-    <string name="shuffle">Shuffle</string>
     <string name="title">Title</string>
     <string name="save">Save</string>
     <string name="view">View</string>

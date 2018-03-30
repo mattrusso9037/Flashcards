@@ -239,7 +239,20 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                         new Intent(SP_CategoryActivity.this, FlashcardActivity.class)
                                                 .putExtra("shuffleMode", true));
                             }
-                        }).setNegativeButton(R.string.cancel, null)
+                        })
+                        .setNeutralButton(R.string.select_all, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                for (int i = 0; i < checkedItems.length; i++) {
+                                    checkedItems[i] = true;
+                                }
+                                Settings.generateShuffledDeck(checkedItems);
+                                startActivity(
+                                        new Intent(SP_CategoryActivity.this, FlashcardActivity.class)
+                                                .putExtra("shuffleMode", true));
+                            }
+                        })
+                        .setNegativeButton(R.string.cancel, null)
                         .show();
             default:
                 return super.onOptionsItemSelected(item);
