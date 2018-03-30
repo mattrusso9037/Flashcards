@@ -71,11 +71,11 @@ public class FlashcardActivity extends AppCompatActivity {
 
         if (shuffleMode) {
             currentDeck = Settings.shuffledDeck;
+            setTitle(R.string.shuffle_mode);
         } else {
             currentDeck = Settings.theDeckOfDecks.get(Deck.currentDeckIndex);
+            setTitle(currentDeck.getTitle());
         }
-
-        setTitle(currentDeck.getTitle());
 
         // Get the viewpager
         viewPager = findViewById(R.id.viewpager);
@@ -148,7 +148,7 @@ public class FlashcardActivity extends AppCompatActivity {
                 return true;
             case R.id.action_list_view:
                 if (currentDeck.isEmpty()) {
-                    Toast.makeText(this, "There are no flashcards in this deck", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.empty_deck, Toast.LENGTH_SHORT).show();
                 } else {
                     startActivity(new Intent(this, FlashcardListActivity.class));
                 }
@@ -173,8 +173,8 @@ public class FlashcardActivity extends AppCompatActivity {
 
     private void deleteFlashCard() {
         new AlertDialog.Builder(this)
-                .setTitle("Are you sure you want to delete this?")
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.confirm_delete)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         currentDeck.remove(currentDeck.currentCardIndex);
@@ -187,7 +187,7 @@ public class FlashcardActivity extends AppCompatActivity {
 
                         Settings.saveData(FlashcardActivity.this);
                     }
-                }).setNegativeButton("Cancel", null)
+                }).setNegativeButton(R.string.cancel, null)
                 .show();
     }
 

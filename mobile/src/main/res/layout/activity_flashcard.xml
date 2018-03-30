@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal|center_vertical"
-        android:text="There are no flashcards in this deck"
+        android:text="@string/empty_deck"
         android:textColor="@android:color/white"
         android:textSize="@dimen/txt_sp_flashcard_viewer_text_size" />
 

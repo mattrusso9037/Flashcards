@@ -117,9 +117,9 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                 break;
                             case R.id.nav_load_dummy_data:
                                 new AlertDialog.Builder(SP_CategoryActivity.this)
-                                        .setTitle("Warning")
-                                        .setMessage("Are you sure you want to overwrite all your data with sample data?")
-                                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                        .setTitle(R.string.warning)
+                                        .setMessage(R.string.confirm_overwrite_with_sample_data)
+                                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 Settings.loadDummyData();
@@ -128,14 +128,14 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                                 syncWear();
                                                 syncToast.cancel();
                                             }
-                                        }).setNegativeButton("Cancel", null)
+                                        }).setNegativeButton(R.string.cancel, null)
                                         .show();
                                 break;
                             case R.id.nav_clear_data:
                                 new AlertDialog.Builder(SP_CategoryActivity.this)
-                                        .setTitle("Warning")
-                                        .setMessage("Are you sure you want to delete all of your decks?")
-                                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                        .setTitle(R.string.warning)
+                                        .setMessage(R.string.confirm_delete_all_decks)
+                                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 Settings.theDeckOfDecks.clear();
@@ -145,7 +145,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                                 syncWear();
                                                 syncToast.cancel();
                                             }
-                                        }).setNegativeButton("Cancel", null)
+                                        }).setNegativeButton(R.string.cancel, null)
                                         .show();
                                 break;
 //                    case R.id.nav_settings:
@@ -180,17 +180,17 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
             final View inflater = getLayoutInflater().inflate(R.layout.deck_dialog, null);
             final TextView dialogName = inflater.findViewById(R.id.deck_dialog_name);
             new AlertDialog.Builder(SP_CategoryActivity.this)
-                    .setTitle(getResources().getString(R.string.create_deck))
+                    .setTitle(R.string.create_deck)
                     .setView(inflater)
-                    .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             String deckTitle = dialogName.getText().toString();
                             if (deckTitle.isEmpty()) {
                                 new AlertDialog.Builder(SP_CategoryActivity.this)
-                                        .setTitle(getResources().getString(R.string.error))
-                                        .setMessage(getResources().getString(R.string.error_msg_1))
-                                        .setPositiveButton(getResources().getString(R.string.ok), null)
+                                        .setTitle(R.string.error)
+                                        .setMessage(R.string.error_decks_need_titles)
+                                        .setPositiveButton(R.string.ok, null)
                                         .show();
                             } else {
                                 Settings.theDeckOfDecks.add(new Deck(deckTitle));
@@ -207,7 +207,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                 }
                             }
                         }
-                    }).setNegativeButton(getResources().getString(R.string.cancel), null)
+                    }).setNegativeButton(R.string.cancel, null)
                     .show();
         }
     };
@@ -224,14 +224,14 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
             case R.id.menu_shuffle:
                 final boolean[] checkedItems = new boolean[Settings.theDeckOfDecks.size()];
                 new AlertDialog.Builder(SP_CategoryActivity.this)
-                        .setTitle("Shuffle Mode")
+                        .setTitle(R.string.shuffle_mode)
                         .setMultiChoiceItems(Settings.getAllDeckTitles(), checkedItems,
                                 // checkedItems won't update properly without this
                                 new DialogInterface.OnMultiChoiceClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which, boolean isChecked) {}
                                 })
-                        .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Settings.generateShuffledDeck(checkedItems);
@@ -239,7 +239,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                         new Intent(SP_CategoryActivity.this, FlashcardActivity.class)
                                                 .putExtra("shuffleMode", true));
                             }
-                        }).setNegativeButton(getResources().getString(R.string.cancel), null)
+                        }).setNegativeButton(R.string.cancel, null)
                         .show();
             default:
                 return super.onOptionsItemSelected(item);
@@ -254,7 +254,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
 
     @Override
     public void onConnectionSuspended(int i) {
-        Toast.makeText(this, "Connection Lost", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.connection_lost, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -294,6 +294,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                prevButton.setEnabled(true);
                 if (++tutorialCount < 6) {
                     tabLayout.getTabAt(tutorialCount).select();
                 }
@@ -304,17 +305,18 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         prevButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tutorialCount > 0) {
-                    tabLayout.getTabAt(--tutorialCount).select();
-                    runTutorial();
-                }
+                tabLayout.getTabAt(--tutorialCount).select();
+                runTutorial();
             }
         });
+
+        prevButton.setEnabled(false);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 tutorialCount = tab.getPosition();
+                prevButton.setEnabled(true);
                 runTutorial();
             }
 
@@ -328,12 +330,13 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
 
     private void runTutorial() {
         if (letsGo && tutorialCount < 5) {
-            nextButton.setText(getResources().getString(R.string.btn_next));
+            nextButton.setText(R.string.btn_next);
             letsGo = false;
         }
         switch (tutorialCount) {
             case 0:
                 tutorialImage.setImageResource(R.drawable.screen_one);
+                prevButton.setEnabled(false);
                 break;
             case 1:
                 tutorialImage.setImageResource(R.drawable.screen_two);
@@ -349,7 +352,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                 break;
             case 5:
                 tutorialImage.setImageResource(R.drawable.screen_five);
-                nextButton.setText(getResources().getString(R.string.lets_go));
+                nextButton.setText(R.string.lets_go);
                 letsGo = true;
                 break;
             default:

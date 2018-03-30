@@ -9,11 +9,11 @@
 
     <item
         android:id="@+id/nav_load_dummy_data"
-        android:title="Load Sample Data" />
+        android:title="@string/load_sample_data" />
 
     <item
         android:id="@+id/nav_clear_data"
-        android:title="Delete all decks" />
+        android:title="@string/nav_delete_all_decks" />
 
     <!--<item-->
         <!--android:id="@+id/nav_settings"-->
@@ -21,7 +21,7 @@
 
     <item
         android:id="@+id/nav_run_tutorial"
-        android:title="@string/tutorial" />
+        android:title="@string/nav_tutorial" />
 
     <item
         android:id="@+id/nav_about"

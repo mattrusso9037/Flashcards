@@ -174,9 +174,9 @@ public final class Settings {
             isFirstRun = true;
         } catch (JSONException | IOException e) {
             new AlertDialog.Builder(context)
-                    .setTitle("Error")
-                    .setMessage("Unable to load data")
-                    .setPositiveButton("Ok", null)
+                    .setTitle(R.string.error)
+                    .setMessage(R.string.cant_load_data)
+                    .setPositiveButton(R.string.ok, null)
                     .show();
         }
     }
@@ -214,13 +214,13 @@ public final class Settings {
 
         } catch (JSONException | IOException e) {
             new AlertDialog.Builder(context)
-                    .setTitle("Error")
-                    .setMessage("Unable to save data")
-                    .setPositiveButton("Ok", null)
+                    .setTitle(R.string.error)
+                    .setMessage(R.string.cant_save_data)
+                    .setPositiveButton(R.string.ok, null)
                     .show();
             return;
         }
-        Toast.makeText(context, "Saved Successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, R.string.successful_save, Toast.LENGTH_SHORT).show();
     }
 
     public static String[] getAllDeckTitles() {
