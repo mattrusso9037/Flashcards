@@ -17,12 +17,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public final class Settings {
 
     private Settings() {} // Prevent instantiation of this class
 
     public final static ArrayList<Deck> theDeckOfDecks = new ArrayList<>();
+    public static Deck shuffledDeck;
 
     public static boolean isFirstRun = false;
     private static boolean dataLoaded = false;
@@ -227,5 +229,20 @@ public final class Settings {
             titles[i] = theDeckOfDecks.get(i).getTitle();
         }
         return titles;
+    }
+
+    public static void generateShuffledDeck(boolean[] decksChecked) {
+        // Make sure the shuffled deck is reset
+        shuffledDeck = new Deck("Shuffle Mode");
+
+        // Add all flashcards from checked off decks to the shuffled deck
+        for (int i = 0; i < theDeckOfDecks.size(); i++) {
+            if (decksChecked[i]) {
+                shuffledDeck.addAll(theDeckOfDecks.get(i));
+            }
+        }
+
+        // Shuffle the deck
+        Collections.shuffle(shuffledDeck);
     }
 }
