@@ -220,4 +220,12 @@ public final class Settings {
         }
         Toast.makeText(context, "Saved Successfully", Toast.LENGTH_SHORT).show();
     }
+
+    public static String[] getAllDeckTitles() {
+        String[] titles = new String[theDeckOfDecks.size()];
+        for (int i = 0; i < titles.length; i++) {
+            titles[i] = theDeckOfDecks.get(i).getTitle();
+        }
+        return titles;
+    }
 }

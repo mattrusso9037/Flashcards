@@ -222,7 +222,23 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_shuffle:
-                new DebugToast(this, "Shuffle menu item clicked");
+                final boolean[] checkedItems = new boolean[Settings.theDeckOfDecks.size()];
+                new AlertDialog.Builder(SP_CategoryActivity.this)
+                        .setTitle("Shuffle Mode")
+                        .setMultiChoiceItems(Settings.getAllDeckTitles(), checkedItems,
+                                new DialogInterface.OnMultiChoiceClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                                new DebugToast(SP_CategoryActivity.this, which + " " + isChecked);
+                            }
+                        })
+                        .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                new DebugToast(SP_CategoryActivity.this, checkedItems[0] + "");
+                            }
+                        }).setNegativeButton(getResources().getString(R.string.cancel), null)
+                        .show();
             default:
                 return super.onOptionsItemSelected(item);
         }
