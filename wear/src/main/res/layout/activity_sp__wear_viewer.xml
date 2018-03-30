@@ -73,10 +73,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black" />
+
             </ScrollView>
-
         </RelativeLayout>
-
     </android.support.constraint.ConstraintLayout>
-
 </android.support.wear.widget.BoxInsetLayout>

@@ -69,13 +69,12 @@ public class MainActivity extends WearableActivity implements ListItemClickListe
 
         Intent intent = new Intent(this, SP_WearViewerActivity.class);
         currentDeck = deckList.get(clickedItemIndex);
-        Toast toast = Toast.makeText(this, String.valueOf("empty"), Toast.LENGTH_SHORT);
 
         if (!currentDeck.isEmpty()) {
             startActivity(intent);
-            toast.cancel();
+        } else {
+            Toast.makeText(this, "empty", Toast.LENGTH_SHORT).show();
         }
-        toast.show();
     }
 
     @Override
@@ -88,7 +87,6 @@ public class MainActivity extends WearableActivity implements ListItemClickListe
     public void onConnected(Bundle bundle) {
         Wearable.MessageApi.addListener(googleClient, this);
         Log.i("wear", "connected");
-
     }
 
     @Override
@@ -98,7 +96,6 @@ public class MainActivity extends WearableActivity implements ListItemClickListe
             if (googleClient.isConnected()) {
                 googleClient.disconnect();
                 Log.i("wear", "disconnected");
-
             }
         }
         super.onStop();
@@ -157,8 +154,7 @@ public class MainActivity extends WearableActivity implements ListItemClickListe
         for (int i = 0; i < dataMapList.size(); i++) {
             String title = dataMapList.get(i).getString("deck title");
             if (title != null) {
-                Deck deck = new Deck(title);
-                deckList.add(deck);
+                deckList.add(new Deck(title));
                 titleList.add(title);
             }
         }
