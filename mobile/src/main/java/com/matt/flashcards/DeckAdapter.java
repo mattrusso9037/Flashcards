@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.mylibrary.Deck;
@@ -19,11 +20,13 @@ public class DeckAdapter extends ArrayAdapter {
 
     private ArrayList<Deck> decks;
     private MenuItem item;
+    private LinearLayout deckTip;
 
-    public DeckAdapter(Context context, ArrayList<Deck> decks, MenuItem item) {
+    public DeckAdapter(Context context, ArrayList<Deck> decks, MenuItem item, LinearLayout deckTip) {
         super(context, 0, decks);
         this.decks = decks;
         this.item = item;
+        this.deckTip = deckTip;
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -96,7 +99,7 @@ public class DeckAdapter extends ArrayAdapter {
 
                                                 // Show the deck tip when there are no decks
                                                 if (Settings.theDeckOfDecks.isEmpty()) {
-                                                    SP_CategoryActivity.deckTip.setVisibility(View.VISIBLE);
+                                                    deckTip.setVisibility(View.VISIBLE);
                                                 }
 
                                                 WearTask wearTask = new WearTask(getContext(), item);

@@ -48,7 +48,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     private int tutorialCount;
     private AlertDialog tutorialDialog;
     private boolean letsGo;
-    protected static LinearLayout deckTip;
+    private LinearLayout deckTip;
 
     @Override
     protected void onResume() {
@@ -87,7 +87,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
             isFirstRun = false;
         }
 
-        adapter = new DeckAdapter(this, Settings.theDeckOfDecks, syncItem);
+        adapter = new DeckAdapter(this, Settings.theDeckOfDecks, syncItem, deckTip);
         ((GridView) findViewById(R.id.grd_mp_category)).setAdapter(adapter);
 
         // Event for the Fab
