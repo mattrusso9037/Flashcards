@@ -214,13 +214,44 @@ public class FlashcardActivity extends AppCompatActivity {
 
     public static class FlashcardListActivity extends AppCompatActivity {
 
+        private boolean updateOnResume;
+        private FlashcardAdapter adapter;
+
+        @Override
+        protected void onResume() {
+            super.onResume();
+            if (updateOnResume) {
+                adapter.notifyDataSetChanged();
+            }
+        }
+
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_flashcard_list);
             Settings.loadData(this);
             setTitle(currentDeck.getTitle());
-            ((ListView) findViewById(R.id.flashcards_listview)).setAdapter(new FlashcardAdapter(this));
+            adapter = new FlashcardAdapter(this);
+            ((ListView) findViewById(R.id.flashcards_listview)).setAdapter(adapter);
+        }
+
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+            getMenuInflater().inflate(R.menu.menu_flashcard_listview, menu);
+            return true;
+        }
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.action_new_card_list_view:
+                    updateOnResume = true;
+                    startActivity(new Intent(this, AddEditActivity.class)
+                            .putExtra("EditMode", false)
+                            .putExtra("DeckIndex", Deck.currentDeckIndex));
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
         }
 
         public class FlashcardAdapter extends ArrayAdapter {

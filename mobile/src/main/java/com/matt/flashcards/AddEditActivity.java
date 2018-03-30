@@ -25,6 +25,9 @@ public class AddEditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_edit);
         Settings.loadData(this);
 
+        // Add an Up button to the ActionBar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         Bundle extras = getIntent().getExtras();
         currentDeck = Settings.theDeckOfDecks.get(extras.getInt("DeckIndex"));
         editMode = extras.getBoolean("EditMode");
