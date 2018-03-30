@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:hint="@string/txt_side_a"
+        android:hint="@string/side_a"
         android:inputType="textMultiLine|textCapWords"
         android:textColor="@android:color/white"
         android:textColorHint="@android:color/white"/>
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:hint="@string/txt_side_b"
+        android:hint="@string/side_b"
         android:inputType="textMultiLine|textCapSentences"
         android:textColor="@android:color/white"
         android:textColorHint="@android:color/white"/>

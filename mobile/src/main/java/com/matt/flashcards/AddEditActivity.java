@@ -37,9 +37,9 @@ public class AddEditActivity extends AppCompatActivity {
             currentCard = currentDeck.get(extras.getInt("CardIndex"));
             sideA.setText(currentCard.getSideA());
             sideB.setText(currentCard.getSideB());
-            setTitle("Edit Flashcard");
+            setTitle(R.string.edit_flashcard);
         } else {
-            setTitle("Add Flashcard");
+            setTitle(R.string.add_flashcard);
         }
     }
 
@@ -59,9 +59,9 @@ public class AddEditActivity extends AppCompatActivity {
                 // Prevent blank flashcards from being created
                 if (a.isEmpty() && b.isEmpty()){
                     new AlertDialog.Builder(this)
-                            .setTitle("Error")
-                            .setMessage("You can't save a blank flashcard")
-                            .setPositiveButton("Ok", null)
+                            .setTitle(R.string.error)
+                            .setMessage(R.string.error_cant_save_blank_flashcard)
+                            .setPositiveButton(R.string.ok, null)
                             .show();
                     return true;
                 }
@@ -100,13 +100,13 @@ public class AddEditActivity extends AppCompatActivity {
             super.onBackPressed();
         } else {
             new AlertDialog.Builder(this)
-                    .setTitle("Are you sure you want to lose the changes you've made?")
-                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    .setTitle(R.string.confirm_lose_changes)
+                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             AddEditActivity.super.onBackPressed();
                         }
-                    }).setNegativeButton("Cancel", null)
+                    }).setNegativeButton(R.string.cancel, null)
                     .show();
         }
     }

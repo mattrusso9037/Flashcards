@@ -63,17 +63,17 @@ public class DeckAdapter extends ArrayAdapter {
                                     final TextView dialogName = inflater.findViewById(R.id.deck_dialog_name);
                                     dialogName.setText(decks.get(position).getTitle());
                                     new AlertDialog.Builder(getContext())
-                                            .setTitle("Rename deck:")
+                                            .setTitle(R.string.rename_deck)
                                             .setView(inflater)
-                                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
                                                     String deckTitle = dialogName.getText().toString();
                                                     if (deckTitle.isEmpty()) {
                                                         new AlertDialog.Builder(getContext())
-                                                                .setTitle("Error")
-                                                                .setMessage("You can't create a deck without a title")
-                                                                .setPositiveButton("Ok", null)
+                                                                .setTitle(R.string.error)
+                                                                .setMessage(R.string.error_decks_need_titles)
+                                                                .setPositiveButton(R.string.ok, null)
                                                                 .show();
                                                     } else {
                                                         decks.get(position).setTitle(dialogName.getText().toString());
@@ -81,13 +81,13 @@ public class DeckAdapter extends ArrayAdapter {
                                                         Settings.saveData(getContext());
                                                     }
                                                 }
-                                            }).setNegativeButton("Cancel", null)
+                                            }).setNegativeButton(R.string.cancel, null)
                                             .show();
                                     break;
                                 case 1:
                                     new AlertDialog.Builder(getContext())
-                                        .setTitle("Are you sure you want to delete this deck?")
-                                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                        .setTitle(R.string.confirm_delete_deck)
+                                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 decks.remove(position);
@@ -102,7 +102,7 @@ public class DeckAdapter extends ArrayAdapter {
                                                 WearTask wearTask = new WearTask(getContext(), item);
                                                 wearTask.execute();
                                             }
-                                        }).setNegativeButton("Cancel", null)
+                                        }).setNegativeButton(R.string.cancel, null)
                                         .show();
                             }
                         }
