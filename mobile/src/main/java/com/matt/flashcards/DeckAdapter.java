@@ -53,7 +53,7 @@ public class DeckAdapter extends ArrayAdapter {
             public boolean onLongClick(View v) {
                 new AlertDialog.Builder(getContext())
                     .setTitle(decks.get(position).getTitle())
-                    .setItems(new String[]{"Rename", "Delete"}, new DialogInterface.OnClickListener() {
+                    .setItems(R.array.rename_delete, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             switch (which) {

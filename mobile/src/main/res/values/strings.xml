@@ -94,4 +94,6 @@
     <string name="view">View</string>
     <string name="confirm_delete_all_decks">Are you sure you want to delete all of your decks?</string>
     <string name="connection_lost">Connection Lost</string>
+    <string name="rename">Rename</string>
+    <string name="delete">Delete</string>
 </resources>
