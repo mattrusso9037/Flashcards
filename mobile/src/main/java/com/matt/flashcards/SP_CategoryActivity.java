@@ -294,6 +294,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                prevButton.setEnabled(true);
                 if (++tutorialCount < 6) {
                     tabLayout.getTabAt(tutorialCount).select();
                 }
@@ -304,17 +305,18 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         prevButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tutorialCount > 0) {
-                    tabLayout.getTabAt(--tutorialCount).select();
-                    runTutorial();
-                }
+                tabLayout.getTabAt(--tutorialCount).select();
+                runTutorial();
             }
         });
+
+        prevButton.setEnabled(false);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 tutorialCount = tab.getPosition();
+                prevButton.setEnabled(true);
                 runTutorial();
             }
 
@@ -334,6 +336,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         switch (tutorialCount) {
             case 0:
                 tutorialImage.setImageResource(R.drawable.screen_one);
+                prevButton.setEnabled(false);
                 break;
             case 1:
                 tutorialImage.setImageResource(R.drawable.screen_two);
