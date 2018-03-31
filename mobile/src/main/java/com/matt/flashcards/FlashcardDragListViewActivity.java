@@ -2,7 +2,9 @@ package com.matt.flashcards;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.woxthebox.draglistview.DragItemAdapter;
 import com.woxthebox.draglistview.DragListView;
@@ -18,9 +20,15 @@ public class FlashcardDragListViewActivity extends AppCompatActivity {
 
         DragListView dragListView = findViewById(R.id.flashcard_drag_list_view);
         DragItemAdapter adapter = new FlashcardDragItemAdapter(currentDeck);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        RecyclerView recyclerView = dragListView.getRecyclerView();
+
         dragListView.setAdapter(adapter, true);
-        dragListView.setLayoutManager(new LinearLayoutManager(this));
+        dragListView.setLayoutManager(layoutManager);
         dragListView.setCanDragHorizontally(false);
+        recyclerView.setVerticalScrollBarEnabled(true);
+        recyclerView.addItemDecoration(
+                new DividerItemDecoration(this, layoutManager.getOrientation()));
         dragListView.setDragListListener(new DragListView.DragListListener() {
             @Override
             public void onItemDragStarted(int position) {
