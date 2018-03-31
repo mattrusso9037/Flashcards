@@ -21,7 +21,7 @@ public class FlashcardDragListViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_flashcard_drag_list_view);
 
         DragListView dragListView = findViewById(R.id.flashcard_drag_list_view);
-        DragItemAdapter adapter = new FlashcardDragItemAdapter(currentDeck);
+        DragItemAdapter adapter = new FlashcardDragItemAdapter(this, currentDeck);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         RecyclerView recyclerView = dragListView.getRecyclerView();
 

@@ -1,6 +1,8 @@
 package com.matt.flashcards;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +13,15 @@ import com.woxthebox.draglistview.DragItemAdapter;
 
 import java.util.List;
 
+import static com.matt.flashcards.FlashcardActivity.currentDeck;
+
 public class FlashcardDragItemAdapter extends DragItemAdapter<Flashcard, FlashcardDragItemAdapter.ViewHolder> {
 
+    private Context context;
     private List<Flashcard> flashcardList;
 
-    public FlashcardDragItemAdapter(List<Flashcard> flashcardList) {
+    public FlashcardDragItemAdapter(Context context, List<Flashcard> flashcardList) {
+        this.context = context;
         this.flashcardList = flashcardList;
         setItemList(flashcardList);
     }
@@ -52,7 +58,8 @@ public class FlashcardDragItemAdapter extends DragItemAdapter<Flashcard, Flashca
         @Override
         public void onItemClicked(View view) {
             super.onItemClicked(view);
-            new DebugToast(view.getContext(), flashcardList.get(getPositionForItemId(getItemId())).getSideA());
+            currentDeck.currentCardIndex = getPositionForItemId(getItemId());
+            ((AppCompatActivity) context).onNavigateUp();
         }
     }
 }
