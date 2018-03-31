@@ -13,6 +13,8 @@ import static com.matt.flashcards.FlashcardActivity.currentDeck;
 
 public class FlashcardDragListViewActivity extends AppCompatActivity {
 
+    private boolean changesMade;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,9 +33,7 @@ public class FlashcardDragListViewActivity extends AppCompatActivity {
                 new DividerItemDecoration(this, layoutManager.getOrientation()));
         dragListView.setDragListListener(new DragListView.DragListListener() {
             @Override
-            public void onItemDragStarted(int position) {
-                new DebugToast(FlashcardDragListViewActivity.this, "Start - position: " + position);
-            }
+            public void onItemDragStarted(int position) {}
 
             @Override
             public void onItemDragging(int itemPosition, float x, float y) {}
@@ -41,9 +41,18 @@ public class FlashcardDragListViewActivity extends AppCompatActivity {
             @Override
             public void onItemDragEnded(int fromPosition, int toPosition) {
                 if (fromPosition != toPosition) {
-                    new DebugToast(FlashcardDragListViewActivity.this, "End - position: " + toPosition);
+                    changesMade = true;
                 }
             }
         });
+    }
+
+    // Save changes when the activity is paused
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (changesMade) {
+            Settings.saveData(this);
+        }
     }
 }
