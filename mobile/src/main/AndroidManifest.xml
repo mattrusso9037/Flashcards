@@ -59,5 +59,8 @@
         <activity
             android:name=".FlashcardActivity$FlashcardListActivity"
             android:parentActivityName=".FlashcardActivity" />
+        <activity
+            android:name=".FlashcardDragListViewActivity"
+            android:parentActivityName=".FlashcardActivity" />
     </application>
 </manifest>
