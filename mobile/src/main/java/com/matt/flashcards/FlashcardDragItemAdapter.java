@@ -22,7 +22,7 @@ public class FlashcardDragItemAdapter extends DragItemAdapter<Flashcard, Flashca
 
     @Override
     public long getUniqueItemId(int position) {
-        return 0;
+        return flashcardList.get(position).getId();
     }
 
     @NonNull
