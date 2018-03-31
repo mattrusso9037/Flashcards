@@ -48,5 +48,11 @@ public class FlashcardDragItemAdapter extends DragItemAdapter<Flashcard, Flashca
             super(itemView, handleResId, dragOnLongPress);
             flashcardTextView = itemView.findViewById(R.id.flashcard_item_text);
         }
+
+        @Override
+        public void onItemClicked(View view) {
+            super.onItemClicked(view);
+            new DebugToast(view.getContext(), flashcardList.get(getPositionForItemId(getItemId())).getSideA());
+        }
     }
 }

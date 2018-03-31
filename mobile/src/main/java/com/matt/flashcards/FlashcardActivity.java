@@ -143,7 +143,7 @@ public class FlashcardActivity extends AppCompatActivity {
                 if (currentDeck.isEmpty()) {
                     Toast.makeText(this, R.string.empty_deck, Toast.LENGTH_SHORT).show();
                 } else {
-                    startActivity(new Intent(this, FlashcardListActivity.class));
+                    startActivity(new Intent(this, FlashcardDragListViewActivity.class));
                 }
                 return true;
             default:
