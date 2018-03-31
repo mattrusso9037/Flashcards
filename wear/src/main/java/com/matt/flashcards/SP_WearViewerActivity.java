@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.mylibrary.Flashcard;
+
 import static com.matt.flashcards.MainActivity.currentDeck;
 
 public class SP_WearViewerActivity extends WearableActivity {
@@ -34,13 +36,10 @@ public class SP_WearViewerActivity extends WearableActivity {
         View.OnClickListener onFlip = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("wear", "index --- " + currentDeck.currentCardIndex);
-                cardText.setText(currentDeck.getCurrentCard().getSideB());
+                Log.i("wear/flip", "index --- " + currentDeck.currentCardIndex);
+                Flashcard currentCard = currentDeck.getCurrentCard();
                 isFront = !isFront;
-
-                if (!isFront) {
-                    cardText.setText(currentDeck.getCurrentCard().getSideA());
-                }
+                cardText.setText(isFront ? currentCard.getSideA() : currentCard.getSideB());
             }
         };
         cardLayout.setOnClickListener(onFlip);
@@ -50,10 +49,10 @@ public class SP_WearViewerActivity extends WearableActivity {
             @Override
             public void onClick(View v) {
                 if (currentDeck.getPrevCard() != null) {
-                    currentDeck.currentCardIndex++;
-                    cardText.setText(currentDeck.getPrevCard().getSideA());
-                    Log.i("wear", "index --- " + currentDeck.currentCardIndex);
+                    cardText.setText(currentDeck.getCurrentCard().getSideA());
+                    isFront = true;
                 }
+                Log.i("wear/prev", "index --- " + currentDeck.currentCardIndex);
             }
         });
 
@@ -61,10 +60,10 @@ public class SP_WearViewerActivity extends WearableActivity {
             @Override
             public void onClick(View v) {
                 if (currentDeck.getNextCard() != null) {
-                    currentDeck.currentCardIndex--;
-                    cardText.setText(currentDeck.getNextCard().getSideA());
-                    Log.i("wear", "index --- " + currentDeck.currentCardIndex);
+                    cardText.setText(currentDeck.getCurrentCard().getSideA());
+                    isFront = true;
                 }
+                Log.i("wear/next", "index --- " + currentDeck.currentCardIndex);
             }
         });
 

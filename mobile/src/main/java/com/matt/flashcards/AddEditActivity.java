@@ -8,12 +8,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.example.mylibrary.Deck;
 import com.example.mylibrary.Flashcard;
+
+import static com.matt.flashcards.FlashcardActivity.currentDeck;
 
 public class AddEditActivity extends AppCompatActivity {
 
-    private Deck currentDeck;
     private Flashcard currentCard;
     private boolean editMode;
     private TextView sideA;
@@ -29,7 +29,6 @@ public class AddEditActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Bundle extras = getIntent().getExtras();
-        currentDeck = Settings.theDeckOfDecks.get(extras.getInt("DeckIndex"));
         editMode = extras.getBoolean("EditMode");
 
         // Get the textviews for both sides
