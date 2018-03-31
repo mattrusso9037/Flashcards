@@ -37,7 +37,7 @@
             android:parentActivityName=".SP_CategoryActivity" />
         <activity
             android:name=".AboutActivity"
-            android:label="@string/title_activity_about"
+            android:label="@string/activity_about_title"
             android:parentActivityName=".SP_CategoryActivity" />
         <activity
             android:name=".SettingsActivity"
@@ -47,9 +47,20 @@
             android:name=".ThemeActivity"
             android:label="@string/title_activity_theme"
             android:parentActivityName=".SettingsActivity" />
-        <activity android:name=".AddEditActivity" />
+        <activity
+            android:name=".AddEditActivity" />
         <activity
             android:name=".SP_FlashcardViewerActivity$FlashcardListActivity"
             android:parentActivityName=".SP_FlashcardViewerActivity" />
+        <activity
+            android:name=".FlashcardActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:parentActivityName=".SP_CategoryActivity" />
+        <activity
+            android:name=".FlashcardActivity$FlashcardListActivity"
+            android:parentActivityName=".FlashcardActivity" />
+        <activity
+            android:name=".FlashcardDragListViewActivity"
+            android:parentActivityName=".FlashcardActivity" />
     </application>
 </manifest>

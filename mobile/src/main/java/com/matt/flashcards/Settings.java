@@ -17,13 +17,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public final class Settings {
 
     private Settings() {} // Prevent instantiation of this class
 
     public final static ArrayList<Deck> theDeckOfDecks = new ArrayList<>();
+    public static Deck shuffledDeck;
 
+    public static boolean isFirstRun = false;
     private static boolean dataLoaded = false;
 
     private final static String SIDE_A_KEY = "SideA";
@@ -168,12 +171,13 @@ public final class Settings {
             }
         } catch (FileNotFoundException e) {
             // It's likely the file was not found because the program ran for the first time
+            isFirstRun = true;
         } catch (JSONException | IOException e) {
             new AlertDialog.Builder(context)
-                    .setTitle("Error")
-                    .setMessage("Unable to load data")
-                    .setPositiveButton("Ok", null)
-                    .create().show();
+                    .setTitle(R.string.error)
+                    .setMessage(R.string.cant_load_data)
+                    .setPositiveButton(R.string.ok, null)
+                    .show();
         }
     }
 
@@ -210,12 +214,39 @@ public final class Settings {
 
         } catch (JSONException | IOException e) {
             new AlertDialog.Builder(context)
-                    .setTitle("Error")
-                    .setMessage("Unable to save data")
-                    .setPositiveButton("Ok", null)
-                    .create().show();
+                    .setTitle(R.string.error)
+                    .setMessage(R.string.cant_save_data)
+                    .setPositiveButton(R.string.ok, null)
+                    .show();
             return;
         }
-        Toast.makeText(context, "Saved Successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, R.string.successful_save, Toast.LENGTH_SHORT).show();
+    }
+
+    public static String[] getAllDeckTitles() {
+        String[] titles = new String[theDeckOfDecks.size()];
+        for (int i = 0; i < titles.length; i++) {
+            titles[i] = theDeckOfDecks.get(i).getTitle();
+        }
+        return titles;
+    }
+
+    public static void generateShuffledDeck(boolean[] decksChecked) {
+        new DebugLog("generateShuffledDeck");
+
+        // Make sure the shuffled deck is reset
+        shuffledDeck = new Deck("Shuffle Mode");
+
+        // Add all flashcards from checked off decks to the shuffled deck
+        for (int i = 0; i < theDeckOfDecks.size(); i++) {
+            new DebugLog(i + " " + decksChecked[i]);
+            if (decksChecked[i]) {
+                shuffledDeck.addAll(theDeckOfDecks.get(i));
+                new DebugLog("Deck added: " + theDeckOfDecks.get(i).getTitle());
+            }
+        }
+
+        // Shuffle the deck
+        Collections.shuffle(shuffledDeck);
     }
 }
