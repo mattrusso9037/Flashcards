@@ -39,4 +39,5 @@ dependencies {
     implementation 'com.google.android.gms:play-services-wearable:12.0.0'
     implementation project(':mylibrary')
     compile 'com.wajahatkarim3.EasyFlipView:EasyFlipView:2.0.5'
+    compile 'com.github.woxthebox:draglistview:1.5.4'
 }
