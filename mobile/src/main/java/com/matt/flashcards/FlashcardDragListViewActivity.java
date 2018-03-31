@@ -43,6 +43,7 @@ public class FlashcardDragListViewActivity extends AppCompatActivity {
                 if (fromPosition != toPosition) {
                     changesMade = true;
                 }
+                currentDeck.currentCardIndex = toPosition;
             }
         });
     }
