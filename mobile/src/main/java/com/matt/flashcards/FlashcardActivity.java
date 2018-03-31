@@ -154,15 +154,13 @@ public class FlashcardActivity extends AppCompatActivity {
     private void newFlashCard() {
         updateOnResume = true;
         startActivity(new Intent(this, AddEditActivity.class)
-                .putExtra("EditMode", false)
-                .putExtra("DeckIndex", Deck.currentDeckIndex));
+                .putExtra("EditMode", false));
     }
 
     private void editFlashCard() {
         updateOnResume = true;
         startActivity(new Intent(this, AddEditActivity.class)
                 .putExtra("EditMode", true)
-                .putExtra("DeckIndex", Deck.currentDeckIndex)
                 .putExtra("CardIndex", viewPager.getCurrentItem()));
     }
 

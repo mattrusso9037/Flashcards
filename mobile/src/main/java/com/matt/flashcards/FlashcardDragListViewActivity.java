@@ -83,8 +83,7 @@ public class FlashcardDragListViewActivity extends AppCompatActivity {
             case R.id.action_new_card_list_view:
                 updateOnResume = true;
                 startActivity(new Intent(this, AddEditActivity.class)
-                        .putExtra("EditMode", false)
-                        .putExtra("DeckIndex", Deck.currentDeckIndex));
+                        .putExtra("EditMode", false));
             default:
                 return super.onOptionsItemSelected(item);
         }
