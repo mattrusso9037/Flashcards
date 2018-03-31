@@ -99,4 +99,5 @@
     <string name="connection_lost">Connection Lost</string>
     <string name="rename">Rename</string>
     <string name="delete">Delete</string>
+    <string name="click_here_to_add_a_new_flashcard">Click here to add a new flashcard</string>
 </resources>
