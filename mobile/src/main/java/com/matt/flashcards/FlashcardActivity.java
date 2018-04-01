@@ -128,6 +128,9 @@ public class FlashcardActivity extends AppCompatActivity {
             newItem.setVisible(false);
             editItem.setVisible(false);
             deleteItem.setVisible(false);
+            if (currentDeck.getCurrentCard().isFavorite()) {
+                favoriteItem.setIcon(R.drawable.ic_star_white_48dp);
+            }
         } else if (favoriteMode) {
             listViewItem.setVisible(false);
             newItem.setVisible(false);

@@ -166,9 +166,13 @@ public final class Settings {
                     // Create a new Flashcard object and add it to the deck object
                     Flashcard f = new Flashcard(
                             JSONFlashcard.getString(SIDE_A_KEY),
-                            JSONFlashcard.getString(SIDE_B_KEY),
-                            JSONFlashcard.getBoolean(FAVORITE_KEY)
+                            JSONFlashcard.getString(SIDE_B_KEY)
                     );
+
+                    try {
+                        f.setFavorite(JSONFlashcard.getBoolean(FAVORITE_KEY));
+                    } catch (JSONException e) {}
+
                     deck.add(f);
 
                     // If the flashcard is a favorite, add it to the favorites deck

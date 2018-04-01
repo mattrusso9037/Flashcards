@@ -129,6 +129,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                                 Settings.loadDummyData();
                                                 Settings.saveData(SP_CategoryActivity.this);
                                                 adapter.notifyDataSetChanged();
+                                                deckTip.setVisibility(View.INVISIBLE);
                                                 syncWear();
                                                 syncToast.cancel();
                                             }
