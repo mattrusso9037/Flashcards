@@ -115,9 +115,11 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                             case R.id.nav_new_category:
                                 FabListener.onClick(getCurrentFocus());
                                 break;
+                            case R.id.nav_shuffle:
+                                shuffleAction();
+                                break;
                             case R.id.nav_favorites:
-                                startActivity(new Intent(SP_CategoryActivity.this,
-                                        FlashcardActivity.class).putExtra("favoriteMode", true));
+                                favoritesAction();
                                 break;
                             case R.id.nav_load_dummy_data:
                                 new AlertDialog.Builder(SP_CategoryActivity.this)
@@ -136,6 +138,12 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                         }).setNegativeButton(R.string.cancel, null)
                                         .show();
                                 break;
+                            case R.id.nav_rearrange_flashcards:
+                                rearrangeFlashcardsAction();
+                                break;
+                            case R.id.nav_rearrange_decks:
+                                rearrangeDecksAction();
+                                break;
                             case R.id.nav_clear_data:
                                 new AlertDialog.Builder(SP_CategoryActivity.this)
                                         .setTitle(R.string.warning)
@@ -153,9 +161,6 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                         }).setNegativeButton(R.string.cancel, null)
                                         .show();
                                 break;
-//                    case R.id.nav_settings:
-//                        startActivity(new Intent(SP_CategoryActivity.this, SettingsActivity.class));
-//                        break;
                             case sync_wear:
                                 syncWear();
                                 break;
@@ -226,45 +231,73 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_shuffle:
-                final boolean[] checkedItems = new boolean[Settings.theDeckOfDecks.size()];
-                new AlertDialog.Builder(SP_CategoryActivity.this)
-                        .setTitle(R.string.shuffle_mode)
-                        .setMultiChoiceItems(Settings.getAllDeckTitles(), checkedItems,
-                                // checkedItems won't update properly without this
-                                new DialogInterface.OnMultiChoiceClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {}
-                                })
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Settings.generateShuffledDeck(checkedItems);
-                                startActivity(
-                                        new Intent(SP_CategoryActivity.this, FlashcardActivity.class)
-                                                .putExtra("shuffleMode", true));
-                            }
-                        })
-                        .setNeutralButton(R.string.select_all, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                for (int i = 0; i < checkedItems.length; i++) {
-                                    checkedItems[i] = true;
-                                }
-                                Settings.generateShuffledDeck(checkedItems);
-                                startActivity(
-                                        new Intent(SP_CategoryActivity.this, FlashcardActivity.class)
-                                                .putExtra("shuffleMode", true));
-                            }
-                        })
-                        .setNegativeButton(R.string.cancel, null)
-                        .show();
+            case R.id.menu_favorites:
+                favoritesAction();
                 break;
-            case R.id.menu_board:
-                updateOnResume = true;
-                startActivity(new Intent(this, BoardActivity.class));
+            case R.id.menu_shuffle:
+                shuffleAction();
+                break;
+            case R.id.menu_tutorial:
+                createTutorialView();
+                break;
+            case R.id.menu_rearrange_flashcards:
+                rearrangeFlashcardsAction();
+                break;
+            case R.id.menu_rearrange_decks:
+                rearrangeDecksAction();
+                break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void shuffleAction() {
+        final boolean[] checkedItems = new boolean[Settings.theDeckOfDecks.size()];
+        new AlertDialog.Builder(SP_CategoryActivity.this)
+                .setTitle(R.string.shuffle_mode)
+                .setMultiChoiceItems(Settings.getAllDeckTitles(), checkedItems,
+                        // checkedItems won't update properly without this
+                        new DialogInterface.OnMultiChoiceClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which, boolean isChecked) {}
+                        })
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Settings.generateShuffledDeck(checkedItems);
+                        startActivity(
+                                new Intent(SP_CategoryActivity.this, FlashcardActivity.class)
+                                        .putExtra("shuffleMode", true));
+                    }
+                })
+                .setNeutralButton(R.string.select_all, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        for (int i = 0; i < checkedItems.length; i++) {
+                            checkedItems[i] = true;
+                        }
+                        Settings.generateShuffledDeck(checkedItems);
+                        startActivity(
+                                new Intent(SP_CategoryActivity.this, FlashcardActivity.class)
+                                        .putExtra("shuffleMode", true));
+                    }
+                })
+                .setNegativeButton(R.string.cancel, null)
+                .show();
+    }
+
+    private void favoritesAction() {
+        startActivity(new Intent(SP_CategoryActivity.this,
+                FlashcardActivity.class).putExtra("favoriteMode", true));
+    }
+
+    private void rearrangeFlashcardsAction() {
+        updateOnResume = true;
+        startActivity(new Intent(this, BoardActivity.class));
+    }
+
+    private void rearrangeDecksAction() {
+        updateOnResume = true;
+        startActivity(new Intent(this, DeckDragListViewActivity.class));
     }
 
     //* GoogleApiClient

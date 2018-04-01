@@ -7,9 +7,12 @@ public class Deck extends ArrayList<Flashcard> {
     private String title;
     public int currentCardIndex;
     public static int currentDeckIndex;
+    private long id;
+    private static long counter;
 
     public Deck(String title) {
         this.title = title;
+        this.id = counter++;
     }
 
     public void setTitle(String title) {
@@ -36,5 +39,9 @@ public class Deck extends ArrayList<Flashcard> {
 
     public Flashcard getCurrentCard() {
         return get(currentCardIndex);
+    }
+
+    public long getId() {
+        return id;
     }
 }
