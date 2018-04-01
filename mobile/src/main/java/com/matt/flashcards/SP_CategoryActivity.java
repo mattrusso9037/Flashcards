@@ -296,7 +296,8 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     }
 
     private void rearrangeDecksAction() {
-        new DebugToast(this, "Rearrange Decks Clicked");
+        updateOnResume = true;
+        startActivity(new Intent(this, DeckDragListViewActivity.class));
     }
 
     //* GoogleApiClient

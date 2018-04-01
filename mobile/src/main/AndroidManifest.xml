@@ -66,5 +66,9 @@
             android:name=".BoardActivity"
             android:label="@string/rearrange_flashcards"
             android:parentActivityName=".SP_CategoryActivity" />
+        <activity
+            android:name=".DeckDragListViewActivity"
+            android:label="@string/rearrange_decks"
+            android:parentActivityName=".SP_CategoryActivity" />
     </application>
 </manifest>
