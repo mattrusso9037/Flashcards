@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.woxthebox.draglistview.BoardView;
 
@@ -30,35 +29,23 @@ public class BoardActivity extends AppCompatActivity {
         boardView.setColumnSnapPosition(BoardView.ColumnSnapPosition.CENTER);
         boardView.setBoardListener(new BoardView.BoardListener() {
             @Override
-            public void onItemDragStarted(int column, int row) {
-                Toast.makeText(BoardActivity.this, "Start - column: " + column + " row: " + row, Toast.LENGTH_SHORT).show();
-            }
+            public void onItemDragStarted(int column, int row) {}
 
             @Override
             public void onItemDragEnded(int fromColumn, int fromRow, int toColumn, int toRow) {
                 if (fromColumn != toColumn || fromRow != toRow) {
-                    Toast.makeText(BoardActivity.this, "End - column: " + toColumn + " row: " + toRow, Toast.LENGTH_SHORT).show();
                     changesMade = true;
                 }
             }
 
             @Override
-            public void onItemChangedPosition(int oldColumn, int oldRow, int newColumn, int newRow) {
-                //Toast.makeText(boardView.BoardActivity.this, "Position changed - column: " + newColumn + " row: " + newRow, Toast.LENGTH_SHORT).show();
-            }
+            public void onItemChangedPosition(int oldColumn, int oldRow, int newColumn, int newRow) {}
 
             @Override
-            public void onItemChangedColumn(int oldColumn, int newColumn) {
-//                TextView itemCount1 = boardView.getHeaderView(oldColumn).findViewById(R.id.item_count);
-//                itemCount1.setText(String.valueOf(boardView.getAdapter(oldColumn).getItemCount()));
-//                TextView itemCount2 = boardView.getHeaderView(newColumn).findViewById(R.id.item_count);
-//                itemCount2.setText(String.valueOf(boardView.getAdapter(newColumn).getItemCount()));
-            }
+            public void onItemChangedColumn(int oldColumn, int newColumn) {}
 
             @Override
-            public void onFocusedColumnChanged(int oldColumn, int newColumn) {
-                Toast.makeText(BoardActivity.this, "Focused column changed from " + oldColumn + " to " + newColumn, Toast.LENGTH_SHORT).show();
-            }
+            public void onFocusedColumnChanged(int oldColumn, int newColumn) {}
         });
 
         FlashcardDragItemAdapter adapter;
