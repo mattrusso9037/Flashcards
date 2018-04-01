@@ -17,6 +17,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public final class Settings {
 
@@ -24,10 +25,15 @@ public final class Settings {
 
     public final static ArrayList<Deck> theDeckOfDecks = new ArrayList<>();
 
+    public static Deck shuffledDeck;
+    public final static Deck favoritesDeck = new Deck("Favorites");
+
+    public static boolean isFirstRun = false;
     private static boolean dataLoaded = false;
 
     private final static String SIDE_A_KEY = "SideA";
     private final static String SIDE_B_KEY = "SideB";
+    private final static String FAVORITE_KEY = "Favorite";
     private final static String DECK_KEY = "Decks";
     private final static String DECK_TITLE_KEY = "Title";
     private final static String DECK_FLASHCARDS_KEY = "Flashcards";
@@ -158,22 +164,34 @@ public final class Settings {
                     JSONObject JSONFlashcard = JSONFlashcards.getJSONObject(j);
 
                     // Create a new Flashcard object and add it to the deck object
-                    deck.add(new Flashcard(
+                    Flashcard f = new Flashcard(
                             JSONFlashcard.getString(SIDE_A_KEY),
-                            JSONFlashcard.getString(SIDE_B_KEY))
+                            JSONFlashcard.getString(SIDE_B_KEY)
                     );
+
+                    try {
+                        f.setFavorite(JSONFlashcard.getBoolean(FAVORITE_KEY));
+                    } catch (JSONException e) {}
+
+                    deck.add(f);
+
+                    // If the flashcard is a favorite, add it to the favorites deck
+                    if (f.isFavorite()) {
+                        favoritesDeck.add(f);
+                    }
                 }
                 // Add the new deck to the theDeckOfDecks
                 theDeckOfDecks.add(deck);
             }
         } catch (FileNotFoundException e) {
             // It's likely the file was not found because the program ran for the first time
+            isFirstRun = true;
         } catch (JSONException | IOException e) {
             new AlertDialog.Builder(context)
-                    .setTitle("Error")
-                    .setMessage("Unable to load data")
-                    .setPositiveButton("Ok", null)
-                    .create().show();
+                    .setTitle(R.string.error)
+                    .setMessage(R.string.cant_load_data)
+                    .setPositiveButton(R.string.ok, null)
+                    .show();
         }
     }
 
@@ -191,6 +209,7 @@ public final class Settings {
                     JSONDeck.put(new JSONObject()
                             .put(SIDE_A_KEY, flashcard.getSideA())
                             .put(SIDE_B_KEY, flashcard.getSideB())
+                            .put(FAVORITE_KEY, flashcard.isFavorite())
                     );
                 }
                 // Adds the JSON deck to the array of decks
@@ -210,12 +229,39 @@ public final class Settings {
 
         } catch (JSONException | IOException e) {
             new AlertDialog.Builder(context)
-                    .setTitle("Error")
-                    .setMessage("Unable to save data")
-                    .setPositiveButton("Ok", null)
-                    .create().show();
+                    .setTitle(R.string.error)
+                    .setMessage(R.string.cant_save_data)
+                    .setPositiveButton(R.string.ok, null)
+                    .show();
             return;
         }
-        Toast.makeText(context, "Saved Successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, R.string.successful_save, Toast.LENGTH_SHORT).show();
+    }
+
+    public static String[] getAllDeckTitles() {
+        String[] titles = new String[theDeckOfDecks.size()];
+        for (int i = 0; i < titles.length; i++) {
+            titles[i] = theDeckOfDecks.get(i).getTitle();
+        }
+        return titles;
+    }
+
+    public static void generateShuffledDeck(boolean[] decksChecked) {
+        new DebugLog("generateShuffledDeck");
+
+        // Make sure the shuffled deck is reset
+        shuffledDeck = new Deck("Shuffle Mode");
+
+        // Add all flashcards from checked off decks to the shuffled deck
+        for (int i = 0; i < theDeckOfDecks.size(); i++) {
+            new DebugLog(i + " " + decksChecked[i]);
+            if (decksChecked[i]) {
+                shuffledDeck.addAll(theDeckOfDecks.get(i));
+                new DebugLog("Deck added: " + theDeckOfDecks.get(i).getTitle());
+            }
+        }
+
+        // Shuffle the deck
+        Collections.shuffle(shuffledDeck);
     }
 }

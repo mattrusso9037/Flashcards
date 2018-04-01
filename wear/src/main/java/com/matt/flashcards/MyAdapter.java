@@ -18,7 +18,7 @@ import static com.matt.flashcards.MainActivity.currentDeck;
 
 public class MyAdapter extends WearableRecyclerView.Adapter<MyAdapter.ViewHolder> {
     final private ListItemClickListener onClickListener;
-    List deckList;
+    private List deckList;
 
     public MyAdapter(List deckList, ListItemClickListener listener) {
         this.deckList = deckList;
@@ -32,8 +32,7 @@ public class MyAdapter extends WearableRecyclerView.Adapter<MyAdapter.ViewHolder
         LayoutInflater inflater = LayoutInflater.from(context);
 
         View view = inflater.inflate(layoutIdForListItem, viewGroup, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override
@@ -41,7 +40,6 @@ public class MyAdapter extends WearableRecyclerView.Adapter<MyAdapter.ViewHolder
 //        Deck deck = deckList.get(position);
         holder.deckTitle.setText(String.valueOf(deckList.get(position)));
     }
-
 
     @Override
     public int getItemCount() {
@@ -54,13 +52,11 @@ public class MyAdapter extends WearableRecyclerView.Adapter<MyAdapter.ViewHolder
         if (currentDeck != null) {
             currentDeck.clear();
             Log.i("wear", "current deck size " + currentDeck.size());
-
         }
         notifyItemRangeRemoved(0, size);
     }
 
     public class ViewHolder extends WearableRecyclerView.ViewHolder implements View.OnClickListener {
-
         TextView deckTitle;
 
         public ViewHolder(View itemView) {

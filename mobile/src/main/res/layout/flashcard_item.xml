@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/flashcard_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -15,7 +17,8 @@
         android:singleLine="true"
         android:textColor="@android:color/white"
         android:textSize="16sp"
-        tools:text="Testing this is a really long string just to show the ..." />
+        tools:text="Testing this is a really long string just to show the ..."
+        tools:textColor="@android:color/black" />
 
     <LinearLayout
         android:id="@+id/flashcard_item_actions"
@@ -28,7 +31,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/btn_view"
+            android:text="@string/view"
             android:textAllCaps="true" />
 
         <Button
@@ -36,7 +39,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/edit"
+            android:text="@string/menu_edit"
             android:textAllCaps="true" />
 
         <Button
@@ -44,7 +47,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/delete"
+            android:text="@string/menu_delete"
             android:textAllCaps="true" />
 
     </LinearLayout>

@@ -12,7 +12,6 @@ import com.google.android.gms.wearable.WearableListenerService;
 public class ListenerService extends WearableListenerService {
     @Override
     public void onMessageReceived(final MessageEvent messageEvent) {
-
         if (messageEvent.getPath().equalsIgnoreCase("/testPath")) {
             Intent intent = new Intent(this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

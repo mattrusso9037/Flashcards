@@ -23,7 +23,7 @@ import static com.matt.flashcards.Settings.theDeckOfDecks;
  */
 
 public class WearTask extends AsyncTask<Void, Void, Void> {
-    final String TRANSFER_PATH = "/dataTransferToWear";
+    private final String TRANSFER_PATH = "/dataTransferToWear";
     private GoogleApiClient googleClient;
     private Context context;
     private MenuItem syncItem;
@@ -47,7 +47,6 @@ public class WearTask extends AsyncTask<Void, Void, Void> {
         syncItem.setEnabled(true);
         googleClient.disconnect();
         Log.i("wear", "synced");
-
     }
 
     @Override
@@ -58,7 +57,6 @@ public class WearTask extends AsyncTask<Void, Void, Void> {
         syncItem.setTitle(Html.fromHtml("<font color='#808080'>Sync with wear</font>"));
         syncItem.setEnabled(false);
     }
-
 
     @Override
     protected void onCancelled() {
@@ -74,8 +72,8 @@ public class WearTask extends AsyncTask<Void, Void, Void> {
             cancel(true);
         }
 
-        ArrayList<DataMap> dataMapList = new ArrayList();
-        DataMap dataMapTitleHolder = null;
+        ArrayList<DataMap> dataMapList = new ArrayList<>();
+        DataMap dataMapTitleHolder;
 
         for (Node node : nodes.getNodes()) {
             dataMapTitleHolder = new DataMap();
@@ -87,7 +85,6 @@ public class WearTask extends AsyncTask<Void, Void, Void> {
             byte[] byteArray = dataMapTitleHolder.toByteArray();
 
             MessageApi.SendMessageResult result = Wearable.MessageApi.sendMessage(googleClient, node.getId(), path, byteArray).await();
-
         }
     }
 
@@ -103,7 +100,6 @@ public class WearTask extends AsyncTask<Void, Void, Void> {
 
                 dataMapList.add(cardDataMap);
             }
-
         }
     }
 
@@ -123,5 +119,4 @@ public class WearTask extends AsyncTask<Void, Void, Void> {
                 .build();
         googleClient.connect();
     }
-
 }
