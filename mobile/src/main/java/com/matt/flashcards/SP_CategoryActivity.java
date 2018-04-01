@@ -54,6 +54,8 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         if (drawer != null && drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START, false);
         }
+
+        adapter.notifyDataSetChanged();
     }
 
     @Override
