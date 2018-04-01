@@ -248,9 +248,11 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                         })
                         .setNegativeButton(R.string.cancel, null)
                         .show();
-            default:
-                return super.onOptionsItemSelected(item);
+                break;
+            case R.id.menu_board:
+                startActivity(new Intent(this, BoardActivity.class));
         }
+        return super.onOptionsItemSelected(item);
     }
 
     //* GoogleApiClient
