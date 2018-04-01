@@ -64,7 +64,7 @@
             android:parentActivityName=".FlashcardActivity" />
         <activity
             android:name=".BoardActivity"
-            android:label="@string/all_flashcards"
+            android:label="@string/rearrange_flashcards"
             android:parentActivityName=".SP_CategoryActivity" />
     </application>
 </manifest>
