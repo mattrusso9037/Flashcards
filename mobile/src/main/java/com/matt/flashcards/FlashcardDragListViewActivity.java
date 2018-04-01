@@ -26,6 +26,7 @@ public class FlashcardDragListViewActivity extends AppCompatActivity {
         super.onResume();
         if (updateOnResume) {
             adapter.notifyDataSetChanged();
+            updateOnResume = false;
         }
     }
 

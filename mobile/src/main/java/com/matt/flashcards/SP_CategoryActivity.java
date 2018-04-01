@@ -45,6 +45,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     private AlertDialog tutorialDialog;
     private boolean letsGo;
     private LinearLayout deckTip;
+    private boolean updateOnResume;
 
     @Override
     protected void onResume() {
@@ -55,7 +56,10 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
             drawer.closeDrawer(GravityCompat.START, false);
         }
 
-        adapter.notifyDataSetChanged();
+        if (updateOnResume) {
+            adapter.notifyDataSetChanged();
+            updateOnResume = false;
+        }
     }
 
     @Override
@@ -252,6 +256,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                         .show();
                 break;
             case R.id.menu_board:
+                updateOnResume = true;
                 startActivity(new Intent(this, BoardActivity.class));
         }
         return super.onOptionsItemSelected(item);
