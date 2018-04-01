@@ -24,7 +24,9 @@ public final class Settings {
     private Settings() {} // Prevent instantiation of this class
 
     public final static ArrayList<Deck> theDeckOfDecks = new ArrayList<>();
+
     public static Deck shuffledDeck;
+    public final static Deck favoritesDeck = new Deck("Favorites");
 
     public static boolean isFirstRun = false;
     private static boolean dataLoaded = false;

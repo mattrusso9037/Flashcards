@@ -20,11 +20,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mylibrary.Deck;
+import com.example.mylibrary.Flashcard;
 
 public class FlashcardActivity extends AppCompatActivity {
 
     private boolean isFullscreen = false;
     private boolean shuffleMode = false;
+    private boolean favoriteMode = false;
     private boolean updateOnResume = false;
     private ViewPager viewPager;
     private FlashcardFragmentPageAdapter pageAdapter;
@@ -45,9 +47,14 @@ public class FlashcardActivity extends AppCompatActivity {
             }
         }
 
-        // Changes the viewpager to the current flashcard
         if (viewPager != null) {
-            viewPager.setCurrentItem(currentDeck.currentCardIndex, false);
+            if (favoriteMode) {
+                // Changes the viewpager to the first flashcard
+                viewPager.setCurrentItem(0);
+            } else {
+                // Changes the viewpager to the current flashcard
+                viewPager.setCurrentItem(currentDeck.currentCardIndex, false);
+            }
         }
     }
 
@@ -60,11 +67,15 @@ public class FlashcardActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             shuffleMode = extras.getBoolean("shuffleMode", false);
+            favoriteMode = extras.getBoolean("favoriteMode", false);
         }
 
         if (shuffleMode) {
             currentDeck = Settings.shuffledDeck;
             setTitle(R.string.shuffle_mode);
+        } else if (favoriteMode) {
+            currentDeck = Settings.favoritesDeck;
+            setTitle(getString(R.string.favorites));
         } else {
             currentDeck = Settings.theDeckOfDecks.get(Deck.currentDeckIndex);
             setTitle(currentDeck.getTitle());
@@ -81,6 +92,7 @@ public class FlashcardActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 currentDeck.currentCardIndex = position;
+                invalidateOptionsMenu();
             }
 
             @Override
@@ -98,11 +110,22 @@ public class FlashcardActivity extends AppCompatActivity {
         MenuItem newItem = menu.findItem(R.id.action_new_card);
         MenuItem editItem = menu.findItem(R.id.action_edit_card);
         MenuItem deleteItem = menu.findItem(R.id.action_delete_card);
+        MenuItem favoriteItem = menu.findItem(R.id.action_favorite);
         if (shuffleMode) {
             listViewItem.setVisible(false);
             newItem.setVisible(false);
             editItem.setVisible(false);
             deleteItem.setVisible(false);
+        } else if (favoriteMode) {
+            listViewItem.setVisible(false);
+            newItem.setVisible(false);
+            editItem.setVisible(false);
+            deleteItem.setVisible(false);
+            if (currentDeck.isEmpty()) {
+                favoriteItem.setIcon(R.drawable.ic_star_border_white_48dp);
+            } else {
+                favoriteItem.setIcon(R.drawable.ic_star_white_48dp);
+            }
         } else if (currentDeck.isEmpty()) {
             newItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
             editItem.setVisible(false);
@@ -111,6 +134,9 @@ public class FlashcardActivity extends AppCompatActivity {
             newItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
             editItem.setVisible(true);
             deleteItem.setVisible(true);
+            if (currentDeck.getCurrentCard().isFavorite()) {
+                favoriteItem.setIcon(R.drawable.ic_star_white_48dp);
+            }
         }
         return super.onPrepareOptionsMenu(menu);
     }
@@ -145,6 +171,23 @@ public class FlashcardActivity extends AppCompatActivity {
                 } else {
                     startActivity(new Intent(this, FlashcardDragListViewActivity.class));
                 }
+                return true;
+            case R.id.action_favorite:
+                if (currentDeck.isEmpty()) {
+                    return true;
+                }
+                Flashcard currentCard = currentDeck.getCurrentCard();
+                boolean isFavorite = currentCard.isFavorite();
+                currentCard.setFavorite(!isFavorite);
+                if (isFavorite) {
+                    Settings.favoritesDeck.remove(currentCard);
+                } else {
+                    Settings.favoritesDeck.add(currentCard);
+                }
+                if (favoriteMode) {
+                    pageAdapter.notifyDataSetChanged();
+                }
+                invalidateOptionsMenu();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
