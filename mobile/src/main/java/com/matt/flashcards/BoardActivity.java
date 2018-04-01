@@ -49,7 +49,10 @@ public class BoardActivity extends AppCompatActivity {
             public void onItemChangedColumn(int oldColumn, int newColumn) {}
 
             @Override
-            public void onFocusedColumnChanged(int oldColumn, int newColumn) {}
+            public void onFocusedColumnChanged(int oldColumn, int newColumn) {
+                boardView.getHeaderView(oldColumn).findViewById(R.id.column_buttons).setVisibility(View.INVISIBLE);
+                boardView.getHeaderView(newColumn).findViewById(R.id.column_buttons).setVisibility(View.VISIBLE);
+            }
         });
 
         FlashcardDragItemAdapter adapter;
