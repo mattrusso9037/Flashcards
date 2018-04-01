@@ -4,6 +4,7 @@ public class Flashcard {
     private String sideA;
     private String sideB;
     private long id;
+    private boolean isFavorite;
     private static long counter = 0;
 
     public Flashcard(String sideA, String sideB) {
@@ -30,5 +31,13 @@ public class Flashcard {
 
     public long getId() {
         return id;
+    }
+
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
     }
 }
