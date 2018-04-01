@@ -55,6 +55,18 @@ public class BoardActivity extends AppCompatActivity {
             adapter = new FlashcardDragItemAdapter(this, theDeckOfDecks.get(i));
             header = View.inflate(this, R.layout.column_header, null);
             ((TextView) header.findViewById(R.id.column_text)).setText(theDeckOfDecks.get(i).getTitle());
+            header.findViewById(R.id.column_left).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new DebugToast(BoardActivity.this, "Move left");
+                }
+            });
+            header.findViewById(R.id.column_right).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new DebugToast(BoardActivity.this, "Move right");
+                }
+            });
             boardView.addColumnList(adapter, header, false);
             recyclerView = boardView.getRecyclerView(i);
             recyclerView.setVerticalScrollBarEnabled(true);
