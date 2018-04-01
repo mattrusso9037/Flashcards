@@ -45,6 +45,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     private AlertDialog tutorialDialog;
     private boolean letsGo;
     private LinearLayout deckTip;
+    private boolean updateOnResume;
 
     @Override
     protected void onResume() {
@@ -53,6 +54,11 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         // Make sure the drawer is closed when returning from another activity
         if (drawer != null && drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START, false);
+        }
+
+        if (updateOnResume) {
+            adapter.notifyDataSetChanged();
+            updateOnResume = false;
         }
     }
 
@@ -248,9 +254,12 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                         })
                         .setNegativeButton(R.string.cancel, null)
                         .show();
-            default:
-                return super.onOptionsItemSelected(item);
+                break;
+            case R.id.menu_board:
+                updateOnResume = true;
+                startActivity(new Intent(this, BoardActivity.class));
         }
+        return super.onOptionsItemSelected(item);
     }
 
     //* GoogleApiClient

@@ -217,6 +217,7 @@ public class FlashcardActivity extends AppCompatActivity {
             super.onResume();
             if (updateOnResume) {
                 adapter.notifyDataSetChanged();
+                updateOnResume = false;
             }
         }
 
