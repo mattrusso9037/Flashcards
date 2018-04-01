@@ -62,6 +62,9 @@
         <activity
             android:name=".FlashcardDragListViewActivity"
             android:parentActivityName=".FlashcardActivity" />
-        <activity android:name=".BoardActivity"></activity>
+        <activity
+            android:name=".BoardActivity"
+            android:label="@string/all_flashcards"
+            android:parentActivityName=".SP_CategoryActivity" />
     </application>
 </manifest>
