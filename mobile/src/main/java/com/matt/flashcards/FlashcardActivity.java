@@ -73,12 +73,15 @@ public class FlashcardActivity extends AppCompatActivity {
         if (shuffleMode) {
             currentDeck = Settings.shuffledDeck;
             setTitle(R.string.shuffle_mode);
+            findViewById(R.id.flashcard_tip).setVisibility(View.INVISIBLE);
         } else if (favoriteMode) {
             currentDeck = Settings.favoritesDeck;
             setTitle(getString(R.string.favorites));
+            findViewById(R.id.flashcard_tip).setVisibility(View.INVISIBLE);
         } else {
             currentDeck = Settings.theDeckOfDecks.get(Deck.currentDeckIndex);
             setTitle(currentDeck.getTitle());
+            findViewById(R.id.flashcard_tip).setVisibility(View.VISIBLE);
         }
 
         // Get the viewpager
