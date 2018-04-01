@@ -115,6 +115,10 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                             case R.id.nav_new_category:
                                 FabListener.onClick(getCurrentFocus());
                                 break;
+                            case R.id.nav_favorites:
+                                startActivity(new Intent(SP_CategoryActivity.this,
+                                        FlashcardActivity.class).putExtra("favoriteMode", true));
+                                break;
                             case R.id.nav_load_dummy_data:
                                 new AlertDialog.Builder(SP_CategoryActivity.this)
                                         .setTitle(R.string.warning)
