@@ -28,6 +28,7 @@ public class FlashcardActivity extends AppCompatActivity {
     private boolean shuffleMode = false;
     private boolean favoriteMode = false;
     private boolean updateOnResume = false;
+    private boolean changesMade;
     private ViewPager viewPager;
     private FlashcardFragmentPageAdapter pageAdapter;
     protected static Deck currentDeck;
@@ -105,6 +106,14 @@ public class FlashcardActivity extends AppCompatActivity {
         // Set the adapter for the viewpager
         pageAdapter = new FlashcardFragmentPageAdapter(getSupportFragmentManager(), currentDeck);
         viewPager.setAdapter(pageAdapter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (changesMade) {
+            Settings.saveData(this);
+        }
     }
 
     @Override
@@ -191,6 +200,7 @@ public class FlashcardActivity extends AppCompatActivity {
                     pageAdapter.notifyDataSetChanged();
                 }
                 invalidateOptionsMenu();
+                changesMade = true;
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

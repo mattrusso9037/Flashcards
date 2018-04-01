@@ -13,6 +13,13 @@ public class Flashcard {
         this.id = counter++;
     }
 
+    public Flashcard(String sideA, String sideB, boolean isFavorite) {
+        this.sideA = sideA;
+        this.sideB = sideB;
+        this.isFavorite = isFavorite;
+        this.id = counter++;
+    }
+
     public String getSideA() {
         return sideA;
     }
