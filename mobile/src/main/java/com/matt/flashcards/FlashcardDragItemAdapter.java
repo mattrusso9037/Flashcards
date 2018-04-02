@@ -110,8 +110,10 @@ public class FlashcardDragItemAdapter extends DragItemAdapter<Flashcard, Flashca
         @Override
         public void onItemClicked(View view) {
             super.onItemClicked(view);
-            currentDeck.currentCardIndex = getPositionForItemId(getItemId());
-            ((AppCompatActivity) context).onNavigateUp();
+            if (context instanceof FlashcardDragListViewActivity) {
+                currentDeck.currentCardIndex = getPositionForItemId(getItemId());
+                ((AppCompatActivity) context).onNavigateUp();
+            }
         }
     }
 }
