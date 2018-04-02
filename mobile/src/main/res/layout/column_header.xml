@@ -26,8 +26,7 @@
         android:id="@+id/column_add"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:src="@drawable/ic_add_white_48dp"
-        android:visibility="gone" />
+        android:src="@drawable/ic_add_white_48dp" />
 
     <LinearLayout
         android:id="@+id/column_buttons"

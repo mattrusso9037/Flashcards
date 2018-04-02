@@ -3,6 +3,7 @@ package com.matt.flashcards;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import com.woxthebox.draglistview.DragItemAdapter;
 
 import java.util.List;
 
+import static com.matt.flashcards.BoardActivity.addEditBundle;
 import static com.matt.flashcards.FlashcardActivity.currentDeck;
 
 public class FlashcardDragItemAdapter extends DragItemAdapter<Flashcard, FlashcardDragItemAdapter.ViewHolder> {
@@ -94,7 +96,13 @@ public class FlashcardDragItemAdapter extends DragItemAdapter<Flashcard, Flashca
 
                 @Override
                 public void onClick(View v) {
-                    new DebugToast(context, "Edit | Col: " + boardView.getFocusedColumn() + " | Row: " + position);
+                    addEditBundle = new Bundle();
+                    addEditBundle.putBoolean("editMode", true);
+                    addEditBundle.putInt("editCol", boardView.getFocusedColumn());
+                    addEditBundle.putInt("editRow", position);
+                    context.startActivity(new Intent(context, AddEditActivity.class)
+                            .putExtra("EditMode", true)
+                            .putExtra("BoardMode", true));
                 }
             });
 
