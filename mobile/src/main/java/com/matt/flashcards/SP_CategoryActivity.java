@@ -47,6 +47,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     private LinearLayout deckTip;
     private boolean updateOnResume;
     protected static boolean updateWear;
+    protected static boolean hideDeckTip;
 
     @Override
     protected void onResume() {
@@ -66,6 +67,11 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
             WearTask wearTask = new WearTask(this, syncItem);
             wearTask.execute();
             updateWear = false;
+        }
+
+        if (hideDeckTip) {
+            findViewById(R.id.deck_tip).setVisibility(View.INVISIBLE);
+            hideDeckTip = false;
         }
     }
 
