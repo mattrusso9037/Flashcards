@@ -46,6 +46,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     private boolean letsGo;
     private LinearLayout deckTip;
     private boolean updateOnResume;
+    protected static boolean updateWear;
 
     @Override
     protected void onResume() {
@@ -59,6 +60,12 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         if (updateOnResume) {
             adapter.notifyDataSetChanged();
             updateOnResume = false;
+        }
+
+        if (updateWear) {
+            WearTask wearTask = new WearTask(this, syncItem);
+            wearTask.execute();
+            updateWear = false;
         }
     }
 

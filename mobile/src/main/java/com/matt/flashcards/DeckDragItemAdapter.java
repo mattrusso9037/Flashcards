@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,6 @@ import com.example.mylibrary.Deck;
 import com.woxthebox.draglistview.DragItemAdapter;
 
 import static com.matt.flashcards.Settings.theDeckOfDecks;
-
 
 public class DeckDragItemAdapter extends DragItemAdapter<Deck, DeckDragItemAdapter.ViewHolder> {
 
@@ -71,6 +71,31 @@ public class DeckDragItemAdapter extends DragItemAdapter<Deck, DeckDragItemAdapt
                                     notifyDataSetChanged();
                                     Settings.saveData(context);
                                 }
+                            }
+                        }).setNegativeButton(R.string.cancel, null)
+                        .show();
+            }
+        });
+
+        holder.deleteView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(context)
+                        .setTitle(R.string.confirm_delete_deck)
+                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                theDeckOfDecks.remove(position);
+                                notifyDataSetChanged();
+                                Settings.saveData(context);
+
+                                // Show the deck tip when there are no decks
+                                if (Settings.theDeckOfDecks.isEmpty()) {
+                                    ((AppCompatActivity) context).findViewById(R.id.deck_tip)
+                                            .setVisibility(View.VISIBLE);
+                                }
+
+                                SP_CategoryActivity.updateWear = true;
                             }
                         }).setNegativeButton(R.string.cancel, null)
                         .show();
