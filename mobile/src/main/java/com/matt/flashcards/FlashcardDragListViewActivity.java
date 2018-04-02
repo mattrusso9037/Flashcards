@@ -17,8 +17,8 @@ import static com.matt.flashcards.FlashcardActivity.currentDeck;
 
 public class FlashcardDragListViewActivity extends AppCompatActivity {
 
-    private boolean changesMade;
-    private boolean updateOnResume;
+    protected boolean changesMade;
+    protected boolean updateOnResume;
     private DragItemAdapter adapter;
 
     @Override
@@ -36,7 +36,7 @@ public class FlashcardDragListViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_flashcard_drag_list_view);
 
         DragListView dragListView = findViewById(R.id.flashcard_drag_list_view);
-        adapter = new FlashcardDragItemAdapter(this, currentDeck);
+        adapter = new FlashcardDragItemAdapter(this, currentDeck, true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         RecyclerView recyclerView = dragListView.getRecyclerView();
 
