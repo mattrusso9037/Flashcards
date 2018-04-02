@@ -20,14 +20,14 @@
         android:title="@string/shuffle"
         app:showAsAction="always" />
 
-    <item
-        android:id="@+id/menu_rearrange_flashcards"
-        android:title="@string/rearrange_flashcards"
-        app:showAsAction="never" />
+    <!--<item-->
+        <!--android:id="@+id/menu_rearrange_flashcards"-->
+        <!--android:title="@string/rearrange_flashcards"-->
+        <!--app:showAsAction="never" />-->
 
-    <item
-        android:id="@+id/menu_rearrange_decks"
-        android:title="@string/rearrange_decks"
-        app:showAsAction="never" />
+    <!--<item-->
+        <!--android:id="@+id/menu_rearrange_decks"-->
+        <!--android:title="@string/rearrange_decks"-->
+        <!--app:showAsAction="never" />-->
 
 </menu>
