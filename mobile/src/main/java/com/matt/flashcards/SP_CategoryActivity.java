@@ -304,7 +304,6 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     }
 
     private void rearrangeFlashcardsAction() {
-        updateOnResume = true;
         startActivity(new Intent(this, BoardActivity.class));
     }
 
