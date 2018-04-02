@@ -88,7 +88,9 @@ public class FlashcardDragItemAdapter extends DragItemAdapter<Flashcard, Flashca
             holder.flashcardItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new DebugToast(context, "Col: " + boardView.getFocusedColumn() + " | Row: " + position);
+                    FlashcardActivity.currentDeck = Settings.theDeckOfDecks.get(boardView.getFocusedColumn());
+                    FlashcardActivity.currentDeck.currentCardIndex = position;
+                    context.startActivity(new Intent(context, FlashcardActivity.class));
                 }
             });
 
