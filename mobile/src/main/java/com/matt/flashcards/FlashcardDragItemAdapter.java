@@ -102,7 +102,17 @@ public class FlashcardDragItemAdapter extends DragItemAdapter<Flashcard, Flashca
 
                 @Override
                 public void onClick(View v) {
-                    new DebugToast(context, "Delete| Col: " + boardView.getFocusedColumn() + " | Row: " + position);
+                    new AlertDialog.Builder(context)
+                            .setTitle(R.string.confirm_delete)
+                            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    boardView.removeItem(boardView.getFocusedColumn(), position);
+                                    notifyDataSetChanged();
+                                    BoardActivity.changesMade = true;
+                                }
+                            }).setNegativeButton(R.string.cancel, null)
+                            .show();
                 }
             });
         }

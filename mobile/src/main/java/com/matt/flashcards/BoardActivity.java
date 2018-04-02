@@ -18,7 +18,7 @@ import static com.matt.flashcards.Settings.theDeckOfDecks;
 public class BoardActivity extends AppCompatActivity {
 
     protected BoardView boardView;
-    private boolean changesMade;
+    protected static boolean changesMade;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +95,7 @@ public class BoardActivity extends AppCompatActivity {
         super.onPause();
         if (changesMade) {
             Settings.saveData(this);
+            changesMade = false;
         }
     }
 
