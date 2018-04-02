@@ -138,6 +138,8 @@ public class FlashcardActivity extends AppCompatActivity {
             deleteItem.setVisible(false);
             if (currentDeck.isEmpty()) {
                 favoriteItem.setIcon(R.drawable.ic_star_border_white_48dp);
+            } else if (!currentDeck.getCurrentCard().isFavorite()) {
+                favoriteItem.setIcon(R.drawable.ic_star_border_white_48dp);
             } else {
                 favoriteItem.setIcon(R.drawable.ic_star_white_48dp);
             }
@@ -191,16 +193,34 @@ public class FlashcardActivity extends AppCompatActivity {
                 if (currentDeck.isEmpty()) {
                     return true;
                 }
-                Flashcard currentCard = currentDeck.getCurrentCard();
+                final Flashcard currentCard = currentDeck.getCurrentCard();
                 boolean isFavorite = currentCard.isFavorite();
                 currentCard.setFavorite(!isFavorite);
-                if (isFavorite) {
-                    Settings.favoritesDeck.remove(currentCard);
-                } else {
-                    Settings.favoritesDeck.add(currentCard);
-                }
                 if (favoriteMode) {
-                    pageAdapter.notifyDataSetChanged();
+                    new AlertDialog.Builder(this)
+                            .setTitle(R.string.confirm_favorite_remove)
+                            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Settings.favoritesDeck.remove(currentCard);
+                                    pageAdapter.notifyDataSetChanged();
+                                    invalidateOptionsMenu();
+                                }
+                            })
+                            .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    currentCard.setFavorite(true);
+                                    invalidateOptionsMenu();
+                                }
+                            })
+                            .show();
+                } else {
+                    if (isFavorite) {
+                        Settings.favoritesDeck.remove(currentCard);
+                    } else {
+                        Settings.favoritesDeck.add(currentCard);
+                    }
                 }
                 invalidateOptionsMenu();
                 changesMade = true;
