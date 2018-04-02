@@ -5,14 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:orientation="horizontal"
+    android:padding="16dp"
+    tools:background="@android:color/darker_gray">
 
     <TextView
         android:id="@+id/flashcard_item_text"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
+        android:layout_marginRight="8dp"
+        android:layout_weight="1"
         android:ellipsize="end"
         android:singleLine="true"
         android:textColor="@android:color/white"
@@ -22,6 +25,28 @@
 
     <LinearLayout
         android:id="@+id/flashcard_item_actions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/flashcard_item_edit"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginRight="16dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_edit_white_48dp" />
+
+        <ImageView
+            android:id="@+id/flashcard_item_delete"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_clear_white_48dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone">
@@ -34,16 +59,16 @@
             android:text="@string/view"
             android:textAllCaps="true" />
 
+        <!--android:id="@+id/flashcard_item_edit"-->
         <Button
-            android:id="@+id/flashcard_item_edit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/menu_edit"
             android:textAllCaps="true" />
 
+        <!--android:id="@+id/flashcard_item_delete"-->
         <Button
-            android:id="@+id/flashcard_item_delete"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

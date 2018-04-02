@@ -17,8 +17,8 @@ import static com.matt.flashcards.FlashcardActivity.currentDeck;
 
 public class FlashcardDragListViewActivity extends AppCompatActivity {
 
-    private boolean changesMade;
-    private boolean updateOnResume;
+    protected boolean changesMade;
+    protected boolean updateOnResume;
     private DragItemAdapter adapter;
 
     @Override
@@ -26,6 +26,7 @@ public class FlashcardDragListViewActivity extends AppCompatActivity {
         super.onResume();
         if (updateOnResume) {
             adapter.notifyDataSetChanged();
+            updateOnResume = false;
         }
     }
 
@@ -83,8 +84,7 @@ public class FlashcardDragListViewActivity extends AppCompatActivity {
             case R.id.action_new_card_list_view:
                 updateOnResume = true;
                 startActivity(new Intent(this, AddEditActivity.class)
-                        .putExtra("EditMode", false)
-                        .putExtra("DeckIndex", Deck.currentDeckIndex));
+                        .putExtra("EditMode", false));
             default:
                 return super.onOptionsItemSelected(item);
         }

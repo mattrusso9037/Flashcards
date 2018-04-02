@@ -3,9 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/menu_tutorial"
+        android:icon="@drawable/ic_help_outline_white_48dp"
+        android:title="@string/tutorial"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/menu_favorites"
+        android:icon="@drawable/ic_star_white_48dp"
+        android:title="@string/favorites"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/menu_shuffle"
         android:icon="@drawable/ic_shuffle_white_48dp"
         android:title="@string/shuffle"
         app:showAsAction="always" />
+
+    <!--<item-->
+        <!--android:id="@+id/menu_rearrange_flashcards"-->
+        <!--android:title="@string/rearrange_flashcards"-->
+        <!--app:showAsAction="never" />-->
+
+    <!--<item-->
+        <!--android:id="@+id/menu_rearrange_decks"-->
+        <!--android:title="@string/rearrange_decks"-->
+        <!--app:showAsAction="never" />-->
 
 </menu>

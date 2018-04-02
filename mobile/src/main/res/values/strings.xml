@@ -91,7 +91,7 @@
     <string name="confirm_delete_flashcard">Are you sure you want to delete this flashcard?</string>
     <string name="error_cant_save_blank_flashcard">You can\'t save a blank flashcard</string>
     <string name="confirm_lose_changes">Are you sure you want to lose the changes you\'ve made?</string>
-    <string name="click_here_to_add_a_new_deck">Click here to add a new deck →</string>
+    <string name="click_here_to_add_a_new_deck">Click here to add a new deck</string>
     <string name="title">Title</string>
     <string name="save">Save</string>
     <string name="view">View</string>
@@ -99,4 +99,10 @@
     <string name="connection_lost">Connection Lost</string>
     <string name="rename">Rename</string>
     <string name="delete">Delete</string>
+    <string name="click_here_to_add_a_new_flashcard">Click here to add a new flashcard</string>
+    <string name="favorite">Favorite</string>
+    <string name="favorites">Favorites</string>
+    <string name="rearrange_flashcards">Rearrange Flashcards</string>
+    <string name="rearrange_decks">Rearrange Decks</string>
+    <string name="confirm_favorite_remove">Are you sure you want to remove this from your favorites?</string>
 </resources>
