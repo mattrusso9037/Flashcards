@@ -45,7 +45,6 @@ public class DeckDragItemAdapter extends DragItemAdapter<Deck, DeckDragItemAdapt
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         super.onBindViewHolder(holder, position);
         holder.deckTextView.setText(theDeckOfDecks.get(position).getTitle());
-        holder.editDeleteLayout.setVisibility(View.VISIBLE);
 
         holder.editView.setOnClickListener(new View.OnClickListener() {
             @Override

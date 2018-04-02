@@ -53,8 +53,6 @@ public class FlashcardDragItemAdapter extends DragItemAdapter<Flashcard, Flashca
 
         if (context instanceof FlashcardDragListViewActivity) {
 
-            holder.editDeleteLayout.setVisibility(View.VISIBLE);
-
             holder.editView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
