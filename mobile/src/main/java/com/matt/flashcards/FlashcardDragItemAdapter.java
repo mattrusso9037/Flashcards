@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.mylibrary.Deck;
 import com.example.mylibrary.Flashcard;
 import com.woxthebox.draglistview.BoardView;
 import com.woxthebox.draglistview.DragItemAdapter;
@@ -88,6 +89,7 @@ public class FlashcardDragItemAdapter extends DragItemAdapter<Flashcard, Flashca
             holder.flashcardItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Deck.currentDeckIndex = boardView.getFocusedColumn();
                     FlashcardActivity.currentDeck = Settings.theDeckOfDecks.get(boardView.getFocusedColumn());
                     FlashcardActivity.currentDeck.currentCardIndex = position;
                     context.startActivity(new Intent(context, FlashcardActivity.class));
