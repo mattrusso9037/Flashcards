@@ -14,7 +14,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +35,8 @@ public class FlashcardActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private FlashcardFragmentPageAdapter pageAdapter;
     protected static Deck currentDeck;
+    private ImageView upArrow;
+    private Animation slide_down;
 
     @Override
     protected void onResume() {
@@ -75,14 +80,20 @@ public class FlashcardActivity extends AppCompatActivity {
             currentDeck = Settings.shuffledDeck;
             setTitle(R.string.shuffle_mode);
             findViewById(R.id.flashcard_tip).setVisibility(View.INVISIBLE);
+            findViewById(R.id.arrow_up).clearAnimation();
         } else if (favoriteMode) {
             currentDeck = Settings.favoritesDeck;
             setTitle(getString(R.string.favorites));
             findViewById(R.id.flashcard_tip).setVisibility(View.INVISIBLE);
+            findViewById(R.id.arrow_up).clearAnimation();
+
         } else {
             currentDeck = Settings.theDeckOfDecks.get(Deck.currentDeckIndex);
             setTitle(currentDeck.getTitle());
             findViewById(R.id.flashcard_tip).setVisibility(View.VISIBLE);
+            slide_down = AnimationUtils.loadAnimation(this, R.anim.down_arrow_animation);
+            findViewById(R.id.arrow_up).startAnimation(slide_down);
+
         }
 
         // Get the viewpager

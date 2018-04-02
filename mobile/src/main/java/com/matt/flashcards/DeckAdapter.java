@@ -8,7 +8,10 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,12 +24,16 @@ public class DeckAdapter extends ArrayAdapter {
     private ArrayList<Deck> decks;
     private MenuItem item;
     private LinearLayout deckTip;
+    private ImageView downArrow;
+    private Animation slide_down;
 
-    public DeckAdapter(Context context, ArrayList<Deck> decks, MenuItem item, LinearLayout deckTip) {
+    public DeckAdapter(Context context, ArrayList<Deck> decks, MenuItem item, LinearLayout deckTip,ImageView downArrow, Animation slide_down) {
         super(context, 0, decks);
         this.decks = decks;
         this.item = item;
         this.deckTip = deckTip;
+        this.downArrow = downArrow;
+        this.slide_down = slide_down;
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -100,6 +107,8 @@ public class DeckAdapter extends ArrayAdapter {
                                                 // Show the deck tip when there are no decks
                                                 if (Settings.theDeckOfDecks.isEmpty()) {
                                                     deckTip.setVisibility(View.VISIBLE);
+                                                    downArrow.setVisibility(View.VISIBLE);
+                                                    downArrow.startAnimation(slide_down);
                                                 }
 
                                                 WearTask wearTask = new WearTask(getContext(), item);
