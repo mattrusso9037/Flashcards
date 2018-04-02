@@ -1,5 +1,6 @@
 package com.matt.flashcards;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.mylibrary.Deck;
+import com.example.mylibrary.Flashcard;
 import com.woxthebox.draglistview.BoardView;
 
 import java.util.Collections;
@@ -17,8 +19,35 @@ import static com.matt.flashcards.Settings.theDeckOfDecks;
 
 public class BoardActivity extends AppCompatActivity {
 
-    private BoardView boardView;
-    private boolean changesMade;
+    protected BoardView boardView;
+    protected static boolean changesMade;
+    protected static Bundle addEditBundle;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (addEditBundle != null) {
+            int editCol = addEditBundle.getInt("editCol");
+            int editRow;
+            String sideA = addEditBundle.getString("sideA");
+            String sideB = addEditBundle.getString("sideB");
+
+            if (addEditBundle.getBoolean("editMode")) {
+                editRow = addEditBundle.getInt("editRow");
+                Flashcard f = (Flashcard) boardView.getAdapter(editCol).getItemList().get(editRow);
+                f.setSideA(sideA);
+                f.setSideB(sideB);
+            } else {
+                editRow = boardView.getItemCount(editCol);
+                boardView.addItem(editCol, editRow, new Flashcard(sideA, sideB), false);
+            }
+
+            boardView.getAdapter(editCol).notifyDataSetChanged();
+            boardView.scrollToItem(editCol, editRow, true);
+            changesMade = true;
+            addEditBundle = null;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +79,8 @@ public class BoardActivity extends AppCompatActivity {
 
             @Override
             public void onFocusedColumnChanged(int oldColumn, int newColumn) {
-                boardView.getHeaderView(oldColumn).findViewById(R.id.column_buttons).setVisibility(View.INVISIBLE);
-                boardView.getHeaderView(newColumn).findViewById(R.id.column_buttons).setVisibility(View.VISIBLE);
+                boardView.getHeaderView(oldColumn).findViewById(R.id.column_add).setVisibility(View.INVISIBLE);
+                boardView.getHeaderView(newColumn).findViewById(R.id.column_add).setVisibility(View.VISIBLE);
             }
         });
 
@@ -65,7 +94,19 @@ public class BoardActivity extends AppCompatActivity {
 
             ((TextView) header.findViewById(R.id.column_text)).setText(theDeckOfDecks.get(i).getTitle());
 
-            header.findViewById(R.id.column_left).setOnClickListener(new View.OnClickListener() {
+            header.findViewById(R.id.column_add).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    addEditBundle = new Bundle();
+                    addEditBundle.putBoolean("editMode", false);
+                    addEditBundle.putInt("editCol", boardView.getFocusedColumn());
+                    BoardActivity.this.startActivity(new Intent(BoardActivity.this, AddEditActivity.class)
+                            .putExtra("EditMode", false)
+                            .putExtra("BoardMode", true));
+                }
+            });
+
+            /*header.findViewById(R.id.column_left).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     moveDeckLeft();
@@ -77,7 +118,7 @@ public class BoardActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     moveDeckRight();
                 }
-            });
+            });*/
 
             boardView.addColumnList(adapter, header, false);
             recyclerView = boardView.getRecyclerView(i);
@@ -95,6 +136,7 @@ public class BoardActivity extends AppCompatActivity {
         super.onPause();
         if (changesMade) {
             Settings.saveData(this);
+            changesMade = false;
         }
     }
 
