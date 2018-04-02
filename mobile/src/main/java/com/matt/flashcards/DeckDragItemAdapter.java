@@ -1,6 +1,7 @@
 package com.matt.flashcards;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,8 +55,8 @@ public class DeckDragItemAdapter extends DragItemAdapter<Deck, DeckDragItemAdapt
         @Override
         public void onItemClicked(View view) {
             super.onItemClicked(view);
-//            currentDeck.currentCardIndex = getPositionForItemId(getItemId());
-//            ((AppCompatActivity) context).onNavigateUp();
+            Deck.currentDeckIndex = getPositionForItemId(getItemId());
+            context.startActivity(new Intent(context, FlashcardActivity.class));
         }
     }
 }
