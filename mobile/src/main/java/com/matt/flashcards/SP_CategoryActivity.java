@@ -132,32 +132,12 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         // Handle navigation view item clicks here.
                         switch (item.getItemId()) {
-                            case R.id.nav_new_category:
-                                FabListener.onClick(getCurrentFocus());
-                                break;
                             case R.id.nav_shuffle:
                                 shuffleAction();
                                 break;
                             case R.id.nav_favorites:
                                 favoritesAction();
                                 break;
-//                            case R.id.nav_load_dummy_data:
-//                                new AlertDialog.Builder(SP_CategoryActivity.this)
-//                                        .setTitle(R.string.warning)
-//                                        .setMessage(R.string.confirm_overwrite_with_sample_data)
-//                                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialog, int which) {
-//                                                Settings.loadDummyData();
-//                                                Settings.saveData(SP_CategoryActivity.this);
-//                                                adapter.notifyDataSetChanged();
-//                                                deckTip.setVisibility(View.INVISIBLE);
-//                                                syncWear();
-//                                                syncToast.cancel();
-//                                            }
-//                                        }).setNegativeButton(R.string.cancel, null)
-//                                        .show();
-//                                break;
                             case R.id.nav_rearrange_flashcards:
                                 rearrangeFlashcardsAction();
                                 break;
@@ -176,6 +156,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                                 adapter.notifyDataSetChanged();
                                                 deckTip.setVisibility(View.VISIBLE);
                                                 arrow.setVisibility(View.VISIBLE);
+                                                arrow.startAnimation(slide_down);
                                                 syncWear();
                                                 syncToast.cancel();
                                             }
@@ -185,9 +166,6 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                             case sync_wear:
                                 syncWear();
                                 break;
-//                            case R.id.nav_run_tutorial:
-//                                createTutorialView();
-//                                break;
                             case R.id.nav_about:
                                 startActivity(new Intent(SP_CategoryActivity.this, AboutActivity.class));
                         }
@@ -367,7 +345,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
             @Override
             public void onClick(View v) {
                 prevButton.setEnabled(true);
-                if (++tutorialCount < 6) {
+                if (++tutorialCount < 7) {
                     tabLayout.getTabAt(tutorialCount).select();
                 }
                 runTutorial();
@@ -401,7 +379,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     }
 
     private void runTutorial() {
-        if (letsGo && tutorialCount < 5) {
+        if (letsGo && tutorialCount < 6) {
             nextButton.setText(R.string.btn_next);
             letsGo = false;
         }
@@ -424,6 +402,9 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                 break;
             case 5:
                 tutorialImage.setImageResource(R.drawable.screen_six);
+                break;
+            case 6:
+                tutorialImage.setImageResource(R.drawable.screen_seven);
                 nextButton.setText(R.string.lets_go);
                 letsGo = true;
                 break;
