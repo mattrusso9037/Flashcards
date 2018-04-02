@@ -10,12 +10,15 @@ import android.widget.TextView;
 
 import com.example.mylibrary.Flashcard;
 
+import static com.matt.flashcards.BoardActivity.addEditBundle;
 import static com.matt.flashcards.FlashcardActivity.currentDeck;
+import static com.matt.flashcards.Settings.theDeckOfDecks;
 
 public class AddEditActivity extends AppCompatActivity {
 
     private Flashcard currentCard;
     private boolean editMode;
+    private boolean boardMode;
     private TextView sideA;
     private TextView sideB;
 
@@ -30,13 +33,20 @@ public class AddEditActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         editMode = extras.getBoolean("EditMode");
+        boardMode = extras.getBoolean("BoardMode", false);
 
         // Get the textviews for both sides
         sideA = findViewById(R.id.add_edit_side_a);
         sideB = findViewById(R.id.add_edit_side_b);
 
         if (editMode) {
-            currentCard = currentDeck.get(extras.getInt("CardIndex"));
+            if (boardMode) {
+                currentCard = theDeckOfDecks
+                        .get(addEditBundle.getInt("editCol"))
+                        .get(addEditBundle.getInt("editRow"));
+            } else {
+                currentCard = currentDeck.get(extras.getInt("CardIndex"));
+            }
             sideA.setText(currentCard.getSideA());
             sideB.setText(currentCard.getSideB());
             setTitle(R.string.edit_flashcard);
@@ -69,16 +79,30 @@ public class AddEditActivity extends AppCompatActivity {
                 }
 
                 if (editMode) { // Edit the current flashcard
-                    currentCard.setSideA(a);
-                    currentCard.setSideB(b);
+                    if (boardMode) {
+                        addEditBundle.putString("sideA", a);
+                        addEditBundle.putString("sideB", b);
+                        super.onBackPressed();
+                        return true;
+                    } else {
+                        currentCard.setSideA(a);
+                        currentCard.setSideB(b);
+                    }
                 } else { // Add a new flashcard
-                    currentDeck.add(new Flashcard(
-                            sideA.getText().toString(),
-                            sideB.getText().toString()
-                    ));
+                    if (boardMode) {
+                        addEditBundle.putString("sideA", sideA.getText().toString());
+                        addEditBundle.putString("sideB", sideB.getText().toString());
+                        super.onBackPressed();
+                        return true;
+                    } else {
+                        currentDeck.add(new Flashcard(
+                                sideA.getText().toString(),
+                                sideB.getText().toString()
+                        ));
 
-                    // Set the current flashcard to the new flashcard
-                    FlashcardActivity.currentDeck.currentCardIndex = currentDeck.size() - 1;
+                        // Set the current flashcard to the new flashcard
+                        FlashcardActivity.currentDeck.currentCardIndex = currentDeck.size() - 1;
+                    }
                 }
 
                 Settings.saveData(this);
@@ -98,6 +122,7 @@ public class AddEditActivity extends AppCompatActivity {
         String a = sideA.getText().toString(), b = sideB.getText().toString();
         if (editMode && currentCard.getSideA().equals(a) && currentCard.getSideB().equals(b) ||
                 !editMode && a.isEmpty() && b.isEmpty()) {
+            addEditBundle = null;
             super.onBackPressed();
         } else {
             new AlertDialog.Builder(this)
@@ -105,6 +130,7 @@ public class AddEditActivity extends AppCompatActivity {
                     .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            addEditBundle = null;
                             AddEditActivity.super.onBackPressed();
                         }
                     }).setNegativeButton(R.string.cancel, null)

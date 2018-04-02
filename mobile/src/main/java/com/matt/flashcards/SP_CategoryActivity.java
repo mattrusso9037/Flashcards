@@ -49,6 +49,8 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     private ImageView arrow;
     private Animation slide_down;
     private boolean updateOnResume;
+    protected static boolean updateWear;
+    protected static boolean hideDeckTip;
 
     @Override
     protected void onResume() {
@@ -62,6 +64,17 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         if (updateOnResume) {
             adapter.notifyDataSetChanged();
             updateOnResume = false;
+        }
+
+        if (updateWear) {
+            WearTask wearTask = new WearTask(this, syncItem);
+            wearTask.execute();
+            updateWear = false;
+        }
+
+        if (hideDeckTip) {
+            findViewById(R.id.deck_tip).setVisibility(View.INVISIBLE);
+            hideDeckTip = false;
         }
     }
 
@@ -295,7 +308,6 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     }
 
     private void rearrangeFlashcardsAction() {
-        updateOnResume = true;
         startActivity(new Intent(this, BoardActivity.class));
     }
 
