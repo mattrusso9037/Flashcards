@@ -50,8 +50,8 @@ public class BoardActivity extends AppCompatActivity {
 
             @Override
             public void onFocusedColumnChanged(int oldColumn, int newColumn) {
-                boardView.getHeaderView(oldColumn).findViewById(R.id.column_buttons).setVisibility(View.INVISIBLE);
-                boardView.getHeaderView(newColumn).findViewById(R.id.column_buttons).setVisibility(View.VISIBLE);
+//                boardView.getHeaderView(oldColumn).findViewById(R.id.column_buttons).setVisibility(View.INVISIBLE);
+//                boardView.getHeaderView(newColumn).findViewById(R.id.column_buttons).setVisibility(View.VISIBLE);
             }
         });
 
