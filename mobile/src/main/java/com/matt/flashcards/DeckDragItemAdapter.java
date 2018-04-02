@@ -1,11 +1,15 @@
 package com.matt.flashcards;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.mylibrary.Deck;
@@ -38,18 +42,55 @@ public class DeckDragItemAdapter extends DragItemAdapter<Deck, DeckDragItemAdapt
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         super.onBindViewHolder(holder, position);
         holder.deckTextView.setText(theDeckOfDecks.get(position).getTitle());
+        holder.editDeleteLayout.setVisibility(View.VISIBLE);
+
+        holder.editView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final View inflater = LayoutInflater.from(context).inflate(R.layout.deck_dialog, null);
+                final TextView dialogName = inflater.findViewById(R.id.deck_dialog_name);
+                dialogName.setText(theDeckOfDecks.get(position).getTitle());
+                new AlertDialog.Builder(context)
+                        .setTitle(R.string.rename_deck)
+                        .setView(inflater)
+                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String deckTitle = dialogName.getText().toString();
+                                if (deckTitle.isEmpty()) {
+                                    new AlertDialog.Builder(context)
+                                            .setTitle(R.string.error)
+                                            .setMessage(R.string.error_decks_need_titles)
+                                            .setPositiveButton(R.string.ok, null)
+                                            .show();
+                                } else {
+                                    theDeckOfDecks.get(position).setTitle(dialogName.getText().toString());
+                                    notifyDataSetChanged();
+                                    Settings.saveData(context);
+                                }
+                            }
+                        }).setNegativeButton(R.string.cancel, null)
+                        .show();
+            }
+        });
     }
 
     public class ViewHolder extends DragItemAdapter.ViewHolder {
 
         public TextView deckTextView;
+        public ImageView editView;
+        public ImageView deleteView;
+        public LinearLayout editDeleteLayout;
 
         public ViewHolder(View itemView, int handleResId, boolean dragOnLongPress) {
             super(itemView, handleResId, dragOnLongPress);
             deckTextView = itemView.findViewById(R.id.flashcard_item_text);
+            editView = itemView.findViewById(R.id.flashcard_item_edit);
+            deleteView = itemView.findViewById(R.id.flashcard_item_delete);
+            editDeleteLayout = itemView.findViewById(R.id.flashcard_item_actions);
         }
 
         @Override
