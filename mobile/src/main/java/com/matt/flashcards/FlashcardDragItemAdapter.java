@@ -1,8 +1,10 @@
 package com.matt.flashcards;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,7 +76,17 @@ public class FlashcardDragItemAdapter extends DragItemAdapter<Flashcard, Flashca
             holder.deleteView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new DebugToast(context, "Delete Clicked: " + position);
+                    new AlertDialog.Builder(context)
+                            .setTitle(R.string.confirm_delete)
+                            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    flashcardList.remove(position);
+                                    notifyDataSetChanged();
+                                    ((FlashcardDragListViewActivity) context).changesMade = true;
+                                }
+                            }).setNegativeButton(R.string.cancel, null)
+                            .show();
                 }
             });
         }

@@ -17,9 +17,9 @@ import static com.matt.flashcards.FlashcardActivity.currentDeck;
 
 public class FlashcardDragListViewActivity extends AppCompatActivity {
 
-    private boolean changesMade;
-    private DragItemAdapter adapter;
+    protected boolean changesMade;
     protected boolean updateOnResume;
+    private DragItemAdapter adapter;
 
     @Override
     protected void onResume() {
