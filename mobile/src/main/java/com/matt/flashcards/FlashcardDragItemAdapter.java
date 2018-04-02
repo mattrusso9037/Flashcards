@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.mylibrary.Flashcard;
+import com.woxthebox.draglistview.BoardView;
 import com.woxthebox.draglistview.DragItemAdapter;
 
 import java.util.List;
@@ -24,18 +25,10 @@ public class FlashcardDragItemAdapter extends DragItemAdapter<Flashcard, Flashca
 
     private Context context;
     private List<Flashcard> flashcardList;
-    private boolean showEditDeleteButtons;
 
     public FlashcardDragItemAdapter(Context context, List<Flashcard> flashcardList) {
         this.context = context;
         this.flashcardList = flashcardList;
-        setItemList(flashcardList);
-    }
-
-    public FlashcardDragItemAdapter(Context context, List<Flashcard> flashcardList, boolean showEditDeleteButtons) {
-        this.context = context;
-        this.flashcardList = flashcardList;
-        this.showEditDeleteButtons = showEditDeleteButtons;
         setItemList(flashcardList);
     }
 
@@ -58,7 +51,7 @@ public class FlashcardDragItemAdapter extends DragItemAdapter<Flashcard, Flashca
         super.onBindViewHolder(holder, position);
         holder.flashcardTextView.setText(flashcardList.get(position).getSideA());
 
-        if (showEditDeleteButtons) {
+        if (context instanceof FlashcardDragListViewActivity) {
 
             holder.editDeleteLayout.setVisibility(View.VISIBLE);
 
@@ -89,11 +82,21 @@ public class FlashcardDragItemAdapter extends DragItemAdapter<Flashcard, Flashca
                             .show();
                 }
             });
+        } else if (context instanceof BoardActivity){
+            final BoardView boardView = ((BoardActivity) context).boardView;
+
+            holder.flashcardItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new DebugToast(context, "Col: " + boardView.getFocusedColumn() + " | Row: " + position);
+                }
+            });
         }
     }
 
     public class ViewHolder extends DragItemAdapter.ViewHolder {
 
+        public LinearLayout flashcardItem;
         public TextView flashcardTextView;
         public ImageView editView;
         public ImageView deleteView;
@@ -101,6 +104,7 @@ public class FlashcardDragItemAdapter extends DragItemAdapter<Flashcard, Flashca
 
         public ViewHolder(View itemView, int handleResId, boolean dragOnLongPress) {
             super(itemView, handleResId, dragOnLongPress);
+            flashcardItem = itemView.findViewById(R.id.flashcard_item);
             flashcardTextView = itemView.findViewById(R.id.flashcard_item_text);
             editView = itemView.findViewById(R.id.flashcard_item_edit);
             deleteView = itemView.findViewById(R.id.flashcard_item_delete);

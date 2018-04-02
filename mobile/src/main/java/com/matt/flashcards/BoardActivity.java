@@ -17,7 +17,7 @@ import static com.matt.flashcards.Settings.theDeckOfDecks;
 
 public class BoardActivity extends AppCompatActivity {
 
-    private BoardView boardView;
+    protected BoardView boardView;
     private boolean changesMade;
 
     @Override
