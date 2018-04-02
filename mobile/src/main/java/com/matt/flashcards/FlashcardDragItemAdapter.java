@@ -89,6 +89,22 @@ public class FlashcardDragItemAdapter extends DragItemAdapter<Flashcard, Flashca
                     new DebugToast(context, "Col: " + boardView.getFocusedColumn() + " | Row: " + position);
                 }
             });
+
+            holder.editView.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    new DebugToast(context, "Edit | Col: " + boardView.getFocusedColumn() + " | Row: " + position);
+                }
+            });
+
+            holder.deleteView.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    new DebugToast(context, "Delete| Col: " + boardView.getFocusedColumn() + " | Row: " + position);
+                }
+            });
         }
     }
 
