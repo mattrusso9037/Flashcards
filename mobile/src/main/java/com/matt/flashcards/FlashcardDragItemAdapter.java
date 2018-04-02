@@ -1,6 +1,7 @@
 package com.matt.flashcards;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -62,7 +63,11 @@ public class FlashcardDragItemAdapter extends DragItemAdapter<Flashcard, Flashca
             holder.editView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new DebugToast(context, "Edit Clicked: " + position);
+                    ((FlashcardDragListViewActivity) context).updateOnResume = true;
+                    context.startActivity(
+                            new Intent(context, AddEditActivity.class)
+                            .putExtra("EditMode", true)
+                            .putExtra("CardIndex", position));
                 }
             });
 
