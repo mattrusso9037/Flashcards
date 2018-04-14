@@ -35,6 +35,7 @@ public class FlashcardDragListViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flashcard_drag_list_view);
+        Settings.loadData(this);
         setTitle(currentDeck.getTitle());
 
         dragListView = findViewById(R.id.flashcard_drag_list_view);

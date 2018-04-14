@@ -53,6 +53,7 @@ public class BoardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board);
+        Settings.loadData(this);
 
         boardView = findViewById(R.id.board_view);
         boardView.setSnapToColumnsWhenScrolling(true);
