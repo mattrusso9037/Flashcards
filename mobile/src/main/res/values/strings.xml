@@ -105,4 +105,5 @@
     <string name="rearrange_flashcards">Rearrange Flashcards</string>
     <string name="rearrange_decks">Rearrange Decks</string>
     <string name="confirm_favorite_remove">Are you sure you want to remove this from your favorites?</string>
+    <string name="error_no_decks">There\'s no decks to shuffle</string>
 </resources>

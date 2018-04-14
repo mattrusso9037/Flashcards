@@ -246,38 +246,57 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     }
 
     private void shuffleAction() {
-        final boolean[] checkedItems = new boolean[Settings.theDeckOfDecks.size()];
-        new AlertDialog.Builder(SP_CategoryActivity.this)
-                .setTitle(R.string.shuffle_mode)
-                .setMultiChoiceItems(Settings.getAllDeckTitles(), checkedItems,
-                        // checkedItems won't update properly without this
-                        new DialogInterface.OnMultiChoiceClickListener() {
+        switch (Settings.theDeckOfDecks.size()) {
+            case 0:
+                new AlertDialog.Builder(SP_CategoryActivity.this)
+                        .setTitle(R.string.error)
+                        .setMessage(R.string.error_no_decks)
+                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which, boolean isChecked) {}
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
                         })
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Settings.generateShuffledDeck(checkedItems);
-                        startActivity(
-                                new Intent(SP_CategoryActivity.this, FlashcardActivity.class)
+                        .show();
+                break;
+            case 1:
+                Settings.generateShuffledDeck(new boolean[]{true});
+                startActivity(new Intent(SP_CategoryActivity.this, FlashcardActivity.class)
+                                .putExtra("shuffleMode", true));
+                break;
+            default:
+                final boolean[] checkedItems = new boolean[Settings.theDeckOfDecks.size()];
+                new AlertDialog.Builder(SP_CategoryActivity.this)
+                        .setTitle(R.string.shuffle_mode)
+                        // checkedItems won't update properly without this
+                        .setMultiChoiceItems(Settings.getAllDeckTitles(), checkedItems,
+                                new DialogInterface.OnMultiChoiceClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {}
+                                })
+                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Settings.generateShuffledDeck(checkedItems);
+                                startActivity(new Intent(SP_CategoryActivity.this, FlashcardActivity.class)
                                         .putExtra("shuffleMode", true));
-                    }
-                })
-                .setNeutralButton(R.string.select_all, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        for (int i = 0; i < checkedItems.length; i++) {
-                            checkedItems[i] = true;
-                        }
-                        Settings.generateShuffledDeck(checkedItems);
-                        startActivity(
-                                new Intent(SP_CategoryActivity.this, FlashcardActivity.class)
-                                        .putExtra("shuffleMode", true));
-                    }
-                })
-                .setNegativeButton(R.string.cancel, null)
-                .show();
+                            }
+                        })
+                        .setNeutralButton(R.string.select_all, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                for (int i = 0; i < checkedItems.length; i++) {
+                                    checkedItems[i] = true;
+                                }
+                                Settings.generateShuffledDeck(checkedItems);
+                                startActivity(
+                                        new Intent(SP_CategoryActivity.this, FlashcardActivity.class)
+                                                .putExtra("shuffleMode", true));
+                            }
+                        })
+                        .setNegativeButton(R.string.cancel, null)
+                        .show();
+        }
     }
 
     private void favoritesAction() {
