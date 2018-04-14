@@ -3,21 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
+    <!--<item-->
+        <!--android:id="@+id/nav_new_category"-->
+        <!--android:title="@string/nav_new_deck" />-->
     <item
-        android:id="@+id/nav_new_category"
-        android:title="@string/nav_new_deck" />
-
+        android:id="@+id/nav_favorites"
+        android:title="@string/favorites" />
     <item
         android:id="@+id/nav_shuffle"
         android:title="@string/shuffle" />
 
-    <item
-        android:id="@+id/nav_favorites"
-        android:title="@string/favorites" />
 
-    <item
-        android:id="@+id/nav_load_dummy_data"
-        android:title="@string/load_sample_data" />
+
+    <!--<item-->
+        <!--android:id="@+id/nav_load_dummy_data"-->
+        <!--android:title="@string/load_sample_data" />-->
 
     <item
         android:id="@+id/nav_rearrange_flashcards"
@@ -31,16 +31,11 @@
         android:id="@+id/nav_clear_data"
         android:title="@string/nav_delete_all_decks" />
 
-    <item
-        android:id="@+id/nav_run_tutorial"
-        android:title="@string/nav_tutorial" />
 
     <item
         android:id="@+id/nav_about"
         android:title="@string/nav_about" />
-
     <item
         android:id="@+id/sync_wear"
         android:title="@string/nav_sync_with_wear" />
-
 </menu>
