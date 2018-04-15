@@ -4,15 +4,14 @@
     <translate
         android:duration="500"
         android:fromYDelta="0"
-        android:toYDelta="5%"
         android:repeatCount="infinite"
         android:repeatMode="reverse"
-        />
+        android:toYDelta="5%" />
+
     <translate
         android:duration="500"
-        android:toYDelta="0"
-        android:repeatCount="infinite"
         android:fillAfter="true"
+        android:repeatCount="infinite"
+        android:toYDelta="0" />
 
-        />
 </set>

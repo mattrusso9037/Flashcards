@@ -1,7 +1,10 @@
 package com.matt.flashcards;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.mylibrary.Deck;
@@ -19,6 +22,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import static android.content.Context.CLIPBOARD_SERVICE;
+
 public final class Settings {
 
     private Settings() {} // Prevent instantiation of this class
@@ -28,13 +33,15 @@ public final class Settings {
     public static Deck shuffledDeck;
     public final static Deck favoritesDeck = new Deck("Favorites");
 
-    public static boolean isFirstRun = false;
-    private static boolean dataLoaded = false;
+    public static boolean isFirstRun;
+    public static boolean debugMode;
+    private static boolean dataLoaded;
 
     private final static String SIDE_A_KEY = "SideA";
     private final static String SIDE_B_KEY = "SideB";
     private final static String FAVORITE_KEY = "Favorite";
     private final static String DECK_KEY = "Decks";
+    private final static String DEBUG_KEY = "DebugMode";
     private final static String DECK_TITLE_KEY = "Title";
     private final static String DECK_FLASHCARDS_KEY = "Flashcards";
     private final static String FILE_NAME = "Settings.json";
@@ -132,10 +139,27 @@ public final class Settings {
         theDeckOfDecks.add(java);
     }
 
-    public static void loadData(Context context) {
+    public static void loadData(final Context context) {
         // Make sure the data is only read in once from the file
         if (dataLoaded) return;
         dataLoaded = true;
+
+        // Override Android's default crash behavior when in Debug Mode; put the error message in the clipboard
+        // https://stackoverflow.com/questions/46070393/replacing-default-uncaught-exception-handler-to-avoid-crash-dialog
+        final Thread.UncaughtExceptionHandler defaultHandler = Thread.getDefaultUncaughtExceptionHandler();
+        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException(Thread t, Throwable ex) {
+                try {
+                    if (debugMode) {
+                        ((ClipboardManager) context.getSystemService(CLIPBOARD_SERVICE)).setPrimaryClip(
+                                ClipData.newPlainText("Flashcards", Log.getStackTraceString(ex)));
+                    }
+                } finally {
+                    defaultHandler.uncaughtException(t, ex);
+                }
+            }
+        });
 
         try {
             // Get ready to read in the JSON data
@@ -148,6 +172,13 @@ public final class Settings {
 
             // Get the array of decks from the settings
             JSONArray JSONAllDecks = JSONSettings.getJSONArray(DECK_KEY);
+
+            // Get the setting for Debug Mode
+            try {
+                debugMode = JSONSettings.getBoolean(DEBUG_KEY);
+            } catch (JSONException e) {
+                // Debug Mode is false by default, so no need to set it
+            }
 
             for (int i = 0; i < JSONAllDecks.length(); i++) {
                 // Get a deck from the array of decks
@@ -171,7 +202,9 @@ public final class Settings {
 
                     try {
                         f.setFavorite(JSONFlashcard.getBoolean(FAVORITE_KEY));
-                    } catch (JSONException e) {}
+                    } catch (JSONException e) {
+                        // Favorite attribute is false by default, so no need to set it
+                    }
 
                     deck.add(f);
 
@@ -196,6 +229,10 @@ public final class Settings {
     }
 
     public static void saveData(Context context) {
+        saveData(context, true);
+    }
+
+    public static void saveData(Context context, boolean showSaveToast) {
         JSONObject JSONSettings = new JSONObject();
         JSONArray JSONAllDecks = new JSONArray();
 
@@ -222,6 +259,9 @@ public final class Settings {
             // Adds the array of decks to the settings
             JSONSettings.put(DECK_KEY, JSONAllDecks);
 
+            // Adds Debug Mode to the settings
+            JSONSettings.put(DEBUG_KEY, debugMode);
+
             // Save the JSON data to the file
             FileOutputStream outputStream = context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
             outputStream.write(JSONSettings.toString().getBytes()); // Convert to binary and write
@@ -235,7 +275,10 @@ public final class Settings {
                     .show();
             return;
         }
-        Toast.makeText(context, R.string.successful_save, Toast.LENGTH_SHORT).show();
+
+        if (showSaveToast) {
+            Toast.makeText(context, R.string.successful_save, Toast.LENGTH_SHORT).show();
+        }
     }
 
     public static String[] getAllDeckTitles() {

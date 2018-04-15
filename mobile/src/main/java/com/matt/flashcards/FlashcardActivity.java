@@ -27,10 +27,10 @@ import com.example.mylibrary.Flashcard;
 
 public class FlashcardActivity extends AppCompatActivity {
 
-    private boolean isFullscreen = false;
-    private boolean shuffleMode = false;
-    private boolean favoriteMode = false;
-    private boolean updateOnResume = false;
+    private boolean isFullscreen;
+    private boolean shuffleMode;
+    private boolean favoriteMode;
+    private boolean updateOnResume;
     private boolean changesMade;
     private ViewPager viewPager;
     private FlashcardFragmentPageAdapter pageAdapter;
