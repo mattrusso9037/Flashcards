@@ -16,6 +16,7 @@ public class AboutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+        Settings.loadData(this);
         currentToast = new Toast(AboutActivity.this);
 
         // TODO Add these strings to the strings.xml file
@@ -40,6 +41,7 @@ public class AboutActivity extends AppCompatActivity {
                             "Debug mode " + (debugMode ? "enabled" : "disabled"),
                             Toast.LENGTH_SHORT
                     ).show();
+                    Settings.saveData(AboutActivity.this, false);
                     clicks = 0;
                 }
             }
