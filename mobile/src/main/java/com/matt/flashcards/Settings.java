@@ -1,7 +1,10 @@
 package com.matt.flashcards;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.mylibrary.Deck;
@@ -18,6 +21,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
+
+import static android.content.Context.CLIPBOARD_SERVICE;
 
 public final class Settings {
 
@@ -134,10 +139,27 @@ public final class Settings {
         theDeckOfDecks.add(java);
     }
 
-    public static void loadData(Context context) {
+    public static void loadData(final Context context) {
         // Make sure the data is only read in once from the file
         if (dataLoaded) return;
         dataLoaded = true;
+
+        // Override Android's default crash behavior when in Debug Mode; put the error message in the clipboard
+        // https://stackoverflow.com/questions/46070393/replacing-default-uncaught-exception-handler-to-avoid-crash-dialog
+        final Thread.UncaughtExceptionHandler defaultHandler = Thread.getDefaultUncaughtExceptionHandler();
+        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException(Thread t, Throwable ex) {
+                try {
+                    if (debugMode) {
+                        ((ClipboardManager) context.getSystemService(CLIPBOARD_SERVICE)).setPrimaryClip(
+                                ClipData.newPlainText("Flashcards", Log.getStackTraceString(ex)));
+                    }
+                } finally {
+                    defaultHandler.uncaughtException(t, ex);
+                }
+            }
+        });
 
         try {
             // Get ready to read in the JSON data
