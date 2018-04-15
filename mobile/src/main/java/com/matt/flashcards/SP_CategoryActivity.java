@@ -48,6 +48,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     private LinearLayout deckTip;
     private ImageView arrow;
     private Animation slide_down;
+    private NavigationView navView;
     private boolean updateOnResume;
     protected static boolean updateWear;
     protected static boolean hideDeckTip;
@@ -83,7 +84,8 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sp_category);
 
-        syncItem = ((NavigationView) findViewById(R.id.nav_view)).getMenu().findItem(R.id.sync_wear);
+        navView = findViewById(R.id.nav_view);
+        syncItem = navView.getMenu().findItem(R.id.sync_wear);
         syncToast = syncToast.makeText(this, getResources().getString(R.string.synced), Toast.LENGTH_SHORT);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -107,6 +109,9 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
             isFirstRun = false;
         }
 
+        // Show the 'Load Sample Data' menu item when debugMode is true
+        navView.getMenu().findItem(R.id.nav_load_dummy_data).setVisible(Settings.debugMode);
+
         adapter = new DeckAdapter(this, Settings.theDeckOfDecks, syncItem, deckTip, arrow, slide_down);
         ((GridView) findViewById(R.id.grd_mp_category)).setAdapter(adapter);
 
@@ -125,7 +130,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         // *
 
         // Events for the drawer items
-        ((NavigationView) findViewById(R.id.nav_view)).setNavigationItemSelectedListener(
+        navView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
 
                     @Override
@@ -137,6 +142,23 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                 break;
                             case R.id.nav_favorites:
                                 favoritesAction();
+                                break;
+                            case R.id.nav_load_dummy_data:
+                                new AlertDialog.Builder(SP_CategoryActivity.this)
+                                        .setTitle(R.string.warning)
+                                        .setMessage(R.string.confirm_overwrite_with_sample_data)
+                                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                Settings.loadDummyData();
+                                                Settings.saveData(SP_CategoryActivity.this);
+                                                adapter.notifyDataSetChanged();
+                                                deckTip.setVisibility(View.INVISIBLE);
+                                                syncWear();
+                                                syncToast.cancel();
+                                            }
+                                        }).setNegativeButton(R.string.cancel, null)
+                                        .show();
                                 break;
                             case R.id.nav_rearrange_flashcards:
                                 rearrangeFlashcardsAction();

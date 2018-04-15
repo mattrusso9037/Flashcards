@@ -13,11 +13,10 @@
         android:id="@+id/nav_shuffle"
         android:title="@string/shuffle" />
 
-
-
-    <!--<item-->
-        <!--android:id="@+id/nav_load_dummy_data"-->
-        <!--android:title="@string/load_sample_data" />-->
+    <item
+        android:id="@+id/nav_load_dummy_data"
+        android:visible="false"
+        android:title="@string/load_sample_data" />
 
     <item
         android:id="@+id/nav_rearrange_flashcards"
