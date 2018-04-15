@@ -19,6 +19,7 @@ public class FlashcardDragListViewActivity extends AppCompatActivity {
 
     protected boolean changesMade;
     protected boolean updateOnResume;
+    protected DragListView dragListView;
     private DragItemAdapter adapter;
 
     @Override
@@ -34,9 +35,10 @@ public class FlashcardDragListViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flashcard_drag_list_view);
+        Settings.loadData(this);
         setTitle(currentDeck.getTitle());
 
-        DragListView dragListView = findViewById(R.id.flashcard_drag_list_view);
+        dragListView = findViewById(R.id.flashcard_drag_list_view);
         adapter = new FlashcardDragItemAdapter(this, currentDeck);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         RecyclerView recyclerView = dragListView.getRecyclerView();
@@ -83,7 +85,7 @@ public class FlashcardDragListViewActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_new_card_list_view:
-//                updateOnResume = true;
+                updateOnResume = true;
                 startActivity(new Intent(this, AddEditActivity.class)
                         .putExtra("EditMode", false));
             default:

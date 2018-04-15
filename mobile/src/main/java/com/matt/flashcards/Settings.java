@@ -264,4 +264,13 @@ public final class Settings {
         // Shuffle the deck
         Collections.shuffle(shuffledDeck);
     }
+
+    public static boolean areThereFlashcards() {
+        for (Deck d : theDeckOfDecks) {
+            if (!d.isEmpty()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
