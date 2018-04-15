@@ -29,6 +29,7 @@ public final class Settings {
     public final static Deck favoritesDeck = new Deck("Favorites");
 
     public static boolean isFirstRun = false;
+    public static boolean debugMode = false;
     private static boolean dataLoaded = false;
 
     private final static String SIDE_A_KEY = "SideA";
