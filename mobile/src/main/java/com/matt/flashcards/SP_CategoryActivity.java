@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.example.mylibrary.Deck;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+
 import static com.matt.flashcards.R.id.sync_wear;
 import static com.matt.flashcards.Settings.isFirstRun;
 
@@ -48,7 +49,6 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     private LinearLayout deckTip;
     private ImageView arrow;
     private Animation slide_down;
-    private NavigationView navView;
     private boolean updateOnResume;
     protected static boolean updateWear;
     protected static boolean hideDeckTip;
@@ -84,9 +84,9 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sp_category);
 
-        navView = findViewById(R.id.nav_view);
+        NavigationView navView = findViewById(R.id.nav_view);
         syncItem = navView.getMenu().findItem(R.id.sync_wear);
-        syncToast = syncToast.makeText(this, getResources().getString(R.string.synced), Toast.LENGTH_SHORT);
+        syncToast = Toast.makeText(this, R.string.synced, Toast.LENGTH_SHORT);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -344,7 +344,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     }
 
     @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Log.i("wear", "connection failed");
     }
 

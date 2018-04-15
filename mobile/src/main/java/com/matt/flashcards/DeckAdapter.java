@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -52,7 +51,6 @@ public class DeckAdapter extends ArrayAdapter {
             @Override
             public void onClick(View v) {
                 Deck.currentDeckIndex = position;
-//                getContext().startActivity(new Intent(getContext(), SP_FlashcardViewerActivity.class));
                 getContext().startActivity(new Intent(getContext(), FlashcardActivity.class));
             }
         });

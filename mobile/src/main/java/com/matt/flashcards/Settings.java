@@ -33,9 +33,9 @@ public final class Settings {
     public static Deck shuffledDeck;
     public final static Deck favoritesDeck = new Deck("Favorites");
 
-    public static boolean isFirstRun = false;
-    public static boolean debugMode = false;
-    private static boolean dataLoaded = false;
+    public static boolean isFirstRun;
+    public static boolean debugMode;
+    private static boolean dataLoaded;
 
     private final static String SIDE_A_KEY = "SideA";
     private final static String SIDE_B_KEY = "SideB";
@@ -202,7 +202,9 @@ public final class Settings {
 
                     try {
                         f.setFavorite(JSONFlashcard.getBoolean(FAVORITE_KEY));
-                    } catch (JSONException e) {}
+                    } catch (JSONException e) {
+                        // Favorite attribute is false by default, so no need to set it
+                    }
 
                     deck.add(f);
 
