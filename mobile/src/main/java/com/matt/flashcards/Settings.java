@@ -205,6 +205,10 @@ public final class Settings {
     }
 
     public static void saveData(Context context) {
+        saveData(context, true);
+    }
+
+    public static void saveData(Context context, boolean showSaveToast) {
         JSONObject JSONSettings = new JSONObject();
         JSONArray JSONAllDecks = new JSONArray();
 
@@ -247,7 +251,10 @@ public final class Settings {
                     .show();
             return;
         }
-        Toast.makeText(context, R.string.successful_save, Toast.LENGTH_SHORT).show();
+
+        if (showSaveToast) {
+            Toast.makeText(context, R.string.successful_save, Toast.LENGTH_SHORT).show();
+        }
     }
 
     public static String[] getAllDeckTitles() {
