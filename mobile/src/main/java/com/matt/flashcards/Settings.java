@@ -36,6 +36,7 @@ public final class Settings {
     private final static String SIDE_B_KEY = "SideB";
     private final static String FAVORITE_KEY = "Favorite";
     private final static String DECK_KEY = "Decks";
+    private final static String DEBUG_KEY = "DebugMode";
     private final static String DECK_TITLE_KEY = "Title";
     private final static String DECK_FLASHCARDS_KEY = "Flashcards";
     private final static String FILE_NAME = "Settings.json";
@@ -150,6 +151,13 @@ public final class Settings {
             // Get the array of decks from the settings
             JSONArray JSONAllDecks = JSONSettings.getJSONArray(DECK_KEY);
 
+            // Get the setting for Debug Mode
+            try {
+                debugMode = JSONSettings.getBoolean(DEBUG_KEY);
+            } catch (JSONException e) {
+                // Debug Mode is false by default, so no need to set it
+            }
+
             for (int i = 0; i < JSONAllDecks.length(); i++) {
                 // Get a deck from the array of decks
                 JSONObject JSONDeck = (JSONObject) JSONAllDecks.get(i);
@@ -222,6 +230,9 @@ public final class Settings {
 
             // Adds the array of decks to the settings
             JSONSettings.put(DECK_KEY, JSONAllDecks);
+
+            // Adds Debug Mode to the settings
+            JSONSettings.put(DEBUG_KEY, debugMode);
 
             // Save the JSON data to the file
             FileOutputStream outputStream = context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
