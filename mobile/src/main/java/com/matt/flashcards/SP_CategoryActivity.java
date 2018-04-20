@@ -78,6 +78,8 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
 
         if (hideDeckTip) {
             findViewById(R.id.deck_tip).setVisibility(View.INVISIBLE);
+            arrow.setVisibility(View.INVISIBLE);
+            arrow.clearAnimation();
             hideDeckTip = false;
         }
     }
@@ -159,6 +161,8 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                                 Settings.saveData(SP_CategoryActivity.this);
                                                 adapter.notifyDataSetChanged();
                                                 deckTip.setVisibility(View.INVISIBLE);
+                                                arrow.setVisibility(View.INVISIBLE);
+                                                arrow.clearAnimation();
                                                 syncWear();
                                                 syncToast.cancel();
                                             }
