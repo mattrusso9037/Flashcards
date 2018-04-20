@@ -215,31 +215,22 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                                             .setPositiveButton(R.string.ok, null)
                                                             .show();
                                                 } else {
-                                                    new AlertDialog.Builder(SP_CategoryActivity.this)
-                                                            .setTitle(R.string.warning)
-                                                            .setMessage(R.string.confirm_data_overwrite)
-                                                            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                                                                @Override
-                                                                public void onClick(DialogInterface dialog, int which) {
-                                                                    try {
-                                                                        Settings.convertJSONToData(dialogName.getText().toString());
-                                                                        Settings.saveData(SP_CategoryActivity.this, false);
-                                                                        adapter.notifyDataSetChanged();
-                                                                        deckTip.setVisibility(View.INVISIBLE);
-                                                                        arrow.setVisibility(View.INVISIBLE);
-                                                                        arrow.clearAnimation();
-                                                                        syncWear();
-                                                                        syncToast.cancel();
-                                                                    } catch (JSONException e) {
-                                                                        new AlertDialog.Builder(SP_CategoryActivity.this)
-                                                                                .setTitle(R.string.error)
-                                                                                .setMessage(R.string.cant_load_data)
-                                                                                .setPositiveButton(R.string.ok, null)
-                                                                                .show();
-                                                                    }
-                                                                }
-                                                            }).setNegativeButton(R.string.cancel, null)
-                                                            .show();
+                                                    try {
+                                                        Settings.convertJSONToData(dialogName.getText().toString());
+                                                        Settings.saveData(SP_CategoryActivity.this, false);
+                                                        adapter.notifyDataSetChanged();
+                                                        deckTip.setVisibility(View.INVISIBLE);
+                                                        arrow.setVisibility(View.INVISIBLE);
+                                                        arrow.clearAnimation();
+                                                        syncWear();
+                                                        syncToast.cancel();
+                                                    } catch (JSONException e) {
+                                                        new AlertDialog.Builder(SP_CategoryActivity.this)
+                                                                .setTitle(R.string.error)
+                                                                .setMessage(R.string.cant_load_data)
+                                                                .setPositiveButton(R.string.ok, null)
+                                                                .show();
+                                                    }
                                                 }
                                                 drawer.closeDrawer(GravityCompat.START, true);
                                             }

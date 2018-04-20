@@ -108,7 +108,6 @@
     <string name="confirm_favorite_remove">Are you sure you want to remove this from your favorites?</string>
     <string name="import_settings">Import Settings</string>
     <string name="export_settings_to_clipboard">Export Settings to Clipboard</string>
-    <string name="confirm_data_overwrite">This will overwrite all data. Are you sure you wish to continue?</string>
     <string name="successful_copy">Settings copied successfully</string>
     <string name="json_data">JSON Data</string>
 </resources>
