@@ -14,6 +14,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +30,8 @@ import android.widget.Toast;
 import com.example.mylibrary.Deck;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+
+import org.json.JSONException;
 
 import static com.matt.flashcards.R.id.sync_wear;
 import static com.matt.flashcards.Settings.isFirstRun;
@@ -109,8 +112,10 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
             isFirstRun = false;
         }
 
-        // Show the 'Load Sample Data' menu item when debugMode is true
+        // When debugMode is true, show menu items that are normally hidden
         navView.getMenu().findItem(R.id.nav_load_dummy_data).setVisible(Settings.debugMode);
+        navView.getMenu().findItem(R.id.nav_import).setVisible(Settings.debugMode);
+        navView.getMenu().findItem(R.id.nav_export).setVisible(Settings.debugMode);
 
         adapter = new DeckAdapter(this, Settings.theDeckOfDecks, syncItem, deckTip, arrow, slide_down);
         ((GridView) findViewById(R.id.grd_mp_category)).setAdapter(adapter);
@@ -190,6 +195,69 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                 break;
                             case R.id.nav_about:
                                 startActivity(new Intent(SP_CategoryActivity.this, AboutActivity.class));
+                                break;
+                            case R.id.nav_import:
+                                final View inflater = LayoutInflater.from(SP_CategoryActivity.this)
+                                        .inflate(R.layout.deck_dialog, null);
+                                final TextView dialogName = inflater.findViewById(R.id.deck_dialog_name);
+                                dialogName.setHint(R.string.json_data);
+                                new AlertDialog.Builder(SP_CategoryActivity.this)
+                                        .setTitle(R.string.import_settings)
+                                        .setView(inflater)
+                                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                String deckTitle = dialogName.getText().toString();
+                                                if (deckTitle.isEmpty()) {
+                                                    new AlertDialog.Builder(SP_CategoryActivity.this)
+                                                            .setTitle(R.string.error)
+                                                            .setMessage(R.string.error_decks_need_titles)
+                                                            .setPositiveButton(R.string.ok, null)
+                                                            .show();
+                                                } else {
+                                                    new AlertDialog.Builder(SP_CategoryActivity.this)
+                                                            .setTitle(R.string.warning)
+                                                            .setMessage(R.string.confirm_data_overwrite)
+                                                            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                    try {
+                                                                        Settings.convertJSONToData(dialogName.getText().toString());
+                                                                        Settings.saveData(SP_CategoryActivity.this, false);
+                                                                        adapter.notifyDataSetChanged();
+                                                                        deckTip.setVisibility(View.INVISIBLE);
+                                                                        arrow.setVisibility(View.INVISIBLE);
+                                                                        arrow.clearAnimation();
+                                                                        syncWear();
+                                                                        syncToast.cancel();
+                                                                    } catch (JSONException e) {
+                                                                        new AlertDialog.Builder(SP_CategoryActivity.this)
+                                                                                .setTitle(R.string.error)
+                                                                                .setMessage(R.string.cant_load_data)
+                                                                                .setPositiveButton(R.string.ok, null)
+                                                                                .show();
+                                                                    }
+                                                                }
+                                                            }).setNegativeButton(R.string.cancel, null)
+                                                            .show();
+                                                }
+                                                drawer.closeDrawer(GravityCompat.START, true);
+                                            }
+                                        }).setNegativeButton(R.string.cancel, null)
+                                        .show();
+                                break;
+                            case R.id.nav_export:
+                                try {
+                                    Settings.saveDataToClipboard(SP_CategoryActivity.this);
+                                    Toast.makeText(SP_CategoryActivity.this, R.string.successful_copy, Toast.LENGTH_SHORT).show();
+                                } catch (JSONException e) {
+                                    new AlertDialog.Builder(SP_CategoryActivity.this)
+                                            .setTitle(R.string.error)
+                                            .setMessage(R.string.cant_save_data)
+                                            .setPositiveButton(R.string.ok, null)
+                                            .show();
+                                }
+                                drawer.closeDrawer(GravityCompat.START, true);
                         }
                         return true;
                     }

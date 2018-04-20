@@ -254,6 +254,11 @@ public final class Settings {
         }
     }
 
+    public static void saveDataToClipboard(Context context) throws JSONException {
+        ((ClipboardManager) context.getSystemService(CLIPBOARD_SERVICE)).setPrimaryClip(
+                ClipData.newPlainText("Flashcards", convertDataToJSON()));
+    }
+
     /**
      * This method takes all the data and converts it into a JSON string.
      * Used in the saveData() method.

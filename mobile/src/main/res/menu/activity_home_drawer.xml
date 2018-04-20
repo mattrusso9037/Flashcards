@@ -34,4 +34,14 @@
     <item
         android:id="@+id/sync_wear"
         android:title="@string/nav_sync_with_wear" />
+
+    <item
+        android:id="@+id/nav_import"
+        android:title="@string/import_settings"
+        android:visible="false" />
+
+    <item
+        android:id="@+id/nav_export"
+        android:title="@string/export_settings_to_clipboard"
+        android:visible="false" />
 </menu>
