@@ -1,15 +1,14 @@
 package com.matt.flashcards;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.mylibrary.Deck;
 import com.woxthebox.draglistview.DragItemAdapter;
 import com.woxthebox.draglistview.DragListView;
 
@@ -19,12 +18,13 @@ public class FlashcardDragListViewActivity extends AppCompatActivity {
 
     protected boolean changesMade;
     protected boolean updateOnResume;
+    protected DragListView dragListView;
     private DragItemAdapter adapter;
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (updateOnResume) {
+        if (updateOnResume && adapter != null) {
             adapter.notifyDataSetChanged();
             updateOnResume = false;
         }
@@ -34,8 +34,10 @@ public class FlashcardDragListViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flashcard_drag_list_view);
+        Settings.loadData(this);
+        setTitle(currentDeck.getTitle());
 
-        DragListView dragListView = findViewById(R.id.flashcard_drag_list_view);
+        dragListView = findViewById(R.id.flashcard_drag_list_view);
         adapter = new FlashcardDragItemAdapter(this, currentDeck);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         RecyclerView recyclerView = dragListView.getRecyclerView();
@@ -88,5 +90,10 @@ public class FlashcardDragListViewActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        onNavigateUp();
     }
 }

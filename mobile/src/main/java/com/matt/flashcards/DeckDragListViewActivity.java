@@ -26,6 +26,7 @@ public class DeckDragListViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flashcard_drag_list_view);
+        Settings.loadData(this);
 
         DragListView dragListView = findViewById(R.id.flashcard_drag_list_view);
         adapter = new DeckDragItemAdapter(this);

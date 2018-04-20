@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resources>
+
+    <!-- Unsorted -->
+
+
+    <string name="app_name">"nombre de la aplicación"</string>
+
+    <!-- Navigation Drawer -->
+
+
+    <string name="navigation_drawer_open">"navigation_drawer_open"</string>
+
+    <string name="navigation_drawer_close">"navigation_drawer_close"</string>
+
+    <string name="action_settings">"action_settings"</string>
+
+    <string name="title_activity_home">"title_activity_home"</string>
+
+    <string name="title_activity_settings">"title_activity_settings"</string>
+
+    <string name="btn_single_player">"btn_single_player"</string>
+
+    <string name="btn_multi_player">"btn_multi_player"</string>
+
+    <string name="nav_new_deck">"nav_new_deck"</string>
+
+    <string name="nav_about">"nav_about"</string>
+
+    <!-- Tutorial Dialog -->
+
+
+    <string name="tutorial">"tutorial"</string>
+
+    <string name="nav_sync_with_wear">"nav_sync_with_wear"</string>
+
+    <!-- Flashcard Menu -->
+
+
+    <string name="menu_new">"menu_new"</string>
+
+    <string name="delete">"borrar"</string>
+
+    <string name="create_deck">"create_deck"</string>
+
+    <string name="title">"título"</string>
+
+    <string name="cancel">"cancelar"</string>
+
+    <!-- General Words -->
+
+
+    <string name="ok">"De acuerdo"</string>
+
+    <!-- Add Edit Activity -->
+
+
+    <string name="add_flashcard">"add_flashcard"</string>
+
+    <string name="edit_flashcard">"edit_flashcard"</string>
+
+    <string name="error">"error"</string>
+
+    <string name="lets_go">"vamonos"</string>
+
+    <!-- TODO Delete these -->
+
+
+    <string name="txt_side_a_with_colon">"txt_side_a_with_colon"</string>
+
+    <string name="txt_side_b_with_colon">"txt_side_b_with_colon"</string>
+
+    <string name="synced">"sincronizado"</string>
+
+    <string name="btn_prev">"btn_prev"</string>
+
+    <string name="btn_next">"btn_next"</string>
+
+    <string name="txt_player_1">"txt_player_1"</string>
+
+    <string name="txt_player_2">"txt_player_2"</string>
+
+    <string name="txt_invite">"txt_invite"</string>
+
+    <string name="txt_nearby">"txt_nearby"</string>
+
+    <string name="btn_code">"btn_code"</string>
+
+    <string name="btn_start_game">"btn_start_game"</string>
+
+    <string name="txt_answer_label">"txt_answer_label"</string>
+
+    <string name="btn_submit">"btn_submit"</string>
+
+    <string name="btn_enter">"btn_enter"</string>
+
+    <string name="edit_mp_code_hint">"edit_mp_code_hint"</string>
+
+    <string name="txt_about">"txt_about"</string>
+
+    <string name="txt_color_theme">"txt_color_theme"</string>
+
+    <string name="txt_timer">"txt_timer"</string>
+
+    <string name="txt_incognito">"txt_incognito"</string>
+
+    <string name="txt_difficulty">"txt_difficulty"</string>
+
+    <string name="title_activity_theme">"title_activity_theme"</string>
+
+    <string name="txt_color_1">"txt_color_1"</string>
+
+    <string name="txt_color_2">"txt_color_2"</string>
+
+    <string name="txt_color_3">"txt_color_3"</string>
+
+    <string name="load_sample_data">"load_sample_data"</string>
+
+    <string name="confirm_overwrite_with_sample_data">"confirm_overwrite_with_sample_data"</string>
+
+    <string name="nav_delete_all_decks">"nav_delete_all_decks"</string>
+
+    <string name="nav_tutorial">"nav_tutorial"</string>
+
+    <!-- Shuffle Dialog -->
+
+
+    <string name="shuffle_mode">"modo aleatorio"</string>
+
+    <string name="shuffle">"barajar"</string>
+
+    <string name="select_all">"seleccionar todo"</string>
+
+    <!-- Flashcard Activity -->
+
+
+    <string name="empty_deck">"empty_deck"</string>
+
+    <string name="menu_edit">"menu_edit"</string>
+
+    <string name="menu_delete">"menu_delete"</string>
+
+    <string name="menu_fullscreen">"menu_fullscreen"</string>
+
+    <string name="menu_view_as_list">"menu_view_as_list"</string>
+
+    <string name="side_a">"lado a"</string>
+
+    <string name="side_b">"lado B"</string>
+
+    <!-- About Activity -->
+
+
+    <string name="activity_about_title">"activity_about_title"</string>
+
+    <!-- Settings -->
+
+
+    <string name="cant_load_data">"cant_load_data"</string>
+
+    <string name="cant_save_data">"cant_save_data"</string>
+
+    <string name="successful_save">"successful_save"</string>
+
+    <string name="warning">"advertencia"</string>
+
+    <string name="rename_deck">"rename_deck"</string>
+
+    <string name="confirm_delete">"Confirmar eliminación"</string>
+
+    <string name="confirm_delete_deck">"confirm_delete_deck"</string>
+
+    <string name="error_decks_need_titles">"error_decks_need_titles"</string>
+
+    <string name="confirm_delete_flashcard">"confirm_delete_flashcard"</string>
+
+    <string name="error_cant_save_blank_flashcard">"error_cant_save_blank_flashcard"</string>
+
+    <string name="confirm_lose_changes">"confirm_lose_changes"</string>
+
+    <string name="click_here_to_add_a_new_deck">"click_here_to_add_a_new_deck"</string>
+
+    <string name="save">"salvar"</string>
+
+    <string name="view">"ver"</string>
+
+    <string name="confirm_delete_all_decks">"confirm_delete_all_decks"</string>
+
+    <string name="connection_lost">"conexión perdida"</string>
+
+    <string name="rename">"rebautizar"</string>
+
+    <string name="click_here_to_add_a_new_flashcard">"click_here_to_add_a_new_flashcard"</string>
+
+    <string name="favorite">"favorito"</string>
+
+    <string name="favorites">"favoritos"</string>
+
+    <string name="rearrange_flashcards">"rearrange_flashcards"</string>
+
+    <string name="rearrange_decks">"rearrange_decks"</string>
+
+    <string name="confirm_favorite_remove">"confirm_favorite_remove"</string>
+
+</resources>

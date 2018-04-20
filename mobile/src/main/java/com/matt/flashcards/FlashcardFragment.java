@@ -3,6 +3,7 @@ package com.matt.flashcards;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,11 +45,14 @@ public class FlashcardFragment extends Fragment {
         // Flips flashcard back to the front when focus is lost
         if (!isVisibleToUser && rootView != null && ((EasyFlipView) rootView).isBackSide()) {
             // Refreshing the fragment works best: https://stackoverflow.com/a/46447226
-            getFragmentManager()
-                    .beginTransaction()
-                    .detach(FlashcardFragment.this)
-                    .attach(FlashcardFragment.this)
-                    .commit();
+            FragmentManager fragmentManager = getFragmentManager();
+            if (fragmentManager != null) {
+                fragmentManager
+                        .beginTransaction()
+                        .detach(FlashcardFragment.this)
+                        .attach(FlashcardFragment.this)
+                        .commit();
+            }
         }
     }
 }

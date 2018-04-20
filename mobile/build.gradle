@@ -14,7 +14,7 @@ android {
         applicationId "com.matt.flashcards"
         minSdkVersion 20
         targetSdkVersion 27
-        versionCode 2
+        versionCode 3
         versionName "2.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -38,6 +38,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.google.android.gms:play-services-wearable:12.0.0'
     implementation project(':mylibrary')
+    wearApp project(':wear')
     compile 'com.wajahatkarim3.EasyFlipView:EasyFlipView:2.0.5'
     compile 'com.github.woxthebox:draglistview:1.5.4'
 }
