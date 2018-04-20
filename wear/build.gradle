@@ -14,8 +14,8 @@ android {
         applicationId "com.matt.flashcards"
         minSdkVersion 23
         targetSdkVersion 27
-        versionCode 3
-        versionName "2.0"
+        versionCode 4
+        versionName "2.1"
     }
     buildTypes {
         release {
