@@ -44,4 +44,9 @@
         android:id="@+id/nav_export"
         android:title="@string/export_settings_to_clipboard"
         android:visible="false" />
+
+    <item
+        android:id="@+id/nav_debug"
+        android:title="@string/disable_debug_mode"
+        android:visible="false" />
 </menu>

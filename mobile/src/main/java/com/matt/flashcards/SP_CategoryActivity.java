@@ -52,6 +52,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     private LinearLayout deckTip;
     private ImageView arrow;
     private Animation slide_down;
+    private NavigationView navView;
     private boolean updateOnResume;
     protected static boolean updateWear;
     protected static boolean hideDeckTip;
@@ -89,7 +90,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sp_category);
 
-        NavigationView navView = findViewById(R.id.nav_view);
+        navView = findViewById(R.id.nav_view);
         syncItem = navView.getMenu().findItem(R.id.sync_wear);
         syncToast = Toast.makeText(this, R.string.synced, Toast.LENGTH_SHORT);
 
@@ -118,6 +119,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         navView.getMenu().findItem(R.id.nav_load_dummy_data).setVisible(Settings.debugMode);
         navView.getMenu().findItem(R.id.nav_import).setVisible(Settings.debugMode);
         navView.getMenu().findItem(R.id.nav_export).setVisible(Settings.debugMode);
+        navView.getMenu().findItem(R.id.nav_debug).setVisible(Settings.debugMode);
 
         adapter = new DeckAdapter(this, Settings.theDeckOfDecks, syncItem, deckTip, arrow, slide_down);
         ((GridView) findViewById(R.id.grd_mp_category)).setAdapter(adapter);
@@ -253,6 +255,15 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                             .show();
                                 }
                                 drawer.closeDrawer(GravityCompat.START, true);
+                                break;
+                            case R.id.nav_debug:
+                                drawer.closeDrawer(GravityCompat.START, true);
+                                Settings.debugMode = false;
+                                navView.getMenu().findItem(R.id.nav_load_dummy_data).setVisible(false);
+                                navView.getMenu().findItem(R.id.nav_import).setVisible(false);
+                                navView.getMenu().findItem(R.id.nav_export).setVisible(false);
+                                navView.getMenu().findItem(R.id.nav_debug).setVisible(false);
+                                Settings.saveData(SP_CategoryActivity.this, false);
                         }
                         return true;
                     }
