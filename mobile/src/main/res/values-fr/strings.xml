@@ -5,7 +5,7 @@
     <!-- Unsorted -->
 
 
-    <string name="app_name">"nom de l'application"</string>
+    <string name="app_name">Flashcards</string>
 
     <!-- Navigation Drawer -->
 
@@ -14,7 +14,7 @@
 
     <string name="navigation_drawer_close">"navigation_drawer_close"</string>
 
-    <string name="action_settings">"action_settings"</string>
+    <string name="action_settings">Paramètres</string>
 
     <string name="title_activity_home">"title_activity_home"</string>
 
@@ -24,183 +24,115 @@
 
     <string name="btn_multi_player">"btn_multi_player"</string>
 
-    <string name="nav_new_deck">"nav_new_deck"</string>
+    <string name="nav_new_deck">Nouveau pont</string>
 
-    <string name="nav_about">"nav_about"</string>
+    <string name="nav_about">Sur</string>
 
     <!-- Tutorial Dialog -->
 
 
-    <string name="tutorial">"Didacticiel"</string>
+    <string name="tutorial">Didacticiel</string>
 
-    <string name="nav_sync_with_wear">"nav_sync_with_wear"</string>
+    <string name="nav_sync_with_wear">Synchroniser avec l\\'usure</string>
 
     <!-- Flashcard Menu -->
 
 
-    <string name="menu_new">"menu_new"</string>
+    <string name="menu_new">Nouveau</string>
 
-    <string name="delete">"effacer"</string>
+    <string name="delete">Effacer</string>
 
-    <string name="create_deck">"create_deck"</string>
+    <string name="create_deck">Créer un nouveau deck:</string>
 
-    <string name="title">"Titre"</string>
+    <string name="title">Titre</string>
 
-    <string name="cancel">"Annuler"</string>
+    <string name="cancel">Annuler</string>
 
     <!-- General Words -->
 
 
-    <string name="ok">"D'accord"</string>
+    <string name="ok">D\\\'accord</string>
 
     <!-- Add Edit Activity -->
 
 
-    <string name="add_flashcard">"add_flashcard"</string>
+    <string name="add_flashcard">Ajouter une carte Flash</string>
 
-    <string name="edit_flashcard">"edit_flashcard"</string>
+    <string name="edit_flashcard">Modifier Flashcard</string>
 
-    <string name="error">"Erreur"</string>
+    <string name="error">Erreur</string>
 
-    <string name="lets_go">"Allons-y"</string>
+    <string name="lets_go">Allons-y</string>
 
-    <!-- TODO Delete these -->
-
-
-    <string name="txt_side_a_with_colon">"txt_side_a_with_colon"</string>
-
-    <string name="txt_side_b_with_colon">"txt_side_b_with_colon"</string>
-
-    <string name="synced">"synchronisé"</string>
-
-    <string name="btn_prev">"btn_prev"</string>
-
-    <string name="btn_next">"btn_next"</string>
-
-    <string name="txt_player_1">"txt_player_1"</string>
-
-    <string name="txt_player_2">"txt_player_2"</string>
-
-    <string name="txt_invite">"txt_invite"</string>
-
-    <string name="txt_nearby">"txt_nearby"</string>
-
-    <string name="btn_code">"btn_code"</string>
-
-    <string name="btn_start_game">"btn_start_game"</string>
-
-    <string name="txt_answer_label">"txt_answer_label"</string>
-
-    <string name="btn_submit">"btn_submit"</string>
-
-    <string name="btn_enter">"btn_enter"</string>
-
-    <string name="edit_mp_code_hint">"edit_mp_code_hint"</string>
-
-    <string name="txt_about">"txt_about"</string>
-
-    <string name="txt_color_theme">"txt_color_theme"</string>
-
-    <string name="txt_timer">"txt_timer"</string>
-
-    <string name="txt_incognito">"txt_incognito"</string>
-
-    <string name="txt_difficulty">"txt_difficulty"</string>
-
-    <string name="title_activity_theme">"title_activity_theme"</string>
-
-    <string name="txt_color_1">"txt_color_1"</string>
-
-    <string name="txt_color_2">"txt_color_2"</string>
-
-    <string name="txt_color_3">"txt_color_3"</string>
-
-    <string name="load_sample_data">"load_sample_data"</string>
-
-    <string name="confirm_overwrite_with_sample_data">"confirm_overwrite_with_sample_data"</string>
-
-    <string name="nav_delete_all_decks">"nav_delete_all_decks"</string>
-
-    <string name="nav_tutorial">"nav_tutorial"</string>
-
-    <!-- Shuffle Dialog -->
-
-
-    <string name="shuffle_mode">"mode aléatoire"</string>
-
-    <string name="shuffle">"mélanger"</string>
-
-    <string name="select_all">"tout sélectionner"</string>
-
-    <!-- Flashcard Activity -->
-
-
-    <string name="empty_deck">"empty_deck"</string>
-
-    <string name="menu_edit">"menu_edit"</string>
-
-    <string name="menu_delete">"menu_delete"</string>
-
-    <string name="menu_fullscreen">"menu_fullscreen"</string>
-
-    <string name="menu_view_as_list">"menu_view_as_list"</string>
-
-    <string name="side_a">"face A"</string>
-
-    <string name="side_b">"side_b"</string>
 
     <!-- About Activity -->
 
 
-    <string name="activity_about_title">"activity_about_title"</string>
+    <string name="activity_about_title">Sur</string>
 
     <!-- Settings -->
 
 
-    <string name="cant_load_data">"cant_load_data"</string>
+    <string name="cant_load_data">Impossible de charger les données</string>
 
-    <string name="cant_save_data">"cant_save_data"</string>
+    <string name="cant_save_data">Impossible de sauvegarder les données</string>
 
-    <string name="successful_save">"successful_save"</string>
+    <string name="successful_save">Enregistré avec succès</string>
 
-    <string name="warning">"Attention"</string>
+    <string name="warning">Attention</string>
 
-    <string name="rename_deck">"rename_deck"</string>
+    <string name="rename_deck">Renommer le deck:</string>
 
-    <string name="confirm_delete">"Confirmation de la suppression"</string>
+    <string name="confirm_delete">Confirmation de la suppression</string>
 
-    <string name="confirm_delete_deck">"confirm_delete_deck"</string>
+    <string name="confirm_delete_deck">Êtes-vous sûr de vouloir supprimer ce deck?</string>
 
-    <string name="error_decks_need_titles">"error_decks_need_titles"</string>
+    <string name="error_decks_need_titles">Vous ne pouvez pas créer de deck sans titre</string>
 
-    <string name="confirm_delete_flashcard">"confirm_delete_flashcard"</string>
+    <string name="confirm_delete_flashcard">Êtes-vous sûr de vouloir supprimer cette carte flash?</string>
 
-    <string name="error_cant_save_blank_flashcard">"error_cant_save_blank_flashcard"</string>
+    <string name="error_cant_save_blank_flashcard">Vous ne pouvez pas enregistrer une carte flash vierge</string>
 
-    <string name="confirm_lose_changes">"confirm_lose_changes"</string>
+    <string name="confirm_lose_changes">Êtes-vous sûr de vouloir perdre les modifications que vous avez faites?</string>
 
-    <string name="click_here_to_add_a_new_deck">"click_here_to_add_a_new_deck"</string>
+    <string name="click_here_to_add_a_new_deck">Cliquez ici pour ajouter un nouveau deck</string>
 
-    <string name="save">"enregistrer"</string>
+    <string name="save">Enregistrer</string>
 
-    <string name="view">"vue"</string>
+    <string name="view">Vue</string>
 
-    <string name="confirm_delete_all_decks">"confirm_delete_all_decks"</string>
+    <string name="confirm_delete_all_decks">Êtes-vous sûr de vouloir supprimer tous vos jeux?</string>
 
-    <string name="connection_lost">"connexion perdue"</string>
+    <string name="connection_lost">connexion perdue</string>
 
-    <string name="rename">"Renommer"</string>
+    <string name="rename">Renommer</string>
 
-    <string name="click_here_to_add_a_new_flashcard">"click_here_to_add_a_new_flashcard"</string>
+    <string name="click_here_to_add_a_new_flashcard">Cliquez ici pour ajouter une nouvelle carte flash</string>
 
-    <string name="favorite">"préféré"</string>
+    <string name="favorite">Préféré</string>
 
-    <string name="favorites">"favoris"</string>
+    <string name="favorites">Favoris</string>
 
-    <string name="rearrange_flashcards">"rearrange_flashcards"</string>
+    <string name="rearrange_flashcards">Réorganiser les flashcards</string>
 
-    <string name="rearrange_decks">"rearrange_decks"</string>
+    <string name="rearrange_decks">Réorganiser les Decks</string>
 
-    <string name="confirm_favorite_remove">"confirm_favorite_remove"</string>
+    <string name="confirm_favorite_remove">Êtes-vous sûr de vouloir supprimer ceci de vos favoris?</string>
+    <string name="shuffle_error_no_flashcards">Il n \\\'y a pas de flashcards à mélanger</string>
+    <string name="btn_prev">Précédent</string>
+    <string name="btn_next">Prochain</string>
+    <string name="shuffle_mode">Mode aléatoire</string>
+    <string name="shuffle">Aléatoire</string>
+    <string name="select_all">Tout Sélectionner</string>
+    <string name="empty_deck">Il n \\\'y a pas de flashcards dans ce deck</string>
+    <string name="menu_edit">Modifier</string>
+    <string name="menu_delete">Effacer</string>
+    <string name="menu_fullscreen">Plein écran</string>
+    <string name="nav_delete_all_decks">Supprimer tous les ponts</string>
+    <string name="nav_tutorial">Didacticiel</string>
+    <string name="side_a">Face A</string>
+    <string name="side_b">Face B</string>
+    <string name="txt_about">Propriétaire du produit | Matt Russo Chef de projet | Kyle Waldron UX | Franklin Torres Front End | Brandon Selzer Middleware | David Pirraglia Middleware | David Siopa Middleware | Anthony Destefano Base de données | Gregory Barney Assurance de la qualité | Enrique Gambra</string>
+    <string name="synced">Synchronisé avec l\\'usure</string>
 
 </resources>
