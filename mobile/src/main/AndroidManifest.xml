@@ -28,10 +28,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SP_FlashcardCreatorActivity"
-            android:parentActivityName=".SP_CategoryActivity"
-            android:windowSoftInputMode="adjustNothing" />
-        <activity
             android:name=".SP_FlashcardViewerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:parentActivityName=".SP_CategoryActivity" />
@@ -39,14 +35,10 @@
             android:name=".AboutActivity"
             android:label="@string/activity_about_title"
             android:parentActivityName=".SP_CategoryActivity" />
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:parentActivityName=".SP_CategoryActivity" />
-        <activity
-            android:name=".ThemeActivity"
-            android:label="@string/title_activity_theme"
-            android:parentActivityName=".SettingsActivity" />
+        <!--<activity-->
+            <!--android:name=".ThemeActivity"-->
+            <!--android:label="@string/title_activity_theme"-->
+            <!--android:parentActivityName=".SettingsActivity" />-->
         <activity
             android:name=".AddEditActivity" />
         <activity

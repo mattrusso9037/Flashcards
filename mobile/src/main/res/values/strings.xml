@@ -83,4 +83,6 @@
     <string name="export_settings_to_clipboard">Export Settings to Clipboard</string>
     <string name="successful_copy">Settings copied successfully</string>
     <string name="json_data">JSON Data</string>
+    <string name="load_sample_data">load sample data</string>
+    <string name="confirm_overwrite_with_sample_data">Are you sure you want to overwrite your data with sample data?</string>
 </resources>
