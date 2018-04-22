@@ -9,11 +9,11 @@ android {
             storePassword ''
         }
     }
-    compileSdkVersion 26
+    compileSdkVersion 27
     defaultConfig {
         applicationId "com.matt.flashcards"
         minSdkVersion 23
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 4
         versionName "2.1"
     }
@@ -28,14 +28,14 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.google.android.support:wearable:2.2.0'
-    implementation 'com.google.android.gms:play-services-wearable:12.0.0'
-    implementation 'com.android.support:percent:26.1.0'
-    implementation 'com.android.support:support-v4:26.1.0'
-    implementation 'com.android.support:recyclerview-v7:26.1.0'
-    implementation 'com.android.support:wear:26.1.0'
+    implementation 'com.google.android.support:wearable:2.3.0'
+    implementation 'com.google.android.gms:play-services-wearable:15.0.0'
+    implementation 'com.android.support:percent:27.1.1'
+    implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation 'com.android.support:wear:27.1.1'
     implementation files('../libs/TalkClient.jar')
-    compileOnly 'com.google.android.wearable:wearable:2.2.0'
+    compileOnly 'com.google.android.wearable:wearable:2.3.0'
     implementation project(':mylibrary')
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
 }

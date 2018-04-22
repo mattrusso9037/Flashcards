@@ -161,61 +161,10 @@ public final class Settings {
             }
         });
 
-        try {
-            // Get ready to read in the JSON data
-            BufferedReader inputStream = new BufferedReader(
-                    new InputStreamReader(context.openFileInput(FILE_NAME), "UTF-8"));
-
+        try (BufferedReader inputStream = new BufferedReader( // Get ready to read in the JSON data
+                new InputStreamReader(context.openFileInput(FILE_NAME), "UTF-8"))) {
             // Since all the JSON data is on 1 line, we only need to read in 1 line from the file
-            JSONObject JSONSettings = new JSONObject(inputStream.readLine());
-            inputStream.close();
-
-            // Get the array of decks from the settings
-            JSONArray JSONAllDecks = JSONSettings.getJSONArray(DECK_KEY);
-
-            // Get the setting for Debug Mode
-            try {
-                debugMode = JSONSettings.getBoolean(DEBUG_KEY);
-            } catch (JSONException e) {
-                // Debug Mode is false by default, so no need to set it
-            }
-
-            for (int i = 0; i < JSONAllDecks.length(); i++) {
-                // Get a deck from the array of decks
-                JSONObject JSONDeck = (JSONObject) JSONAllDecks.get(i);
-
-                // Create a new deck object using the title read in
-                Deck deck = new Deck(JSONDeck.getString(DECK_TITLE_KEY));
-
-                // Get an array of flashcards from the deck
-                JSONArray JSONFlashcards = JSONDeck.getJSONArray(DECK_FLASHCARDS_KEY);
-
-                for (int j = 0; j < JSONFlashcards.length(); j++) {
-                    // Get a flashcard from the array of flashcards
-                    JSONObject JSONFlashcard = JSONFlashcards.getJSONObject(j);
-
-                    // Create a new Flashcard object and add it to the deck object
-                    Flashcard f = new Flashcard(
-                            JSONFlashcard.getString(SIDE_A_KEY),
-                            JSONFlashcard.getString(SIDE_B_KEY)
-                    );
-
-                    try {
-                        f.setFavorite(JSONFlashcard.getBoolean(FAVORITE_KEY));
-                    } catch (JSONException e) {
-                        // Favorite attribute is false by default, so no need to set it
-                    }
-
-                    deck.add(f);
-
-                    // If the flashcard is a favorite, add it to the favorites deck
-                    if (f.isFavorite()) {
-                        favoritesDeck.add(f);
-                    }
-                }
-                // Add the new deck to the theDeckOfDecks
-                theDeckOfDecks.add(deck);
-            }
+            convertJSONToData(inputStream.readLine());
         } catch (FileNotFoundException e) {
             // It's likely the file was not found because the program ran for the first time
             isFirstRun = true;
@@ -228,45 +177,69 @@ public final class Settings {
         }
     }
 
+    /**
+     * This method takes a JSON string ang converts it into the appropriate objects.
+     * Used in the loadData() method.
+     */
+    public static void convertJSONToData(String json) throws JSONException {
+        JSONObject JSONSettings = new JSONObject(json);
+
+        // Get the array of decks from the settings
+        JSONArray JSONAllDecks = JSONSettings.getJSONArray(DECK_KEY);
+
+        // Get the setting for Debug Mode
+        try {
+            debugMode = JSONSettings.getBoolean(DEBUG_KEY);
+        } catch (JSONException e) {
+            // Debug Mode is false by default, so no need to set it
+        }
+
+        for (int i = 0; i < JSONAllDecks.length(); i++) {
+            // Get a deck from the array of decks
+            JSONObject JSONDeck = (JSONObject) JSONAllDecks.get(i);
+
+            // Create a new deck object using the title read in
+            Deck deck = new Deck(JSONDeck.getString(DECK_TITLE_KEY));
+
+            // Get an array of flashcards from the deck
+            JSONArray JSONFlashcards = JSONDeck.getJSONArray(DECK_FLASHCARDS_KEY);
+
+            for (int j = 0; j < JSONFlashcards.length(); j++) {
+                // Get a flashcard from the array of flashcards
+                JSONObject JSONFlashcard = JSONFlashcards.getJSONObject(j);
+
+                // Create a new Flashcard object and add it to the deck object
+                Flashcard f = new Flashcard(
+                        JSONFlashcard.getString(SIDE_A_KEY),
+                        JSONFlashcard.getString(SIDE_B_KEY)
+                );
+
+                try {
+                    f.setFavorite(JSONFlashcard.getBoolean(FAVORITE_KEY));
+                } catch (JSONException e) {
+                    // Favorite attribute is false by default, so no need to set it
+                }
+
+                deck.add(f);
+
+                // If the flashcard is a favorite, add it to the favorites deck
+                if (f.isFavorite()) {
+                    favoritesDeck.add(f);
+                }
+            }
+            // Add the new deck to the theDeckOfDecks
+            theDeckOfDecks.add(deck);
+        }
+    }
+
     public static void saveData(Context context) {
         saveData(context, true);
     }
 
     public static void saveData(Context context, boolean showSaveToast) {
-        JSONObject JSONSettings = new JSONObject();
-        JSONArray JSONAllDecks = new JSONArray();
-
-        try {
-            for (Deck deck : theDeckOfDecks) {
-                // Create a new JSON deck to hold all the flashcards
-                JSONArray JSONDeck = new JSONArray();
-
-                for (Flashcard flashcard : deck) {
-                    // Adds a new JSON flashcard to the deck
-                    JSONDeck.put(new JSONObject()
-                            .put(SIDE_A_KEY, flashcard.getSideA())
-                            .put(SIDE_B_KEY, flashcard.getSideB())
-                            .put(FAVORITE_KEY, flashcard.isFavorite())
-                    );
-                }
-                // Adds the JSON deck to the array of decks
-                JSONAllDecks.put(new JSONObject()
-                        .put(DECK_TITLE_KEY, deck.getTitle())
-                        .put(DECK_FLASHCARDS_KEY, JSONDeck)
-                );
-            }
-
-            // Adds the array of decks to the settings
-            JSONSettings.put(DECK_KEY, JSONAllDecks);
-
-            // Adds Debug Mode to the settings
-            JSONSettings.put(DEBUG_KEY, debugMode);
-
-            // Save the JSON data to the file
-            FileOutputStream outputStream = context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
-            outputStream.write(JSONSettings.toString().getBytes()); // Convert to binary and write
-            outputStream.close();
-
+        try (FileOutputStream outputStream = context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE)) {
+            // Convert to binary and save JSON data to the file
+            outputStream.write(convertDataToJSON().getBytes());
         } catch (JSONException | IOException e) {
             new AlertDialog.Builder(context)
                     .setTitle(R.string.error)
@@ -279,6 +252,47 @@ public final class Settings {
         if (showSaveToast) {
             Toast.makeText(context, R.string.successful_save, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public static void saveDataToClipboard(Context context) throws JSONException {
+        ((ClipboardManager) context.getSystemService(CLIPBOARD_SERVICE)).setPrimaryClip(
+                ClipData.newPlainText("Flashcards", convertDataToJSON()));
+    }
+
+    /**
+     * This method takes all the data and converts it into a JSON string.
+     * Used in the saveData() method.
+     */
+    public static String convertDataToJSON() throws JSONException {
+        JSONObject JSONSettings = new JSONObject();
+        JSONArray JSONAllDecks = new JSONArray();
+
+        for (Deck deck : theDeckOfDecks) {
+            // Create a new JSON deck to hold all the flashcards
+            JSONArray JSONDeck = new JSONArray();
+
+            for (Flashcard flashcard : deck) {
+                // Adds a new JSON flashcard to the deck
+                JSONDeck.put(new JSONObject()
+                        .put(SIDE_A_KEY, flashcard.getSideA())
+                        .put(SIDE_B_KEY, flashcard.getSideB())
+                        .put(FAVORITE_KEY, flashcard.isFavorite())
+                );
+            }
+            // Adds the JSON deck to the array of decks
+            JSONAllDecks.put(new JSONObject()
+                    .put(DECK_TITLE_KEY, deck.getTitle())
+                    .put(DECK_FLASHCARDS_KEY, JSONDeck)
+            );
+        }
+
+        // Adds the array of decks to the settings
+        JSONSettings.put(DECK_KEY, JSONAllDecks);
+
+        // Adds Debug Mode to the settings
+        JSONSettings.put(DEBUG_KEY, debugMode);
+
+        return JSONSettings.toString();
     }
 
     public static String[] getAllDeckTitles() {
