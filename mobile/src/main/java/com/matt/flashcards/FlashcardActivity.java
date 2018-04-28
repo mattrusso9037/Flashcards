@@ -1,25 +1,15 @@
 package com.matt.flashcards;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mylibrary.Deck;
@@ -35,8 +25,6 @@ public class FlashcardActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private FlashcardFragmentPageAdapter pageAdapter;
     protected static Deck currentDeck;
-    private ImageView upArrow;
-    private Animation slide_down;
 
     @Override
     protected void onResume() {
@@ -91,9 +79,7 @@ public class FlashcardActivity extends AppCompatActivity {
             currentDeck = Settings.theDeckOfDecks.get(Deck.currentDeckIndex);
             setTitle(currentDeck.getTitle());
             findViewById(R.id.flashcard_tip).setVisibility(View.VISIBLE);
-            slide_down = AnimationUtils.loadAnimation(this, R.anim.down_arrow_animation);
-            findViewById(R.id.arrow_up).startAnimation(slide_down);
-
+            findViewById(R.id.arrow_up).startAnimation(AnimationUtils.loadAnimation(this, R.anim.down_arrow_animation));
         }
 
         // Get the viewpager
@@ -294,82 +280,6 @@ public class FlashcardActivity extends AppCompatActivity {
             isFullscreen = false;
         } else {
             super.onBackPressed();
-        }
-    }
-
-    public static class FlashcardListActivity extends AppCompatActivity {
-
-        private boolean updateOnResume;
-        private FlashcardAdapter adapter;
-
-        @Override
-        protected void onResume() {
-            super.onResume();
-            if (updateOnResume) {
-                adapter.notifyDataSetChanged();
-                updateOnResume = false;
-            }
-        }
-
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_flashcard_list);
-            Settings.loadData(this);
-            setTitle(currentDeck.getTitle());
-            adapter = new FlashcardAdapter(this);
-            ((ListView) findViewById(R.id.flashcards_listview)).setAdapter(adapter);
-        }
-
-        @Override
-        public boolean onCreateOptionsMenu(Menu menu) {
-            getMenuInflater().inflate(R.menu.menu_flashcard_listview, menu);
-            return true;
-        }
-
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.action_new_card_list_view:
-                    updateOnResume = true;
-                    startActivity(new Intent(this, AddEditActivity.class)
-                            .putExtra("EditMode", false)
-                            .putExtra("DeckIndex", Deck.currentDeckIndex));
-                default:
-                    return super.onOptionsItemSelected(item);
-            }
-        }
-
-        public class FlashcardAdapter extends ArrayAdapter {
-            public FlashcardAdapter(Context context) {
-                super(context, 0, currentDeck);
-            }
-
-            @NonNull
-            @Override
-            public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                // Create the layout
-                View listItem = convertView;
-                if (listItem == null) {
-                    listItem = LayoutInflater.from(getContext()).inflate(
-                            R.layout.flashcard_item, parent, false);
-                }
-
-                // Add the text to the textview
-                ((TextView) listItem.findViewById(R.id.flashcard_item_text))
-                        .setText(currentDeck.get(position).getSideA());
-
-                // Event for when an item is clicked
-                listItem.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        currentDeck.currentCardIndex = position;
-                        onNavigateUp();
-                    }
-                });
-
-                return listItem;
-            }
         }
     }
 }
