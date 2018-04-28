@@ -35,49 +35,6 @@ public class FlashcardAdapter extends ArrayAdapter {
 
         ((TextView) listItemView.findViewById(R.id.flashcard_item_text)).setText(currentFlashcard.getSideA());
 
-        // Event for the view button
-        listItemView.findViewById(R.id.flashcard_item_view).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SP_FlashcardViewerActivity.currentDeck.currentCardIndex = position;
-                ((SP_FlashcardViewerActivity.FlashcardListActivity) getContext()).onNavigateUp();
-            }
-        });
-
-        // Event for the edit button
-        listItemView.findViewById(R.id.flashcard_item_edit).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getContext().startActivity(new Intent(getContext(), AddEditActivity.class)
-                        .putExtra("EditMode", true)
-                        .putExtra("DeckIndex", Deck.currentDeckIndex)
-                        .putExtra("CardIndex", position));
-            }
-        });
-
-        // Event for the delete button
-        listItemView.findViewById(R.id.flashcard_item_delete).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new AlertDialog.Builder(getContext())
-                        .setTitle(R.string.confirm_delete_flashcard)
-                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                deck.remove(position);
-                                if (SP_FlashcardViewerActivity.currentDeck.currentCardIndex
-                                        == SP_FlashcardViewerActivity.currentDeck.size()) {
-                                    SP_FlashcardViewerActivity.currentDeck.currentCardIndex--;
-                                }
-                                notifyDataSetChanged();
-                                Settings.saveData(getContext());
-                            }
-                        }).setNegativeButton(android.R.string.cancel, null)
-                        .show();
-            }
-        });
-
-
         View flashCardItem = listItemView.findViewById(R.id.flashcard_item_actions);
         flashCardItem.setVisibility(position == lastPosition ? View.VISIBLE : View.GONE);
         flashCardItem.setTag(Integer.toString(position));
