@@ -73,7 +73,7 @@ public class AddEditActivity extends AppCompatActivity {
                     new AlertDialog.Builder(this)
                             .setTitle(R.string.error)
                             .setMessage(R.string.error_cant_save_blank_flashcard)
-                            .setPositiveButton(R.string.ok, null)
+                            .setPositiveButton(android.R.string.ok, null)
                             .show();
                     return true;
                 }
@@ -127,13 +127,13 @@ public class AddEditActivity extends AppCompatActivity {
         } else {
             new AlertDialog.Builder(this)
                     .setTitle(R.string.confirm_lose_changes)
-                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             addEditBundle = null;
                             AddEditActivity.super.onBackPressed();
                         }
-                    }).setNegativeButton(R.string.cancel, null)
+                    }).setNegativeButton(android.R.string.cancel, null)
                     .show();
         }
     }

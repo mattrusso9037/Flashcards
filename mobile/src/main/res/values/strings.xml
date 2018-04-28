@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-
     <!-- Navigation Drawer -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_new_deck">New Deck</string>
+    <string name="rearrange_flashcards">Rearrange Flashcards</string>
+    <string name="rearrange_decks">Rearrange Decks</string>
     <string name="nav_delete_all_decks">Delete all decks</string>
-    <string name="nav_tutorial">Tutorial</string>
     <string name="nav_about">About</string>
     <string name="nav_sync_with_wear">Sync with wear</string>
 
@@ -22,6 +21,11 @@
     <string name="shuffle">Shuffle</string>
     <string name="select_all">Select All</string>
     <string name="shuffle_error_no_flashcards">There\'s no flashcards to shuffle</string>
+
+    <!-- Favorites -->
+    <string name="favorite">Favorite</string>
+    <string name="favorites">Favorites</string>
+    <string name="confirm_favorite_remove">Are you sure you want to remove this from your favorites?</string>
 
     <!-- Flashcard Activity-->
     <string name="empty_deck">There are no flashcards in this deck</string>
@@ -38,10 +42,11 @@
     <string name="edit_flashcard">Edit Flashcard</string>
     <string name="side_a">Side A</string>
     <string name="side_b">Side B</string>
+    <string name="confirm_lose_changes">Are you sure you want to lose the changes you\'ve made?</string>
 
     <!-- About Activity -->
     <string name="activity_about_title">About</string>
-    <string name="txt_about">Product Owner | Matt Russo Project Manager | Kyle Waldron UX | Franklin Torres Front End | Brandon Selzer Middleware | David Pirraglia Middleware | David Siopa Middleware | Anthony Destefano Database | Gregory Barney Quality Assurance | Enrique Gambra</string>
+    <string name="txt_about">Product Owner | Matt Russo\nProject Manager | Kyle Waldron\nUX | Franklin Torres\nFront End | Brandon Selzer\nMiddleware | David Pirraglia\nMiddleware | David Siopa\nMiddleware | Anthony Destefano\nDatabase | Gregory Barney\nQuality Assurance | Enrique Gambra</string>
 
     <!-- Settings -->
     <string name="cant_load_data">Unable to load data</string>
@@ -49,40 +54,37 @@
     <string name="successful_save">Saved Successfully</string>
 
     <!-- General Words -->
-    <string name="ok">Ok</string>
-    <string name="cancel">Cancel</string>
     <string name="warning">Warning</string>
     <string name="error">Error</string>
+    <string name="title">Title</string>
+    <string name="save">Save</string>
+    <string name="view">View</string>
+    <string name="rename">Rename</string>
+    <string name="delete">Delete</string>
+
+    <!-- Debug Mode -->
+    <string name="import_settings">Import Settings</string>
+    <string name="export_settings_to_clipboard">Export Settings to Clipboard</string>
+    <string name="successful_copy">Settings copied successfully</string>
+    <string name="json_data">JSON Data</string>
+    <string name="load_sample_data">Load Sample Data</string>
+    <string name="confirm_overwrite_with_sample_data">Are you sure you want to overwrite your data with sample data?</string>
+    <string name="disable_debug_mode">Disable Debug Mode</string>
+
+    <!-- Wear -->
+    <string name="synced">Synced with wear</string>
+    <string name="connection_lost">Connection Lost</string>
 
     <!-- Unsorted -->
     <string name="app_name">Flashcards</string>
     <string name="create_deck">Create a new deck:</string>
-    <string name="synced">Synced with wear</string>
     <string name="rename_deck">Rename deck:</string>
     <string name="confirm_delete">Are you sure you want to delete this?</string>
     <string name="confirm_delete_deck">Are you sure you want to delete this deck?</string>
     <string name="error_decks_need_titles">You can\'t create a deck without a title</string>
     <string name="confirm_delete_flashcard">Are you sure you want to delete this flashcard?</string>
     <string name="error_cant_save_blank_flashcard">You can\'t save a blank flashcard</string>
-    <string name="confirm_lose_changes">Are you sure you want to lose the changes you\'ve made?</string>
     <string name="click_here_to_add_a_new_deck">Click here to add a new deck</string>
-    <string name="title">Title</string>
-    <string name="save">Save</string>
-    <string name="view">View</string>
     <string name="confirm_delete_all_decks">Are you sure you want to delete all of your decks?</string>
-    <string name="connection_lost">Connection Lost</string>
-    <string name="rename">Rename</string>
-    <string name="delete">Delete</string>
     <string name="click_here_to_add_a_new_flashcard">Click here to add a new flashcard</string>
-    <string name="favorite">Favorite</string>
-    <string name="favorites">Favorites</string>
-    <string name="rearrange_flashcards">Rearrange Flashcards</string>
-    <string name="rearrange_decks">Rearrange Decks</string>
-    <string name="confirm_favorite_remove">Are you sure you want to remove this from your favorites?</string>
-    <string name="import_settings">Import Settings</string>
-    <string name="export_settings_to_clipboard">Export Settings to Clipboard</string>
-    <string name="successful_copy">Settings copied successfully</string>
-    <string name="json_data">JSON Data</string>
-    <string name="load_sample_data">load sample data</string>
-    <string name="confirm_overwrite_with_sample_data">Are you sure you want to overwrite your data with sample data?</string>
 </resources>

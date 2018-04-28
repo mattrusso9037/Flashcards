@@ -9,7 +9,7 @@ android {
         config {
             keyAlias 'flashcardkey'
             keyPassword ''
-            storeFile file('C:/Users/Matt/Flashcards/keystore/key.jks')
+            storeFile file('./keystore/key.jks')
             storePassword ''
         }
     }

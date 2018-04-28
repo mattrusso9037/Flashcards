@@ -45,35 +45,4 @@
             android:src="@drawable/ic_clear_white_48dp" />
 
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone">
-
-        <Button
-            android:id="@+id/flashcard_item_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/view"
-            android:textAllCaps="true" />
-
-        <!--android:id="@+id/flashcard_item_edit"-->
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/menu_edit"
-            android:textAllCaps="true" />
-
-        <!--android:id="@+id/flashcard_item_delete"-->
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/menu_delete"
-            android:textAllCaps="true" />
-
-    </LinearLayout>
 </LinearLayout>

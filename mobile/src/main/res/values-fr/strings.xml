@@ -24,8 +24,6 @@
 
     <string name="btn_multi_player">"btn_multi_player"</string>
 
-    <string name="nav_new_deck">Nouveau pont</string>
-
     <string name="nav_about">Sur</string>
 
     <!-- Tutorial Dialog -->
@@ -46,12 +44,7 @@
 
     <string name="title">Titre</string>
 
-    <string name="cancel">Annuler</string>
-
     <!-- General Words -->
-
-
-    <string name="ok">D\\\'accord</string>
 
     <!-- Add Edit Activity -->
 
@@ -129,7 +122,6 @@
     <string name="menu_delete">Effacer</string>
     <string name="menu_fullscreen">Plein écran</string>
     <string name="nav_delete_all_decks">Supprimer tous les ponts</string>
-    <string name="nav_tutorial">Didacticiel</string>
     <string name="side_a">Face A</string>
     <string name="side_b">Face B</string>
     <string name="txt_about">Propriétaire du produit | Matt Russo Chef de projet | Kyle Waldron UX | Franklin Torres Front End | Brandon Selzer Middleware | David Pirraglia Middleware | David Siopa Middleware | Anthony Destefano Base de données | Gregory Barney Assurance de la qualité | Enrique Gambra</string>
