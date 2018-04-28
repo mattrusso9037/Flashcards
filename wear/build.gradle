@@ -34,7 +34,6 @@ dependencies {
     implementation 'com.android.support:support-v4:27.1.1'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'com.android.support:wear:27.1.1'
-    implementation files('../libs/TalkClient.jar')
     compileOnly 'com.google.android.wearable:wearable:2.3.0'
     implementation project(':mylibrary')
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
