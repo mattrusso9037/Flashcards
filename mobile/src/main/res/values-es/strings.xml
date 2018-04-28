@@ -24,8 +24,6 @@
 
     <string name="btn_multi_player">"btn_multi_player"</string>
 
-    <string name="nav_new_deck">Nueva cubierta</string>
-
     <string name="nav_about">Acerca de</string>
 
     <!-- Tutorial Dialog -->
@@ -136,7 +134,6 @@
     <string name="menu_delete">Borrar</string>
     <string name="btn_prev">Anterior</string>
     <string name="btn_next">Siguiente</string>
-    <string name="nav_tutorial">Tutoría</string>
     <string name="nav_delete_all_decks">Eliminar todas las cubiertas</string>
     <string name="txt_about">Propietario del producto | Matt Russo Jefe de Proyecto | Kyle Waldron UX | Franklin Torres Front End | Brandon Selzer Middleware | David Pirraglia Middleware | David Siopa Middleware | Anthony Destefano | Gregory Barney Garantía de calidad | Enrique Gambra</string>
     <string name="synced">Sincronizado con el desgaste</string>
