@@ -1,33 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- TODO Delete these -->
-    <string name="txt_side_a_with_colon">Side A:</string>
-    <string name="txt_side_b_with_colon">Side B:</string>
-    <string name="title_activity_home">Home</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_settings">Settings</string>
-    <string name="btn_single_player">Single Player</string>
-    <string name="btn_multi_player">Study With\nFriends</string>
-    <string name="txt_player_1">Player 1</string>
-    <string name="txt_player_2">Player 2</string>
-    <string name="txt_invite">Invite Friends</string>
-    <string name="txt_nearby">Nearby</string>
-    <string name="btn_code">Enter a Code</string>
-    <string name="edit_mp_code_hint">Enter a Code</string>
-    <string name="btn_start_game">Start Game</string>
-    <string name="txt_color_theme">Color Theme</string>
-    <string name="txt_timer">Timer</string>
-    <string name="txt_incognito">Incognito Mode</string>
-    <string name="txt_difficulty">Difficulty</string>
-    <string name="title_activity_theme">Theme</string>
-    <string name="txt_color_1">Color 1</string>
-    <string name="txt_color_2">Color 2</string>
-    <string name="txt_color_3">Color 3</string>
-    <string name="txt_answer_label">Your Answer</string>
-    <string name="btn_submit">Submit</string>
-    <string name="btn_enter">Enter</string>
-    <string name="load_sample_data">Load Sample Data</string>
-    <string name="confirm_overwrite_with_sample_data">Are you sure you want to overwrite all your data with sample data?</string>
+
 
     <!-- Navigation Drawer -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -68,7 +41,7 @@
 
     <!-- About Activity -->
     <string name="activity_about_title">About</string>
-    <string name="txt_about">Product Owner | Matt Russo\nProject Manager | Kyle Waldron\nUX | Franklin Torres\nFront End | Brandon Selzer\nMiddleware | David Pirraglia\nMiddleware | David Siopa\nMiddleware | Anthony Destefano\nDatabase | Gregory Barney\nQuality Assurance | Enrique Gambra</string>
+    <string name="txt_about">Product Owner | Matt Russo Project Manager | Kyle Waldron UX | Franklin Torres Front End | Brandon Selzer Middleware | David Pirraglia Middleware | David Siopa Middleware | Anthony Destefano Database | Gregory Barney Quality Assurance | Enrique Gambra</string>
 
     <!-- Settings -->
     <string name="cant_load_data">Unable to load data</string>
@@ -110,5 +83,7 @@
     <string name="export_settings_to_clipboard">Export Settings to Clipboard</string>
     <string name="successful_copy">Settings copied successfully</string>
     <string name="json_data">JSON Data</string>
+    <string name="load_sample_data">load sample data</string>
+    <string name="confirm_overwrite_with_sample_data">Are you sure you want to overwrite your data with sample data?</string>
     <string name="disable_debug_mode">Disable Debug Mode</string>
 </resources>
