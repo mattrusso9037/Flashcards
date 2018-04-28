@@ -49,8 +49,6 @@
     <string name="successful_save">Saved Successfully</string>
 
     <!-- General Words -->
-    <string name="ok">Ok</string>
-    <string name="cancel">Cancel</string>
     <string name="warning">Warning</string>
     <string name="error">Error</string>
 

@@ -61,7 +61,7 @@ public class FlashcardAdapter extends ArrayAdapter {
             public void onClick(View view) {
                 new AlertDialog.Builder(getContext())
                         .setTitle(R.string.confirm_delete_flashcard)
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 deck.remove(position);
@@ -72,7 +72,7 @@ public class FlashcardAdapter extends ArrayAdapter {
                                 notifyDataSetChanged();
                                 Settings.saveData(getContext());
                             }
-                        }).setNegativeButton(R.string.cancel, null)
+                        }).setNegativeButton(android.R.string.cancel, null)
                         .show();
             }
         });

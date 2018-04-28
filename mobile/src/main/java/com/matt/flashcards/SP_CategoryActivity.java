@@ -156,7 +156,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                 new AlertDialog.Builder(SP_CategoryActivity.this)
                                         .setTitle(R.string.warning)
                                         .setMessage(R.string.confirm_overwrite_with_sample_data)
-                                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 Settings.loadDummyData();
@@ -168,7 +168,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                                 syncWear();
                                                 syncToast.cancel();
                                             }
-                                        }).setNegativeButton(R.string.cancel, null)
+                                        }).setNegativeButton(android.R.string.cancel, null)
                                         .show();
                                 break;
                             case R.id.nav_rearrange_flashcards:
@@ -181,7 +181,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                 new AlertDialog.Builder(SP_CategoryActivity.this)
                                         .setTitle(R.string.warning)
                                         .setMessage(R.string.confirm_delete_all_decks)
-                                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 Settings.theDeckOfDecks.clear();
@@ -193,7 +193,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                                 syncWear();
                                                 syncToast.cancel();
                                             }
-                                        }).setNegativeButton(R.string.cancel, null)
+                                        }).setNegativeButton(android.R.string.cancel, null)
                                         .show();
                                 break;
                             case sync_wear:
@@ -210,7 +210,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                 new AlertDialog.Builder(SP_CategoryActivity.this)
                                         .setTitle(R.string.import_settings)
                                         .setView(inflater)
-                                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 String deckTitle = dialogName.getText().toString();
@@ -218,7 +218,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                                     new AlertDialog.Builder(SP_CategoryActivity.this)
                                                             .setTitle(R.string.error)
                                                             .setMessage(R.string.error_decks_need_titles)
-                                                            .setPositiveButton(R.string.ok, null)
+                                                            .setPositiveButton(android.R.string.ok, null)
                                                             .show();
                                                 } else {
                                                     try {
@@ -234,13 +234,13 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                                         new AlertDialog.Builder(SP_CategoryActivity.this)
                                                                 .setTitle(R.string.error)
                                                                 .setMessage(R.string.cant_load_data)
-                                                                .setPositiveButton(R.string.ok, null)
+                                                                .setPositiveButton(android.R.string.ok, null)
                                                                 .show();
                                                     }
                                                 }
                                                 drawer.closeDrawer(GravityCompat.START, true);
                                             }
-                                        }).setNegativeButton(R.string.cancel, null)
+                                        }).setNegativeButton(android.R.string.cancel, null)
                                         .show();
                                 break;
                             case R.id.nav_export:
@@ -251,7 +251,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                     new AlertDialog.Builder(SP_CategoryActivity.this)
                                             .setTitle(R.string.error)
                                             .setMessage(R.string.cant_save_data)
-                                            .setPositiveButton(R.string.ok, null)
+                                            .setPositiveButton(android.R.string.ok, null)
                                             .show();
                                 }
                                 drawer.closeDrawer(GravityCompat.START, true);
@@ -287,7 +287,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
             new AlertDialog.Builder(SP_CategoryActivity.this)
                     .setTitle(R.string.create_deck)
                     .setView(inflater)
-                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             String deckTitle = dialogName.getText().toString();
@@ -295,7 +295,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                 new AlertDialog.Builder(SP_CategoryActivity.this)
                                         .setTitle(R.string.error)
                                         .setMessage(R.string.error_decks_need_titles)
-                                        .setPositiveButton(R.string.ok, null)
+                                        .setPositiveButton(android.R.string.ok, null)
                                         .show();
                             } else {
                                 Settings.theDeckOfDecks.add(new Deck(deckTitle));
@@ -314,7 +314,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                 }
                             }
                         }
-                    }).setNegativeButton(R.string.cancel, null)
+                    }).setNegativeButton(android.R.string.cancel, null)
                     .show();
         }
     };
@@ -346,7 +346,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
             new AlertDialog.Builder(SP_CategoryActivity.this)
                     .setTitle(R.string.error)
                     .setMessage(R.string.shuffle_error_no_flashcards)
-                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -367,7 +367,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                 @Override
                                 public void onClick(DialogInterface dialog, int which, boolean isChecked) {}
                             })
-                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Settings.generateShuffledDeck(checkedItems);
@@ -387,7 +387,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                             .putExtra("shuffleMode", true));
                         }
                     })
-                    .setNegativeButton(R.string.cancel, null)
+                    .setNegativeButton(android.R.string.cancel, null)
                     .show();
         }
     }

@@ -79,7 +79,7 @@ public class DeckDragListViewActivity extends AppCompatActivity {
                 new AlertDialog.Builder(DeckDragListViewActivity.this)
                         .setTitle(R.string.create_deck)
                         .setView(inflater)
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 String deckTitle = dialogName.getText().toString();
@@ -87,7 +87,7 @@ public class DeckDragListViewActivity extends AppCompatActivity {
                                     new AlertDialog.Builder(DeckDragListViewActivity.this)
                                             .setTitle(R.string.error)
                                             .setMessage(R.string.error_decks_need_titles)
-                                            .setPositiveButton(R.string.ok, null)
+                                            .setPositiveButton(android.R.string.ok, null)
                                             .show();
                                 } else {
                                     Settings.theDeckOfDecks.add(new Deck(deckTitle));
@@ -100,7 +100,7 @@ public class DeckDragListViewActivity extends AppCompatActivity {
                                     SP_CategoryActivity.updateWear = true;
                                 }
                             }
-                        }).setNegativeButton(R.string.cancel, null)
+                        }).setNegativeButton(android.R.string.cancel, null)
                         .show();
             default:
                 return super.onOptionsItemSelected(item);

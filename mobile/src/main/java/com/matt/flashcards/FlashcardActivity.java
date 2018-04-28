@@ -210,7 +210,7 @@ public class FlashcardActivity extends AppCompatActivity {
                 if (favoriteMode) {
                     new AlertDialog.Builder(this)
                             .setTitle(R.string.confirm_favorite_remove)
-                            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     Settings.favoritesDeck.remove(currentCard);
@@ -218,7 +218,7 @@ public class FlashcardActivity extends AppCompatActivity {
                                     invalidateOptionsMenu();
                                 }
                             })
-                            .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                            .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     currentCard.setFavorite(true);
@@ -257,7 +257,7 @@ public class FlashcardActivity extends AppCompatActivity {
     private void deleteFlashCard() {
         new AlertDialog.Builder(this)
                 .setTitle(R.string.confirm_delete)
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         currentDeck.remove(currentDeck.currentCardIndex);
@@ -270,7 +270,7 @@ public class FlashcardActivity extends AppCompatActivity {
 
                         Settings.saveData(FlashcardActivity.this);
                     }
-                }).setNegativeButton(R.string.cancel, null)
+                }).setNegativeButton(android.R.string.cancel, null)
                 .show();
     }
 

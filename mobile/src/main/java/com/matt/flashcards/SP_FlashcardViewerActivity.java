@@ -193,7 +193,7 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
     private void deleteFlashCard() {
         new AlertDialog.Builder(this)
                 .setTitle("Are you sure you want to delete this?")
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (currentDeck.size() == 1) {
@@ -208,7 +208,7 @@ public class SP_FlashcardViewerActivity extends AppCompatActivity {
                         }
                         Settings.saveData(SP_FlashcardViewerActivity.this);
                     }
-                }).setNegativeButton(R.string.cancel, null)
+                }).setNegativeButton(android.R.string.cancel, null)
                 .show();
     }
 

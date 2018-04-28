@@ -172,7 +172,7 @@ public final class Settings {
             new AlertDialog.Builder(context)
                     .setTitle(R.string.error)
                     .setMessage(R.string.cant_load_data)
-                    .setPositiveButton(R.string.ok, null)
+                    .setPositiveButton(android.R.string.ok, null)
                     .show();
         }
     }
@@ -244,7 +244,7 @@ public final class Settings {
             new AlertDialog.Builder(context)
                     .setTitle(R.string.error)
                     .setMessage(R.string.cant_save_data)
-                    .setPositiveButton(R.string.ok, null)
+                    .setPositiveButton(android.R.string.ok, null)
                     .show();
             return;
         }

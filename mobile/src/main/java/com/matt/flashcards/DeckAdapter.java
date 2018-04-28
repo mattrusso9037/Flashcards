@@ -73,7 +73,7 @@ public class DeckAdapter extends ArrayAdapter {
                                     new AlertDialog.Builder(getContext())
                                             .setTitle(R.string.rename_deck)
                                             .setView(inflater)
-                                            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
                                                     String deckTitle = dialogName.getText().toString();
@@ -81,7 +81,7 @@ public class DeckAdapter extends ArrayAdapter {
                                                         new AlertDialog.Builder(getContext())
                                                                 .setTitle(R.string.error)
                                                                 .setMessage(R.string.error_decks_need_titles)
-                                                                .setPositiveButton(R.string.ok, null)
+                                                                .setPositiveButton(android.R.string.ok, null)
                                                                 .show();
                                                     } else {
                                                         decks.get(position).setTitle(dialogName.getText().toString());
@@ -89,13 +89,13 @@ public class DeckAdapter extends ArrayAdapter {
                                                         Settings.saveData(getContext());
                                                     }
                                                 }
-                                            }).setNegativeButton(R.string.cancel, null)
+                                            }).setNegativeButton(android.R.string.cancel, null)
                                             .show();
                                     break;
                                 case 1:
                                     new AlertDialog.Builder(getContext())
                                         .setTitle(R.string.confirm_delete_deck)
-                                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 decks.remove(position);
@@ -112,7 +112,7 @@ public class DeckAdapter extends ArrayAdapter {
                                                 WearTask wearTask = new WearTask(getContext(), item);
                                                 wearTask.execute();
                                             }
-                                        }).setNegativeButton(R.string.cancel, null)
+                                        }).setNegativeButton(android.R.string.cancel, null)
                                         .show();
                             }
                         }

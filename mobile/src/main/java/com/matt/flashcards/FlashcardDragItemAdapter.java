@@ -72,14 +72,14 @@ public class FlashcardDragItemAdapter extends DragItemAdapter<Flashcard, Flashca
                 public void onClick(View v) {
                     new AlertDialog.Builder(context)
                             .setTitle(R.string.confirm_delete)
-                            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     removeItem(position);
                                     notifyDataSetChanged();
                                     ((FlashcardDragListViewActivity) context).changesMade = true;
                                 }
-                            }).setNegativeButton(R.string.cancel, null)
+                            }).setNegativeButton(android.R.string.cancel, null)
                             .show();
                 }
             });
@@ -116,14 +116,14 @@ public class FlashcardDragItemAdapter extends DragItemAdapter<Flashcard, Flashca
                 public void onClick(View v) {
                     new AlertDialog.Builder(context)
                             .setTitle(R.string.confirm_delete)
-                            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     boardView.removeItem(boardView.getFocusedColumn(), position);
                                     notifyDataSetChanged();
                                     BoardActivity.changesMade = true;
                                 }
-                            }).setNegativeButton(R.string.cancel, null)
+                            }).setNegativeButton(android.R.string.cancel, null)
                             .show();
                 }
             });
