@@ -14,8 +14,6 @@
 
     <string name="navigation_drawer_close">"navigation_drawer_close"</string>
 
-    <string name="action_settings">Configuraciones</string>
-
     <string name="title_activity_home">"title_activity_home"</string>
 
     <string name="title_activity_settings">Configuraciones</string>
