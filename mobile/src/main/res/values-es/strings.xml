@@ -14,14 +14,6 @@
 
     <string name="navigation_drawer_close">"navigation_drawer_close"</string>
 
-    <string name="title_activity_home">"title_activity_home"</string>
-
-    <string name="title_activity_settings">Configuraciones</string>
-
-    <string name="btn_single_player">"btn_single_player"</string>
-
-    <string name="btn_multi_player">"btn_multi_player"</string>
-
     <string name="nav_about">Acerca de</string>
 
     <!-- Tutorial Dialog -->
