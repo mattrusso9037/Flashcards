@@ -1,6 +1,7 @@
 package com.matt.flashcards;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.wear.widget.WearableRecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,8 +26,9 @@ public class MyAdapter extends WearableRecyclerView.Adapter<MyAdapter.ViewHolder
         onClickListener = listener;
     }
 
+    @NonNull
     @Override
-    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int numberOfItems) {
+    public MyAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int numberOfItems) {
         Context context = viewGroup.getContext();
         int layoutIdForListItem = R.layout.list_item;
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -36,7 +38,7 @@ public class MyAdapter extends WearableRecyclerView.Adapter<MyAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 //        Deck deck = deckList.get(position);
         holder.deckTitle.setText(String.valueOf(deckList.get(position)));
     }

@@ -1,6 +1,7 @@
 package com.matt.flashcards;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -37,7 +38,7 @@ public class FlashcardFragmentPageAdapter extends FragmentStatePagerAdapter {
      * in order to update the viewpager properly when calling notifyDataSetChanged()
      */
     @Override
-    public int getItemPosition(Object object) {
+    public int getItemPosition(@NonNull Object object) {
         return POSITION_NONE;
     }
 
