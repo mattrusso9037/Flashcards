@@ -36,7 +36,7 @@ import org.json.JSONException;
 import static com.matt.flashcards.R.id.sync_wear;
 import static com.matt.flashcards.Settings.isFirstRun;
 
-public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class DeckActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private DeckAdapter adapter;
     private DrawerLayout drawer;
@@ -88,7 +88,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sp_category);
+        setContentView(R.layout.activity_deck);
 
         navView = findViewById(R.id.nav_view);
         syncItem = navView.getMenu().findItem(R.id.sync_wear);
@@ -153,14 +153,14 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                 favoritesAction();
                                 break;
                             case R.id.nav_load_dummy_data:
-                                new AlertDialog.Builder(SP_CategoryActivity.this)
+                                new AlertDialog.Builder(DeckActivity.this)
                                         .setTitle(R.string.warning)
                                         .setMessage(R.string.confirm_overwrite_with_sample_data)
                                         .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 Settings.loadDummyData();
-                                                Settings.saveData(SP_CategoryActivity.this);
+                                                Settings.saveData(DeckActivity.this);
                                                 adapter.notifyDataSetChanged();
                                                 deckTip.setVisibility(View.INVISIBLE);
                                                 arrow.setVisibility(View.INVISIBLE);
@@ -178,14 +178,14 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                 rearrangeDecksAction();
                                 break;
                             case R.id.nav_clear_data:
-                                new AlertDialog.Builder(SP_CategoryActivity.this)
+                                new AlertDialog.Builder(DeckActivity.this)
                                         .setTitle(R.string.warning)
                                         .setMessage(R.string.confirm_delete_all_decks)
                                         .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 Settings.theDeckOfDecks.clear();
-                                                Settings.saveData(SP_CategoryActivity.this);
+                                                Settings.saveData(DeckActivity.this);
                                                 adapter.notifyDataSetChanged();
                                                 deckTip.setVisibility(View.VISIBLE);
                                                 arrow.setVisibility(View.VISIBLE);
@@ -200,14 +200,14 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                 syncWear();
                                 break;
                             case R.id.nav_about:
-                                startActivity(new Intent(SP_CategoryActivity.this, AboutActivity.class));
+                                startActivity(new Intent(DeckActivity.this, AboutActivity.class));
                                 break;
                             case R.id.nav_import:
-                                final View inflater = LayoutInflater.from(SP_CategoryActivity.this)
+                                final View inflater = LayoutInflater.from(DeckActivity.this)
                                         .inflate(R.layout.deck_dialog, null);
                                 final TextView dialogName = inflater.findViewById(R.id.deck_dialog_name);
                                 dialogName.setHint(R.string.json_data);
-                                new AlertDialog.Builder(SP_CategoryActivity.this)
+                                new AlertDialog.Builder(DeckActivity.this)
                                         .setTitle(R.string.import_settings)
                                         .setView(inflater)
                                         .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -215,7 +215,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                             public void onClick(DialogInterface dialog, int which) {
                                                 String deckTitle = dialogName.getText().toString();
                                                 if (deckTitle.isEmpty()) {
-                                                    new AlertDialog.Builder(SP_CategoryActivity.this)
+                                                    new AlertDialog.Builder(DeckActivity.this)
                                                             .setTitle(R.string.error)
                                                             .setMessage(R.string.error_decks_need_titles)
                                                             .setPositiveButton(android.R.string.ok, null)
@@ -223,7 +223,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                                 } else {
                                                     try {
                                                         Settings.convertJSONToData(dialogName.getText().toString());
-                                                        Settings.saveData(SP_CategoryActivity.this, false);
+                                                        Settings.saveData(DeckActivity.this, false);
                                                         adapter.notifyDataSetChanged();
                                                         deckTip.setVisibility(View.INVISIBLE);
                                                         arrow.setVisibility(View.INVISIBLE);
@@ -231,7 +231,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                                         syncWear();
                                                         syncToast.cancel();
                                                     } catch (JSONException e) {
-                                                        new AlertDialog.Builder(SP_CategoryActivity.this)
+                                                        new AlertDialog.Builder(DeckActivity.this)
                                                                 .setTitle(R.string.error)
                                                                 .setMessage(R.string.cant_load_data)
                                                                 .setPositiveButton(android.R.string.ok, null)
@@ -245,10 +245,10 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                 break;
                             case R.id.nav_export:
                                 try {
-                                    Settings.saveDataToClipboard(SP_CategoryActivity.this);
-                                    Toast.makeText(SP_CategoryActivity.this, R.string.successful_copy, Toast.LENGTH_SHORT).show();
+                                    Settings.saveDataToClipboard(DeckActivity.this);
+                                    Toast.makeText(DeckActivity.this, R.string.successful_copy, Toast.LENGTH_SHORT).show();
                                 } catch (JSONException e) {
-                                    new AlertDialog.Builder(SP_CategoryActivity.this)
+                                    new AlertDialog.Builder(DeckActivity.this)
                                             .setTitle(R.string.error)
                                             .setMessage(R.string.cant_save_data)
                                             .setPositiveButton(android.R.string.ok, null)
@@ -263,7 +263,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                                 navView.getMenu().findItem(R.id.nav_import).setVisible(false);
                                 navView.getMenu().findItem(R.id.nav_export).setVisible(false);
                                 navView.getMenu().findItem(R.id.nav_debug).setVisible(false);
-                                Settings.saveData(SP_CategoryActivity.this, false);
+                                Settings.saveData(DeckActivity.this, false);
                         }
                         return true;
                     }
@@ -284,7 +284,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
         public void onClick(final View view) {
             final View inflater = getLayoutInflater().inflate(R.layout.deck_dialog, null);
             final TextView dialogName = inflater.findViewById(R.id.deck_dialog_name);
-            new AlertDialog.Builder(SP_CategoryActivity.this)
+            new AlertDialog.Builder(DeckActivity.this)
                     .setTitle(R.string.create_deck)
                     .setView(inflater)
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -292,7 +292,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                         public void onClick(DialogInterface dialog, int which) {
                             String deckTitle = dialogName.getText().toString();
                             if (deckTitle.isEmpty()) {
-                                new AlertDialog.Builder(SP_CategoryActivity.this)
+                                new AlertDialog.Builder(DeckActivity.this)
                                         .setTitle(R.string.error)
                                         .setMessage(R.string.error_decks_need_titles)
                                         .setPositiveButton(android.R.string.ok, null)
@@ -300,14 +300,14 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                             } else {
                                 Settings.theDeckOfDecks.add(new Deck(deckTitle));
                                 adapter.notifyDataSetChanged();
-                                Settings.saveData(SP_CategoryActivity.this);
+                                Settings.saveData(DeckActivity.this);
 
                                 // Hide the deck tip when decks are created
                                 deckTip.setVisibility(View.INVISIBLE);
                                 arrow.setVisibility(View.INVISIBLE);
                                 arrow.clearAnimation();
 
-                                WearTask newDeckWearTask = new WearTask(SP_CategoryActivity.this, syncItem);
+                                WearTask newDeckWearTask = new WearTask(DeckActivity.this, syncItem);
                                 newDeckWearTask.execute();
                                 if (drawer.isDrawerOpen(GravityCompat.START)) {
                                     drawer.closeDrawer(GravityCompat.START, false);
@@ -343,7 +343,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
 
     private void shuffleAction() {
         if (!Settings.areThereFlashcards()) {
-            new AlertDialog.Builder(SP_CategoryActivity.this)
+            new AlertDialog.Builder(DeckActivity.this)
                     .setTitle(R.string.error)
                     .setMessage(R.string.shuffle_error_no_flashcards)
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -355,11 +355,11 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                     .show();
         } else if (Settings.theDeckOfDecks.size() == 1) {
             Settings.generateShuffledDeck(new boolean[]{true});
-            startActivity(new Intent(SP_CategoryActivity.this, FlashcardActivity.class)
+            startActivity(new Intent(DeckActivity.this, FlashcardActivity.class)
                     .putExtra("shuffleMode", true));
         } else {
             final boolean[] checkedItems = new boolean[Settings.theDeckOfDecks.size()];
-            new AlertDialog.Builder(SP_CategoryActivity.this)
+            new AlertDialog.Builder(DeckActivity.this)
                     .setTitle(R.string.shuffle_mode)
                     // checkedItems won't update properly without this
                     .setMultiChoiceItems(Settings.getAllDeckTitles(), checkedItems,
@@ -371,7 +371,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Settings.generateShuffledDeck(checkedItems);
-                            startActivity(new Intent(SP_CategoryActivity.this, FlashcardActivity.class)
+                            startActivity(new Intent(DeckActivity.this, FlashcardActivity.class)
                                     .putExtra("shuffleMode", true));
                         }
                     })
@@ -383,7 +383,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
                             }
                             Settings.generateShuffledDeck(checkedItems);
                             startActivity(
-                                    new Intent(SP_CategoryActivity.this, FlashcardActivity.class)
+                                    new Intent(DeckActivity.this, FlashcardActivity.class)
                                             .putExtra("shuffleMode", true));
                         }
                     })
@@ -393,7 +393,7 @@ public class SP_CategoryActivity extends AppCompatActivity implements GoogleApiC
     }
 
     private void favoritesAction() {
-        startActivity(new Intent(SP_CategoryActivity.this,
+        startActivity(new Intent(DeckActivity.this,
                 FlashcardActivity.class).putExtra("favoriteMode", true));
     }
 

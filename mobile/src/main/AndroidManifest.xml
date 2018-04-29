@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SP_CategoryActivity"
+            android:name=".DeckActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter android:label="@string/app_name">
                 <action android:name="android.intent.action.MAIN" />
@@ -25,23 +25,23 @@
         <activity
             android:name=".AboutActivity"
             android:label="@string/activity_about_title"
-            android:parentActivityName=".SP_CategoryActivity" />
+            android:parentActivityName=".DeckActivity" />
         <activity
             android:name=".AddEditActivity" />
         <activity
             android:name=".FlashcardActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:parentActivityName=".SP_CategoryActivity" />
+            android:parentActivityName=".DeckActivity" />
         <activity
             android:name=".FlashcardDragListViewActivity"
             android:parentActivityName=".FlashcardActivity" />
         <activity
             android:name=".BoardActivity"
             android:label="@string/rearrange_flashcards"
-            android:parentActivityName=".SP_CategoryActivity" />
+            android:parentActivityName=".DeckActivity" />
         <activity
             android:name=".DeckDragListViewActivity"
             android:label="@string/rearrange_decks"
-            android:parentActivityName=".SP_CategoryActivity" />
+            android:parentActivityName=".DeckActivity" />
     </application>
 </manifest>

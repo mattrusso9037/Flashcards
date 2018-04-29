@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.matt.flashcards.SP_CategoryActivity">
+    tools:context="com.matt.flashcards.DeckActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -17,20 +17,10 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
-
-        </android.support.v7.widget.Toolbar>
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_home" />
 
-    <!--<android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginBottom="@dimen/fab_margin_vertical"
-        android:layout_marginEnd="@dimen/fab_margin_horizontal"
-        app:srcCompat="@android:drawable/ic_menu_add" />-->
 </android.support.design.widget.CoordinatorLayout>

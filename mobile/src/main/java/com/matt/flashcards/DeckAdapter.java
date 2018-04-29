@@ -3,6 +3,7 @@ package com.matt.flashcards;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -35,7 +36,8 @@ public class DeckAdapter extends ArrayAdapter {
         this.slide_down = slide_down;
     }
 
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    @NonNull
+    public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
         View listItemView = convertView;
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(

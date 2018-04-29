@@ -94,7 +94,7 @@ public class DeckDragItemAdapter extends DragItemAdapter<Deck, DeckDragItemAdapt
                                             .setVisibility(View.VISIBLE);
                                 }
 
-                                SP_CategoryActivity.updateWear = true;
+                                DeckActivity.updateWear = true;
                             }
                         }).setNegativeButton(android.R.string.cancel, null)
                         .show();
