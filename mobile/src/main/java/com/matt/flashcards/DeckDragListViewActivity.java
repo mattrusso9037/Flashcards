@@ -95,9 +95,9 @@ public class DeckDragListViewActivity extends AppCompatActivity {
                                     Settings.saveData(DeckDragListViewActivity.this);
 
                                     // Hide the deck tip when decks are created
-                                    SP_CategoryActivity.hideDeckTip = true;
+                                    DeckActivity.hideDeckTip = true;
 
-                                    SP_CategoryActivity.updateWear = true;
+                                    DeckActivity.updateWear = true;
                                 }
                             }
                         }).setNegativeButton(android.R.string.cancel, null)
