@@ -88,7 +88,7 @@ public class DeckActivity extends AppCompatActivity implements GoogleApiClient.C
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sp_category);
+        setContentView(R.layout.activity_deck);
 
         navView = findViewById(R.id.nav_view);
         syncItem = navView.getMenu().findItem(R.id.sync_wear);
